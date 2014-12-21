@@ -1,3 +1,44 @@
-.table-container {
-    background: #00a651;
+
+/* the table is in fact an instance of the 'holy-grail' layout */
+/* see here https://github.com/philipwalton/solved-by-flexbox/blob/master/_sass/components/_holy-grail.scss */
+
+.table-container {    
+    display: flex;
+    min-height: 100vh;
+	flex-direction: column;
+}
+
+.table-center {
+   flex: 1;
+}
+
+.table-edge-ew {
+	flex: 0 0 12em;
+}
+
+.table-edge-ns {
+    
+}
+
+/*****************/
+
+.bridge-table {
+	/*background: #00a651;*/
+	/*background: #12BF07;*/
+	/*background: #064002;*/
+	background: #017F00;
+	co]or: white;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+/*    flex-direction: column;*/
+}
+
+.row.full-Width {
+   width: 100%;
+   margin-left: 0;
+   margin-right: 0;
+   max-width: 100%;
 }

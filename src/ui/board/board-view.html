@@ -1,11 +1,4 @@
-<div>
-	<ol class="board-hand-list">
-		<li class="board-hand" 
-			ng-repeat="player in board.players">
-			<tower-hand hand="player.hand"></tower-hand>
-		</li>
-	</ol>
-
-    <tower-round bidding="board.bidding"></tower-round>
+<div class="board-container">
+    <tower-round round="board.bidding"></tower-round>
     <tower-trick trick="board.cardplay.currentTrick"></tower-round>
 </div>

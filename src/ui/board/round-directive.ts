@@ -5,7 +5,7 @@ function towerRoundDirective() {
         restrict: "EA",
         name: "towerRound",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             round: "="
         },

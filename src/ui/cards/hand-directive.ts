@@ -5,7 +5,7 @@ function towerHandDirective() {
         restrict: "EA",
         name: "towerHand",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             hand: "="
         },

@@ -1,0 +1,13 @@
+.hand-card {
+    width: 3em;
+    overflow: hidden;
+    
+    display: inline-flex;
+    width: 50em;
+    overflow: hidden;
+    flex-direction: row;
+}
+
+.hand-container {
+    height: 7em;   
+}

@@ -17,7 +17,7 @@ class Cardplay extends GameSequence {
     }
     
     public tricks: Array<tower.ITrick>;
-    public currentTrickIndex: number = 0;
+    public currentTrickIndex: number = -1;
     public get currentTrick(): tower.ITrick {
         return this.tricks[this.currentTrickIndex];
     }

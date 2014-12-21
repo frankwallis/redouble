@@ -5,7 +5,7 @@ function towerBoardDirective() {
         restrict: "EA",
         name: "towerBoard",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             board: "="
         },

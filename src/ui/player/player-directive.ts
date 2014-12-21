@@ -5,7 +5,7 @@ function towerPlayerDirective() {
         restrict: "EA",
         name: "towerPlayer",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             player: "="
         },

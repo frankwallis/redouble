@@ -1,13 +1,13 @@
 .card-container {
   position: relative;
   float: left;
-  margin-right: 10px;
-  width: 150px;
-  height: 220px;
-  border-radius: 10px;
+  margin: 0.1rem;
+  width: 5rem;
+  height: 7rem;
+  border-radius: 1rem;
   background: #fff;
-  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0.25rem 0.25rem 0.75rem rgba(0,0,0,0.3);
+  box-shadow: 0.25rem 0.25rem 0.75rem rgba(0,0,0,0.3);
 }
 
 .card-suit-diamonds:before, .card-suit-diamonds:after {
@@ -32,33 +32,21 @@
 
 .card-suit:before {
   position: absolute;
-  font-size: 35px;
-  left: 5px;
-  top: 5px;
+  font-size: 2rem;
+  line-height: 2rem;
+  left: 0.5rem;
+  top: 0.5rem;
 }
  
 .card-suit:after {
   position: absolute;
-  font-size: 35px;
-  right: 5px;
-  bottom: 5px;
-}
-
-div[class*='card-suit']:before {
-  position: absolute;
-  font-size: 35px;
-  left: 5px;
-  top: 5px;
-}
- 
-div[class*='card-suit']:after {
-  position: absolute;
-  font-size: 35px;
-  right: 5px;
-  bottom: 5px;
+  font-size: 2rem;
+  line-height: 2rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
 }
 
 .card-pip {
   text-align: center;
-  font: 100px/220px Georgia, Times New Roman, serif;
+  font: 2rem/7rem Georgia, Times New Roman, serif;
 }

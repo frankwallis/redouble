@@ -21,7 +21,8 @@
     "src/**/*.html"
   ],
   "styles": [
-    "src/**/*.css"
+    "src/**/*.css",
+    "src/**/*.scss"
   ],
   "development": {
     "dependencies": {

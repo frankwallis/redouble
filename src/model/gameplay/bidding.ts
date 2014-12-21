@@ -30,7 +30,11 @@ class Bidding extends GameSequence {
 		return this.bids[this.bids.length -1];
 	}
 
-	public get lastAction(): tower.IBid {
+	public get currentRound(): Array<tower.IBid> {
+		return this.bids.slice(-4);
+	}
+
+    public get lastAction(): tower.IBid {
         for (var i = this.bids.length -1; i >= 0; i --) {
             if (this.bids[i].type != tower.BidType.NoBid)
                 return this.bids[i];

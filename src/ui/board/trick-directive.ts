@@ -5,7 +5,7 @@ function towerTrickDirective() {
         restrict: "EA",
         name: "towerTrick",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             trick: "="
         },

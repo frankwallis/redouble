@@ -5,7 +5,7 @@ function towerCardDirective() {
         restrict: "EA",
         name: "towerCard",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             card: "="
         },

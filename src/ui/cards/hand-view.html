@@ -1,3 +1,9 @@
-<div class="hand-container">
-	<tower-card class="hand-card" ng-repeat="card in handCtrl.hand.availableCards"></tower-card>
+<div class="hand-container row">
+    <span class="hand-card">
+        <div ng-repeat="card in hand.availableCards">
+            <div class="small-1 small-centered columns">
+                <tower-card card="card"></tower-card>
+            </div>
+        </div>
+    </span>
 </div>

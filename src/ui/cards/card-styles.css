@@ -1,0 +1,64 @@
+.card-container {
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card-suit-diamonds:before, .card-suit-diamonds:after {
+  content: "♦";
+  color: #ff0000;
+}
+ 
+.card-suit-hearts:before, .card-suit-hearts:after {
+  content: "♥";
+  color: #ff0000;
+}
+ 
+.card-suit-clubs:before, .card-suit-clubs:after {
+  content: "♣";
+  color: #000;
+}
+ 
+.card-suit-spades:before, .card-suit-spades:after {
+  content: "♠";
+  color: #000;
+}
+
+.card-suit:before {
+  position: absolute;
+  font-size: 35px;
+  left: 5px;
+  top: 5px;
+}
+ 
+.card-suit:after {
+  position: absolute;
+  font-size: 35px;
+  right: 5px;
+  bottom: 5px;
+}
+
+div[class*='card-suit']:before {
+  position: absolute;
+  font-size: 35px;
+  left: 5px;
+  top: 5px;
+}
+ 
+div[class*='card-suit']:after {
+  position: absolute;
+  font-size: 35px;
+  right: 5px;
+  bottom: 5px;
+}
+
+.card-pip {
+  text-align: center;
+  font: 100px/220px Georgia, Times New Roman, serif;
+}

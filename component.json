@@ -1,0 +1,30 @@
+{
+  "name": "tower",
+  "main": "src/index.ts",
+  "dependencies": {
+    "components/angular.js": "1.3",
+    "angular-ui/ui-router": "0.2",
+    "components/font-awesome": "4.2",
+    "components/normalize.css": "*",
+    "components/foundation": "*"
+  },
+  "e2e": [
+
+  ],
+  "scripts": [
+    "src/**/*.ts"
+  ],
+  "specs": [
+    "src/**/*-specs.ts"
+  ],
+  "templates": [
+    "src/**/*.html"
+  ],
+  "styles": [
+    "src/**/*.css"
+  ],
+  "development": {
+    "dependencies": {
+    }
+  }
+}

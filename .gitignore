@@ -1,0 +1,13 @@
+*.log
+bin/
+lib/
+deps/
+obj/
+node_modules/
+mods/
+reports/
+js/
+tmp/
+bower/
+build/
+components/

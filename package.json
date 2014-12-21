@@ -1,0 +1,22 @@
+{
+  "name": "tower",
+  "version": "0.1.0",
+  "description": "contract bridge",
+  "main": "src/index.js",
+  "directories": {},
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-tasks": "git+https://bitbucket.org/jhc-systems/gulp-tasks.git"
+  },
+  "scripts": {
+    "build": "gulp install bundle",
+    "start": "gulp serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/frankwallis/tower.git"
+  },
+  "author": "Frank Wallis",
+  "license": "MIT"
+}

@@ -4,7 +4,12 @@ require("angular.js");
 
 export var Module: ng.IModule = angular.module("tower.ui.board", [ "tower.ui.cards" ]);
 
-Module.directive("towerBoard", require("./board-directive"));
-Module.directive("towerTrick", require("./trick-directive"));
-Module.directive("towerRound", require("./round-directive"));
-Module.directive("towerBid", require("./bid-directive"));
+import boardDirective = require("./board-directive");
+import trickDirective = require("./trick-directive");
+import roundDirective = require("./round-directive");
+import bidDirective = require("./bid-directive");
+
+Module.directive("towerBoard", boardDirective);
+Module.directive("towerTrick", trickDirective);
+Module.directive("towerRound", roundDirective);
+Module.directive("towerBid", bidDirective);

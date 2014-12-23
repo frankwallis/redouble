@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/// <reference path="../_references.d.ts" />
 
 require("angular.js");
 
@@ -6,13 +6,20 @@ export var Module: ng.IModule = angular.module("tower.model", [
 
 ]);
 
-Module.service("towerService", require("./tower-service"));
+import TowerService = require("./tower-service");
+import biddingFactory = require("./gameplay/bidding");
+import trickFactory = require("./gameplay/trick");
+import cardplayFactory = require("./gameplay/cardplay")
+import boardFactory = require("./gameplay/board");
+import rubberFactory = require("./gameplay/rubber");
 
-Module.factory("biddingFactory", require("./gameplay/bidding"));
-Module.factory("trickFactory", require("./gameplay/trick"));
-Module.factory("cardplayFactory", require("./gameplay/cardplay"));
-Module.factory("boardFactory", require("./gameplay/board"));
-Module.factory("rubberFactory", require("./gameplay/rubber"));
+Module.service("towerService", TowerService);
+
+Module.factory("biddingFactory", biddingFactory);
+Module.factory("trickFactory", trickFactory);
+Module.factory("cardplayFactory", cardplayFactory);
+Module.factory("boardFactory", boardFactory);
+Module.factory("rubberFactory", rubberFactory);
 
 import mock = require("./players/mock");
 Module.factory("mockBidderFactory", mock.bidderFactory);

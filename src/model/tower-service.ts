@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/// <reference path="../_references.d.ts" />
 
 import Computer = require('./players/computer');
 

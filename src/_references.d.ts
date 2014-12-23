@@ -13,4 +13,6 @@
 /// <reference path="declarations/mocks/selenium-webdriver.d.ts" />
 /// <reference path="model/cards/cards.d.ts" />
 /// <reference path="model/gameplay/gameplay.d.ts" />
+/// <reference path="model/gameplay/promise-matchers.d.ts" />
 /// <reference path="model/model.d.ts" />
+/// <reference path="model/players/players.d.ts" />

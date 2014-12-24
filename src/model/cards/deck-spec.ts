@@ -1,6 +1,6 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular.js");
+require("components/angular.js");
 require("components-angular.js/angular-mocks.js");
 
 import Deck = require('./deck');

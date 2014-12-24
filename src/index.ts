@@ -1,6 +1,7 @@
 /// <reference path="./_references.d.ts" />
 
-require("angular");
+//require("angular");
+require("components/angular.js");
 
 import ui = require("./ui/index");
 import model = require("./model/index");

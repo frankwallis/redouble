@@ -1,8 +1,9 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular.js");
+require("components/angular.js");
+require("angular-ui/ui-router");
 
-var modUiRouter = require("ui-router");
+//var modUiRouter = require("ui-router");
 import cards = require("./cards/index");
 import board = require("./board/index");
 import player = require("./player/index");
@@ -10,7 +11,7 @@ import MenuController = require('./menu/menu-controller');
 import TableController = require('./table/table-controller');
 
 export var Module: ng.IModule = angular.module("tower.ui", [ 
-	modUiRouter, cards.Module.name, board.Module.name, player.Module.name
+	"ui.router", cards.Module.name, board.Module.name, player.Module.name
 ]);
 
 Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($stateProvider: any, $urlRouterProvider: any, $locationProvider: ng.ILocationProvider) => {

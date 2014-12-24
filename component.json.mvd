@@ -7,25 +7,5 @@
     "components/font-awesome": "4.2",
     "components/normalize.css": "*",
     "components/foundation": "*"
-  },
-  "e2e": [
-
-  ],
-  "scripts": [
-    "src/**/*.ts"
-  ],
-  "specs": [
-    "src/**/*-specs.ts"
-  ],
-  "templates": [
-    "src/**/*.html"
-  ],
-  "styles": [
-    "src/**/*.css",
-    "src/**/*.scss"
-  ],
-  "development": {
-    "dependencies": {
-    }
   }
 }

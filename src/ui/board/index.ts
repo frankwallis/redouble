@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-require("angular.js");
+require("components/angular.js");
 
 export var Module: ng.IModule = angular.module("tower.ui.board", [ "tower.ui.cards" ]);
 

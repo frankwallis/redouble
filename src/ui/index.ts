@@ -1,6 +1,6 @@
 /// <reference path="../_references.d.ts" />
 
-require("components/angular.js");
+require("angular/bower-angular:/angular.js");
 require("angular-ui/ui-router");
 
 //var modUiRouter = require("ui-router");

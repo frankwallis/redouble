@@ -1,7 +1,7 @@
-/// <reference path="../_references.d.ts" />
+/// <reference path="../../_references.d.ts" />
 
-require("components/angular.js");
-require("components-angular.js/angular-mocks.js");
+require("angular/bower-angular:/angular.js");
+require("angular/bower-angular-mocks:/angular-mocks.js");
 
 import Deck = require('./deck');
 
@@ -42,3 +42,4 @@ describe("Deck", () => {
         expect(different).toBeTruthy();
     });        
 });
+

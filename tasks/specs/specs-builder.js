@@ -1,7 +1,7 @@
 var gutil = require('gulp-util');
 var utils = require('../utils/utils');
 var notify = require("../utils/notify");
-var unglob = require("../utils/resolve-glob");
+var requireSpecs = require("./require-specs");
 
 module.exports = function(options) {
     
@@ -22,34 +22,32 @@ module.exports = function(options) {
         });
 
         gulp.task('bundle-specs', ['clean-specs'], function (cb) {
-            var Duo = require("duo");
-            var typescript = require('duo-typescript');
-            var duo = new Duo(process.cwd())
 
-            var specs = unglob("./src/**/*-spec.ts");
+            var specs = requireSpecs("./**/*-spec.ts", "./src");
 
-            specs.forEach(function(spec) {
-                duo.entry(spec);
-                console.log('a: ' + spec);
-            })
+            utils.ensureWriteFile("./src/index-specs.ts", specs, function() {
+                var Duo = require("duo");
+                var typescript = require('duo-typescript');
+                var duo = new Duo(process.cwd())
 
-            duo
-            //  .entry(options.entryJs)
-              .use(typescript())
-              .run(function(err, src) {
-                    if (err) {
-                        console.log(err);
-                        cb();
-                    }
-                    else {                
-                        var filename = options.outputFile;
-                        utils.ensureWriteFile(filename, src, function(err) {
-                            if (err) throw err;
-                            gutil.log('Generated ' + filename);
+                duo
+                  .entry("./src/index-specs.ts")
+                  .use(typescript())
+                  .run(function(err, src) {
+                        if (err) {
+                            console.log(err);
                             cb();
-                        });
-                    }
-                });
+                        }
+                        else {                
+                            var filename = options.outputFile;
+                            utils.ensureWriteFile(filename, src, function(err) {
+                                if (err) throw err;
+                                gutil.log('Generated ' + filename);
+                                cb();
+                            });
+                        }
+                    });
+            })
         });
 
         var watchOpts =  { 

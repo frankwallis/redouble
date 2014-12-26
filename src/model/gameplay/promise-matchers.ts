@@ -9,7 +9,7 @@
  *   $rootScope.$apply();
  */
 
-beforeEach(function() {
+function promiseMatchers(jasmine) {
   jasmine.addMatchers({
     toBeRejected: function() {
       return {
@@ -68,4 +68,6 @@ beforeEach(function() {
       };
     }
   });
-});
+}
+
+export = promiseMatchers;

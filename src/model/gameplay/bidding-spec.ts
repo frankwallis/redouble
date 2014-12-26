@@ -2,8 +2,8 @@
 
 require("angular/bower-angular:/angular.js");
 require("angular/bower-angular-mocks:/angular-mocks.js");
-require("./promise-matchers");
 
+import promiseMatchers = require("./promise-matchers");
 import tow = require("../index");
 
 describe("Bidding", () => {
@@ -13,10 +13,14 @@ describe("Bidding", () => {
     var $rootScope: ng.IRootScopeService;
     
     beforeEach(() => {
+            promiseMatchers(jasmine);
+        });
+
+    beforeEach(() => {
         console.log(tow.Module.name);
         var testModule = angular.module("tower.test", [ tow.Module.name ]);
         angular.mock.module(testModule);
-        angular.mock.module(tow.Module.name);
+        angular.mock.module(tow.Module.name); // don't understand why this is needded
     });
     
     beforeEach(angular.mock.inject((_biddingFactory_, _mockBidderFactory_, _$rootScope_) => {      
@@ -108,3 +112,5 @@ describe("Bidding", () => {
         // TODO - the opposing stuff
     });
 });
+
+export = tow;

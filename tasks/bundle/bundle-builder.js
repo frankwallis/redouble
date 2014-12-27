@@ -1,4 +1,3 @@
-var fs = require('fs');
 var gutil = require('gulp-util');
 var utils = require('../utils/utils');
 var notify = require('../utils/notify');
@@ -52,11 +51,10 @@ module.exports = function(options) {
             });
         });
 
-
         gulp.task('bundle-styles', ['clean-styles'], function (cb) {
             var Duo = require("duo");
             var duo = new Duo(process.cwd())
-            //var sass = require('component-builder-sass');
+            //var sass = require('duo-sass');
 
             duo
               .entry(options.entryCss)
@@ -73,7 +71,8 @@ module.exports = function(options) {
                             cb();
                         });
                     }
-                });
+                });            
+
         });
 
         var watchOpts =  { 
@@ -82,32 +81,13 @@ module.exports = function(options) {
             interval: 500 
         };
 
-        gulp.task('watch-scripts', [ 'bundle-scripts' ], function () {
-            var resolve = require("component-resolve-list");
-
-            resolve.scripts(function(filelist) {
-                gulp.watch(filelist, watchOpts, [ 'bundle-scripts' ]);
-            });
-        });
-
-        gulp.task('watch-styles', [ 'bundle-styles' ], function () {
-            var resolve = require("component-resolve-list");
-
-            resolve.styles(function(filelist) {
-                gulp.watch(filelist, watchOpts, [ 'bundle-styles' ]);
-            });
-        });
-
-        gulp.task('watch-files', [ 'bundle-files' ], function () {
-            var resolve = require("component-resolve-list");
-
-            resolve.files(function(filelist) {
-                gulp.watch(filelist, watchOpts, [ 'bundle-files' ]);
-            });
+        gulp.task('watch', [ 'bundle' ], function () {
+            var duoJson = require('../../components/duo.json');
+            var filelist = Object.keys(duoJson);
+            gulp.watch(filelist, watchOpts, [ 'bundle' ]);
         });
 
         gulp.task('bundle', ['bundle-scripts', 'bundle-styles']);
-        gulp.task('watch', ['watch-scripts', 'watch-styles']);
         gulp.task('default', ['bundle']);
     }
 }

@@ -57,15 +57,9 @@ module.exports = function(options) {
         };
 
         gulp.task('watch-specs', [ 'bundle-specs' ], function () {
-            var resolve = require('component-resolve-list');
-
-            resolve.scripts({ development: true }, function(filelist) {
-                filelist = filelist.filter(function(filename) {
-                    return !utils.endsWith(filename, '_dependencies.d.ts');
-                });
-                
-                gulp.watch(filelist, watchOpts, [ 'bundle-specs' ]);
-            });
+            var duoJson = require('../../components/duo.json');
+            var filelist = Object.keys(duoJson);
+            gulp.watch(filelist, watchOpts, [ 'bundle-specs' ]);
         });
 
         gulp.task('run-karma', [ 'bundle-specs' ], function (cb) {

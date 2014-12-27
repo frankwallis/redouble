@@ -1,9 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-require("angular/bower-angular");
-//require("bower-angular");
-//require("angular");
-//require("components/angular.js");
+require("angular/bower-angular:/angular.js");
 
 export var Module: ng.IModule = angular.module("tower.ui.cards", []);
 

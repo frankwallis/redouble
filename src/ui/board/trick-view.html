@@ -1,30 +1,33 @@
-<div class="trick-container">
-    <div class="row trick-edge-ns">
-        <div class="small-3 small-centered columns">
-            <tower-card class="trick-card" ng-if="trick.northCard" card="trick.northCard">
-            </tower-card>
-        </div>
+<div class="trick-container"
+     layout="column" layout-align="center center">
+    <div class="trick-edge-ns"
+         flex="25">
+        <tower-card class="trick-card" ng-if="trick.northCard" card="trick.northCard">
+        </tower-card>
     </div>
     
-    <div class="row trick-center">
-        <div class="small-3 columns trick-edge-ew">
+    <div class="trick-center"
+         flex="50"
+         layout="row" layout-align="center center">
+        <div class="trick-edge-ew"
+             flex="30">
             <tower-card class="trick-card" ng-if="trick.westCard" card="trick.westCard">
             </tower-card>
         </div>
 
-        <div class="small-6 small-centered columns">
+        <div flex="40">
         </div>
         
-        <div class="small-3 columns trick-edge-ew">
+        <div class="trick-edge-ew"
+             flex="30">
             <tower-card class="trick-card" ng-if="trick.eastCard" card="trick.eastCard">
             </tower-card>
         </div>
     </div>
 
-    <div class="row trick-edge-ns">
-        <div class="small-3 small-centered columns">
-            <tower-card class="trick-card" ng-if="trick.southCard" card="trick.southCard">
-            </tower-card>
-        </div>
+    <div class="trick-edge-ns"
+         flex="50">
+        <tower-card class="trick-card" ng-if="trick.southCard" card="trick.southCard">
+        </tower-card>
     </div>
 </div>

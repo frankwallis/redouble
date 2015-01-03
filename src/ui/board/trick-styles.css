@@ -1,18 +1,10 @@
-/* the trick is in fact an instance of the 'holy-grail' layout */
-/* see here https://github.com/philipwalton/solved-by-flexbox/blob/master/_sass/components/_holy-grail.scss */
-
 .trick-container {    
-    display: flex;
-    min-height: 100%;
-	flex-direction: column;
 }
 
 .trick-center {
-   flex: 1;
 }
 
 .trick-edge-ew {
-	flex: 0 0 6em;
 }
 
 .trick-edge-ns {

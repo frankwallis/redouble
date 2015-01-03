@@ -1,7 +1,6 @@
 @import 'components/font-awesome';
 @import 'components/normalize.css';
-@import 'components/foundation';
-/*@import 'components/bootstrap-default';*/
+@import 'angular/bower-material:/angular-material.css';
 
 @import './board/trick-styles.css';
 @import './board/bid-styles.css';

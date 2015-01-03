@@ -1,6 +1,11 @@
 /// <reference path="../_references.d.ts" />
 
 require("angular/bower-angular:/angular.js");
+window["Hammer"] = require("hammerjs/hammer.js");
+require("angular/bower-angular-aria:/angular-aria.js");
+require("angular/bower-angular-animate:/angular-animate.js");
+require("angular/bower-material:/angular-material.js");
+
 require("angular-ui/ui-router");
 
 //var modUiRouter = require("ui-router");
@@ -11,7 +16,7 @@ import MenuController = require('./menu/menu-controller');
 import TableController = require('./table/table-controller');
 
 export var Module: ng.IModule = angular.module("tower.ui", [ 
-	"ui.router", cards.Module.name, board.Module.name, player.Module.name
+	"ngMaterial", "ui.router", cards.Module.name, board.Module.name, player.Module.name
 ]);
 
 Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($stateProvider: any, $urlRouterProvider: any, $locationProvider: ng.ILocationProvider) => {

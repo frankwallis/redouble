@@ -1,7 +1,8 @@
 <div class="hand-container row">
-    <span class="hand-card">
+    <span class="hand-card"
+          layout="row" layout-align="start">
         <div ng-repeat="card in hand.availableCards">
-            <div class="small-1 small-centered columns">
+            <div flex="5">
                 <tower-card card="card"></tower-card>
             </div>
         </div>

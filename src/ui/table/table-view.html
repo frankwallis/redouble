@@ -1,20 +1,26 @@
-<div class="table-container bridge-table">
-    <div class="row full-width table-edge-ns">
-        <div class="small-3 small-centered columns">
+<div class="table-container bridge-table"
+     layout="column" layout-align="center">
+    <div class="table-edge-ns" 
+         flex="25"
+         layout="row" layout-align="center">
+        <div layout="column" layout-align="center">
             <tower-player class="table-player-north" 
                           player="tableCtrl.game.north"></tower-player>
             <tower-hand class="table-hand-north"
                         hand="tableCtrl.game.north.hand"></tower-hand>
         </div>
-        <div class="small-3 columns">
+        <div layout="column" layout-align="end">
             <tower-bidding-box class="table-bidding-north"
                                player="tableCtrl.game.north"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>
         </div>
     </div>
 
-    <div class="row full-width table-center">
-        <div class="small-3 columns table-edge-ew">
+    <div class="table-center"
+         flex="50"
+         layout="row" layout-align="center start">
+        <div class="table-edge-ew"
+             flex="30">
             <tower-player class="table-player-west" 
                           player="tableCtrl.game.west"></tower-player>
             <tower-hand class="table-hand-west"
@@ -23,10 +29,11 @@
                                player="tableCtrl.game.west"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>
         </div>
-        <div class="small-6 columns">
+        <div flex="40">
             <tower-board board="tableCtrl.game.currentBoard"></tower-board> 
         </div>
-        <div class="small-3 columns table-edge-ew">
+        <div class="table-edge-ew"
+             flex="30">
             <tower-player class="table-player-east" 
                           player="tableCtrl.game.east"></tower-player>
             <tower-hand class="table-hand-east" 
@@ -37,12 +44,16 @@
         </div>
     </div>
 
-    <div class="row full-width table-edge-ns">
-        <div class="small-3 small-centered columns">
+    <div class="table-edge-ns"
+         flex="25"
+         layout="row" layout-align="center">
+        <div layout="column" layout-align="center">
             <tower-player class="table-player-south" 
                           player="tableCtrl.game.south"></tower-player>
             <tower-hand class="table-hand-south"
                         hand="tableCtrl.game.south.hand"></tower-hand>
+        </div>
+        <div layout="column" layout-align="end">
             <tower-bidding-box class="table-bidding-south"
                                player="tableCtrl.game.south"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>

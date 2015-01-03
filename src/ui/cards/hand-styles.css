@@ -1,11 +1,6 @@
 .hand-card {
-    width: 3em;
+    width: 20em;
     overflow: hidden;
-    
-    display: inline-flex;
-    width: 50em;
-    overflow: hidden;
-    flex-direction: row;
 }
 
 .hand-container {

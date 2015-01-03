@@ -16,6 +16,11 @@ class Rubber extends GameSequence implements tower.IGame {
 
 	public getNextState(player: tower.IPlayer): ng.IPromise<any> {
 
+        // TODO !!
+        this.players.forEach((player) => {
+            player.game = this;
+        });
+        
         var deck = new Deck();
         deck.shuffle();
         var hands = deck.deal(4);

@@ -1,13 +1,13 @@
 <div class="card-container">
-    <div class="card-edge-left">
-        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
+    <div class="card-edge-left" layout="column" layout-align="start center">
         <div class="card-pip-small">{{card.pip | towerPipName}}</div>
+        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
     </div>
     
     <div class="card-pip">{{card.pip | towerPipName}}</div>
     
-    <div class="card-edge-right">
-        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
+    <div class="card-edge-right" layout="column" layout-align="end center">
         <div class="card-pip-small">{{card.pip | towerPipName}}</div>
+        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
     </div>
 </div>

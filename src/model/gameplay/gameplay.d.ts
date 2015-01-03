@@ -8,10 +8,12 @@ declare module tower {
 	}
 
 	interface IPlayer {
-		bid(): ng.IPromise<any>;
-		play(trick: ITrick): ng.IPromise<any>;
+		bid(game: tower.IGame): ng.IPromise<any>;
+		play(game: tower.IGame): ng.IPromise<any>;
         seat: Seat;
         name: string;
+        game: IGame;
+        hand: IHand;
         setCards(cards: Array<ICard>): IPlayer;
 	}
 
@@ -22,8 +24,7 @@ declare module tower {
 	}
     
     interface IMemorable {
-        memo: any;
-        
+        memo: any;       
     }
 
     enum BidType {

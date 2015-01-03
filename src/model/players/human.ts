@@ -12,7 +12,7 @@ class Human extends Player {
 
     private pendingBid: ng.IDeferred<tower.IBid>;
     
-	public bid(): ng.IPromise<tower.IBid> {
+	public bid(game: tower.IGame): ng.IPromise<tower.IBid> {
         if (this.awaitingBid)
             throw new Error("bid is already pending");
         
@@ -35,7 +35,7 @@ class Human extends Player {
     
     private pendingPlay: ng.IDeferred<tower.ICard>;
 
-	public play(trick: tower.ITrick): ng.IPromise<tower.ICard> {
+	public play(game: tower.IGame): ng.IPromise<tower.ICard> {
         if (this.awaitingPlay)
             throw new Error("play is already pending");
         

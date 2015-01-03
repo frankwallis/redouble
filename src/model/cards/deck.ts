@@ -1,7 +1,5 @@
 /// <reference path="../../_references.d.ts" />
 
-import Hand = require("./hand");
-
 class Deck implements tower.IDeck {
 
     constructor() {

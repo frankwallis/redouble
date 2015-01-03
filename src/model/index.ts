@@ -2,11 +2,15 @@
 
 require("angular/bower-angular:/angular.js");
 
-export var Module: ng.IModule = angular.module("tower.model", [ 
+import stgy = require("./strategy/index");
+import plyr = require("./players/index");
 
+export var Module: ng.IModule = angular.module("tower.model", [ 
+    stgy.Module.name, plyr.Module.name
 ]);
 
 import TowerService = require("./tower-service");
+
 import biddingFactory = require("./gameplay/bidding");
 import trickFactory = require("./gameplay/trick");
 import cardplayFactory = require("./gameplay/cardplay")
@@ -20,7 +24,3 @@ Module.factory("trickFactory", trickFactory);
 Module.factory("cardplayFactory", cardplayFactory);
 Module.factory("boardFactory", boardFactory);
 Module.factory("rubberFactory", rubberFactory);
-
-import mock = require("./players/mock");
-Module.factory("mockBidderFactory", mock.bidderFactory);
-Module.factory("mockPlayerFactory", mock.playerFactory);

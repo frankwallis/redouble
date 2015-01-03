@@ -49,7 +49,7 @@ class Trick extends GameSequence implements tower.ITrick {
     }
     
 	public getNextState(player: tower.IPlayer): ng.IPromise<any> {
-        return this.delay(player.play(this)
+        return this.delay(player.play(undefined) // TODO
 			.then((card) => {
 				this.cards[ player.seat ] = card;
 			}), 200);

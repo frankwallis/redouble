@@ -14,6 +14,7 @@ class TableController {
         // TODO - let them cut to deal
                 
         this.game.setPlayers($stateParams.players);
+    
         this.game.play($stateParams.players[0])
         	.then(
         		(game) => {

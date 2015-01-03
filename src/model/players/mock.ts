@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
-import Hand = require("../cards/hand");
 import Deck = require("../cards/deck");
+import Hand = require("./hand");
 import Player = require("./player");
 
 class MockPlayer extends Player {
@@ -20,7 +20,7 @@ class MockPlayer extends Player {
         return this;
     }
 
-    public bid(): ng.IPromise<tower.IBid> {
+    public bid(game: tower.IGame): ng.IPromise<tower.IBid> {
 		var result = this.$q.defer<tower.IBid>();
         var bid = { type: tower.BidType.NoBid };
         
@@ -35,8 +35,9 @@ class MockPlayer extends Player {
 		return result.promise;
 	}
 
-	public play(trick: tower.ITrick): ng.IPromise<tower.ICard> {
+	public play(game: tower.IGame): ng.IPromise<tower.ICard> {
 		var result = this.$q.defer<tower.ICard>();
+        var trick = game.currentBoard.cardplay.currentTrick;
         var selectedCard = this.getAnyCard(trick.leadCard);
         this.hand.play(selectedCard);
         result.resolve(selectedCard);

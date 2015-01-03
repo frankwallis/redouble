@@ -4,19 +4,22 @@ import Player = require("./player");
 
 class Computer extends Player {
 
-    public static $inject = [ "$q", "$timeout", "name" ];
+    public static $inject = [ "$q", "$timeout", "name",
+                              "biddingStrategy", "cardplayStrategy" ];
     
     constructor($q: ng.IQService,
                 private $timeout: ng.ITimeoutService,
-                name: string) {   
+                name: string,
+                private biddingStrategy: tower.IBiddingStrategy,
+                private cardplayStrategy: tower.ICardplayStrategy) {   
          super($q, name);
     }
         
-	public bid(): ng.IPromise<tower.IBid> {
+	public bid(game: tower.IGame): ng.IPromise<tower.IBid> {
 		var result = this.$q.defer<tower.IBid>();
 
         this.$timeout(() => {
-            var bid = {type: tower.BidType.NoBid};
+            var bid = this.biddingStrategy.getBid(this.game); // TODO!!
             console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
             result.resolve(bid);
         }, 200);
@@ -24,14 +27,16 @@ class Computer extends Player {
 		return result.promise;
 	}
 
-	public play(trick: tower.ITrick): ng.IPromise<tower.ICard> {
+	public play(game: tower.IGame): ng.IPromise<tower.ICard> {
 		var result = this.$q.defer<tower.ICard>();
+        
         this.$timeout(() => {
-            var selectedCard = this.getAnyCard(trick.leadCard);
-            console.log('seat ' + this.seat + ': ' + JSON.stringify(selectedCard));
-            this.hand.play(selectedCard);
-            result.resolve(selectedCard);
+            var card = this.cardplayStrategy.getCard(this.game);  // TODO!!
+            console.log('seat ' + this.seat + ': ' + JSON.stringify(card));
+            this.hand.play(card);
+            result.resolve(card);
         }, 200);
+        
 		return result.promise;
 	}
     

@@ -30,11 +30,13 @@
 
 .card-edge-left {
     align-self: flex-start;
-    margin: 0.5rem;
+    margin-left: 0.55rem;
+    margin-top: 0.35rem;
 }
 
 .card-edge-right {
     transform: rotate(180deg);
     align-self: flex-end;
-    margin: 0.5rem;
+    margin-right: 0.55rem;
+    margin-bottom: 0.35rem;
 }

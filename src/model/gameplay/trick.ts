@@ -4,10 +4,12 @@ import GameSequence = require("./game-sequence");
 
 class Trick extends GameSequence implements tower.ITrick {
 
-    public static $inject = [ "$q", "$timeout" ];
+    public static $inject = [ "$q", "$timeout", "$log" ];
     
-    constructor($q: ng.IQService, $timeout: ng.ITimeoutService) {   
-        super($q, $timeout);
+    constructor($q: ng.IQService, 
+                $timeout: ng.ITimeoutService,
+                $log: ng.ILogService) {   
+        super($q, $timeout, $log);
     	this.cards = [,,,];
     }
 

@@ -5,12 +5,13 @@ import Deck = require("../cards/deck");
 
 class Rubber extends GameSequence implements tower.IGame {
 
-    public static $inject = [ "$q", "$timeout", "boardFactory" ];
+    public static $inject = [ "$q", "$timeout", "$log", "boardFactory" ];
     
     constructor($q: ng.IQService, 
                 $timeout: ng.ITimeoutService,
+                $log: ng.ILogService,
                 private boardFactory: () => tower.IBoard) {   
-         super($q, $timeout);
+         super($q, $timeout, $log);
     }
 
 	public getNextState(player: tower.IPlayer): ng.IPromise<any> {

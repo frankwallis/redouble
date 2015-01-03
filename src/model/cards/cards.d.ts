@@ -1,7 +1,7 @@
 declare module tower {
 
 	enum Suit {
-		Spades = 0, Hearts = 1, Diamonds = 2, Clubs = 3
+		Clubs = 1, Diamonds = 2, Hearts = 3, Spades = 4
 	}
 
 	enum Pip {

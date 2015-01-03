@@ -4,14 +4,15 @@ import GameSequence = require("./game-sequence");
 
 class Board extends GameSequence implements tower.IBoard {
 
-    public static $inject = [ "$q", "$timeout", "biddingFactory", "cardplayFactory" ];
+    public static $inject = [ "$q", "$timeout", "$log", "biddingFactory", "cardplayFactory" ];
     
     constructor($q: ng.IQService, 
                 $timeout: ng.ITimeoutService,
+                $log: ng.ILogService,
                 biddingFactory: () => tower.IBidding, 
                 cardplayFactory: () => tower.ICardplay) {   
         
-        super($q, $timeout);
+        super($q, $timeout, $log);
         
         this.bidding = biddingFactory();
         this.cardplay = cardplayFactory();

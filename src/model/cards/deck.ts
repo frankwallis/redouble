@@ -13,7 +13,7 @@ class Deck implements tower.IDeck {
     private createCards(): Array<tower.ICard> {
     	var result = [];
 
-    	for (var asuit = tower.Suit.Spades; asuit <= tower.Suit.Clubs; asuit++) {
+    	for (var asuit = tower.Suit.Clubs; asuit <= tower.Suit.Spades; asuit++) {
 	    	for (var apip = tower.Pip.Two; apip <= tower.Pip.Ace; apip++) {
     				result.push({ suit: asuit, pip: apip });
     		}

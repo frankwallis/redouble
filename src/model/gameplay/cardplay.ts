@@ -4,12 +4,13 @@ import GameSequence = require("./game-sequence");
 
 class Cardplay extends GameSequence {
 
-    public static $inject = [ "$q", "$timeout", "trickFactory" ];
+    public static $inject = [ "$q", "$timeout", "$log", "trickFactory" ];
     
     constructor($q: ng.IQService, 
                 $timeout: ng.ITimeoutService,
+                $log: ng.ILogService,
                 trickFactory: () => tower.ITrick) {   
-        super($q, $timeout);
+        super($q, $timeout, $log);
             
         this.tricks = [];
         for (var i = 0; i < 13; i ++)

@@ -20,7 +20,7 @@ describe("Bidding", () => {
         console.log(tow.Module.name);
         var testModule = angular.module("tower.test", [ tow.Module.name ]);
         angular.mock.module(testModule);
-        angular.mock.module(tow.Module.name); // don't understand why this is needded
+        angular.mock.module(tow.Module.name); // don't understand why this is needed
     });
     
     beforeEach(angular.mock.inject((_biddingFactory_, _mockBidderFactory_, _$rootScope_) => {      
@@ -111,6 +111,11 @@ describe("Bidding", () => {
         
         // TODO - the opposing stuff
     });
+
+    it("should only allow access to certina properties after the biddng has ended", () => {
+
+    });
+    
 });
 
 export = tow;

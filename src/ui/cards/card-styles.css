@@ -1,7 +1,12 @@
+@import "./suit-styles.css";
+    
 .card-container {
   position: relative;
-  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0.1rem;
+  padding: 0.3rem 0.3rem;
   width: 5rem;
   height: 7rem;
   border-radius: 1rem;
@@ -10,43 +15,28 @@
   box-shadow: 0.25rem 0.25rem 0.75rem rgba(0,0,0,0.3);
 }
 
-.card-suit-diamonds:before, .card-suit-diamonds:after {
-  content: "♦";
-  color: #ff0000;
-}
- 
-.card-suit-hearts:before, .card-suit-hearts:after {
-  content: "♥";
-  color: #ff0000;
-}
- 
-.card-suit-clubs:before, .card-suit-clubs:after {
-  content: "♣";
-  color: #000;
-}
- 
-.card-suit-spades:before, .card-suit-spades:after {
-  content: "♠";
-  color: #000;
+.card-suit {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 
-.card-suit:before {
-  position: absolute;
-  font-size: 2rem;
-  line-height: 2rem;
-  left: 0.5rem;
-  top: 0.5rem;
-}
- 
-.card-suit:after {
-  position: absolute;
-  font-size: 2rem;
-  line-height: 2rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
+.card-pip-small {
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
 }
 
 .card-pip {
+  min-width: 60%;
   text-align: center;
   font: 2rem/7rem Georgia, Times New Roman, serif;
+}
+
+.card-edge-left {
+    align-self: flex-start;
+}
+
+.card-edge-right {
+    transform: rotate(180deg);
+    align-self: flex-end;
 }

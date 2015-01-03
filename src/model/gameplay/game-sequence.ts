@@ -3,7 +3,8 @@
 class GameSequence {
 
     constructor(public $q: ng.IQService, 
-                public $timeout: ng.ITimeoutService) { }
+                public $timeout: ng.ITimeoutService,
+                public $log: ng.ILogService) { }
 
     public get north(): tower.IPlayer {
 		return this.players[tower.Seat.North];

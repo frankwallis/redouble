@@ -20,6 +20,10 @@
     
 }
 
+.table-hand-north, .table-hand-south {
+    display: inline;
+}
+
 /*****************/
 
 .bridge-table {

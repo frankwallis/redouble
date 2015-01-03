@@ -1,27 +1,30 @@
+var path = require('path');
 var gutil = require('gulp-util');
+var utils = require('../utils/utils');
 
 module.exports = function(options) {
     
     return function(gulp) {
     
-        gulp.task('generate-references', ['install-components'], function (cb) {
+        gulp.task('generate-references', function (cb) {
+
+            var outputFile = path.join(options.rootDir, '_references.d.ts');
             var writeRefs = require('./generate-references');
-            var utils = require('../utils/utils');
-            var async = require('async');
             var notify = require('../utils/notify');
-            var path = require('path');
+
+            utils.ensureWriteFile(outputFile, lines, function(err) {
+                if (err) {
+                    notify.error(err);
+                    throw err;
+                }
+                gutil.log('Generated ' + outputFile);
+                cb();
+            });
+
 
             var writeFile = function(rootDir, done) {
                 writeRefs({ "fields": allfields, "root": rootDir }, function(lines, err) {
-                    var outputFile = path.join(rootDir, '_references.d.ts');
-                    utils.ensureWriteFile(outputFile, lines, function(err) {
-                        if (err) {
-                            notify.error(err);
-                            throw err;
-                        }
-                        gutil.log('Generated ' + outputFile);
-                        done();
-                    });
+                    
                 });                    
             };
 

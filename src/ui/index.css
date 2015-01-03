@@ -1,8 +1,12 @@
 @import 'components/font-awesome';
 @import 'components/normalize.css';
 @import 'components/foundation';
+/*@import 'components/bootstrap-default';*/
 
 @import './board/trick-styles.css';
+@import './board/bid-styles.css';
 @import './cards/hand-styles.css';
 @import './cards/card-styles.css';
 @import './table/table-styles.css';
+
+@import './player/bidding-box-styles.css';

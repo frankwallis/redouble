@@ -4,10 +4,12 @@ import GameSequence = require("./game-sequence");
 
 class Bidding extends GameSequence {
 
-    public static $inject = [ "$q", "$timeout" ];
+    public static $inject = [ "$q", "$timeout", "$log" ];
     
-    constructor($q: ng.IQService, $timeout: ng.ITimeoutService) {   
-         super($q, $timeout);
+    constructor($q: ng.IQService, 
+                $timeout: ng.ITimeoutService,
+                $log: ng.ILogService) {   
+         super($q, $timeout, $log);
     }
 
 	public get northBid(): tower.IBid {
@@ -48,8 +50,9 @@ class Bidding extends GameSequence {
         return player.bid()
 			.then((bid) => {
                 var error = this.validate(bid);
+                
                 if (error)
-                    return this.$q.reject(error);//throw "err";
+                    return this.$q.reject(error);
                 
                 this.bids.push(bid);
                 return bid;

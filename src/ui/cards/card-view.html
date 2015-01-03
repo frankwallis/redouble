@@ -1,6 +1,13 @@
 <div class="card-container">
-    <div class="card-suit card-suit-{{card.suit | towerSuitName}}" 
-    	 ng-class="card-suit-{{card.suit | towerSuitName}}">
-        <div class="card-pip">{{card.pip | towerPipName}}</div>
+    <div class="card-edge-left">
+        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
+        <div class="card-pip-small">{{card.pip | towerPipName}}</div>
+    </div>
+    
+    <div class="card-pip">{{card.pip | towerPipName}}</div>
+    
+    <div class="card-edge-right">
+        <div class="card-suit suit-{{card.suit | towerSuitName}}"></div>
+        <div class="card-pip-small">{{card.pip | towerPipName}}</div>
     </div>
 </div>

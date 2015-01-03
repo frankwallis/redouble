@@ -1,4 +1,20 @@
-<div class="bid-container">
-    <span class="bid-level">{{bid.level}}</span>
-    <span class="bid-suit">{{bid.suit}}</span>
-</ol>
+<div ng-switch="bid.type">
+    <div class="bid-container" 
+         ng-switch-when="0">
+        No Bid
+    </div>
+    <div class="bid-container"
+         ng-switch-when="1">
+        <span class="bid-level">{{bid.level}}</span>
+        <span class="bid-suit suit-{{bid.suit | towerSuitName}}"
+              ng-class="suit-{{bid.suit | towerSuitName}}"></span>
+    </div>
+    <div class="bid-container"
+         ng-switch-when="2">
+        Double
+    </div>
+    <div class="bid-container"
+         ng-switch-when="3">
+        Redouble
+    </div>
+</div>

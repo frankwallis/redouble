@@ -1,6 +1,6 @@
 declare module tower {
 	enum BidSuit {
-		Spades = 0, Hearts = 2, Diamonds = 3, Clubs = 4, NoTrumps = 5
+		Clubs = 1, Diamonds = 2, Hearts = 3, Spades = 4, NoTrumps = 5
 	}
 
 	enum Seat {

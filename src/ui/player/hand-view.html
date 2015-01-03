@@ -1,0 +1,12 @@
+<div class="hand-container row">
+    <span class="hand-card"
+          layout="row" layout-align="start">
+        <div ng-repeat="card in player.hand.availableCards">
+            <div flex="5">
+                <md-button class="md-raised hand-card-button" ng-click="player.makePlay(card)">
+                    <tower-card card="card"></tower-card>
+                </md-button>
+            </div>
+        </div>
+    </span>
+</div>

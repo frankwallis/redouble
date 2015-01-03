@@ -1,6 +1,7 @@
 /// <reference path="../_references.d.ts" />
 
 import Computer = require('./players/computer');
+import Human = require('./players/human');
 
 class GameService implements tower.ITowerService {
 
@@ -19,6 +20,9 @@ class GameService implements tower.ITowerService {
         return this.$injector.instantiate(Computer, { "name": name });
     }
 
+    createHuman(name: string): tower.IPlayer {
+        return this.$injector.instantiate(Human, { "name": name });
+    }
 }
 
 export = GameService;

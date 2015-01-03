@@ -7,7 +7,7 @@ function towerHandDirective() {
         transclude: false,
         replace: true,
         scope: {
-            hand: "="
+            player: "="
         },
         template: require('./hand-view.html')
     }

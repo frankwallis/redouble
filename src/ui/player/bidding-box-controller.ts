@@ -25,7 +25,7 @@ class BiddingBoxController {
         this.nobid = { type: tower.BidType.NoBid };
     }
     
-    private player: tower.IPlayer;
+    private player: any;//tower.IPlayer;
     private bidding: tower.IBidding;
     
     public levels: Array<Array<tower.IBid>>;
@@ -38,7 +38,7 @@ class BiddingBoxController {
     }
     
     public bid(bid: tower.IBid) {
-        
+        this.player.makeBid(bid);   
     }
 }
 

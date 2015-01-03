@@ -24,6 +24,10 @@ class Player implements tower.IPlayer {
     public play(trick: tower.ITrick): ng.IPromise<any> {
         return this.$q.reject(new Error("unimplemented"));
     }
+    
+    public get isHuman() {
+        return false;
+    }
 }
 
 export = Player;

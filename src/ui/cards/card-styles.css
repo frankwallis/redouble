@@ -5,14 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.1rem;
-  padding: 0.3rem 0.3rem;
   width: 5rem;
   height: 7rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: #fff;
-  -webkit-box-shadow: 0.25rem 0.25rem 0.75rem rgba(0,0,0,0.3);
-  box-shadow: 0.25rem 0.25rem 0.75rem rgba(0,0,0,0.3);
 }
 
 .card-suit {
@@ -34,9 +30,11 @@
 
 .card-edge-left {
     align-self: flex-start;
+    margin: 0.5rem;
 }
 
 .card-edge-right {
     transform: rotate(180deg);
     align-self: flex-end;
+    margin: 0.5rem;
 }

@@ -22,7 +22,7 @@ class MenuController {
     	var result = [];
     	result.push(this.towerService.createComputer("north"));
     	result.push(this.towerService.createComputer("east"));
-    	result.push(this.towerService.createComputer("south"));
+    	result.push(this.towerService.createHuman("south"));
     	result.push(this.towerService.createComputer("west"));
     	return result;
     }

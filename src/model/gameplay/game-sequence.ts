@@ -45,7 +45,7 @@ class GameSequence {
 
 	public initialPlayer: tower.IPlayer;
 
-    // TODO - make this an ES6 generator?
+    // TODO - make this an ES6 generator
 	public play(initialPlayer: tower.IPlayer): ng.IPromise<any> {
 		var result = this.$q.defer();
         this.initialPlayer = initialPlayer;

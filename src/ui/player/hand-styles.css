@@ -3,6 +3,11 @@
     overflow: hidden;
 }
 
+.hand-card-button {
+    padding: 0;
+    border-radius: 0.5rem;   
+}
+
 .hand-container {
     height: 7em;   
 }

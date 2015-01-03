@@ -19,6 +19,10 @@
     display: inline;
 }
 
+.table-bidding-box {
+    margin-left: 1rem;
+}
+
 /*****************/
 
 .bridge-table {

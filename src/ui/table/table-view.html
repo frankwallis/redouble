@@ -7,7 +7,7 @@
             <tower-player class="table-player-north" 
                           player="tableCtrl.game.north"></tower-player>
             <tower-hand class="table-hand-north"
-                        hand="tableCtrl.game.north.hand"></tower-hand>
+                        player="tableCtrl.game.north"></tower-hand>
         </div>
         <div layout="column" layout-align="end">
             <tower-bidding-box class="table-bidding-north"
@@ -24,20 +24,22 @@
             <tower-player class="table-player-west" 
                           player="tableCtrl.game.west"></tower-player>
             <tower-hand class="table-hand-west"
-                        hand="tableCtrl.game.west.hand"></tower-hand>
+                        player="tableCtrl.game.west"></tower-hand>
             <tower-bidding-box class="table-bidding-west"
                                player="tableCtrl.game.west"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>
         </div>
+        
         <div flex="40">
             <tower-board board="tableCtrl.game.currentBoard"></tower-board> 
         </div>
+        
         <div class="table-edge-ew"
              flex="30">
             <tower-player class="table-player-east" 
                           player="tableCtrl.game.east"></tower-player>
             <tower-hand class="table-hand-east" 
-                        hand="tableCtrl.game.east.hand"></tower-hand>
+                        player="tableCtrl.game.east"></tower-hand>
             <tower-bidding-box class="table-bidding-east"
                                player="tableCtrl.game.east"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>
@@ -51,9 +53,9 @@
             <tower-player class="table-player-south" 
                           player="tableCtrl.game.south"></tower-player>
             <tower-hand class="table-hand-south"
-                        hand="tableCtrl.game.south.hand"></tower-hand>
+                        player="tableCtrl.game.south"></tower-hand>
         </div>
-        <div layout="column" layout-align="end">
+        <div class="table-bidding-box" layout="column" layout-align="center">
             <tower-bidding-box class="table-bidding-south"
                                player="tableCtrl.game.south"
                                bidding="tableCtrl.game.bidding"></tower-bidding-box>

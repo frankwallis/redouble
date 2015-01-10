@@ -10,7 +10,10 @@ class BiddingStrategy implements tower.IBiddingStrategy {
     }
 
     public getBid(game: tower.IGame): tower.IBid {
-         return {type: tower.BidType.NoBid};
+        if ((game.currentBoard.bidding.bids.length > 0) && (game.currentBoard.bidding.bids.length < 4))
+            return {type: tower.BidType.Call, suit: game.currentBoard.bidding.lastBid.suit +1 || tower.BidSuit.Clubs, level: game.currentBoard.bidding.lastBid.level +1 || 1}; 
+        else
+            return {type: tower.BidType.NoBid};
     }
     
 }

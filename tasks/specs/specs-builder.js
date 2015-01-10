@@ -28,10 +28,12 @@ module.exports = function(options) {
             utils.ensureWriteFile("./src/index-specs.ts", specs, function() {
                 var Duo = require("duo");
                 var typescript = require('duo-typescript');
+                var debower = require('duo-debower');
                 var duo = new Duo(process.cwd())
 
                 duo
                   .entry("./src/index-specs.ts")
+                  .usePackage(debower())
                   .use(typescript())
                   .run(function(err, src) {
                         if (err) {

@@ -9,6 +9,7 @@
   height: 7rem;
   border-radius: 0.5rem;
   background: #fff;
+  color: black;
 }
 
 .card-suit {
@@ -20,6 +21,7 @@
   font-size: 1rem;
   line-height: 1rem;
   text-align: center;
+  
 }
 
 .card-pip {

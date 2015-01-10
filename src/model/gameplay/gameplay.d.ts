@@ -43,6 +43,7 @@ declare module tower {
 		southBid: IBid;
 		westBid: IBid;
         
+        lastBid: IBid;
         bids: Array<IBid>;
         currentPlayer: IPlayer;
 	}

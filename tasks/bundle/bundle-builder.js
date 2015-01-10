@@ -21,10 +21,12 @@ module.exports = function(options) {
         gulp.task('bundle-scripts', ['clean-scripts'], function (cb) {
             var Duo = require("duo");
             var typescript = require('duo-typescript');
+            var debower = require('duo-debower');
             var duo = new Duo(process.cwd())
 
             duo
               .entry(options.entryJs)
+              .usePackage(debower())
               .use(typescript())
               .run(function(err, src) {
                     if (err) {
@@ -54,25 +56,26 @@ module.exports = function(options) {
         gulp.task('bundle-styles', ['clean-styles'], function (cb) {
             var Duo = require("duo");
             var duo = new Duo(process.cwd())
+            var debower = require('duo-debower');
             //var sass = require('duo-sass');
 
             duo
               .entry(options.entryCss)
+              .usePackage(debower())
               .run(function(err, src) {
-                    if (err) {
-                        gutil.log(err);
+                if (err) {
+                    gutil.log(err);
+                    cb();
+                }
+                else {                
+                    var filename = 'build/build.css';
+                    utils.ensureWriteFile(filename, src, function(err) {
+                        if (err) throw err;
+                        gutil.log('Generated ' + filename);
                         cb();
-                    }
-                    else {                
-                        var filename = 'build/build.css';
-                        utils.ensureWriteFile(filename, src, function(err) {
-                            if (err) throw err;
-                            gutil.log('Generated ' + filename);
-                            cb();
-                        });
-                    }
-                });            
-
+                    });
+                }
+            });            
         });
 
         var watchOpts =  { 
@@ -81,13 +84,13 @@ module.exports = function(options) {
             interval: 500 
         };
 
-        gulp.task('watch', [ 'bundle' ], function () {
+        gulp.task('watch', [ 'bundle-scripts', 'bundle-styles' ], function () {
             var duoJson = require('../../components/duo.json');
             var filelist = Object.keys(duoJson);
-            gulp.watch(filelist, watchOpts, [ 'bundle' ]);
+            gulp.watch(filelist, watchOpts, [ 'bundle-scripts', 'bundle-styles' ]);
         });
 
-        gulp.task('bundle', ['bundle-scripts', 'bundle-styles']);
+        gulp.task('bundle', ['bundle-scripts', 'bundle-styles', 'bundle-styles']);
         gulp.task('default', ['bundle']);
     }
 }

@@ -5,7 +5,6 @@ class Hand implements tower.IHand {
     constructor(cards: Array<tower.ICard>) {
         this.availableCards = cards.sort((c1, c2) => (c2.suit - c1.suit) || (c2.pip - c1.pip));
         this.playedCards = [];
-        
     }
     
     public availableCards: Array<tower.ICard>;

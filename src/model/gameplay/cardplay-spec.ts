@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
-require("angular/bower-angular:/angular.js");
-require("angular/bower-angular-mocks:/angular-mocks.js");
+require("angular/bower-angular");
+require("angular/bower-angular-mocks");
 
 import tow = require("../index");
 

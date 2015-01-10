@@ -1,9 +1,8 @@
 @import 'components/font-awesome';
 @import 'components/normalize.css';
-@import 'angular/bower-material:/angular-material.css';
+@import 'angular/bower-material';
 
-@import './board/trick-styles.css';
-@import './board/bid-styles.css';
+@import './board/board-styles.css';
 @import './cards/card-styles.css';
 @import './table/table-styles.css';
 

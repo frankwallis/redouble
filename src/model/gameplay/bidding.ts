@@ -47,9 +47,10 @@ class Bidding extends GameSequence {
     public bids = [];
     
 	public getNextState(player: tower.IPlayer): ng.IPromise<any> {
-        return player.bid(undefined) // TODO
+        return player.bid(player.game)
 			.then((bid) => {
                 var error = this.validate(bid);
+                console.log(error);
                 
                 if (error)
                     return this.$q.reject(error);
@@ -101,7 +102,8 @@ class Bidding extends GameSequence {
             
             idx --;
         }
-        return (consecutivePasses >= 3) && (this.bids.length > 3);
+        var result = (consecutivePasses >= 3) && (this.bids.length > 3);
+        return result;
     }
 }
 

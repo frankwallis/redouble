@@ -1,10 +1,11 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular/bower-angular:/angular.js");
+require("angular/bower-angular");
 window["Hammer"] = require("hammerjs/hammer.js");
-require("angular/bower-angular-aria:/angular-aria.js");
-require("angular/bower-angular-animate:/angular-animate.js");
-require("angular/bower-material:/angular-material.js");
+require("angular/bower-angular-aria");
+require("angular/bower-angular-animate");
+require("angular/bower-material");
+
 require("angular-ui/ui-router");
 
 import cards = require("./cards/index");

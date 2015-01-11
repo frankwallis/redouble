@@ -88,10 +88,11 @@ module.exports = function(options) {
         gulp.task('watch', [ 'bundle-scripts', 'bundle-styles' ], function () {
             var duoJson = require('../../components/duo.json');
             var csslist = Object.keys(duoJson).filter(function(key) {
-                return path.extname(key) == 'css';
+                console.log(path.extname(key));
+                return path.extname(key) == '.css';
             });
             var jslist = Object.keys(duoJson).filter(function(key) {
-                return path.extname(key) != 'css';
+                return path.extname(key) != '.css';
             });
             gulp.watch(jslist, watchOpts, [ 'bundle-scripts' ]);
             gulp.watch(csslist, watchOpts, [ 'bundle-styles' ]);

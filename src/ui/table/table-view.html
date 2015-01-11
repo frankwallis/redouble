@@ -1,5 +1,6 @@
 <div class="bridge-table">
 
+<!--
     <nav class="game-menu">
         <md-button class="game-menu-button md-raised"
                    aria-label="undo"
@@ -17,6 +18,7 @@
             <i class="game-icon fa fa-bullhorn"></i>            
         </md-button>
     </nav>
+-->
 
     <div class="table-container" layout="column" layout-align="space-between">
         
@@ -68,16 +70,17 @@
 
         <div class="table-edge-ns"
              flex="25">
-            <div layout="row" layout-align="space-between">
-                <tower-bidding bidding="tableCtrl.game.currentBoard.bidding"></tower-bidding>
+            <div layout="row" layout-align="center">
+                <tower-bidding flex="25" bidding="tableCtrl.game.currentBoard.bidding"></tower-bidding>
 
-                <div layout="column" layout-align="center">
+                <div flex="50" layout="column" layout-align="center center">
                     <tower-player class="table-player-south" 
                                   player="tableCtrl.game.south"></tower-player>
                     <tower-hand class="table-hand-south"
                                 player="tableCtrl.game.south"></tower-hand>
                 </div>
-                <div class="table-bidding-box" layout="column" layout-align="center">
+
+                <div flex="25" class="table-bidding-box" layout="column" layout-align="center">
                     <tower-bidding-box class="table-bidding-south"
                                        player="tableCtrl.game.south"
                                        bidding="tableCtrl.game.bidding"></tower-bidding-box>

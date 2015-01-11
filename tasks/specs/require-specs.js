@@ -4,7 +4,11 @@ var utils = require('../utils/utils');
 
 module.exports = function(glob, root, done) {
     var filelist = utils.unglob(glob, root);
-    var result = '';///// <reference path="./_references.d.ts" />' + os.EOL;
+
+    var result = "";
+    result    += "/// ------------------------------------- ///" + os.EOL;
+    result    += "/// Automatically generated. DO NOT EDIT. ///" + os.EOL;
+    result    += "/// ------------------------------------- ///" + os.EOL + os.EOL;
 
     filelist.forEach(function(filename, idx) {
         filename = filename.substr(0, filename.length - 3);

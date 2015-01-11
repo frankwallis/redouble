@@ -5,7 +5,7 @@ function towerBidDirective() {
         restrict: "EA",
         name: "towerBid",
         transclude: false,
-        replace: false,
+        replace: true,
         scope: {
             bid: "="
         },

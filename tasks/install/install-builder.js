@@ -4,6 +4,9 @@ var utils = require('../utils/utils');
 
 module.exports = function(options) {
     
+    options = options || {};
+    options.rootDir = options.rootDir || process.cwd();
+    
     return function(gulp) {
     
         gulp.task('generate-references', function (cb) {
@@ -11,7 +14,9 @@ module.exports = function(options) {
             var outputFile = path.join(options.rootDir, '_references.d.ts');
             var writeRefs = require('./generate-references');
             var notify = require('../utils/notify');
-
+            
+            var lines = writeRefs(options);
+            
             utils.ensureWriteFile(outputFile, lines, function(err) {
                 if (err) {
                     notify.error(err);
@@ -20,15 +25,6 @@ module.exports = function(options) {
                 gutil.log('Generated ' + outputFile);
                 cb();
             });
-
-
-            var writeFile = function(rootDir, done) {
-                writeRefs({ "fields": allfields, "root": rootDir }, function(lines, err) {
-                    
-                });                    
-            };
-
-            async.map(options.typescriptDirs, writeFile, cb);
         });
 
         gulp.task('install', ['generate-references']);

@@ -2,7 +2,7 @@ var os = require('os');
 var path = require('path');
 var utils = require('../utils/utils');
 
-module.exports = function(glob, root, done) {
+module.exports = function(glob, root) {
     var filelist = utils.unglob(glob, root);
 
     var result = "";

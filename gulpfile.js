@@ -4,7 +4,7 @@ var tasks = require('./tasks');
 tasks
     .addClean(['build/**/*', 'components/**', 'reports/**'])
     .addInstall({
-        typescriptDirs: ["src"]
+        rootDir: "src"
     })
     .addSpecs({ 
         

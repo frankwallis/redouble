@@ -1,35 +1,28 @@
 var os = require('os');
 var path = require('path');
-var resolveList = require('component-resolve-list');
+var utils = require('../utils/utils');
 
-module.exports = function(options, done) {
+module.exports = function(options) {
     options = options || {};
-    options.filterRx = /\.d\.ts$/i;
-    options.development = true;
     options.root = options.root || process.cwd();
+    options.rootDir = options.rootDir || options.root;
 
-    resolveList.custom(options, function(filelist, err) {
-        if (err) throw err;
+    var filelist = utils.unglob(['components/**/*.d.ts', path.join(options.rootDir, '**/*.d.ts')], options.root);
+    
+    var result = "";
+    result    += "/// ------------------------------------- ///" + os.EOL;
+    result    += "/// Automatically generated. DO NOT EDIT. ///" + os.EOL;
+    result    += "/// ------------------------------------- ///" + os.EOL + os.EOL;
 
-        var header = os.EOL;
-        header    += "/// ------------------------------------- ///" + os.EOL;
-        header    += "/// Automatically generated. DO NOT EDIT. ///" + os.EOL;
-        header    += "/// ------------------------------------- ///" + os.EOL + os.EOL;
+    filelist.forEach(function(filename, idx) {
+        if (path.basename(filename) != '_references.d.ts') {
+            result += '/// <reference path="';
+            result += forward_slash( path.relative(options.rootDir, filename) );
+            result += '" />' + os.EOL;
+        }
+    })
 
-        var lines = filelist
-            .reduce(function(lines, file) {
-
-                if (path.basename(file) != '_references.d.ts') {
-                    lines += '/// <reference path="';
-                    lines += forward_slash( path.relative(options.root, file) );
-                    lines += '" />' + os.EOL;
-                }
-
-                return lines;
-            }, header);
-
-        return done(lines);    
-    });
+    return result;
 }
 
 function forward_slash(str) {

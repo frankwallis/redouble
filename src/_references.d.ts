@@ -2,7 +2,7 @@
 /// Automatically generated. DO NOT EDIT. ///
 /// ------------------------------------- ///
 
-/// <reference path="../components/angular-ui-ui-router@0.2.13/api/angular-ui-router.d.ts" />
+////// <reference path="../components/angular-ui-ui-router@0.2.13/api/angular-ui-router.d.ts" />
 /// <reference path="declarations/commonjs.d.ts" />
 /// <reference path="declarations/angular/angular.d.ts" />
 /// <reference path="declarations/jquery/jquery.d.ts" />

@@ -2,14 +2,17 @@
 
     <nav class="game-menu">
         <md-button class="game-menu-button md-raised"
+                   aria-label="undo"
                    ng-click="cx.back()">
             <i class="game-icon fa fa-arrow-left"></i>            
         </md-button>
         <md-button class="board-menu-button md-raised"
+                   aria-label="redo"
                    ng-click="cx.forward()">
             <i class="game-icon fa fa-arrow-right"></i>            
         </md-button>
         <md-button class="board-menu-button md-raised"
+                   aria-label="show bidding"
                    ng-click="cx.showBidding()">
             <i class="game-icon fa fa-bullhorn"></i>            
         </md-button>

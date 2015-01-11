@@ -26,7 +26,7 @@ module.exports = function(options) {
 
             duo
               .entry(options.entryJs)
-              .usePackage(debower())
+              .usePackage(debower({"gulpMode": true}))
               .use(typescript())
               .run(function(err, src) {
                     if (err) {
@@ -53,7 +53,7 @@ module.exports = function(options) {
             });
         });
 
-        gulp.task('bundle-styles', ['clean-styles'], function (cb) {
+        gulp.task('bundle-styles', ['clean-styles', 'bundle-scripts'], function (cb) {
             var Duo = require("duo");
             var duo = new Duo(process.cwd())
             var debower = require('duo-debower');
@@ -61,7 +61,7 @@ module.exports = function(options) {
 
             duo
               .entry(options.entryCss)
-              .usePackage(debower())
+              .usePackage(debower({"gulpMode": true}))
               .run(function(err, src) {
                 if (err) {
                     gutil.log(err);
@@ -86,11 +86,17 @@ module.exports = function(options) {
 
         gulp.task('watch', [ 'bundle-scripts', 'bundle-styles' ], function () {
             var duoJson = require('../../components/duo.json');
-            var filelist = Object.keys(duoJson);
-            gulp.watch(filelist, watchOpts, [ 'bundle-scripts', 'bundle-styles' ]);
+            var csslist = Object.keys(duoJson).filter(function(key) {
+                return path.extname(key) == 'css';
+            });
+            var jslist = Object.keys(duoJson).filter(function(key) {
+                return path.extname(key) != 'css';
+            });
+            gulp.watch(jslist, watchOpts, [ 'bundle-scripts' ]);
+            gulp.watch(csslist, watchOpts, [ 'bundle-styles' ]);
         });
 
-        gulp.task('bundle', ['bundle-scripts', 'bundle-styles', 'bundle-styles']);
+        gulp.task('bundle', ['bundle-scripts', 'bundle-styles']);
         gulp.task('default', ['bundle']);
     }
 }

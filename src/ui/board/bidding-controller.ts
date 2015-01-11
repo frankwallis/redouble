@@ -17,7 +17,10 @@ class BiddingController {
         var result = [];
         
         for (var i = 0; i < 6; i ++) {
-            result.push([,,,]);
+            result.push([]);
+            for (var j = 0; j < 4; j ++) {
+                result[i].push({});
+            }
         }
                 
         bidding.bids.forEach(function(bid, idx) {

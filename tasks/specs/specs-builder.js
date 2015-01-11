@@ -33,7 +33,7 @@ module.exports = function(options) {
 
                 duo
                   .entry("./src/index-specs.ts")
-                  .usePackage(debower())
+                  .usePackage(debower({"gulpMode": true}))
                   .use(typescript())
                   .run(function(err, src) {
                         if (err) {

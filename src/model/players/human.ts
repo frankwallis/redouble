@@ -13,6 +13,10 @@ class Human extends Player {
     private pendingBid: ng.IDeferred<tower.IBid>;
     
 	public bid(game: tower.IGame): ng.IPromise<tower.IBid> {
+        console.log('in human');
+
+        console.log(this.game.currentBoard.bidding.eastBid);
+
         if (this.awaitingBid)
             throw new Error("bid is already pending");
         

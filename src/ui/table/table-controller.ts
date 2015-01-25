@@ -9,18 +9,18 @@ class TableController {
                 private $rootScope: any) {
         
         this.game = $stateParams.game;
+
+        $stateParams.players.forEach((player) => {
+                player.game = this.game;
+            })
         
-        console.log(JSON.stringify($stateParams));
-        // TODO - let them cut to deal
-                
-        this.game.setPlayers($stateParams.players);
-    
-        this.game.play($stateParams.players[0])
+        this.game.play($stateParams.players)
         	.then(
         		(game) => {
 					$state.go(".result");
         		},
         		(err) => {
+                    console.log(err);
         			$state.go(".error");
         		},
         		(game) => {

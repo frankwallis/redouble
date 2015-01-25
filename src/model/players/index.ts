@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-require("angular/bower-angular");
+require("angular");
 
 export var Module: ng.IModule = angular.module("tower.model.players", [ 
 

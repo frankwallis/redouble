@@ -1,15 +1,15 @@
 /// <reference path="../../_references.d.ts" />
 
-import Deck = require("../cards/deck");
 import Hand = require("./hand");
 import Player = require("./player");
 
 class MockPlayer extends Player {
 
-    public static $inject = [ "$q", "name" ];
+    public static $inject = [ "$q", "name", "deck" ];
     
     constructor($q: ng.IQService,
-                public name: string) {   
+                public name: string,
+                private deck: any) {   
          super($q, name);
     }
 
@@ -77,10 +77,9 @@ export var playerFactory = [ "$injector", ($injector) => {
             southCards: Array<any>, westCards: Array<any>) => {
       
         if (!westCards) {
-            var deck = new Deck();
-            deck.shuffle();
+            this.deck.shuffle();
             
-            return deck.deal(4)
+            return this.deck.deal(4)
                 .map((cards) => $injector.instantiate(MockPlayer).setCards(cards))
         }
         else {

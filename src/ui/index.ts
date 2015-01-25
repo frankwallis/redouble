@@ -1,12 +1,13 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular/bower-angular");
-window["Hammer"] = require("hammerjs/hammer.js");
-require("angular/bower-angular-aria");
-require("angular/bower-angular-animate");
-require("angular/bower-material");
+require("angular");
 
-require("angular-ui/ui-router");
+window["Hammer"] = require("hammerjs/hammer.js");
+require("angular-aria");
+require("angular-animate");
+
+require("ui-router");
+require("angular-material");
 
 import cards = require("./cards/index");
 import board = require("./board/index");

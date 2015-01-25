@@ -19,7 +19,7 @@ class Computer extends Player {
 		var result = this.$q.defer<tower.IBid>();
 
         this.$timeout(() => {
-            var bid = this.biddingStrategy.getBid(this.game); // TODO!!
+            var bid = this.biddingStrategy.getBid(game);
             console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
             result.resolve(bid);
         }, 200);
@@ -31,7 +31,7 @@ class Computer extends Player {
 		var result = this.$q.defer<tower.ICard>();
         
         this.$timeout(() => {
-            var card = this.cardplayStrategy.getCard(this.game);  // TODO!!
+            var card = this.cardplayStrategy.getCard(game);  // TODO!!
             console.log('seat ' + this.seat + ': ' + JSON.stringify(card));
             this.hand.play(card);
             result.resolve(card);

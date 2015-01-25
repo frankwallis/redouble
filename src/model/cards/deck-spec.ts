@@ -3,7 +3,7 @@
 require("angular/bower-angular:/angular.js");
 require("angular/bower-angular-mocks:/angular-mocks.js");
 
-import Deck = require('./deck');
+import Deck = require('./deck').Deck;
 
 describe("Deck", () => {
 

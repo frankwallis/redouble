@@ -30,11 +30,9 @@ export class Rubber {
     	while(!this.playHasEnded()) {
     		var board = new Board(this.$q, this.$timeout, this.$log, this.deck);
     		this.boards.push(board);
-    		await board.play(players, dealer);
+    		await this.$q.when(board.play(players, dealer));
     		dealer = rotate(dealer);
     	}
-
-    	return this.$q.when({});
 	}
 
 	get north(): tower.IPlayer {

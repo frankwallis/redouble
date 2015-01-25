@@ -28,9 +28,8 @@ export class Board {
         this.$log.debug('playing board');
 
       	this.deal(players, dealer);
-      	await this.bidding.play(players, dealer);
+      	await this.$q.when(this.bidding.play(players, dealer));
       	await this.cardplay.play(players, this.bidding.opener);
-        return this.$q.when({});
     }
 
   	deal(players: Array<tower.IPlayer>, dealer: tower.Seat) {

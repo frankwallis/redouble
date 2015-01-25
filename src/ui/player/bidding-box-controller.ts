@@ -23,6 +23,10 @@ class BiddingBoxController {
         this.double = { type: tower.BidType.Double };
         this.redouble = { type: tower.BidType.Redouble };
         this.nobid = { type: tower.BidType.NoBid };
+
+        $scope.$watch(() => this.player.awaitingBid, () => {
+                console.log("Awaiting: " + this.player.awaitingBid);
+            })
     }
     
     private player: any;//tower.IPlayer;

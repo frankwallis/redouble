@@ -21,14 +21,11 @@ export class Bidding {
         var current = dealer;
 
         while(!this.biddingHasEnded()) {
-            var bid = await players[current].bid(players[current].game);
+            let bid = await this.$q.when(players[current].bid(players[current].game));
             this.validate(bid);                                
             this.bids.push(bid);
             current = rotate(current);
         }
-        
-        // wrap in angular promise
-        return this.$q.when({});
 	  }
 
     validate(bid: tower.IBid) {

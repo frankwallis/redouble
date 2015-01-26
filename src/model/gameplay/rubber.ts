@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import GameSequence = require("./game-sequence");
+var GameSequence = require("./game-sequence");
 import Deck = require("../cards/deck");
 
 class Rubber extends GameSequence implements tower.IGame {

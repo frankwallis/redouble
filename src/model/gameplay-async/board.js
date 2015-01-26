@@ -1,8 +1,8 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Cardplay} from "./cardplay";
-import {Bidding} from "./bidding";
-import {nextPlayer} from "./utils"
+import {Cardplay} from "./cardplay.js";
+import {Bidding} from "./bidding.js";
+import {nextPlayer} from "./utils.js"
 
 //implements tower.IGameSequence
 export class Board {

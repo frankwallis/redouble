@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import GameSequence = require("./game-sequence");
+var GameSequence = require("./game-sequence");
 
 class Bidding extends GameSequence {
 

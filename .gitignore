@@ -3,6 +3,7 @@ bin/
 lib/
 deps/
 obj/
+jspm_packages/
 node_modules/
 mods/
 reports/

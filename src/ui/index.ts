@@ -2,12 +2,9 @@
 
 require("angular");
 
-window["Hammer"] = require("hammerjs/hammer.js");
-require("angular-aria");
-require("angular-animate");
-
-require("ui-router");
+window["Hammer"] = require("hammer"); // one black mark to bower.
 require("angular-material");
+require("angular-ui-router");
 
 import cards = require("./cards/index");
 import board = require("./board/index");
@@ -20,6 +17,11 @@ export var Module: ng.IModule = angular.module("tower.ui", [
 ]);
 
 Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($stateProvider: any, $urlRouterProvider: any, $locationProvider: ng.ILocationProvider) => {
+		console.log("Configurating");
+
+		console.log('template ');
+		console.log(require('./menu/menu-view.html'));
+
         $locationProvider.html5Mode(true);
 
 		$stateProvider.state('menu', {

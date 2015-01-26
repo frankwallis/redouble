@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {nextPlayer} from "./utils"
+import {nextPlayer} from "./utils.js"
 
 //implements tower.IGameSequence
 export class Cardplay {

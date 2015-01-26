@@ -7,11 +7,11 @@ class GameSequence {
                 public $log: ng.ILogService) { }
 
     public get north(): tower.IPlayer {
-		return this.players[tower.Seat.North];
+		return this.players[0];//tower.Seat.North];
 	}
 
 	public get south(): tower.IPlayer {
-		return this.players[tower.Seat.South];
+		return this.players[2];//tower.Seat.South];
 	}
 
 	public get east(): tower.IPlayer {

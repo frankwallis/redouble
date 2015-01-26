@@ -13,6 +13,8 @@ class TableController {
         $stateParams.players.forEach((player) => {
                 player.game = this.game;
             })
+
+        $stateParams.game.setPlayers($stateParams.players);
         
         this.game.play($stateParams.players)
         	.then(

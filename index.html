@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="tower" ng-strict-di>
+<html lang="en" ng-strict-di>
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -12,10 +12,19 @@
     <base href="/"></base>
     
     <link rel="shortcut icon" href="/resources/tower2.jpeg" />
+    <link href="/build/build.css" rel="stylesheet" />
 
-    <!-- include the bundles -->
-	<script src="/build/build.js"></script>
-	<link href="/build/build.css" rel="stylesheet" />
+    <!--<script src="jspm_packages/traceur.js"></script>
+    <script src="jspm_packages/es6-module-loader.js"></script>-->
+
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+      System.import('src/index.ts!').then(function() {
+        angular.bootstrap(document, ['tower']);
+      });
+    </script>
+
 </head>
 
 <body>

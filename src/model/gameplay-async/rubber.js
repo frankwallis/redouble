@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
-import {rotate} from "./utils"
-import {Board} from "./board";
+import {rotate} from "./utils.js"
+import {Board} from "./board.js";
 
 //implements tower.IGame
 export class Rubber {

@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {rotate} from "./utils"
+import {rotate} from "./utils.js"
 
 //implements tower.IGameSequence
 export class Bidding {

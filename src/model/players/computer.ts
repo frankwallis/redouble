@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import Player = require("./player");
+var Player = require("./player");
 
 class Computer extends Player {
 

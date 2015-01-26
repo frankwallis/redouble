@@ -1,12 +1,12 @@
 /// <reference path="../../_references.d.ts" />
 
-import Player = require("./player");
+var Player = require("./player");
 
 class Human extends Player {
 
-    public static $inject = [ "$q", "name" ];
+    public static $inject = [ "$q", "name", "$rootScope" ];
 
-    constructor($q: ng.IQService, name: string) {   
+    constructor($q: ng.IQService, name: string, $rootScope: ng.IScope) {   
          super($q, name);
     }
 
@@ -20,7 +20,12 @@ class Human extends Player {
         if (this.awaitingBid)
             throw new Error("bid is already pending");
         
-		this.pendingBid = this.$q.defer<tower.IBid>();
+        // this.$rootScope.$apply(() => {
+        //     this.pendingBid = this.$q.defer<tower.IBid>();
+        // })
+
+        this.pendingBid = this.$q.defer<tower.IBid>();
+     //   this.$rootScope.$digest();
 
 		return this.pendingBid.promise;
 	}

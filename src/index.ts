@@ -1,6 +1,6 @@
 /// <reference path="./_references.d.ts" />
 
-require("angular");
+var angular = require("angular");
 //require('d3');
 
 import ui = require("./ui/index");

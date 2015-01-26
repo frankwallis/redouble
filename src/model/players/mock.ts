@@ -1,7 +1,10 @@
 /// <reference path="../../_references.d.ts" />
 
 import Hand = require("./hand");
-import Player = require("./player");
+var Player = require("./player");
+
+if (Player)
+    console.log('yes');
 
 class MockPlayer extends Player {
 

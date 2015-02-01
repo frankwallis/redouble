@@ -11,6 +11,7 @@ System.config({
     "src/model/gameplay-async/*": "src/model/gameplay-async/*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js",
+    "typescript/bin/*.d.ts": "jspm_packages/npm/typescript@1.4.1/bin/*.d.ts",
     "tower/*": "src/*.js"
   },
   "traceurOptions": {
@@ -28,6 +29,7 @@ System.config({
     "angular": "github:angular/bower-angular@1.3.10",
     "angular-material": "github:angular/bower-material@0.7.0",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.13",
+    "bluebird": "npm:bluebird@2.9.4",
     "coffee": "github:forresto/plugin-coffee@1.8.0",
     "duo-typescript": "npm:duo-typescript@1.4.6",
     "hammer": "github:hammerjs/hammer.js@2.0.4",
@@ -50,6 +52,9 @@ System.config({
       "angular-aria": "github:angular/bower-angular-aria@1.3.10",
       "css": "github:systemjs/plugin-css@0.1.0",
       "hammer": "github:hammerjs/hammer.js@2.0.4"
+    },
+    "github:jspm/nodelibs-assert@0.1.0": {
+      "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
       "buffer": "npm:buffer@3.0.1"
@@ -86,6 +91,9 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "npm:beeper@1.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.0"
+    },
+    "npm:bluebird@2.9.4": {
       "process": "github:jspm/nodelibs-process@0.1.0"
     },
     "npm:buffer@3.0.1": {
@@ -292,13 +300,20 @@ System.config({
       "typescript": "npm:typescript@1.4.1"
     },
     "npm:plugin-typescript@0.4.4": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "bluebird": "npm:bluebird@2.9.4",
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "convert-source-map": "npm:convert-source-map@0.4.1",
       "fs": "github:jspm/nodelibs-fs@0.1.0",
-      "lodash": "npm:lodash@2.4.1",
+      "object-assign": "npm:object-assign@2.0.0",
       "os": "github:jspm/nodelibs-os@0.1.0",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "requires": "npm:requires@1.0.2",
-      "typescript": "npm:typescript@1.4.1"
+      "process": "github:jspm/nodelibs-process@0.1.0",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0",
+      "typescript": "npm:typescript@1.4.1",
+      "util": "github:jspm/nodelibs-util@0.1.0",
+      "vm": "github:jspm/nodelibs-vm@0.1.0"
     },
     "npm:readable-stream@1.0.33": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

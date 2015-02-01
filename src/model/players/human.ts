@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-var Player = require("./player");
+import Player = require("./player");
 
 class Human extends Player {
 

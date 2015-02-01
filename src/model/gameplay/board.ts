@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-var GameSequence = require("./game-sequence");
+import GameSequence = require("./game-sequence");
 
 class Board extends GameSequence implements tower.IBoard {
 

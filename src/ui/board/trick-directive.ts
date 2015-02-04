@@ -9,7 +9,7 @@ function towerTrickDirective() {
         scope: {
             trick: "="
         },
-        template: require('./trick-view.html')
+        template: require('./trick-view.html.js!html')
     }
 };
  

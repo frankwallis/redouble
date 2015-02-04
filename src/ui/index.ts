@@ -19,22 +19,19 @@ export var Module: ng.IModule = angular.module("tower.ui", [
 Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($stateProvider: any, $urlRouterProvider: any, $locationProvider: ng.ILocationProvider) => {
 		console.log("Configurating");
 
-		console.log('template ');
-		console.log(require('./menu/menu-view.html'));
-
         $locationProvider.html5Mode(true);
 
 		$stateProvider.state('menu', {
 				controller: MenuController,
 				controllerAs: "menuCtrl",
-				template: require('./menu/menu-view.html'),
+				template: require('./menu/menu-view.html.js!html'),
 				url: '/menu'
 			});
 
 		$stateProvider.state('table', {
 				controller: TableController,
 				controllerAs: "tableCtrl",
-				template: require('./table/table-view.html'),
+				template: require('./table/table-view.html.js!html'),
                 params: {
                     "game": {},
                     "players": []

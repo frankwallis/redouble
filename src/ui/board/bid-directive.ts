@@ -9,7 +9,7 @@ function towerBidDirective() {
         scope: {
             bid: "="
         },
-        template: require('./bid-view.html')
+        template: require('./bid-view.html.js!html')
     }
 };
  

@@ -13,7 +13,7 @@ function biddingDirective() {
         scope: {
             bidding: "="
         },
-        template: require('./bidding-view.html')
+        template: require('./bidding-view.html.js!html')
     }
 };
  

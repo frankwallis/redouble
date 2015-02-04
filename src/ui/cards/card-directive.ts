@@ -9,7 +9,7 @@ function towerCardDirective() {
         scope: {
             card: "="
         },
-        template: require('./card-view.html')
+        template: require('./card-view.html.js!html')
     }
 };
  

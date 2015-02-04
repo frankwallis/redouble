@@ -29,14 +29,11 @@ System.config({
     "angular": "github:angular/bower-angular@1.3.10",
     "angular-material": "github:angular/bower-material@0.7.0",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.13",
-    "bluebird": "npm:bluebird@2.9.4",
-    "coffee": "github:forresto/plugin-coffee@1.8.0",
-    "duo-typescript": "npm:duo-typescript@1.4.6",
     "hammer": "github:hammerjs/hammer.js@2.0.4",
     "html": "github:systemjs/plugin-text@0.0.2",
     "plugin-text": "github:systemjs/plugin-text@0.0.2",
-    "plugin-typescript": "npm:plugin-typescript@0.4.4",
-    "ts": "npm:plugin-typescript@0.4.4",
+    "plugin-typescript": "npm:plugin-typescript@0.5.4",
+    "ts": "npm:plugin-typescript@0.5.4",
     "github:angular-ui/ui-router@0.2.13": {
       "angular": "github:angular/bower-angular@1.3.10"
     },
@@ -147,18 +144,6 @@ System.config({
     "npm:debuglog@1.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:duo-typescript@1.4.6": {
-      "component-consoler": "npm:component-consoler@2.0.0",
-      "convert-source-map": "npm:convert-source-map@0.4.1",
-      "debuglog": "npm:debuglog@1.0.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.0",
-      "gulp-util": "npm:gulp-util@3.0.2",
-      "lodash": "npm:lodash@2.4.1",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "requires": "npm:requires@1.0.2",
-      "typescript": "npm:typescript@1.4.1"
     },
     "npm:duplexer2@0.0.2": {
       "readable-stream": "npm:readable-stream@1.1.13"
@@ -281,39 +266,18 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.0"
     },
-    "npm:plugin-typescript@0.4.2": {
-      "convert-source-map": "npm:convert-source-map@0.4.1",
+    "npm:path@0.11.14": {
       "fs": "github:jspm/nodelibs-fs@0.1.0",
-      "lodash": "npm:lodash@2.4.1",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "requires": "npm:requires@1.0.2",
-      "typescript": "npm:typescript@1.4.1"
-    },
-    "npm:plugin-typescript@0.4.3": {
-      "convert-source-map": "npm:convert-source-map@0.4.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.0",
-      "lodash": "npm:lodash@2.4.1",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "requires": "npm:requires@1.0.2",
-      "typescript": "npm:typescript@1.4.1"
-    },
-    "npm:plugin-typescript@0.4.4": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "bluebird": "npm:bluebird@2.9.4",
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "convert-source-map": "npm:convert-source-map@0.4.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.0",
-      "object-assign": "npm:object-assign@2.0.0",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:plugin-typescript@0.5.4": {
+      "convert-source-map": "npm:convert-source-map@0.4.1",
+      "path": "npm:path@0.11.14",
+      "process": "github:jspm/nodelibs-process@0.1.0",
+      "requires": "npm:requires@1.0.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
-      "typescript": "npm:typescript@1.4.1",
-      "util": "github:jspm/nodelibs-util@0.1.0",
-      "vm": "github:jspm/nodelibs-vm@0.1.0"
+      "typescript": "npm:typescript@1.4.1"
     },
     "npm:readable-stream@1.0.33": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

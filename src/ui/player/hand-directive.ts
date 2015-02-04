@@ -9,7 +9,7 @@ function towerHandDirective() {
         scope: {
             player: "="
         },
-        template: require('./hand-view.html')
+        template: require('./hand-view.html.js!html')
     }
 };
  

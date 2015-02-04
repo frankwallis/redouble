@@ -9,7 +9,7 @@ function towerPlayerDirective() {
         scope: {
             player: "="
         },
-        template: require('./player-view.html')
+        template: require('./player-view.html.js!html')
     }
 };
  

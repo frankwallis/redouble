@@ -1,7 +1,7 @@
 module.exports = function(glob) {
     
     var options = {};
-    options.glob = glob || ['build/**/*', 'components/**', 'reports/**'];
+    options.glob = glob || ['build/**/*', 'jspm_packages/**', 'reports/**'];
     
     return function(gulp) {
         

@@ -1,9 +1,9 @@
 declare module tower {
-	const enum BidSuit {
+	export const enum BidSuit {
 		Clubs = 1, Diamonds = 2, Hearts = 3, Spades = 4, NoTrumps = 5
 	}
 
-	const enum Seat {
+	export const enum Seat {
 		North = 0, East = 1, South = 2, West = 3
 	}
 
@@ -27,7 +27,7 @@ declare module tower {
         memo: any;       
     }
 
-    const enum BidType {
+    export const enum BidType {
         NoBid = 0, Call = 1, Double = 2, Redouble = 3
     }
     

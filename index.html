@@ -11,11 +11,7 @@
     <title>tower</title>
     <base href="/"></base>
     
-    <link rel="shortcut icon" href="/resources/tower2.jpeg" />
-    <link href="/build/build.css" rel="stylesheet" />
-
-    <!--<script src="jspm_packages/traceur.js"></script>
-    <script src="jspm_packages/es6-module-loader.js"></script>-->
+    <link rel="shortcut icon" href="/resources/tower.jpeg" />
 
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
@@ -23,6 +19,7 @@
       System.import('src/index.ts!').then(function() {
         angular.bootstrap(document, ['tower']);
       });
+      System.import('src/ui/build.css.js!css')
     </script>
 
 </head>

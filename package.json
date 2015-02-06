@@ -30,8 +30,10 @@
       "angular-material": "^0.7.0",
       "angular-ui-router": "^0.2.13",
       "hammer": "^2.0.4",
+      "plugin-css": "github:systemjs/plugin-css@^0.1.0",
       "plugin-text": "github:systemjs/plugin-text@^0.0.2",
       "plugin-typescript": "npm:plugin-typescript@0.5.3",
+      "plugin-typescript@0.5.5": "github:frankwallis/plugin-typescript@0.5.5",
       "typescript": "github:microsoft/typescript@master"
     }
   }

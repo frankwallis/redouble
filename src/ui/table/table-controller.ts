@@ -2,20 +2,20 @@
 
 class TableController {
 
-    public static $inject = ["$state", "$stateParams", "$rootScope"]; 
+    public static $inject = ["$state", "$stateParams", "$rootScope"];
 
     constructor(private $state: any,
                 private $stateParams: any,
                 private $rootScope: any) {
-        
+
         this.game = $stateParams.game;
 
         $stateParams.players.forEach((player) => {
                 player.game = this.game;
             })
 
-        $stateParams.game.setPlayers($stateParams.players);
-        
+        //$stateParams.game.setPlayers($stateParams.players);
+
         this.game.play($stateParams.players)
         	.then(
         		(game) => {
@@ -26,11 +26,11 @@ class TableController {
         			$state.go(".error");
         		},
         		(game) => {
-        			
+
         		});
-         
+
     }
-    
+
     public game: tower.IGame;
 }
 

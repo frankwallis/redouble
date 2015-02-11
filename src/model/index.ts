@@ -4,10 +4,10 @@ require("angular");
 
 import stgy = require("./strategy/index");
 import plyr = require("./players/index");
-import gply = require("./gameplay/index");
-//var gply = require("./gameplay-async/index.js");
+//import gply = require("./gameplay/index");
+var gply = require("./gameplay-async/index.js");
 
-export var Module: ng.IModule = angular.module("tower.model", [ 
+export var Module: ng.IModule = angular.module("tower.model", [
     stgy.Module.name, plyr.Module.name, gply.Module.name
 ]);
 

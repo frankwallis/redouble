@@ -10,12 +10,22 @@
 
     <title>tower</title>
     <base href="/"></base>
-    
+
     <link rel="shortcut icon" href="/resources/tower.jpeg" />
+
+    <!-- Temporary workaround for TypeScript const enums issue -->
+    <script type="text/javascript">
+      tower = {};
+      tower.BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
+      tower.Seat = { "North": 0, "East": 1, "South": 2, "West": 3 };
+      tower.BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };
+      tower.Suit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4 };
+      tower.Pip = { "Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 11, "Queen": 12, "King": 13, "Ace": 14 };
+    </script>
 
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
-    <script>
+    <script type="module">
       System.import('src/index.ts!').then(function() {
         angular.bootstrap(document, ['tower']);
       });

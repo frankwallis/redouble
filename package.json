@@ -9,7 +9,17 @@
     "packages": "jspm_packages"
   },
   "devDependencies": {
-    "gulp-util": "^3.0.2"
+    "connect-livereload-safe": "0.0.5",
+    "debounce": "^1.0.0",
+    "express": "^4.11.2",
+    "glob": "^4.3.5",
+    "gulp": "^3.8.11",
+    "gulp-util": "^3.0.2",
+    "karma": "^0.12.31",
+    "morgan": "^1.5.1",
+    "node-notifier": "^4.1.0",
+    "open": "0.0.5",
+    "tiny-lr": "^0.1.5"
   },
   "scripts": {
     "build": "gulp install bundle",

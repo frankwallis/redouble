@@ -6,15 +6,15 @@ tasks
     .addInstall({
         rootDir: "src"
     })
-    .addSpecs({ 
-        
+    .addSpecs({
+
     })
-    .addBundle({ 
+    .addBundle({
         entryJs: "src/index.ts",
         entryCss: "src/ui/index.css"
     })
-    .addServer({ 
-    	port: 8888, 
+    .addServer({
+    	port: 8888,
     	verbose: true
     })
     .build(gulp);

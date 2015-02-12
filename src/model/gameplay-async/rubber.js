@@ -7,24 +7,24 @@ import {Board} from "./board.js";
 export class Rubber {
 
     static get $inject() { return [ "$q", "$timeout", "$log", "deck" ] };
-    
-    constructor($q: ng.IQService, 
+
+    constructor($q: ng.IQService,
                 $timeout: ng.ITimeoutService,
                 $log: ng.ILogService,
-                deck) {   
+                deck) {
     	this.$q = $q;
     	this.$timeout = $timeout;
     	this.$log = $log;
     	this.boards = [];
     	this.deck = deck;
     	console.log('creating');
-    	
+
     }
 
     async play(players: Array<tower.IPlayer>) {
-		this.$log.debug('playing new rubber');
+      this.$log.debug('playing new rubber');
 
-		this.players = players;
+		  this.players = players;
     	var dealer = this.cut();
 
     	while(!this.playHasEnded()) {
@@ -56,7 +56,7 @@ export class Rubber {
 	cut(): any {
 		return 0;
 	}
-    
+
 	playHasEnded(): boolean {
 		return false;
 	}
@@ -83,6 +83,6 @@ export class Rubber {
 	boards: Array<tower.IBoard>;
 }
 
-export var rubberFactory = [ "$injector", ($injector) => {    
+export var rubberFactory = [ "$injector", ($injector) => {
     return () => $injector.instantiate(Rubber);
 }];

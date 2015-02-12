@@ -6,10 +6,10 @@ import {nextPlayer} from "./utils.js"
 export class Cardplay {
 
     static get $inject() { return [ "$q", "$timeout", "$log" ] };
-    
-    constructor($q: ng.IQService, 
+
+    constructor($q: ng.IQService,
                 $timeout: ng.ITimeoutService,
-                $log: ng.ILogService) {   
+                $log: ng.ILogService) {
         this.$q = $q;
     }
 

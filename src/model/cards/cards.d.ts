@@ -15,6 +15,6 @@ declare module tower {
 
 	interface IDeck {
 		shuffle();
-		deal(hands: number): Array<Array<ICard>>; 
+		deal(hands: number): Array<Array<ICard>>;
 	}
 }

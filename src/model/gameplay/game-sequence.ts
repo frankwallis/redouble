@@ -2,7 +2,7 @@
 
 class GameSequence {
 
-    constructor(public $q: ng.IQService, 
+    constructor(public $q: ng.IQService,
                 public $timeout: ng.ITimeoutService,
                 public $log: ng.ILogService) { }
 
@@ -23,7 +23,7 @@ class GameSequence {
 	}
 
     public players: Array<tower.IPlayer>;
-    
+
 	public setPlayers(players: Array<tower.IPlayer>);
 	public setPlayers(north: tower.IPlayer, south: tower.IPlayer, east: tower.IPlayer, west: tower.IPlayer);
 	public setPlayers() {
@@ -72,11 +72,11 @@ class GameSequence {
 				}
 			});
 	}
-    
+
     private nextPlayer() {
         this.currentPlayerIndex = this.players.indexOf(this.getNextPlayer());
     }
-    
+
     public getNextPlayer(): tower.IPlayer {
         if (this.currentPlayerIndex == tower.Seat.West)
             return this.north;
@@ -87,20 +87,20 @@ class GameSequence {
     public getNextState(currentPlayer: tower.IPlayer): ng.IPromise<any> {
         throw new Error("unimplemented abstract method: getNextState");
         //return { playHasEnded: () => true, currenPlayer: () => undefined };
-    }    
-    
+    }
+
     public playHasEnded(): boolean {
         throw new Error("unimplemented abstract method: playHasEnded");
         //return { playHasEnded: () => true, currenPlayer: () => undefined };
-    }   
-    
+    }
+
     public delay(promise: ng.IPromise<any>, interval: number): ng.IPromise<any> {
         var result = this.$q.defer();
-        
+
         promise.then((res) => this.$timeout(() => result.resolve(res), interval),
                      (err) => this.$timeout(() => result.reject(err), interval),
                      (msg) => this.$timeout(() => result.notify(msg), interval));
-        
+
         return result.promise;
     }
 }

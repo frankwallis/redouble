@@ -40,6 +40,5 @@ describe("Deck", () => {
         }
 
         expect(different).toBeTruthy();
-    });        
+    });
 });
-

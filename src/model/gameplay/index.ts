@@ -1,8 +1,8 @@
 /// <reference path="../../_references.d.ts" />
 
-var angular = require("angular");
+import angular = require("angular");
 
-export var Module: ng.IModule = angular.module("tower.model.gameplay", [ 
+export var Module: ng.IModule = angular.module("tower.model.gameplay", [
 
 ]);
 

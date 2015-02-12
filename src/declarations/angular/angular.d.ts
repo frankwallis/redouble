@@ -5,8 +5,12 @@
 
 
 /// <reference path="../jquery/jquery.d.ts" />
+declare module "angular" {
+  var _angular: any;//ng.IAngularStatic;
+  export = _angular;
+}
 
-declare var angular: ng.IAngularStatic;
+//declare var angular: ng.IAngularStatic;
 
 // Support for painless dependency injection
 interface Function {
@@ -482,7 +486,7 @@ declare module ng {
         $apply(): any;
         $apply(exp: string): any;
         $apply(exp: (scope: IScope) => any): any;
-        
+
         $applyAsync(exp: string): any;
         $applyAsync(exp: (scope: IScope) => any): any;
 

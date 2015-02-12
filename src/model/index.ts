@@ -1,6 +1,6 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular");
+import angular = require("angular");
 
 import stgy = require("./strategy/index");
 import plyr = require("./players/index");

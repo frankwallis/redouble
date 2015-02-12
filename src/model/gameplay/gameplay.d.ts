@@ -22,9 +22,9 @@ declare module tower {
 		play(initialPlayer: IPlayer): ng.IPromise<any>;
         playHasEnded(): boolean;
 	}
-    
+
     interface IMemorable {
-        memo: any;       
+        memo: any;
     }
 
     export const enum BidType {
@@ -42,7 +42,7 @@ declare module tower {
 		eastBid: IBid;
 		southBid: IBid;
 		westBid: IBid;
-        
+
         lastBid: IBid;
         bids: Array<IBid>;
         currentPlayer: IPlayer;
@@ -54,7 +54,7 @@ declare module tower {
 		southCard: ICard;
 		westCard: ICard;
 		leadCard: ICard;
-        
+
 		cards: Array<ICard>;
         leader: IPlayer;
         currentPlayer: IPlayer;
@@ -74,5 +74,5 @@ declare module tower {
 	interface IGame extends IGameSequence, IMemorable {
 		currentBoard: IBoard;
 	}
-    
+
 }

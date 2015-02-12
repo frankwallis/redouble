@@ -18,16 +18,15 @@ System.config({
 
 System.config({
   "map": {
-    "ts": "github:frankwallis/plugin-typescript@0.5.7",
-    "css": "github:systemjs/plugin-css@0.1.5",
-    "html": "github:systemjs/plugin-text@0.0.2",
     "angular": "github:angular/bower-angular@1.3.13",
     "angular-material": "github:angular/bower-material@0.7.1",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.13",
+    "css": "github:systemjs/plugin-css@0.1.5",
     "hammer": "github:hammerjs/hammer.js@2.0.4",
+    "html": "github:systemjs/plugin-text@0.0.2",
     "plugin-css": "github:systemjs/plugin-css@0.1.5",
     "plugin-text": "github:systemjs/plugin-text@0.0.2",
-    "plugin-typescript": "github:frankwallis/plugin-typescript@0.5.7",
+    "ts": "github:frankwallis/plugin-typescript@0.5.9",
     "github:angular-ui/ui-router@0.2.13": {
       "angular": "github:angular/bower-angular@1.3.13"
     },
@@ -43,7 +42,7 @@ System.config({
       "angular-aria": "github:angular/bower-angular-aria@1.3.13",
       "css": "github:systemjs/plugin-css@0.1.5"
     },
-    "github:frankwallis/plugin-typescript@0.5.7": {
+    "github:frankwallis/plugin-typescript@0.5.9": {
       "convert-source-map": "npm:convert-source-map@0.4.1",
       "path": "npm:path@0.11.14",
       "requires": "npm:requires@1.0.2",
@@ -53,7 +52,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.0.1"
+      "buffer": "npm:buffer@3.0.2"
     },
     "github:jspm/nodelibs-events@0.1.0": {
       "events-browserify": "npm:events-browserify@0.0.1"
@@ -103,7 +102,7 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:buffer@3.0.1": {
+    "npm:buffer@3.0.2": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"

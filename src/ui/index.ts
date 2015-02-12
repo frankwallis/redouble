@@ -1,6 +1,6 @@
 /// <reference path="../_references.d.ts" />
 
-require("angular");
+import angular = require("angular");
 
 window["Hammer"] = require("hammer"); // one black mark to bower.
 require("angular-material");
@@ -12,23 +12,23 @@ import player = require("./player/index");
 import MenuController = require('./menu/menu-controller');
 import TableController = require('./table/table-controller');
 
-export var Module: ng.IModule = angular.module("tower.ui", [ 
+export var Module: ng.IModule = angular.module("tower.ui", [
 	"ngMaterial", "ui.router", cards.Module.name, board.Module.name, player.Module.name
 ]);
 
 Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($stateProvider: any, $urlRouterProvider: any, $locationProvider: ng.ILocationProvider) => {
-		console.log("Configurating");
+			console.log("Application started");
 
-        $locationProvider.html5Mode(true);
+    	$locationProvider.html5Mode(true);
 
-		$stateProvider.state('menu', {
+			$stateProvider.state('menu', {
 				controller: MenuController,
 				controllerAs: "menuCtrl",
 				template: require('./menu/menu-view.html.js!html'),
 				url: '/menu'
 			});
 
-		$stateProvider.state('table', {
+			$stateProvider.state('table', {
 				controller: TableController,
 				controllerAs: "tableCtrl",
 				template: require('./table/table-view.html.js!html'),
@@ -36,8 +36,8 @@ Module.config(["$stateProvider", "$urlRouterProvider", "$locationProvider", ($st
                     "game": {},
                     "players": []
                 }
-				
+
 			});
 
-        $urlRouterProvider.otherwise("/menu");
+      $urlRouterProvider.otherwise("/menu");
     }]);

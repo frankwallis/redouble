@@ -22,7 +22,7 @@ class Deck implements tower.IDeck {
 
     private shuffleCards(array: Array<tower.ICard>): Array<tower.ICard> {
 		var i = array.length, j, swap;
-  
+
   		while (--i) {
     		j = Math.random() * (i + 1) | 0;
     		swap = array[i];
@@ -43,8 +43,8 @@ class Deck implements tower.IDeck {
 		var result = [];
 
         while (current < this.cards.length) {
-            var hand = current % hands;    
-            
+            var hand = current % hands;
+
 			if (!result[hand])
 				result[hand] = [];
 

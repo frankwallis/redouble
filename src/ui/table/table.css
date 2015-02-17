@@ -1,5 +1,5 @@
 
-.table-container {    
+.table-container {
     width: 100%;
     height: 100%;
 }
@@ -13,7 +13,7 @@
 }
 
 .table-edge-ns {
-    
+
 }
 
 .table-hand-north, .table-hand-south {
@@ -25,11 +25,11 @@
 }
 
 .game-menu {
-    
+
 }
 
 .game-icon {
-    color: white;   
+    color: white;
 }
 
 /*****************/

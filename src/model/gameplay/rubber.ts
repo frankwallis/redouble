@@ -6,11 +6,11 @@ import Deck = require("../cards/deck");
 class Rubber extends GameSequence implements tower.IGame {
 
     public static $inject = [ "$q", "$timeout", "$log", "boardFactory" ];
-    
-    constructor($q: ng.IQService, 
+
+    constructor($q: ng.IQService,
                 $timeout: ng.ITimeoutService,
                 $log: ng.ILogService,
-                private boardFactory: () => tower.IBoard) {   
+                private boardFactory: () => tower.IBoard) {
          super($q, $timeout, $log);
     }
 
@@ -20,7 +20,7 @@ class Rubber extends GameSequence implements tower.IGame {
         this.players.forEach((player) => {
             player.game = this;
         });
-        
+
         var deck = new Deck();
         deck.shuffle();
         var hands = deck.deal(4);
@@ -28,14 +28,14 @@ class Rubber extends GameSequence implements tower.IGame {
             console.log(JSON.stringify(hands[i]));
             this.players[i].setCards(hands[i]);
         }
-        
+
 		var board = this.boardFactory();
-		board.setPlayers(this.players);        
+		board.setPlayers(this.players);
 		this.boards.push(board);
 
 		return board.play(this.currentPlayer)
 	}
-    
+
 	public playHasEnded(): boolean {
 		return true;
 	}
@@ -62,7 +62,7 @@ class Rubber extends GameSequence implements tower.IGame {
 	public boards: Array<tower.IBoard> = [];
 }
 
-var rubberFactory = [ "$injector", ($injector) => {    
+var rubberFactory = [ "$injector", ($injector) => {
     return () => $injector.instantiate(Rubber);
 }];
 

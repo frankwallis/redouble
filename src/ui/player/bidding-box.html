@@ -1,0 +1,53 @@
+<template>
+    <div class="bidding-box-container"
+         ng-show="player.isHuman && player.awaitingBid">
+        <table>
+            <colgroup>
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+            </colgroup>
+            <tbody>
+                <tr class="bidding-box-level" ng-repeat="level in cx.levels">
+                    <td class="bidding-box-cell" colspan="2" ng-repeat="bid in level">
+                        <md-button class="bidding-box-button md-raised"
+                                   aria-label="{{bid}}"
+                                   ng-click="cx.bid(bid)">
+                            <tower-bid bid="bid"></tower-bid>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr class="bidding-box-level">
+                    <td class="bidding-box-cell" colspan="3">
+                        <md-button class="bidding-box-button md-raised"
+                                   aria-label="{{cx.double}}"
+                                   ng-click="cx.bid(cx.double)">
+                            <tower-bid bid="cx.double"></tower-bid>
+                        </md-button>
+                    </td>
+                    <td class="bidding-box-cell" colspan="3">
+                        <md-button class="bidding-box-button md-raised"
+                                   aria-label="{{cx.redouble}}"
+                                   ng-click="cx.bid(cx.redouble)">
+                            <tower-bid bid="cx.redouble"></tower-bid>
+                        </md-button>
+                    </td>
+                    <td class="bidding-box-cell" colspan="4">
+                        <md-button class="bidding-box-button md-raised"
+                                   aria-label="{{cx.nobid}}"
+                                   ng-click="cx.bid(cx.nobid)">
+                            <tower-bid bid="cx.nobid"></tower-bid>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>

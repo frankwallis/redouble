@@ -1,88 +1,75 @@
 /// <reference path="../../_references.d.ts" />
 
-import {rotate} from "./utils.js"
-import {Board} from "./board.js";
+import {rotate} from "./utils"
+import {Board} from "./board";
+import {Deck} from "../cards/deck";
+import {Human} from "../players/human";
 
 //implements tower.IGame
 export class Rubber {
 
-    static get $inject() { return [ "$q", "$timeout", "$log", "deck" ] };
+  constructor(deck: Deck) {
+    this.boards = [];
+    this.deck = deck;
+  }
 
-    constructor($q: ng.IQService,
-                $timeout: ng.ITimeoutService,
-                $log: ng.ILogService,
-                deck) {
-    	this.$q = $q;
-    	this.$timeout = $timeout;
-    	this.$log = $log;
-    	this.boards = [];
-    	this.deck = deck;
-    	console.log('creating');
+  async play(players: any) {
+    console.log('playing rubber');
 
+    this.players = [ new Human("player1"), new Human("player2"), new Human("player3"), new Human("player4") ];
+    this.players.forEach((player) => { player.game = this });
+    var dealer = this.cut();
+
+    while(!this.playHasEnded()) {
+      var board = new Board(this.deck);
+      this.boards.push(board);
+      await board.play(this.players, dealer);
+      dealer = rotate(dealer);
     }
+  }
 
-    async play(players: Array<tower.IPlayer>) {
-      this.$log.debug('playing new rubber');
+  get north(): tower.IPlayer {
+    return this.players[0];//tower.Seat.North];
+  }
 
-		  this.players = players;
-    	var dealer = this.cut();
+  get east(): tower.IPlayer {
+    return this.players[1];//tower.Seat.East];
+  }
 
-    	while(!this.playHasEnded()) {
-    		var board = new Board(this.$q, this.$timeout, this.$log, this.deck);
-    		this.boards.push(board);
-    		await this.$q.when(board.play(players, dealer));
-    		dealer = rotate(dealer);
-    	}
-	}
+  get south(): tower.IPlayer {
+    return this.players[2];//tower.Seat.South];
+  }
 
-	get north(): tower.IPlayer {
-		return this.players[0];//tower.Seat.North];
-	}
+  get west(): tower.IPlayer {
+    return this.players[3];//tower.Seat.West];
+  }
 
-	get east(): tower.IPlayer {
-		return this.players[1];//tower.Seat.East];
-	}
+  cut(): any {
+    return 0;   // TODO
+  }
 
-	get south(): tower.IPlayer {
-		return this.players[2];//tower.Seat.South];
-	}
+  playHasEnded(): boolean {
+    return false;
+  }
 
-	get west(): tower.IPlayer {
-		return this.players[3];//tower.Seat.West];
-	}
+  getRubberScore(): any {
+    return undefined;
+  }
 
+  get memo() {
+    return { "boardIndex": this.currentBoardIndex, "board": this.currentBoard.memo };
+  }
 
-	// TODO
-	cut(): any {
-		return 0;
-	}
+  // public set memo(value: any) {
+  // 	this.currentBoardIndex = Math.min(value.boardIndex, this.boards.length -1);
+  // 	this.currentBoard.memo = value.board;
+  // }
 
-	playHasEnded(): boolean {
-		return false;
-	}
+  // private currentBoardIndex: number = 0;
 
-	getRubberScore(): any {
-		return undefined;
-	}
+  get currentBoard(): tower.IBoard {
+    return this.boards[this.boards.length -1];
+  }
 
-	get memo() {
-		return { "boardIndex": this.currentBoardIndex, "board": this.currentBoard.memo };
-	}
-
-	// public set memo(value: any) {
-	// 	this.currentBoardIndex = Math.min(value.boardIndex, this.boards.length -1);
-	// 	this.currentBoard.memo = value.board;
-	// }
-
-	// private currentBoardIndex: number = 0;
-
-	get currentBoard(): tower.IBoard {
-		return this.boards[this.boards.length -1];
-	}
-
-	boards: Array<tower.IBoard>;
+  boards: any;
 }
-
-export var rubberFactory = [ "$injector", ($injector) => {
-    return () => $injector.instantiate(Rubber);
-}];

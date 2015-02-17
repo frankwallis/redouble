@@ -26,16 +26,18 @@
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script type="module">
-      System.import('src/index.ts!').then(function() {
+      System.baseUrl = 'src'; //NOTE: You can move this into the config.js file, if you like.
+      System.import('aurelia-bootstrapper');
+    </script>
+      <!-- System.import('src/index.ts!').then(function() {
         angular.bootstrap(document, ['tower']);
       });
-      System.import('src/ui/build.css.js!css')
-    </script>
+      System.import('src/ui/build.css.js!css') -->
 
 </head>
 
-<body>
-    <ui-view></ui-view>
+<body aurelia-main="src/main">
+
 </body>
 
 </html>

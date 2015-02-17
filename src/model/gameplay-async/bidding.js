@@ -1,53 +1,47 @@
 /// <reference path="../../_references.d.ts" />
 
-import {rotate} from "./utils.js"
+import {rotate} from "./utils"
 
 //implements tower.IGameSequence
 export class Bidding {
 
-    static get $inject() { return [ "$q", "$timeout", "$log" ] };
-    
-    constructor($q: ng.IQService, 
-                $timeout: ng.ITimeoutService,
-                $log: ng.ILogService) {   
-        this.$q = $q; 
-        this.$log = $log;
+    constructor() {
         this.bids = [];
     }
 
     async play(players: Array<tower.IPlayer>, dealer: tower.Seat) {
-        this.$log.debug('playing bidding');
+        console.log('playing bidding');
 
         var current = dealer;
 
         while(!this.biddingHasEnded()) {
-            let bid = await this.$q.when(players[current].bid(players[current].game));
-            this.validate(bid);                                
+            let bid = await players[current].bid(players[current].game);
+            this.validate(bid);
             this.bids.push(bid);
             current = rotate(current);
         }
 	  }
 
     validate(bid: tower.IBid) {
-      return;
+        return;
 
 
         switch(bid.type) {
-            case tower.BidType.NoBid: 
+            case tower.BidType.NoBid:
                 return;
-                
+
             case tower.BidType.Double:
                 if (!this.lastAction || (this.lastAction.type != tower.BidType.Call))
                     return new Error("invalid double");
                 else
                     return;
 
-            case tower.BidType.Redouble: 
+            case tower.BidType.Redouble:
                 if (!this.lastAction || (this.lastAction.type != tower.BidType.Double))
                     return new Error("invalid redouble");
                 else
                     return;
-                
+
             case tower.BidType.Call: {
                 if ((!bid.level) || (!bid.suit))
                     return new Error("you must provide level and suit");
@@ -60,17 +54,17 @@ export class Bidding {
             }
         }
     }
-    
+
     biddingHasEnded(): boolean {
         var consecutivePasses = 0;
         var idx = this.bids.length - 1;
-        
+
         while(idx >= 0) {
             if (this.bids[idx].type == 0)//tower.BidType.NoBid)
                 consecutivePasses ++;
             else
                 break;
-            
+
             idx --;
         }
         var result = (consecutivePasses >= 3) && (this.bids.length > 3);
@@ -108,6 +102,4 @@ export class Bidding {
         }
         return undefined;
     }
-
-
 }

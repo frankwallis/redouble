@@ -1,21 +1,20 @@
 /// <reference path="../_references.d.ts" />
 
-import Computer = require('./players/computer');
-import Human = require('./players/human');
+import Computer from './players/computer';
+import Human from './players/human';
 
-class GameService implements tower.ITowerService {
+export class GameService implements tower.ITowerService {
 
-	public static $inject = [ "$injector", "rubberFactory" ];
+		public static inject = [];
 
-    constructor(private $injector: ng.auto.IInjectorService,
-                private rubberFactory: () => tower.IGame) {   
-         
+    constructor() {
+
     }
 
-    createGame(): tower.IGame {
+    createGame(options): tower.IGame {
     	return this.rubberFactory();
     }
-    
+
     createComputer(name: string): tower.IPlayer {
         return this.$injector.instantiate(Computer, { "name": name });
     }

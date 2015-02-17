@@ -12,5 +12,5 @@ function towerPlayerDirective() {
         template: require('./player-view.html.js!html')
     }
 };
- 
+
 export = towerPlayerDirective;

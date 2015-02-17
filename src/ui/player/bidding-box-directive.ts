@@ -17,5 +17,5 @@ function towerBiddingBoxDirective() {
         controllerAs: "cx"
     }
 };
- 
+
 export = towerBiddingBoxDirective;

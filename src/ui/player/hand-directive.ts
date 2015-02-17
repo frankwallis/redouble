@@ -12,5 +12,5 @@ function towerHandDirective() {
         template: require('./hand-view.html.js!html')
     }
 };
- 
+
 export = towerHandDirective;

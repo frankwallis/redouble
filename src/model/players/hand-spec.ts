@@ -14,7 +14,7 @@ describe("Hand", () => {
      });
 
      it("should sort the cards in alternate colours", () => {
-//         var cards = [ 
+//         var cards = [
 //         hand.
 //         var hands = deck.deal(4);
 //
@@ -26,6 +26,6 @@ describe("Hand", () => {
      });
 
      it("should play the cards", () => {
-         
-     });        
+
+     });
  });

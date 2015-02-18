@@ -5,21 +5,21 @@ import GameSequence = require("./game-sequence");
 class Board extends GameSequence implements tower.IBoard {
 
     public static $inject = [ "$q", "$timeout", "$log", "biddingFactory", "cardplayFactory" ];
-    
-    constructor($q: ng.IQService, 
+
+    constructor($q: ng.IQService,
                 $timeout: ng.ITimeoutService,
                 $log: ng.ILogService,
-                biddingFactory: () => tower.IBidding, 
-                cardplayFactory: () => tower.ICardplay) {   
-        
+                biddingFactory: () => tower.IBidding,
+                cardplayFactory: () => tower.ICardplay) {
+
         super($q, $timeout, $log);
-        
+
         this.bidding = biddingFactory();
         this.cardplay = cardplayFactory();
     }
 
     public bidding: tower.IBidding;
-    public cardplay: tower.ICardplay; 
+    public cardplay: tower.ICardplay;
 
     public getNextState(currentPlayer: tower.IPlayer): ng.IPromise<any> {
     	this.bidding.setPlayers(this.players);
@@ -33,11 +33,11 @@ class Board extends GameSequence implements tower.IBoard {
     public playHasEnded(): boolean {
         return this.cardplay.playHasEnded();
     }
-    
+
     private get opener(): tower.IPlayer {
     	return this.initialPlayer;//bidding.openingLead;
     }
-    
+
     public get memo() {
 		return {};// TODO { "bidding": this.bidding.memo, "cardplay": this.cardplay.memo };
 	}
@@ -49,7 +49,7 @@ class Board extends GameSequence implements tower.IBoard {
 
 }
 
-var boardFactory = [ "$injector", ($injector) => {    
+var boardFactory = [ "$injector", ($injector) => {
     return () => $injector.instantiate(Board);
 }];
 

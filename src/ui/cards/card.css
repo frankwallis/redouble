@@ -1,5 +1,5 @@
 @import "./suit-styles.css";
-    
+
 .card-container {
   position: relative;
   display: flex;
@@ -21,7 +21,7 @@
   font-size: 1rem;
   line-height: 1rem;
   text-align: center;
-  
+
 }
 
 .card-pip {

@@ -1,0 +1,9 @@
+<template>
+    <link rel="stylesheet" type="text/css" href="./board.css">
+
+    <import from='./trick'></import>
+
+    <div class="board-container">
+        <tower-trick trick.bind="board.cardplay.currentTrick"></tower-trick>
+    </div>
+</template>

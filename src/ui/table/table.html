@@ -1,5 +1,7 @@
 <template>
-  <div class="bridge-table">
+    <link rel="stylesheet" type="text/css" href="./table.css">
+
+    <div class="bridge-table">
 
   <!--
       <nav class="game-menu">
@@ -25,6 +27,19 @@
       <import from='../player/hand'></import>
       <import from='../player/bidding-box'></import>
 
+      <tower-player class="table-player-north"
+                    player.bind="game.north"></tower-player>
+      <tower-hand class="table-hand-north"
+                  player.bind="game.north"></tower-hand>
+      <tower-bidding-box class="table-bidding-north"
+                         player="game.north"
+                         bidding="game.bidding"></tower-bidding-box> -->
+
+      <import from='../board/board'></import>
+      <import from='../player/player'></import>
+      <import from='../player/hand'></import>
+      <import from='../player/bidding-box'></import>
+
       <div class="table-container" layout="column" layout-align="space-between">
 
           <div class="table-edge-ns"
@@ -32,14 +47,14 @@
               <div layout="row" layout-align="center">
                   <div layout="column" layout-align="center">
                       <tower-player class="table-player-north"
-                                    player="tableCtrl.game.north"></tower-player>
+                                    player.bind="game.north"></tower-player>
                       <tower-hand class="table-hand-north"
-                                  player="tableCtrl.game.north"></tower-hand>
+                                  player.bind="game.north"></tower-hand>
                   </div>
                   <div layout="column" layout-align="end">
                       <tower-bidding-box class="table-bidding-north"
-                                         player="tableCtrl.game.north"
-                                         bidding="tableCtrl.game.bidding"></tower-bidding-box>
+                                         player.bind="game.north"
+                                         bidding.bind="game.bidding"></tower-bidding-box>
                   </div>
               </div>
           </div>
@@ -49,26 +64,26 @@
               <div layout="row" layout-align="space-between">
                   <div class="table-edge-ew" flex="30">
                       <tower-player class="table-player-west"
-                                    player="tableCtrl.game.west"></tower-player>
+                                    player.bind="game.west"></tower-player>
                       <tower-hand class="table-hand-west"
-                                  player="tableCtrl.game.west"></tower-hand>
+                                  player.bind="game.west"></tower-hand>
                       <tower-bidding-box class="table-bidding-west"
-                                         player="tableCtrl.game.west"
-                                         bidding="tableCtrl.game.bidding"></tower-bidding-box>
+                                         player.bind="game.west"
+                                         bidding.bind="game.bidding"></tower-bidding-box>
                   </div>
 
                   <div flex="40">
-                      <tower-board board="tableCtrl.game.currentBoard"></tower-board>
+                      <tower-board board.bind="game.currentBoard"></tower-board>
                   </div>
 
                   <div class="table-edge-ew" flex="30">
                       <tower-player class="table-player-east"
-                                    player="tableCtrl.game.east"></tower-player>
+                                    player.bind="game.east"></tower-player>
                       <tower-hand class="table-hand-east"
-                                  player="tableCtrl.game.east"></tower-hand>
+                                  player.bind="game.east"></tower-hand>
                       <tower-bidding-box class="table-bidding-east"
-                                         player="tableCtrl.game.east"
-                                         bidding="tableCtrl.game.bidding"></tower-bidding-box>
+                                         player.bind="game.east"
+                                         bidding.bind="game.bidding"></tower-bidding-box>
                   </div>
               </div>
           </div>
@@ -76,22 +91,22 @@
           <div class="table-edge-ns"
                flex="25">
               <div layout="row" layout-align="center">
-                  <tower-bidding flex="25" bidding="tableCtrl.game.currentBoard.bidding"></tower-bidding>
+                  <tower-bidding flex="25" bidding="game.currentBoard.bidding"></tower-bidding>
 
                   <div flex="50" layout="column" layout-align="center center">
                       <tower-player class="table-player-south"
-                                    player="tableCtrl.game.south"></tower-player>
+                                    player.bind="game.south"></tower-player>
                       <tower-hand class="table-hand-south"
-                                  player="tableCtrl.game.south"></tower-hand>
+                                  player.bind="game.south"></tower-hand>
                   </div>
 
                   <div flex="25" class="table-bidding-box" layout="column" layout-align="center">
                       <tower-bidding-box class="table-bidding-south"
-                                         player="tableCtrl.game.south"
-                                         bidding="tableCtrl.game.bidding"></tower-bidding-box>
+                                         player.bind="game.south"
+                                         bidding.bind="game.bidding"></tower-bidding-box>
                   </div>
               </div>
           </div>
-      </div> -->
+      </div>
   </div>
 </template>

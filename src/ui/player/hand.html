@@ -1,12 +1,15 @@
 <template>
+    <link rel="stylesheet" type="text/css" href="./hand.css">
+    <import from='../cards/card'></import>
+
     <div class="hand-container row">
         <span class="hand-card"
               layout="row" layout-align="start">
-            <div ng-repeat="card in player.hand.availableCards">
+            <div repeat.for="card of player.hand.availableCards">
                 <div flex="5">
-                    <md-button class="md-raised hand-card-button" ng-click="player.makePlay(card)">
-                        <tower-card card="card"></tower-card>
-                    </md-button>
+                    <button class="md-raised hand-card-button" click.call="player.makePlay(card)">
+                        <tower-card card.bind="card"></tower-card>
+                    </button>
                 </div>
             </div>
         </span>

@@ -1,12 +1,14 @@
 /// <reference path="../../_references.d.ts" />
 
-export class BiddingBox {
+import {Behavior} from 'aurelia-framework';
+
+export class TowerBiddingBox {
+
+    static metadata(){ return Behavior.withProperty('player').withProperty('bidding'); }
 
     constructor() {
 
-        this.player = $scope.player;
-        this.bidding = $scope.bidding;
-
+        console.log('creating bidding-box')
         this.levels = [];
 
         for (var i = 1; i <= 7; i++) {
@@ -20,6 +22,7 @@ export class BiddingBox {
         this.double = { type: tower.BidType.Double };
         this.redouble = { type: tower.BidType.Redouble };
         this.nobid = { type: tower.BidType.NoBid };
+        console.log('created bidding-box')
     }
 
     player: any;//tower.IPlayer;

@@ -68,6 +68,7 @@ export class Rubber {
   // private currentBoardIndex: number = 0;
 
   get currentBoard(): tower.IBoard {
+    //console.log('in current board')
     return this.boards[this.boards.length -1];
   }
 

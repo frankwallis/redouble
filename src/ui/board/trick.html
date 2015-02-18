@@ -1,0 +1,37 @@
+<template>
+    <import from='../cards/card'></import>
+
+    <div class="trick-container"
+         layout="column" layout-align="center center">
+        <div class="trick-edge-ns"
+             flex="25">
+            <tower-card class="trick-card" if.bind="trick.northCard" card.bind="trick.northCard">
+            </tower-card>
+        </div>
+
+        <div class="trick-center"
+             flex="50"
+             layout="row" layout-align="center center">
+            <div class="trick-edge-ew"
+                 flex="30">
+                <tower-card class="trick-card" if.bind="trick.westCard" card.bind="trick.westCard">
+                </tower-card>
+            </div>
+
+            <div flex="40">
+            </div>
+
+            <div class="trick-edge-ew"
+                 flex="30">
+                <tower-card class="trick-card" if.bind="trick.eastCard" card.bind="trick.eastCard">
+                </tower-card>
+            </div>
+        </div>
+
+        <div class="trick-edge-ns"
+             flex="50">
+            <tower-card class="trick-card" if.bind="trick.southCard" card.bind="trick.southCard">
+            </tower-card>
+        </div>
+    </div>
+</template>

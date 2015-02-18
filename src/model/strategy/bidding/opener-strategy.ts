@@ -2,13 +2,13 @@
 
 class OpenerStrategy implements tower.IBiddingStrategy {
 
-    constructor() {   
-         
+    constructor() {
+
     }
-    
+
     public getBid(game: tower.IGame): tower.IBid {
         return {type: tower.BidType.NoBid};
-    }    
+    }
 }
 
 export = OpenerStrategy;

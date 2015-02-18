@@ -14,6 +14,7 @@ export class Human extends Player {
         if (this.awaitingBid)
             throw new Error("bid is already pending");
 
+        console.log(this.name + ' bidding');
         this.pendingBid = this.defer();
 
         return this.pendingBid.promise;

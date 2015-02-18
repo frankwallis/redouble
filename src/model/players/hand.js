@@ -2,7 +2,7 @@
 
 export class Hand { //implements tower.IHand {
 
-    constructor(cards: any/*Array<tower.ICard>*/) {
+    constructor(cards: Array<tower.ICard>) {
       console.log('creating hand');
         this.availableCards = cards.sort((c1, c2) => (c2.suit - c1.suit) || (c2.pip - c1.pip));
         this.playedCards = [];

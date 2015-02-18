@@ -6,9 +6,9 @@ export class Deck {//implements tower.IDeck {
     	this.cards = this.createCards();
     }
 
-    cards: any;//Array<tower.ICard>;
+    cards: Array<tower.ICard>;
 
-    createCards(): any {//Array<tower.ICard> {
+    createCards(): Array<tower.ICard> {
     	var result = [];
 
     	for (var asuit = tower.Suit.Clubs; asuit <= tower.Suit.Spades; asuit++) {
@@ -20,7 +20,7 @@ export class Deck {//implements tower.IDeck {
     	return result;
     }
 
-    shuffleCards(array: any): any {//} Array<tower.ICard>): Array<tower.ICard> {
+    shuffleCards(array: Array<tower.ICard>): Array<tower.ICard> {
 		  var i = array.length, j, swap;
 
   		while (--i) {

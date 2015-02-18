@@ -4,6 +4,7 @@ import {rotate} from "./utils"
 import {Board} from "./board";
 import {Deck} from "../cards/deck";
 import {Human} from "../players/human";
+import {Computer} from "../players/computer";
 
 //implements tower.IGame
 export class Rubber {
@@ -16,7 +17,7 @@ export class Rubber {
   async play(players: any) {
     console.log('playing rubber');
 
-    this.players = [ new Human("player1"), new Human("player2"), new Human("player3"), new Human("player4") ];
+    this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
     this.players.forEach((player) => { player.game = this });
     var dealer = this.cut();
 

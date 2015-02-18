@@ -1,5 +1,5 @@
 <template>
-    <link rel="stylesheet" type="text/css" href="./bidding-box.css">
+    <link rel="stylesheet" type="text/css" href="src/ui/player/bidding-box.css">
     <import from='../board/bid'></import>
 
     <div class="bidding-box-container">
@@ -21,7 +21,7 @@
                 <tr class="bidding-box-level" repeat.for="level of levels">
                     <td class="bidding-box-cell" colspan="2" repeat.for="bid of level">
                         <button class="bidding-box-button md-raised"
-                                   click.call="bid(bid)">
+                                click.trigger="$parent.$parent.makeBid(bid)">
                             <tower-bid bid.bind="bid"></tower-bid>
                         </button>
                     </td>
@@ -29,19 +29,19 @@
                 <tr class="bidding-box-level">
                     <td class="bidding-box-cell" colspan="3">
                         <button class="bidding-box-button md-raised"
-                                   click.call="bid(double)">
+                                click.delegate="makeBid(double)">
                             <tower-bid bid.bind="double"></tower-bid>
                         </button>
                     </td>
                     <td class="bidding-box-cell" colspan="3">
                         <button class="bidding-box-button md-raised"
-                                   click.call="bid(redouble)">
+                                click.delegate="makeBid(redouble)">
                             <tower-bid bid.bind="redouble"></tower-bid>
                         </button>
                     </td>
                     <td class="bidding-box-cell" colspan="4">
                         <button class="bidding-box-button md-raised"
-                                   click.call="bid(nobid)">
+                                click.delegate="makeBid(nobid)">
                             <tower-bid bid.bind="nobid"></tower-bid>
                         </button>
                     </td>

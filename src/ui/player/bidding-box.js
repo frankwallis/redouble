@@ -37,7 +37,7 @@ export class TowerBiddingBox {
         return true;
     }
 
-    bid(bid: tower.IBid) {
+    makeBid(bid: tower.IBid) {
         this.player.makeBid(bid);
     }
 }

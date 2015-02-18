@@ -3,16 +3,13 @@
 import Hand = require("./hand");
 import Player = require("./player");
 
-// if (Player)
-//     console.log('yes');
-
 class MockPlayer extends Player {
 
     public static $inject = [ "$q", "name", "deck" ];
-    
+
     constructor($q: ng.IQService,
                 public name: string,
-                private deck: any) {   
+                private deck: any) {
          super($q, name);
     }
 
@@ -26,14 +23,14 @@ class MockPlayer extends Player {
     public bid(game: tower.IGame): ng.IPromise<tower.IBid> {
 		var result = this.$q.defer<tower.IBid>();
         var bid = { type: tower.BidType.NoBid };
-        
+
         if (this.bids && (this.bids.length > 0)) {
             bid = this.bids[0];
             this.bids = this.bids.slice(1);
         }
-        
+
         console.log("seat " + this.seat + " " + JSON.stringify(bid));
-        
+
         result.resolve(bid);
 		return result.promise;
 	}
@@ -46,42 +43,42 @@ class MockPlayer extends Player {
         result.resolve(selectedCard);
 		return result.promise;
 	}
-    
+
     private getAnyCard(lead: tower.ICard) {
         if (lead) {
             for (var i = 0; i < this.hand.availableCards.length; i ++)
                 if (this.hand.availableCards[i].suit == lead.suit)
                     return this.hand.availableCards[0];
         }
-        
+
         return this.hand.availableCards[0];
     }
 }
 
-export var bidderFactory = [ "$injector", ($injector) => {    
-    return (northBids: Array<any>, eastBids: Array<any>, 
+export var bidderFactory = [ "$injector", ($injector) => {
+    return (northBids: Array<any>, eastBids: Array<any>,
             southBids: Array<any>, westBids: Array<any>) => {
         var north: MockPlayer = $injector.instantiate(MockPlayer);
         north.setBids(northBids.map(convertBid));
-        
+
         var east: MockPlayer = $injector.instantiate(MockPlayer);
         east.setBids(eastBids.map(convertBid));
         var south: MockPlayer = $injector.instantiate(MockPlayer);
         south.setBids(southBids.map(convertBid));
         var west: MockPlayer = $injector.instantiate(MockPlayer);
         west.setBids(westBids.map(convertBid));
-        
+
         return [ north, east, south, west ];
     }
 }];
 
-export var playerFactory = [ "$injector", ($injector) => {    
-    return (northCards: Array<any>, eastCards: Array<any>, 
+export var playerFactory = [ "$injector", ($injector) => {
+    return (northCards: Array<any>, eastCards: Array<any>,
             southCards: Array<any>, westCards: Array<any>) => {
-      
+
         if (!westCards) {
             this.deck.shuffle();
-            
+
             return this.deck.deal(4)
                 .map((cards) => $injector.instantiate(MockPlayer).setCards(cards))
         }
@@ -100,7 +97,7 @@ export var playerFactory = [ "$injector", ($injector) => {
     }
 }];
 
-//var playerFactory = [ "$injector", ($injector) => {    
+//var playerFactory = [ "$injector", ($injector) => {
 //    return (bids: Array<any>, cards: Array<tower.ICard>) => {
 //        var player: MockPlayer = $injector.instantiate(MockPlayer);
 //        player.setBids(bids.map(convertBid));
@@ -133,7 +130,7 @@ function convertLevel(str: string): number {
 function convertPip(str: string): tower.Pip {
     str = str.slice(0, str.length -1);
     console.log('parsing ' + str);
-    
+
     if (str == 'K')
         return tower.Pip.King;
     else if (str == 'A')
@@ -150,7 +147,7 @@ function convertPip(str: string): tower.Pip {
 
 function convertSuit(str: string): number {
     str = str[str.length - 1];
-    
+
     if (str.toLowerCase() == "s")
         return tower.BidSuit.Spades;
     else if (str.toLowerCase() == "d")

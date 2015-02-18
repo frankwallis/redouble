@@ -7,12 +7,12 @@ export class TowerBidding {
     static metadata(){ return Behavior.withProperty('bidding'); }
 
     constructor() {
-      //this.rounds = getRounds()
+      this.rounds = [];//getRounds()
     }
 
     //rounds: Array<Array<tower.IBid>>;
 
-    get rounds(bidding: tower.IBidding) {
+    get rounds1(bidding: tower.IBidding) {
       console.log('in rounds');
         var result = [];
 

@@ -1,18 +1,43 @@
 
-.table-container {
-    width: 100%;
-    height: 100%;
+.bridge-table {
+  background: #017F00;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.table-edge-north {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 1rem;
+}
+
+.table-edge-south {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+}
+
+.table-edge-west {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+}
+
+.table-edge-east {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 }
 
 .table-center {
-
-}
-
-.table-edge-ew {
-
-}
-
-.table-edge-ns {
 
 }
 
@@ -20,8 +45,11 @@
     display: inline;
 }
 
-.table-bidding-box {
-    margin-left: 1rem;
+.table-bidding-south {
+    left: 0;
+    transform: translateX(-105%);
+    position: absolute;
+    bottom: 0;
 }
 
 .game-menu {
@@ -33,13 +61,3 @@
 }
 
 /*****************/
-
-.bridge-table {
-    padding: 0 1rem;
-    height: 100%;
-	/*background: #00a651;*/
-	/*background: #12BF07;*/
-	/*background: #064002;*/
-	background: #017F00;
-	color: white;
-}

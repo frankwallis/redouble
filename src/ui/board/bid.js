@@ -11,22 +11,22 @@ export class TowerBid {
     }
 
     get isNoBid() {
-      console.log('in no bid')
+      //console.log('in no bid')
       return this.bid.type == 0;//tower.BidType.NoBid;
     }
 
     get isSuitBid() {
-      console.log('in suit bid')
+      //console.log('in suit bid')
       return this.bid.type == 1;//tower.BidType.Call;
     }
 
     get isDouble() {
-      console.log('in double')
+      //console.log('in double')
       return this.bid.type == 2;//tower.BidType.Double;
     }
 
     get isRedouble() {
-      console.log('in redouble')
+    //  console.log('in redouble')
       return this.bid.type == 3;//tower.BidType.Redouble;
     }
 }

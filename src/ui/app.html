@@ -1,11 +1,11 @@
 <template>
-  <link rel="stylesheet" type="text/css" href="./build.css">
+  <link rel="stylesheet" type="text/css" href="src/ui/build.css">
+  <link rel="stylesheet" type="text/css" href="src/ui/app.css">
 
   <import from='./nav-bar'></import>
 
-  <nav-bar router.bind="router"></nav-bar>
-
-  <div class="page-host">
-    <router-view></router-view>
+  <div class="app-container">
+    <nav-bar class="app-menu" router.bind="router"></nav-bar>
+    <router-view class="app-content"></router-view>
   </div>
 </template>

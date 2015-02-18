@@ -10,14 +10,14 @@ describe("cardplay", () => {
     var cardplayFactory: () => tower.ICardplay;
     var mockPlayerFactory: () => Array<tower.IPlayer>
     var north, south, east, west;
-    
+
     beforeEach(() => {
         var testModule = angular.module("tower.test", [ tow.Module.name ]);
         angular.mock.module(testModule);
         angular.mock.module(tow.Module.name);
    });
-    
-    beforeEach(angular.mock.inject((_cardplayFactory_, _mockPlayerFactory_) => {      
+
+    beforeEach(angular.mock.inject((_cardplayFactory_, _mockPlayerFactory_) => {
         cardplayFactory = _cardplayFactory_;
         mockPlayerFactory = _mockPlayerFactory_;
     }));
@@ -26,7 +26,7 @@ describe("cardplay", () => {
         var players = mockPlayerFactory();
         var cardplay = cardplayFactory();
         cardplay.setPlayers(players);
-        
+
         cardplay.play(players[0])
             .then(() => {
                 expect(cardplay.tricks.length).toBe(13);
@@ -43,5 +43,5 @@ describe("cardplay", () => {
 //
 //    it("should not allow cards to be played twice", () => {
 //
-//    });        
+//    });
 });

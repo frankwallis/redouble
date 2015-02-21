@@ -4,6 +4,7 @@ lib/
 deps/
 obj/
 node_modules/
+jspm_packages/
 mods/
 reports/
 js/

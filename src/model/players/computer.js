@@ -8,33 +8,29 @@ export class Computer extends Player {
 
   constructor(name: string) {
     super(name);
-    this.biddingFactory = new BiddingStrategy();
-    this.cardplayFactory = new CardplayStrategy();
+    this.biddingStrategy = new BiddingStrategy();
+    this.cardplayStrategy = new CardplayStrategy();
   }
 
   biddingStrategy: tower.IBiddingStrategy;
   cardplayStrategy: tower.ICardplayStrategy;
 
-  bid(game: tower.IGame): Promise<tower.IBid> {
-    var bid = this.biddingStrategy.getBid(game);
-    console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
-    return Promise.resolve(bid).delay(200);
+  delay(value, ms) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => resolve(value), ms);
+    });
   }
 
-  play(game: tower.IGame): Promise<tower.ICard> {
-    var card = this.cardplayStrategy.getCard(game);  // TODO!!
+  bid(): Promise<tower.IBid> {
+    var bid = this.biddingStrategy.getBid(this.game, this);
+    console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
+    return this.delay(bid, 200);
+  }
+
+  play(): Promise<tower.ICard> {
+    var card = this.cardplayStrategy.getCard(this.game, this);  // TODO!!
     console.log('seat ' + this.seat + ': ' + JSON.stringify(card));
     this.hand.play(card);
-    return Promise.resolve(card).delay(200);
-  }
-
-  getAnyCard(lead: tower.ICard) {
-    if (lead) {
-      for (var i = 0; i < this.hand.availableCards.length; i ++)
-      if (this.hand.availableCards[i].suit == lead.suit)
-      return this.hand.availableCards[i];
-    }
-
-    return this.hand.availableCards[0];
+    return this.delay(card, 200);
   }
 }

@@ -23,7 +23,7 @@ export class Board {
 
       	this.deal(players, dealer);
       	await this.bidding.play(players, dealer);
-      	await this.cardplay.play(players, this.bidding.opener);
+      	await this.cardplay.play(players, this.bidding.leader);
     }
 
   	deal(players: Array<tower.IPlayer>, dealer: tower.Seat) {

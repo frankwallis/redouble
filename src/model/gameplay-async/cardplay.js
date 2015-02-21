@@ -1,17 +1,29 @@
 /// <reference path="../../_references.d.ts" />
 
-import {nextPlayer} from "./utils"
+import {Trick} from "./trick";
 
 //implements tower.IGameSequence
 export class Cardplay {
 
     constructor() {
-
+      this.tricks = [];
     }
 
-    // players: Array<tower.IPlayer>;
-    //
-    // play(players: Array<tower.IPlayer>, firstPlayer: tower.IPlayer) {
-    //
-    // }
+    tricks: Array<tower.ITrick>;
+    //currentTrickIndex: number = -1;
+    get currentTrick(): tower.ITrick {
+      return this.tricks[this.tricks.length -1];
+    }
+
+    async play(players: Array<tower.IPlayer>, leader: tower.Seat) {
+      console.log('playing cardplay');
+      var current = leader;
+
+      for (var i = 0; i < 13; i ++) {
+        var trick = new Trick();
+        this.tricks[i] = trick;
+        await trick.play(players, current);
+        current = trick.winner;
+      }
+    }
 }

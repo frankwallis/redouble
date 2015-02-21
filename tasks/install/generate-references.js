@@ -8,7 +8,7 @@ module.exports = function(options) {
     options.rootDir = options.rootDir || options.root;
 
     var filelist = utils.unglob(['components/**/*.d.ts', path.join(options.rootDir, '**/*.d.ts')], options.root);
-    
+
     var result = "";
     result    += "/// ------------------------------------- ///" + os.EOL;
     result    += "/// Automatically generated. DO NOT EDIT. ///" + os.EOL;

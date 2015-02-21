@@ -7,13 +7,10 @@ export class TowerBidding {
     static metadata(){ return Behavior.withProperty('bidding'); }
 
     constructor() {
-      this.rounds = [];//getRounds()
+      console.log("creating bidding");
     }
 
-    //rounds: Array<Array<tower.IBid>>;
-
-    get rounds1(bidding: tower.IBidding) {
-      console.log('in rounds');
+    get rounds() {
         var result = [];
 
         for (var i = 0; i < 6; i ++) {
@@ -26,7 +23,6 @@ export class TowerBidding {
         this.bidding.bids.forEach(function(bid, idx) {
             result[Math.floor(idx/4)][idx % 4] = bid;
         });
-        console.log('leaving rounds');
         return result;
     }
 }

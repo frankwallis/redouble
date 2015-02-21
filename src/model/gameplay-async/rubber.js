@@ -30,23 +30,23 @@ export class Rubber {
   }
 
   get north(): tower.IPlayer {
-    return this.players[0];//tower.Seat.North];
+    return this.players[tower.Seat.North];
   }
 
   get east(): tower.IPlayer {
-    return this.players[1];//tower.Seat.East];
+    return this.players[tower.Seat.East];
   }
 
   get south(): tower.IPlayer {
-    return this.players[2];//tower.Seat.South];
+    return this.players[tower.Seat.South];
   }
 
   get west(): tower.IPlayer {
-    return this.players[3];//tower.Seat.West];
+    return this.players[tower.Seat.West];
   }
 
   cut(): any {
-    return 0;   // TODO
+    return tower.Seat.West;   // TODO
   }
 
   playHasEnded(): boolean {
@@ -69,7 +69,6 @@ export class Rubber {
   // private currentBoardIndex: number = 0;
 
   get currentBoard(): tower.IBoard {
-    //console.log('in current board')
     return this.boards[this.boards.length -1];
   }
 

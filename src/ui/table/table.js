@@ -8,16 +8,8 @@ export class Table {
       this.game = game;
       console.log('playing table')
       this.game.play()
-      	.then(
-      		(game) => {
+      	.then((game) => {
 				     //$state.go(".result");
-      		},
-      		(err) => {
-              console.log(err);
-      			//$state.go(".error");
-      		},
-      		(game) => {
-
       		});
     }
 

@@ -2,7 +2,7 @@ var http = require('http');
 var express = require('express');
 
 function staticServer(options) {
-    
+
     var app = express();
 
     // log all requests
@@ -13,7 +13,7 @@ function staticServer(options) {
 
     // this injects the live reload script into index.html
     if (options.liveReload) {
-        var lr_rewriter = require("connect-livereload-safe"); 
+        var lr_rewriter = require("connect-livereload-safe");
         var liveReloadPort = options.liveReloadPort || 35729;
         var liveReloadHost = "http://localhost:" + liveReloadPort;
         app.use(lr_rewriter({

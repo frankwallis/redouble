@@ -4,7 +4,7 @@ var notify = require("../utils/notify");
 var requireSpecs = require("./require-specs");
 
 module.exports = function(options) {
-    
+
     var path = require('path');
     options.configFile = path.join(process.cwd(), options.configFile || 'karma.conf.js');
     options.outputFile = options.outputFile || 'build/build-specs.js';
@@ -40,7 +40,7 @@ module.exports = function(options) {
                             console.log(err);
                             cb();
                         }
-                        else {                
+                        else {
                             var filename = options.outputFile;
                             utils.ensureWriteFile(filename, src, function(err) {
                                 if (err) throw err;
@@ -52,10 +52,10 @@ module.exports = function(options) {
             })
         });
 
-        var watchOpts =  { 
-            read: false, 
-            debounceDelay: 1000, 
-            interval: 500 
+        var watchOpts =  {
+            read: false,
+            debounceDelay: 1000,
+            interval: 500
         };
 
         gulp.task('watch-specs', [ 'bundle-specs' ], function () {
@@ -70,14 +70,14 @@ module.exports = function(options) {
                 singleRun: true
             }, cb);
         });
-        
+
         gulp.task('watch-karma', [ 'watch-specs' ], function (cb) {
             karma.server.start({
                 configFile: options.configFile,
                 autoWatch: true
             }, cb);
         });
-        
+
         gulp.task('specs', ['run-karma']);
         gulp.task('watch', ['watch-specs', 'watch-karma']);
         gulp.task('default', ['specs']);

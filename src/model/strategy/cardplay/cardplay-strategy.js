@@ -6,9 +6,9 @@ export class CardplayStrategy { //implements tower.ICardplayStrategy {
 
     }
 
-    getCard(game: tower.IGame): tower.ICard {
+    getCard(game: tower.IGame, player: tower.IPlayer): tower.ICard {
         var trick = game.currentBoard.cardplay.currentTrick;
-        return this.getAnyCard(trick.leadCard, trick.currentPlayer.hand);
+        return this.getAnyCard(trick.leadCard, player.hand);
     }
 
     getAnyCard(lead: tower.ICard, hand: tower.IHand) {

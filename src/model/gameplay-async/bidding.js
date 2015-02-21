@@ -15,7 +15,7 @@ export class Bidding {
         var current = dealer;
 
         while(!this.biddingHasEnded()) {
-            let bid = await players[current].bid(players[current].game);
+            let bid = await players[current].bid();
             this.validate(bid);
             this.bids.push(bid);
             current = rotate(current);
@@ -23,9 +23,6 @@ export class Bidding {
 	  }
 
     validate(bid: tower.IBid) {
-        return;
-
-
         switch(bid.type) {
             case tower.BidType.NoBid:
                 return;
@@ -60,7 +57,7 @@ export class Bidding {
         var idx = this.bids.length - 1;
 
         while(idx >= 0) {
-            if (this.bids[idx].type == 0)//tower.BidType.NoBid)
+            if (this.bids[idx].type == tower.BidType.NoBid)
                 consecutivePasses ++;
             else
                 break;
@@ -72,19 +69,19 @@ export class Bidding {
     }
 
     get northBid(): tower.IBid {
-        return this.bids[0];//tower.Seat.North];
+        return this.bids[tower.Seat.North];
     }
 
     get eastBid(): tower.IBid {
-        return this.bids[1];//tower.Seat.East];
+        return this.bids[tower.Seat.East];
     }
 
     get southBid(): tower.IBid {
-        return this.bids[2]//tower.Seat.South];
+        return this.bids[tower.Seat.South];
     }
 
     get westBid(): tower.IBid {
-        return this.bids[3];//tower.Seat.West];
+        return this.bids[tower.Seat.West];
     }
 
     get lastBid(): tower.IBid {
@@ -95,9 +92,14 @@ export class Bidding {
         return this.bids.slice(-4);
     }
 
+    get leader(): tower.Seat {
+        // TODO
+        return tower.Seat.West;
+    }
+
     get lastAction(): tower.IBid {
         for (var i = this.bids.length -1; i >= 0; i --) {
-            if (this.bids[i].type != 0)//tower.BidType.NoBid)
+            if (this.bids[i].type != tower.BidType.NoBid)
                 return this.bids[i];
         }
         return undefined;

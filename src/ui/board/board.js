@@ -7,6 +7,6 @@ export class TowerBoard {
     static metadata(){ return Behavior.withProperty('board'); }
 
     constructor() {
-
+      console.log('creating board');
     }
 }

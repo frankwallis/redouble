@@ -43,7 +43,7 @@
 
       <div class="table-center">
           <tower-board board.bind="game.currentBoard"></tower-board>
-          <tower-bidding flex="25" bidding="game.currentBoard.bidding"></tower-bidding>
+          <tower-bidding bidding.bind="game.currentBoard.bidding"></tower-bidding>
       </div>
 
       <div class="table-edge-east">

@@ -1,25 +1,13 @@
-/*@import 'components/font-awesome';
-@import 'components/normalize.css';
-@import 'angular/bower-material';
-
-@import './board/board.css';
-@import './cards/card.css';
-@import './table/table.css';
-
-@import './player/hand.css';
-@import './player/bidding-box.css';*/
-
 .app-menu {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  height: 3rem;
 }
 
 .app-content {
   position: absolute;
-  top: 3rem;
+  top: 2.75rem;
   left: 0;
   right: 0;
   bottom: 0;

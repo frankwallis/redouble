@@ -22,7 +22,6 @@
     "tiny-lr": "^0.1.5"
   },
   "scripts": {
-    "build": "gulp install bundle",
     "start": "gulp serve"
   },
   "repository": {
@@ -36,14 +35,15 @@
       "lib": "src"
     },
     "dependencies": {
+      "angular-material": "^0.7.1",
       "aurelia-bootstrapper": "^0.9.1",
       "aurelia-dependency-injection": "^0.4.1",
       "aurelia-framework": "^0.8.4",
       "aurelia-http-client": "^0.4.3",
       "aurelia-router": "^0.5.1",
-      "plugin-css": "github:systemjs/plugin-css@^0.1.0",
-      "plugin-text": "github:systemjs/plugin-text@^0.0.2",
-      "ts": "github:frankwallis/plugin-typescript@^0.5.9"
+      "css": "^0.1.0",
+      "font-awesome": "^4.3.0",
+      "text": "github:systemjs/plugin-text@^0.0.2"
     }
   }
 }

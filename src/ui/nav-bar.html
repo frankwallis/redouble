@@ -1,20 +1,21 @@
 <template>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <i class="fa fa-home"></i>
-        <span>${router.title}</span>
-      </a>
-    </div>
+  <link rel="stylesheet" type="text/css" href="src/ui/nav-bar.css">
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <nav role="navigation">
+    <div id="cssmenu">
       <ul class="nav navbar-nav">
+        <li>
+          <a href="#">
+            <i class="fa fa-home"></i>
+            <span>${router.title}</span>
+          </a>
+        </li>
         <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
           <a href.bind="row.href">${row.title}</a>
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="align-right">
         <li class="loader" if.bind="router.isNavigating">
           <i class="fa fa-spinner fa-spin fa-2x"></i>
         </li>

@@ -2,7 +2,6 @@
     <link rel="stylesheet" type="text/css" href="src/ui/table/table.css">
 
     <import from='../board/board'></import>
-    <import from='../board/bidding'></import>
     <import from='../player/player'></import>
     <import from='../player/hand'></import>
     <import from='../player/bidding-box'></import>
@@ -44,7 +43,6 @@
 
       <div class="table-center">
           <tower-board board.bind="game.currentBoard"></tower-board>
-          <tower-bidding bidding.bind="game.currentBoard.bidding"></tower-bidding>
       </div>
 
       <div class="table-edge-east">

@@ -1,6 +1,8 @@
 
 .bridge-table {
-  background: #017F00;
+  /*background: #017F00;*/
+  /*background: #13B219;*/
+  background: #147A21;
   color: white;
   position: absolute;
   top: 0;
@@ -40,9 +42,10 @@
 .table-center {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 50%;
 }
 
 .table-hand-north, .table-hand-south {

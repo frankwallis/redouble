@@ -27,11 +27,16 @@
     <script src="config.js"></script>
     <script type="module">
       System.baseUrl = 'src'; //NOTE: You can move this into the config.js file, if you like.
-      System.import('aurelia-bootstrapper');
+      System.import('./src/ui/table/table.jsx!').catch(function (err) {
+          console.log('ERROR: ', err);
+      });
+      // System.import('aurelia-bootstrapper');
     </script>
 </head>
 
-<body aurelia-main="src/main">
+<!-- <body aurelia-main="src/main"> -->
+<body>
+  <div id="main"/>
 
 </body>
 

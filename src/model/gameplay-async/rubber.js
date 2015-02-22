@@ -12,13 +12,16 @@ export class Rubber {
   constructor(deck: Deck) {
     this.boards = [];
     this.deck = deck;
+    this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
+    this.players.forEach((player, idx) => { 
+      player.game = this;
+      player.seat = idx;
+    });
   }
 
   async play(players: any) {
     console.log('playing rubber');
 
-    this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
-    this.players.forEach((player) => { player.game = this });
     var dealer = this.cut();
 
     while(!this.playHasEnded()) {

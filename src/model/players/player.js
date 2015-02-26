@@ -1,15 +1,13 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Hand} from "./hand";
-
 export class Player {//implements tower.IPlayer {
 
     constructor(name: string) {
       this.name = name;
     }
 
-    setCards(cards: Array<tower.ICard>): tower.IPlayer {
-        this.hand = new Hand(cards);
+    setCards(hand: Array<tower.ICard>): tower.IPlayer {
+        this.hand = hand;
         return this;
     }
 
@@ -26,9 +24,7 @@ export class Player {//implements tower.IPlayer {
         };
     }
 
-    hand: tower.IHand;
     seat: tower.Seat;
-    game: tower.IGame;
     name: string;
 
     bid(game: tower.IGame): Promise<tower.IBid> {

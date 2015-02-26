@@ -10,7 +10,7 @@ export class Human extends Player {
 
     pendingBid: Deferred<tower.IBid>;
 
-	  bid(): Promise<tower.IBid> {
+	  bid(game): Promise<tower.IBid> {
         if (this.awaitingBid)
             throw new Error("bid is already pending");
 
@@ -34,7 +34,7 @@ export class Human extends Player {
 
     pendingPlay: Deferred<tower.ICard>;
 
-	  play(): Promise<tower.ICard> {
+	  play(game): Promise<tower.ICard> {
         if (this.awaitingPlay)
             throw new Error("play is already pending");
 
@@ -50,7 +50,6 @@ export class Human extends Player {
         if (!this.awaitingPlay)
             throw new Error("unexpected card!");
 
-        this.hand.play(card);
         this.pendingPlay.resolve(card);
         this.pendingPlay = undefined;
     }

@@ -21,16 +21,15 @@ export class Computer extends Player {
     });
   }
 
-  bid(): Promise<tower.IBid> {
-    var bid = this.biddingStrategy.getBid(this.game, this);
+  bid(game): Promise<tower.IBid> {
+    var bid = this.biddingStrategy.getBid(game, this);
     console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
     return this.delay(bid, 200);
   }
 
-  play(): Promise<tower.ICard> {
-    var card = this.cardplayStrategy.getCard(this.game, this);  // TODO!!
+  play(game): Promise<tower.ICard> {
+    var card = this.cardplayStrategy.getCard(game, this);  // TODO!!
     console.log('seat ' + this.seat + ': ' + JSON.stringify(card));
-    this.hand.play(card);
     return this.delay(card, 200);
   }
 }

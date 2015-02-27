@@ -27,13 +27,13 @@ export class Table extends React.Component {
     static seatName(seat) {
       switch(seat) {
         case tower.Seat.North:
-          return "North";
+          return "north";
         case tower.Seat.South:
-          return "South";
+          return "south";
         case tower.Seat.East:
-          return "East";
+          return "east";
         case tower.Seat.West:
-          return "West";
+          return "west";
         default:
           throw new Error("unrecognised seat");
       }
@@ -50,7 +50,7 @@ export class Table extends React.Component {
       console.log('rendering');
 
       var players = this.rubber.players.map((player) => {
-        return <div className="table-player-{this.seatName(player.seat)}" key={player.seat}>
+        return <div className={"table-edge-" + Table.seatName(player.seat)} key={player.seat}>
                   <header className="table-player-name">
                     {player.name}
                   </header>

@@ -1,13 +1,28 @@
+.hand-container {
+    height: 7rem;
+    width: 12rem;
+    position: relative;
+}
+
 .hand-card {
     width: 20em;
     overflow: hidden;
+    list-style: none;
+}
+
+.hand-container > .hand-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: top 0.3s ease, left 0.3s ease;
+  -moz-transition: top 0.3s ease, left 0.3s ease;
+  -o-transition: top 0.3s ease, left 0.3s ease;
+  -ms-transition: top 0.3s ease, left 0.3s ease;
+  transition: top 0.3s ease, left 0.3s ease;
 }
 
 .hand-card-button {
     padding: 0;
-    border-radius: 0.5rem;
-}
-
-.hand-container {
-    height: 7em;
+    border-radius: 0;
+    border-thickness: none;
 }

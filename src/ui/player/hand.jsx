@@ -21,7 +21,7 @@ export class Hand extends React.Component {
 
     render() {
       var cards = this.availableCards.map((card) => {
-        return <li key={Card.key(card)}>
+        return <li className="hand-card" key={Card.key(card)}>
                 <button className="hand-card-button"
                         onClick={() => this.playCard(card)}>
                   <Card pip={card.pip} suit={card.suit}></Card>
@@ -29,6 +29,6 @@ export class Hand extends React.Component {
                </li>;
       });
 
-      return (<ol>{cards}</ol>);
+      return (<ol className="hand-container">{cards}</ol>);
     }
 }

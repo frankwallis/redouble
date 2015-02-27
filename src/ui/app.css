@@ -1,3 +1,11 @@
+@import './board/board.css';
+@import './cards/suit.css';
+@import './cards/card.css';
+@import './table/table.css';
+
+@import './player/hand.css';
+@import './player/bidding-box.css';
+
 .app-menu {
   position: absolute;
   top: 0;

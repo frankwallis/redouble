@@ -6,9 +6,14 @@ export class BiddingStrategy { //implements tower.IBiddingStrategy {
 
     }
 
-    getBid(game: tower.IGame, player: tower.IPlayer): tower.IBid {
-        if ((game.currentBoard.bids.length > 0) && (game.currentBoard.bids.length < 4))
-            return {type: tower.BidType.Call, suit: game.currentBoard.lastBid.suit +1 || tower.BidSuit.Clubs, level: game.currentBoard.lastBid.level +1 || 1};
+    getBid(game: tower.IGame): tower.IBid {
+        if ((game.currentBoard.bids.length > 0) &&
+            (game.currentBoard.bids.length < 4))
+            return {
+              type: tower.BidType.Call,
+              suit: game.lastBid.suit +1 || tower.BidSuit.Clubs,
+              level: game.lastBid.level +1 || 1
+            };
         else
             return {type: tower.BidType.NoBid};
     }

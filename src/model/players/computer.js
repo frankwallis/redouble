@@ -22,7 +22,7 @@ export class Computer extends Player {
   }
 
   bid(game): Promise<tower.IBid> {
-    var bid = this.biddingStrategy.getBid(game, this);
+    var bid = this.biddingStrategy.getBid(game);
     console.log('seat ' + this.seat + ': ' + JSON.stringify(bid));
     return this.delay(bid, 200);
   }

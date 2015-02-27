@@ -19,7 +19,7 @@ export class GameStateHelper {
   }
 
   get lastBid(): tower.IBid {
-    return this.currentBoard.bids[gameState.bids.length -1];
+    return this.currentBoard.bids[this.currentBoard.bids.length -1];
   }
 
   get biddingHasEnded(): boolean {

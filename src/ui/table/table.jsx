@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
 import {Rubber} from "../../model/gameplay-generators/rubber";
-//import {Hand} from "../player/hand.jsx!";
+import {Hand} from "../player/hand.jsx!";
 import {BiddingBox} from "../player/bidding-box.jsx!";
 
 import React from 'react';
@@ -10,52 +10,36 @@ export class Table extends React.Component {
 
     constructor(props) {
       super(props);
-      // this.props = {
-      //   game: new Rubber()
-      // }
       this.rubber = new Rubber();
       this.game = this.rubber.newGame();
-      // this.game = game;
-      // console.log('playing table')
-      // this.game.play()
-      // 	.then((game) => {
-			// 	     //$state.go(".result");
-      // 		});
     }
 
-    componentDidMount() {
+    async componentDidMount() {
       console.log('mounted ' + JSON.stringify(this.props));
 
-      this.rubber.nextState(this.game)
-        .then((game) => {
-          this.game = game;
-          this.render();
-        });
-//      for (var state of this.props.game.play())
-  //      this.setState(state);
-
-      // this.state.game.play()
-      //   .then((game) => {
-      //     this.setState({game: game})
-      //   });
+      while(true) {
+        this.game = await this.rubber.nextState(this.game)
+        console.log(JSON.stringify(this.game));
+      }
     }
 
     render() {
       console.log('rendering');
 
-//      var hands = [];
-      //this.state.game.players.map((player) => {
-      //  return <Hand key={player.seat} hand={player.hand}></Hand>
-      //});
+      var hands = this.rubber.players.map((player) => {
+        return <Hand key={player.seat}
+                     seat={player.seat}
+                     game={this.game}></Hand>
+      });
 
       return (
-        <BiddingBox game={this.game} className="table-bidding-box"></BiddingBox>
+        <div>
+          <BiddingBox game={this.game} className="table-bidding-box"></BiddingBox>
+          <div className="table-hand">
+            {hands}
+          </div>
+        </div>
       );
-      // return (
-      //   <div className="table-hand">
-      //     {hands}
-      //   </div>
-      // );
     }
 }
 

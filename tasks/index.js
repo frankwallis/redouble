@@ -21,12 +21,6 @@ module.exports.addBundle = function(options) {
     return module.exports;
 }
 
-module.exports.addSpecs = function(options) {
-    var specs = require('./specs/specs-builder');
-    builders.push(specs(options));
-    return module.exports;
-}
-
 module.exports.addClean = function(options) {
     var clean = require('./clean/clean-builder');
     builders.push(clean(options));

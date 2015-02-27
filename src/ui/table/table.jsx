@@ -54,7 +54,7 @@ export class Table extends React.Component {
                   <header className="table-player-name">
                     {player.name}
                   </header>
-                  <Hand className="table-hand"
+                  <Hand className={"table-hand-" + Table.seatName(player.seat)}
                         seat={player.seat}
                         game={this.game}
                         onGameStateChanged={(state) => this.gameStateChanged(state)}>

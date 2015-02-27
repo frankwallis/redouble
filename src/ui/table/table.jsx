@@ -16,11 +16,12 @@ export class Table extends React.Component {
 
     async componentDidMount() {
       console.log('mounted ' + JSON.stringify(this.props));
+      this.game = await this.rubber.nextState(this.game);
 
-      while(true) {
-        this.game = await this.rubber.nextState(this.game);
-        console.log(JSON.stringify(this.game));
-      }
+      // while(true) {
+      //   this.game = await this.rubber.nextState(this.game);
+      //   console.log(JSON.stringify(this.game));
+      // }
     }
 
     static seatName(seat) {
@@ -38,6 +39,13 @@ export class Table extends React.Component {
       }
     }
 
+    gameStateChanged(state) {
+        console.log('in stateChanged')
+        this.game = state;
+        this.setState(state);
+        this.render();
+    }
+
     render() {
       console.log('rendering');
 
@@ -48,10 +56,12 @@ export class Table extends React.Component {
                   </header>
                   <Hand className="table-hand"
                         seat={player.seat}
-                        game={this.game}>
+                        game={this.game}
+                        onGameStateChanged={(state) => this.gameStateChanged(state)}>
                   </Hand>
                   <BiddingBox className="table-bidding-box"
-                              game={this.game}>
+                              game={this.game}
+                              onGameStateChanged={(state) => this.gameStateChanged(state)}>
                   </BiddingBox>
                </div>
       });

@@ -7,7 +7,6 @@ export class Bidding extends React.Component {
 
     constructor(props) {
       super(props);
-      console.log("creating bidding");
     }
 
     render() {

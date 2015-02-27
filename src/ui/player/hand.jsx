@@ -7,7 +7,6 @@ export class Hand extends React.Component {
 
     constructor(props) {
       super(props);
-      console.log('props: ' + JSON.stringify(props));
     }
 
     get availableCards() {
@@ -15,11 +14,16 @@ export class Hand extends React.Component {
         .filter((card) => !this.props.game.hasBeenPlayed(card));
     }
 
+    playCard(card) {
+        var state = this.props.game.playCard(card);
+        this.props.onGameStateChanged(state);
+    }
+
     render() {
-      console.log(JSON.stringify(this.availableCards))
       var cards = this.availableCards.map((card) => {
         return <li key={Card.key(card)}>
-                <button>
+                <button className="hand-card-button"
+                        onClick={() => this.playCard(card)}>
                   <Card pip={card.pip} suit={card.suit}></Card>
                 </button>
                </li>;

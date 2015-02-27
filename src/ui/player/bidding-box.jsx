@@ -21,8 +21,10 @@ export class BiddingBox extends React.Component {
       );
     }
 
-    makeBid() {
+    makeBid(bid) {
       console.log('in makeBid');
+      var newstate = this.props.game.makeBid(bid);
+      this.props.onGameStateChanged(newstate);
     }
 
     render() {

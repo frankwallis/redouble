@@ -21,7 +21,7 @@ export class Bid extends React.Component {
           return "Redouble";
         default:
           throw new Error("unrecognised bid");
-      }      
+      }
     }
 
     render() {

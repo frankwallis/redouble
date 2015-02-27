@@ -3,7 +3,7 @@
 import {Rubber} from "../../model/gameplay-generators/rubber";
 import {Hand} from "../player/hand.jsx!";
 import {BiddingBox} from "../player/bidding-box.jsx!";
-
+import {Bidding} from "../board/bidding.jsx!";
 import React from 'react';
 
 export class Table extends React.Component {
@@ -18,25 +18,58 @@ export class Table extends React.Component {
       console.log('mounted ' + JSON.stringify(this.props));
 
       while(true) {
-        this.game = await this.rubber.nextState(this.game)
+        this.game = await this.rubber.nextState(this.game);
         console.log(JSON.stringify(this.game));
+      }
+    }
+
+    static seatName(seat) {
+      switch(seat) {
+        case tower.Seat.North:
+          return "North";
+        case tower.Seat.South:
+          return "South";
+        case tower.Seat.East:
+          return "East";
+        case tower.Seat.West:
+          return "West";
+        default:
+          throw new Error("unrecognised seat");
       }
     }
 
     render() {
       console.log('rendering');
 
-      var hands = this.rubber.players.map((player) => {
-        return <Hand key={player.seat}
-                     seat={player.seat}
-                     game={this.game}></Hand>
+      var players = this.rubber.players.map((player) => {
+        return <div className="table-player-{this.seatName(player.seat)}" key={player.seat}>
+                  <header className="table-player-name">
+                    {player.name}
+                  </header>
+                  <Hand className="table-hand"
+                        seat={player.seat}
+                        game={this.game}>
+                  </Hand>
+                  <BiddingBox className="table-bidding-box"
+                              game={this.game}>
+                  </BiddingBox>
+               </div>
       });
 
+      var board
+
+      if (this.game.biddingHasEnded)
+        board = <ol></ol>;
+      else
+        board = <Bidding board={this.game.currentBoard}></Bidding>
+
       return (
-        <div>
-          <BiddingBox game={this.game} className="table-bidding-box"></BiddingBox>
-          <div className="table-hand">
-            {hands}
+        <div className="bridge-table">
+          <div className="table-players">
+            {players}
+          </div>
+          <div className="table-board">
+            {board}
           </div>
         </div>
       );

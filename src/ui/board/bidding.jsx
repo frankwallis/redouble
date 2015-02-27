@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import Bid from './bid';
+import {Bid} from './bid.jsx!';
 
 export class Bidding extends React.Component {
 
@@ -23,16 +23,24 @@ export class Bidding extends React.Component {
 
       for (var i = 0; i < 6; i ++) {
         var cells = [];
+
         for (var j = 0; j < 4; j ++) {
-          bid = {type: tower.BidType.NoBid}; // TODO
-          cells.push(
-            <td className="bidding-cell">
-                <Bid bid={bid}></tower-bid>
-            </td>
-          );
+          var position = (i*4) + j;
+
+          if (this.props.board.bids.length > position) {
+            var bid = this.props.board.bids[position];
+            cells.push(
+              <td key={position} className="bidding-cell">
+                  <Bid bid={bid}></Bid>
+              </td>
+            );
+          }
+          else {
+            cells.push(<td key={position} className="bidding-cell"></td>);
+          }
         }
         rows.push(
-          <tr className="bidding-round">
+          <tr key={i} className="bidding-round">
             {cells}
           </tr>
         );
@@ -41,10 +49,8 @@ export class Bidding extends React.Component {
       return (
         <table className="bidding-container">
           <thead>
-            <tr>
-              {headings}
-            </tr>
-          <thead>
+            <tr>{headings}</tr>
+          </thead>
           <tbody>
             {rows}
           </tbody>

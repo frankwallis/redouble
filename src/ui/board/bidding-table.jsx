@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {Bid} from './bid.jsx!';
+import {BidComponent} from './bid.jsx';
 
-export class Bidding extends React.Component {
+export class BiddingTable extends React.Component {
 
     constructor(props) {
       super(props);
@@ -30,7 +30,7 @@ export class Bidding extends React.Component {
             var bid = this.props.board.bids[position];
             cells.push(
               <td key={position} className="bidding-cell">
-                  <Bid bid={bid}></Bid>
+                  <BidComponent bid={bid}/>
               </td>
             );
           }

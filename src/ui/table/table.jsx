@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Rubber} from "../../model/gameplay-generators/rubber";
-import {Hand} from "../player/hand.jsx";
+import {Rubber} from "../../model/gameplay/rubber";
+import {HandComponent} from "../player/hand.jsx";
 import {BiddingBox} from "../player/bidding-box.jsx";
-import {Bidding} from "../board/bidding.jsx";
+import {BiddingTable} from "../board/bidding-table.jsx";
 import React from 'react';
 
 export class Table extends React.Component {
@@ -62,15 +62,10 @@ export class Table extends React.Component {
          return (
             <div className={"table-edge-" + Table.seatName(player.seat)} key={player.seat}>
                <header className="table-player-name">{player.name}</header>
-               <Hand className={"table-hand-" + Table.seatName(player.seat)}
-                     seat={player.seat}
-                     game={this.game}
-                     onGameStateChanged={(state) => this.gameStateChanged(state)}>
-               </Hand>
-               <BiddingBox className="table-bidding-box"
-                           game={this.game}
-                           onGameStateChanged={(state) => this.gameStateChanged(state)}>
-               </BiddingBox>
+               <HandComponent className={"table-hand-" + Table.seatName(player.seat)}
+                              seat={player.seat}
+                              game={this.game}
+                              onGameStateChanged={(state) => this.gameStateChanged(state)}/>
             </div>
          );
       });
@@ -78,9 +73,15 @@ export class Table extends React.Component {
       var board
 
       if (this.game.biddingHasEnded)
-         board = <ol></ol>;
+         board = <ol/>;
       else
-         board = <Bidding board={this.game.currentBoard}></Bidding>
+         board = <BiddingTable board={this.game.currentBoard}/>
+
+      var biddingBox = (
+         <BiddingBox className="table-bidding-box"
+                     game={this.game}
+                     onGameStateChanged={(state) => this.gameStateChanged(state)}/>
+      );
 
       return (
          <div className="bridge-table">
@@ -89,6 +90,9 @@ export class Table extends React.Component {
             </div>
             <div className="table-board">
                {board}
+            </div>
+            <div className="table-bidding-box">
+               {biddingBox}
             </div>
          </div>
       );

@@ -1,8 +1,8 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {Bid} from '../board/bid.jsx';
-import {BidSuit, BidType} from '../../model/gameplay-generators/types';
+import {BidComponent} from '../board/bid.jsx';
+import {BidSuit, BidType, Bid} from '../../model/core/bid';
 
 export class BiddingBox extends React.Component {
 
@@ -13,10 +13,10 @@ export class BiddingBox extends React.Component {
 
    bidButton(bid: tower.IBid, colspan: number) {
       return (
-         <td key={Bid.key(bid)} className="bidding-box-cell" colSpan={colspan}>
+         <td key={BidComponent.key(bid)} className="bidding-box-cell" colSpan={colspan}>
             <button className="bidding-box-button md-raised"
                     onClick={() => this.makeBid(bid)}>
-               <Bid bid={bid}></Bid>
+               <BidComponent bid={bid}/>
             </button>
          </td>
       );

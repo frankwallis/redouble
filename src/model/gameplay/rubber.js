@@ -29,7 +29,6 @@ import {GameStateHelper} from "./game-state-helper";
 //     // dealer = rotate(dealer);
 // }
 
-//implements tower.IGame
 export class Rubber {
 
    constructor() {

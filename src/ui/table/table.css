@@ -52,9 +52,9 @@
     display: inline;
 }
 
-.table-bidding-south {
-    left: 0;
-    transform: translateX(-105%);
+.table-bidding-box {
+    right: 0;
+    transform: translateX(-50%);
     position: absolute;
     bottom: 0;
 }

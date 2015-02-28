@@ -1,8 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import {rotate} from "./utils"
-import {Deck} from "../cards/deck";
-import {BidType, Seat} from "./types";
+import {Deck} from "../core/deck";
+import {Seat} from "./types";
+import {BidType} from "../core/bid";
 
 //implements tower.IGame
 export class GameStateHelper {

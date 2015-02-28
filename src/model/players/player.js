@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-export class Player {//implements tower.IPlayer {
+export class Player {
 
    constructor(name: string) {
       this.name = name;

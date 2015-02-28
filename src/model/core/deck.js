@@ -1,15 +1,15 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Suit, Pip} from "../gameplay-generators/types";
+import {Suit, Pip, Card} from "./card";
 
-export class Deck {//implements tower.IDeck {
+export class Deck {
 
    constructor() {
       this.cards = this.createCards();
    }
 
    cards: Array<tower.ICard>;
-   
+
    createCards(): Array<tower.ICard> {
       var result = [];
 

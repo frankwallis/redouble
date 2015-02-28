@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {Card} from '../cards/card.jsx';
+import {CardComponent} from '../cards/card.jsx';
 
-export class Hand extends React.Component {
+export class HandComponent extends React.Component {
 
    constructor(props) {
       super(props);
@@ -22,10 +22,10 @@ export class Hand extends React.Component {
    render() {
       var cards = this.availableCards.map((card) => {
          return (
-            <li className="hand-card" key={Card.key(card)}>
+            <li className="hand-card" key={CardComponent.key(card)}>
                <button className="hand-card-button"
                      onClick={() => this.playCard(card)}>
-                  <Card pip={card.pip} suit={card.suit}></Card>
+                  <CardComponent pip={card.pip} suit={card.suit}/>
                </button>
             </li>
          );

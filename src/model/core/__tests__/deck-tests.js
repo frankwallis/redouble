@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import Deck = require('./deck').Deck;
+import Deck from '../deck';
 
 describe("Deck", () => {
 

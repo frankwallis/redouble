@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {BidType} from '../../model/gameplay-generators/types';
+import {BidType, BidSuit, Bid} from '../../model/core/bid';
 
-export class Bid extends React.Component {
+export class BidComponent extends React.Component {
 
     constructor(props) {
       super(props);

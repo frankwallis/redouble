@@ -13,7 +13,7 @@ export class Human extends Player {
    bid(game): Promise<tower.IBid> {
       if (this.awaitingBid)
       throw new Error("bid is already pending");
-      
+
       console.log(this.name + ' bidding');
       this.pendingBid = this.defer();
 

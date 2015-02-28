@@ -2,7 +2,9 @@
 
 import React from 'react';
 
-export class Card extends React.Component {
+import {Suit, Pip, Card} from "../../model/core/card";
+
+export class CardComponent extends React.Component {
 
     constructor(props) {
       super(props);
@@ -10,35 +12,35 @@ export class Card extends React.Component {
 
     static suitName(suit) {
       switch(suit) {
-          case tower.BidSuit.Spades: return "spades";
-          case tower.BidSuit.Hearts: return "hearts";
-          case tower.BidSuit.Diamonds: return "diamonds";
-          case tower.BidSuit.Clubs: return "clubs";
-          case tower.BidSuit.NoTrumps: return "no-trumps";
+          case Suit.Spades: return "spades";
+          case Suit.Hearts: return "hearts";
+          case Suit.Diamonds: return "diamonds";
+          case Suit.Clubs: return "clubs";
+          case Suit.NoTrumps: return "no-trumps";
           default: return "unknown";
       }
     }
 
     get suit() {
-      return Card.suitName(this.props.suit);
+      return CardComponent.suitName(this.props.suit);
     }
 
     static pipName(pip) {
       switch(pip) {
-          case tower.Pip.Ace: return "A";
-          case tower.Pip.King: return "K";
-          case tower.Pip.Queen: return "Q";
-          case tower.Pip.Jack: return "J";
+          case Pip.Ace: return "A";
+          case Pip.King: return "K";
+          case Pip.Queen: return "Q";
+          case Pip.Jack: return "J";
           default: return pip.toString();
       }
     }
 
     get pip() {
-      return Card.pipName(this.props.pip);
+      return CardComponent.pipName(this.props.pip);
     }
 
     static key(card) {
-      return Card.suitName(card.suit) + Card.pipName(card.pip);
+      return CardComponent.suitName(card.suit) + CardComponent.pipName(card.pip);
     }
 
     render() {

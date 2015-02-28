@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" ng-strict-di>
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="apple-mobile-web-app-capable" content="YES"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="fragment" content="!" />
+   <meta charset="utf-8"/>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+   <meta name="apple-mobile-web-app-capable" content="YES"/>
+   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <meta name="fragment" content="!" />
 
-    <title>tower</title>
-    <base href="/"></base>
+   <title>tower</title>
+   <base href="/"></base>
 
-    <link rel="shortcut icon" href="/resources/tower.jpeg" />
+   <link rel="shortcut icon" href="/resources/tower.jpeg" />
 
-    <link rel="stylesheet" type="text/css" href="jspm_packages/npm/font-awesome@4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="jspm_packages/github/angular/bower-material@0.7.1/angular-material.css">
-    <link rel="stylesheet" type="text/css" href="src/ui/app.css">
+   <link rel="stylesheet" type="text/css" href="jspm_packages/npm/font-awesome@4.3.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="jspm_packages/github/angular/bower-material@0.7.1/angular-material.css">
+   <link rel="stylesheet" type="text/css" href="src/ui/app.css">
 
-    <!-- Temporary workaround for TypeScript const enums issue -->
-    <script type="text/javascript">
+   <!-- Temporary workaround for TypeScript const enums issue -->
+   <script type="text/javascript">
       tower = {};
       tower.BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
       tower.Seat = { "North": 0, "East": 1, "South": 2, "West": 3 };
       tower.BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };
       tower.Suit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4 };
       tower.Pip = { "Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 11, "Queen": 12, "King": 13, "Ace": 14 };
-    </script>
+   </script>
 
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script type="module">
-      System.transpiler = 'babel';
-      System.baseUrl = 'src'; //NOTE: You can move this into the config.js file, if you like.
-      System.import('./src/ui/table/table.jsx!').catch(function (err) {
-          console.log('ERROR: ', err);
-      });
-      // System.import('aurelia-bootstrapper');
-    </script>
+   <!--<script src="jspm_packages/system.js" data-babel-src="node_modules/babel/browser.js"></script>-->
+   <script src="jspm_packages/system.js"></script>
+   <script src="config.js"></script>
+
+   <script type="module">
+      /*System.transpiler = 'babel';*/
+
+      var systemLocate = System.locate;
+      System.locate = function(load) {
+         var System = this; // its good to ensure exact instance-binding
+         return systemLocate.call(this, load).then(function(address) {
+            if (address.slice(-7) == '.jsx.js')
+               address = address.slice(0, address.length -3);
+
+            return address;
+         });
+      }
+
+      var systemNormalize = System.normalize;
+      System.normalize = function(arg1, arg2) {
+         var System = this; // its good to ensure exact instance-binding
+         return systemNormalize.call(this, arg1, arg2).then(function(normed) {
+            if (normed.slice(-4) == '.jsx')
+               normed = normed + '!github:floatdrop/plugin-jsx@0.1.1';
+
+            return normed;
+         });
+      }
+
+      System.import('./src/ui/table/table.jsx!')
+         .catch(function (err) {
+            console.log('ERROR: ', err);
+         });
+   </script>
 </head>
 
-<!-- <body aurelia-main="src/main"> -->
 <body>
-  <div id="main"/>
-
+   <div id="main"/>
 </body>
 
 </html>

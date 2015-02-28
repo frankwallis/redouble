@@ -6,9 +6,6 @@ tasks
     .addInstall({
         rootDir: "src"
     })
-    .addSpecs({
-
-    })
     // .addBundle({
     //     entryJs: "src/index.ts",
     //     entryCss: "src/ui/index.css"

@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import {Rubber} from "../../model/gameplay-generators/rubber";
-import {Hand} from "../player/hand.jsx!";
-import {BiddingBox} from "../player/bidding-box.jsx!";
-import {Bidding} from "../board/bidding.jsx!";
+import {Hand} from "../player/hand.jsx";
+import {BiddingBox} from "../player/bidding-box.jsx";
+import {Bidding} from "../board/bidding.jsx";
 import React from 'react';
 
 export class Table extends React.Component {
@@ -14,14 +14,23 @@ export class Table extends React.Component {
       this.game = this.rubber.newGame();
    }
 
-   async componentDidMount() {
-      console.log('mounted ' + JSON.stringify(this.props));
-      this.game = await this.rubber.nextState(this.game);
+   // async componentDidMount() {
+   //    console.log('mounted ' + JSON.stringify(this.props));
+   //    this.game = await this.rubber.nextState(this.game);
+   //
+   //    // while(true) {
+   //    //   this.game = await this.rubber.nextState(this.game);
+   //    //   console.log(JSON.stringify(this.game));
+   //    // }
+   // }
 
-      // while(true) {
-      //   this.game = await this.rubber.nextState(this.game);
-      //   console.log(JSON.stringify(this.game));
-      // }
+   componentDidMount() {
+      console.log('mounted ' + JSON.stringify(this.props));
+      this.rubber.nextState(this.game)
+         .then((game) => {
+            this.setState(game);
+            this.render();
+         });
    }
 
    static seatName(seat) {
@@ -63,6 +72,7 @@ export class Table extends React.Component {
                            onGameStateChanged={(state) => this.gameStateChanged(state)}>
                </BiddingBox>
             </div>
+         );
       });
 
       var board

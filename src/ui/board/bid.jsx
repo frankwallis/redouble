@@ -1,6 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
+import {BidType} from '../../model/gameplay-generators/types';
 
 export class Bid extends React.Component {
 
@@ -11,13 +12,13 @@ export class Bid extends React.Component {
 
     static key(bid) {
       switch(bid.type) {
-        case tower.BidType.NoBid:
+        case BidType.NoBid:
           return "No Bid";
-        case tower.BidType.Call:
+        case BidType.Call:
           return bid.level.toString() + bid.suit.toString();
-        case tower.BidType.Double:
+        case BidType.Double:
           return "Double";
-        case tower.BidType.Redouble:
+        case BidType.Redouble:
           return "Redouble";
         default:
           throw new Error("unrecognised bid");
@@ -26,18 +27,18 @@ export class Bid extends React.Component {
 
     render() {
       switch(this.props.bid.type) {
-        case tower.BidType.NoBid:
+        case BidType.NoBid:
           return <div className="bid-container">No Bid</div>;
-        case tower.BidType.Call:
+        case BidType.Call:
           return (
             <div className="bid-container">
               <span className="bid-level">{this.props.bid.level}</span>
               <span className="bid-suit suit-${this.props.bid.suit}"></span>
             </div>
         );
-        case tower.BidType.Double:
+        case BidType.Double:
           return <div className="bid-container">Double</div>;
-        case tower.BidType.Redouble:
+        case BidType.Redouble:
           return <div className="bid-container">Redouble</div>;
         default:
            throw new Error("unrecognised bid");

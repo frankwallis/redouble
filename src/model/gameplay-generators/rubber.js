@@ -32,56 +32,56 @@ import {GameStateHelper} from "./game-state-helper";
 //implements tower.IGame
 export class Rubber {
 
-  constructor() {
-    this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
-    this.players.forEach((player, idx) => {
-      player.game = this;
-      player.seat = idx;
-    });
-  }
-
-  newGame(): GameStateHelper {
-    return new GameStateHelper().newBoard();
-  }
-
-  moveBack(): GameStateHelper {
-
-  }
-
-  moveForward() {
-
-  }
-
-  nextState(game: GameStateHelper): Promise<GameStateHelper> {
-    console.log('' + game.nextPlayer);
-    console.log('' + tower.Seat.North);
-    var player = this.players[game.nextPlayer];
-
-    if (game.biddingHasEnded) {
-      return player.play(game).then((card) => {
-        return game.playCard(card);
+   constructor() {
+      this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
+      this.players.forEach((player, idx) => {
+         player.game = this;
+         player.seat = idx;
       });
-    }
-    else {
-      return player.bid(game).then((bid) => {
-        return game.makeBid(bid);
-      });
-    }
-  }
+   }
 
-  get north(): tower.IPlayer {
-    return this.players[tower.Seat.North];
-  }
+   newGame(): GameStateHelper {
+      return new GameStateHelper().newBoard();
+   }
 
-  get east(): tower.IPlayer {
-    return this.players[tower.Seat.East];
-  }
+   moveBack(): GameStateHelper {
 
-  get south(): tower.IPlayer {
-    return this.players[tower.Seat.South];
-  }
+   }
 
-  get west(): tower.IPlayer {
-    return this.players[tower.Seat.West];
-  }
+   moveForward() {
+
+   }
+
+   nextState(game: GameStateHelper): Promise<GameStateHelper> {
+      console.log('' + game.nextPlayer);
+      console.log('' + tower.Seat.North);
+      var player = this.players[game.nextPlayer];
+
+      if (game.biddingHasEnded) {
+         return player.play(game).then((card) => {
+            return game.playCard(card);
+         });
+      }
+      else {
+         return player.bid(game).then((bid) => {
+            return game.makeBid(bid);
+         });
+      }
+   }
+
+   get north(): tower.IPlayer {
+      return this.players[tower.Seat.North];
+   }
+
+   get east(): tower.IPlayer {
+      return this.players[tower.Seat.East];
+   }
+
+   get south(): tower.IPlayer {
+      return this.players[tower.Seat.South];
+   }
+
+   get west(): tower.IPlayer {
+      return this.players[tower.Seat.West];
+   }
 }

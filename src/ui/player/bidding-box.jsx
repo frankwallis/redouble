@@ -1,78 +1,78 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {Bid} from '../board/bid.jsx!';
+import {Bid} from '../board/bid.jsx';
+import {BidSuit, BidType} from '../../model/gameplay-generators/types';
 
 export class BiddingBox extends React.Component {
 
-    constructor(props) {
+   constructor(props) {
       super(props);
-      console.log('creating bidding-box')
-    }
+      console.log('created bidding-box')
+   }
 
-    bidButton(bid, colspan) {
+   bidButton(bid: tower.IBid, colspan: number) {
       return (
-        <td key={Bid.key(bid)} className="bidding-box-cell" colSpan={colspan}>
-          <button className="bidding-box-button md-raised"
-                  onClick={() => this.makeBid(bid)}>
-            <Bid bid={bid}></Bid>
-          </button>
-        </td>
+         <td key={Bid.key(bid)} className="bidding-box-cell" colSpan={colspan}>
+            <button className="bidding-box-button md-raised"
+                    onClick={() => this.makeBid(bid)}>
+               <Bid bid={bid}></Bid>
+            </button>
+         </td>
       );
-    }
+   }
 
-    makeBid(bid) {
+   makeBid(bid) {
       console.log('in makeBid');
       var newstate = this.props.game.makeBid(bid);
       this.props.onGameStateChanged(newstate);
-    }
+   }
 
-    render() {
+   render() {
+      console.log('rendering');
       var levels = [];
       for (let i = 1; i <= 7; i++) {
-          let cells = [];
-          for (var s = tower.BidSuit.Clubs; s <= tower.BidSuit.NoTrumps; s ++) {
-              cells.push(this.bidButton({type: tower.BidType.Call, suit: s, level: i}, 2));
-          }
+         let cells = [];
+         for (var s = BidSuit.Clubs; s <= BidSuit.NoTrumps; s ++) {
+            cells.push(this.bidButton({type: BidType.Call, suit: s, level: i}, 2));
+         }
 
-          levels.push(
-            <tr key={i} className="bidding-box-level">
-              {cells}
-            </tr>
-          );
+         levels.push(<tr key={i} className="bidding-box-level">{cells}</tr>);
       }
       var modButtons = [
-        this.bidButton({type: tower.BidType.Double}, 3),
-        this.bidButton({type: tower.BidType.Redouble}, 3),
-        this.bidButton({type: tower.BidType.NoBid}, 4)
+      this.bidButton({type: BidType.Double}, 3),
+      this.bidButton({type: BidType.Redouble}, 3),
+      this.bidButton({type: BidType.NoBid}, 4)
       ];
 
+      console.log('len='+modButtons.length);
+
       levels.push(
-        <tr key="bottom" className="bidding-box-level">
+         <tr key="bottom" className="bidding-box-level">
             {modButtons}
-        </tr>
+         </tr>
       );
 
       return (
-        <div className="bidding-box-container">
+         <div className="bidding-box-container">
             <table>
-                <colgroup>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                    <col span="1" style={{width: '10%'}}></col>
-                </colgroup>
-                <tbody>
-                    {levels}
-                </tbody>
+               <colgroup>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+                  <col span="1" style={{width: '10%'}}></col>
+               </colgroup>
+                  <tbody>
+                     {levels}
+                  </tbody>
             </table>
-        </div>
+         </div>
       );
-    }
+   }
 }

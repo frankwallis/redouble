@@ -30,6 +30,7 @@
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script type="module">
+      System.transpiler = 'babel';
       System.baseUrl = 'src'; //NOTE: You can move this into the config.js file, if you like.
       System.import('./src/ui/table/table.jsx!').catch(function (err) {
           console.log('ERROR: ', err);

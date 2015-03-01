@@ -1,5 +1,6 @@
+/* @flow */
+
 import Reflux from 'reflux';
-import {Deck} from "../core/deck";
 import {GameStateHelper} from "./game-state";
 
 export const GameActions = Reflux.createActions([

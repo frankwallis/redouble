@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
 export const BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };

@@ -1,5 +1,3 @@
-/// <reference path="../../_references.d.ts" />
-
 import React from 'react';
 import Reflux from 'reflux';
 

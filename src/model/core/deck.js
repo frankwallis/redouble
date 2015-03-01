@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import {Suit, Pip, Card} from "./card";
 

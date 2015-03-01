@@ -1,3 +1,5 @@
+/* @flow */
+
 export class EnumSymbol {
    sym = Symbol.for(name);
    value: number;

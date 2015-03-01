@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 export const Suit = {
    "Clubs": 1,

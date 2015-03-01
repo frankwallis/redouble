@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import {Deck} from "../core/deck";
 import {Seat, rotate} from "../core/seat";
@@ -28,9 +28,9 @@ export class GameStateHelper {
 
       while(idx >= 0) {
          if (this.currentBoard.bids[idx].type == tower.BidType.NoBid)
-         consecutivePasses ++;
+            consecutivePasses ++;
          else
-         break;
+            break;
 
          idx --;
       }

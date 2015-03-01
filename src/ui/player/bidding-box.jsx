@@ -42,12 +42,10 @@ export class BiddingBox extends React.Component {
          levels.push(<tr key={i} className="bidding-box-level">{cells}</tr>);
       }
       var modButtons = [
-      this.bidButton({type: BidType.Double}, 3),
-      this.bidButton({type: BidType.Redouble}, 3),
-      this.bidButton({type: BidType.NoBid}, 4)
+         this.bidButton({type: BidType.Double}, 3),
+         this.bidButton({type: BidType.Redouble}, 3),
+         this.bidButton({type: BidType.NoBid}, 4)
       ];
-
-      console.log('len='+modButtons.length);
 
       levels.push(
          <tr key="bottom" className="bidding-box-level">

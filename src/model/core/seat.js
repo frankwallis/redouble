@@ -2,7 +2,8 @@ export var Seat = { "North": 0, "East": 1, "South": 2, "West": 3 };
 
 export var rotate = function(seat, count) {
    count = count || 1;
-   return ((seat + count - tower.Seat.North) % 4) + Seat.North;
+   console.log('herre')
+   return ((seat + count - Seat.North) % 4) + Seat.North;
 }
 
 // export const Seat = new Enum({

@@ -2,7 +2,7 @@ import Reflux from 'reflux';
 import {Deck} from "../core/deck";
 import {GameStateHelper} from "./game-state";
 
-export var GameActions = Reflux.createActions([
+export const GameActions = Reflux.createActions([
    "newGame",
    "newBoard",
    "makeBid",
@@ -11,7 +11,7 @@ export var GameActions = Reflux.createActions([
    "forward"
 ]);
 
-export var GameStore = Reflux.createStore({
+export const GameStore = Reflux.createStore({
    init: function() {
       this.listenToMany(GameActions);
       this.states = [ new GameStateHelper().newBoard() ];

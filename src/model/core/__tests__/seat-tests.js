@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+jest.autoMockOff()
 
 import {Seat, rotate} from '../seat';
 

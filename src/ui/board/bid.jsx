@@ -33,7 +33,7 @@ export class BidComponent extends React.Component {
           return (
             <div className="bid-container">
               <span className="bid-level">{this.props.bid.level}</span>
-              <span className="bid-suit suit-${this.props.bid.suit}"></span>
+              <span className="bid-suit suit-{this.props.bid.suit}"></span>
             </div>
         );
         case BidType.Double:

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import {Suit, Pip, Card} from "../../model/core/card";
+import {Suit,Pip,Card} from "../../model/core/card";
 
 export class CardComponent extends React.Component {
 

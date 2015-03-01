@@ -1,10 +1,8 @@
-@import './board/board.css';
-@import './cards/suit.css';
-@import './cards/card.css';
+@import './components/card.css';
 @import './table/table.css';
-
-@import './player/hand.css';
-@import './player/bidding-box.css';
+@import './table/board.css';
+@import './table/hand.css';
+@import './table/bidding-box.css';
 
 .app-menu {
   position: absolute;

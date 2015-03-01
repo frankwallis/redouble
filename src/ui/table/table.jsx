@@ -3,10 +3,12 @@ import Reflux from 'reflux';
 
 import {GameStore, GameActions} from "../../model/game/game-store";
 import {GameState} from "../../model/game/game-state";
+import {Seat, seatName} from "../../model/core/seat";
 
-import {HandComponent} from "../player/hand.jsx";
-import {BiddingBox} from "../player/bidding-box.jsx";
-import {BiddingTable} from "../board/bidding-table.jsx";
+import {HandComponent} from "./hand.jsx";
+import {BiddingBox} from "./bidding-box.jsx";
+import {BiddingHistory} from "./bidding-history.jsx";
+import {Trick} from "./trick.jsx";
 
 import {Human} from "../../model/players/human";
 import {Computer} from "../../model/players/computer";
@@ -24,33 +26,16 @@ export class Table extends React.Component {
       });
 
       this.game = GameStore.currentState();
-      // Registers a console logging callback to the statusStore updates
+
+      // Registers a callback for game updates
       GameStore.listen((state) => {
          this.game = state;
          this.forceUpdate();
-         console.log('state: ', state);
       });
-
-      console.log(JSON.stringify(GameStore.currentState()));
    }
 
    componentDidMount() {
       console.log('mounted ' + JSON.stringify(this.props));
-   }
-
-   static seatName(seat) {
-      switch(seat) {
-      case tower.Seat.North:
-         return "north";
-      case tower.Seat.South:
-         return "south";
-      case tower.Seat.East:
-         return "east";
-      case tower.Seat.West:
-         return "west";
-      default:
-         throw new Error("unrecognised seat");
-      }
    }
 
    render() {
@@ -58,21 +43,21 @@ export class Table extends React.Component {
 
       var players = this.players.map((player) => {
          return (
-            <div className={"table-edge-" + Table.seatName(player.seat)} key={player.seat}>
+            <div className={"table-edge-" + seatName(player.seat)} key={player.seat}>
                <header className="table-player-name">{player.name}</header>
-               <HandComponent className={"table-hand-" + Table.seatName(player.seat)}
+               <HandComponent className={"table-hand-" + seatName(player.seat)}
                               seat={player.seat}
                               game={this.game}/>
             </div>
          );
       });
 
-      var board
+      var board;
 
       if (this.game.biddingHasEnded)
-         board = <ol/>;
+         board = <Trick game={this.game}/>;
       else
-         board = <BiddingTable board={this.game.currentBoard}/>
+         board = <BiddingHistory board={this.game.currentBoard}/>
 
       var biddingBox = (
          <BiddingBox className="table-bidding-box"
@@ -94,5 +79,3 @@ export class Table extends React.Component {
       );
    }
 }
-
-React.render(<Table/>, document.body);

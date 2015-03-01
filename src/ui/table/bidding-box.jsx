@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {BidComponent} from '../board/bid.jsx';
+import {BidComponent} from '../components/bid.jsx';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
 import {GameActions} from '../../model/game/game-store';
 
@@ -26,8 +26,6 @@ export class BiddingBox extends React.Component {
    makeBid(bid) {
       console.log('in makeBid');
       GameActions.makeBid(bid);
-      //var newstate = this.props.game.makeBid(bid);
-      //this.props.onGameStateChanged(newstate);
    }
 
    render() {

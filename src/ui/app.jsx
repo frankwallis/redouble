@@ -1,5 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
+import {Table} from './table/table.jsx';
 
 //var Route = Router.Route;import { Route, DefaultRoute, RouteHandler, Link } from Router;//'react-router';
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
@@ -35,7 +36,7 @@ export class App extends React.Component {
     );
   }
 }
-App.defaultProps = {};
+//App.defaultProps = {};
 
 export class Index extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ export class Index extends React.Component {
     return <p>Select a state from the left</p>;
   }
 }
-Index.defaultProps = {};
+//Index.defaultProps = {};
 
 export class State extends React.Component {
   constructor(props) {
@@ -71,7 +72,7 @@ export class State extends React.Component {
   }
 }
 
-State.defaultProps = {};
+//State.defaultProps = {};
 
 var routes = (
   <Route handler={App}>
@@ -82,7 +83,8 @@ var routes = (
 console.log('loading');
 Router.run(routes, function (Handler) {
   console.log('running');
-  React.render(<Handler/>, document.getElementById('main'));
+  React.render(<Table/>, document.body);
+  // React.render(<Handler/>, document.getElementById('main'));
 });
 
 /*****************************************************************************/

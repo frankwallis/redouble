@@ -1,11 +1,26 @@
 /* @flow */
 
-export var Seat = { "North": 0, "East": 1, "South": 2, "West": 3 };
+export const Seat = { "North": 0, "East": 1, "South": 2, "West": 3 };
 
-export var rotate = function(seat, count) {
+export const rotate = function(seat, count) {
    count = count || 1;
    console.log('herre')
    return ((seat + count - Seat.North) % 4) + Seat.North;
+}
+
+export function seatName(seat) {
+   switch(seat) {
+   case Seat.North:
+      return "north";
+   case Seat.South:
+      return "south";
+   case Seat.East:
+      return "east";
+   case Seat.West:
+      return "west";
+   default:
+      throw new Error("unrecognised seat");
+   }
 }
 
 // export const Seat = new Enum({

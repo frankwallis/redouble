@@ -27,7 +27,7 @@ export class GameStateHelper {
       var idx = this.currentBoard.bids.length - 1;
 
       while(idx >= 0) {
-         if (this.currentBoard.bids[idx].type == tower.BidType.NoBid)
+         if (this.currentBoard.bids[idx].type == BidType.NoBid)
             consecutivePasses ++;
          else
             break;

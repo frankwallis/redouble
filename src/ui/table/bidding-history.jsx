@@ -1,9 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {BidComponent} from './bid.jsx';
+import {BidComponent} from '../components/bid.jsx';
 
-export class BiddingTable extends React.Component {
+export class BiddingHistory extends React.Component {
 
     constructor(props) {
       super(props);

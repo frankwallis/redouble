@@ -53,7 +53,7 @@
       "font-awesome": "npm:font-awesome@^4.3.0",
       "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
       "react": "npm:react@0.13.0-beta.1",
-      "react-router": "npm:react-router@^0.12.0",
+      "react-router": "npm:react-router#0.13-compat",
       "reflux": "npm:reflux@^0.2.5",
       "text": "github:systemjs/plugin-text@^0.0.2"
     }

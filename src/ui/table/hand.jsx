@@ -1,7 +1,7 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
-import {CardComponent} from '../cards/card.jsx';
+import {CardComponent} from '../components/card.jsx';
 import {GameActions} from '../../model/game/game-store';
 
 export class HandComponent extends React.Component {

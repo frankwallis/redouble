@@ -48,17 +48,13 @@
     },
     "dependencies": {
       "angular-material": "github:angular/bower-material@^0.7.1",
-      "aurelia-bootstrapper": "github:aurelia/bootstrapper@^0.9.1",
-      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.4.1",
-      "aurelia-framework": "github:aurelia/framework@^0.8.4",
-      "aurelia-http-client": "github:aurelia/http-client@^0.4.3",
-      "aurelia-router": "github:aurelia/router@^0.5.1",
       "babel": "npm:babel@^4.6.1",
       "css": "github:systemjs/plugin-css@^0.1.0",
       "font-awesome": "npm:font-awesome@^4.3.0",
       "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
       "react": "npm:react@0.13.0-beta.1",
       "react-router": "npm:react-router@^0.12.0",
+      "reflux": "npm:reflux@^0.2.5",
       "text": "github:systemjs/plugin-text@^0.0.2"
     }
   }

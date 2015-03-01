@@ -32,11 +32,11 @@ import {GameStateHelper} from "./game-state-helper";
 export class Rubber {
 
    constructor() {
-      this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
-      this.players.forEach((player, idx) => {
-         player.game = this;
-         player.seat = idx;
-      });
+         this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
+         this.players.forEach((player, idx) => {
+            player.game = this;
+            player.seat = idx;
+         });
    }
 
    newGame(): GameStateHelper {

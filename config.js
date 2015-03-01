@@ -31,6 +31,7 @@ System.config({
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
     "react": "npm:react@0.13.0-beta.1",
     "react-router": "npm:react-router@0.12.0",
+    "reflux": "npm:reflux@0.2.5",
     "text": "github:systemjs/plugin-text@0.0.2",
     "github:angular/bower-angular-animate@1.3.13": {
       "angular": "github:angular/bower-angular@1.3.13"
@@ -507,6 +508,10 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.1",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:eventemitter3@0.1.6": {
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:events-browserify@0.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
@@ -660,6 +665,12 @@ System.config({
     "npm:nan@1.5.3": {
       "path": "github:jspm/nodelibs-path@0.1.0"
     },
+    "npm:native-promise-only@0.7.6-a": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.1",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
     "npm:once@1.3.1": {
       "wrappy": "npm:wrappy@1.0.1"
     },
@@ -770,6 +781,10 @@ System.config({
       "private": "npm:private@0.1.6",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.1.43"
+    },
+    "npm:reflux@0.2.5": {
+      "eventemitter3": "npm:eventemitter3@0.1.6",
+      "native-promise-only": "npm:native-promise-only@0.7.6-a"
     },
     "npm:regenerator-babel@0.8.13-1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
@@ -888,3 +903,4 @@ System.config({
     }
   }
 });
+

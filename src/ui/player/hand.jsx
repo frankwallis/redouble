@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {CardComponent} from '../cards/card.jsx';
+import {GameActions} from '../../model/game/game-store';
 
 export class HandComponent extends React.Component {
 
@@ -11,15 +12,18 @@ export class HandComponent extends React.Component {
 
    get availableCards() {
       return this.props.game.currentBoard.hands[this.props.seat]
-      .filter((card) => !this.props.game.hasBeenPlayed(card));
+         .filter((card) => !this.props.game.hasBeenPlayed(card));
    }
 
    playCard(card) {
-      var state = this.props.game.playCard(card);
-      this.props.onGameStateChanged(state);
+      //var state = this.props.game.playCard(card);
+      //this.props.onGameStateChanged(state);
+      GameActions.playCard(card);
    }
 
    render() {
+      console.log('rendering hand');
+
       var cards = this.availableCards.map((card) => {
          return (
             <li className="hand-card" key={CardComponent.key(card)}>

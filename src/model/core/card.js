@@ -15,6 +15,6 @@ export class Card {
    }
 
    static compare(card1, card2, trumpSuit): number {
-
+      
    }
 }

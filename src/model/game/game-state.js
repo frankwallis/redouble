@@ -55,18 +55,10 @@ export class GameStateHelper {
    }
 
    get nextPlayer(): tower.Seat {
-      if (this.biddingHasEnded) {
+      if (this.biddingHasEnded)
          return rotate(this.currentBoard.leader, this.currentBoard.cards.length);
-      }
-      else {
+      else
          return rotate(this.currentBoard.dealer, this.currentBoard.bids.length);
-      }
-   }
-
-   playCard(card): GameStateHelper {
-      var result = this.clone();
-      result.currentBoard.cards.push(card);
-      return result;
    }
 
    validateBid(bid: tower.IBid) {
@@ -99,24 +91,22 @@ export class GameStateHelper {
       }
    }
 
+   validateCard(card: tower.ICard) {
+
+   }
+
    clone(): GameStateHelper {
       var newstate = JSON.parse(JSON.stringify(this.gameState));
       return new GameStateHelper(newstate);
    }
 
-   makeBid(bid): GameStateHelper {
-      this.validateBid(bid);
-      var result = this.clone();
-      result.currentBoard.bids.push(bid);
-      return result;
-   }
-
    newBoard(): GameStateHelper {
       var deck = new Deck();
       deck.shuffle();
+
       var hands = deck.deal(4);
       var board = {
-         dealer: Seat.North,
+         dealer: Seat.North, // TODO
          hands: hands,
          bids: [],
          cards: []
@@ -126,4 +116,6 @@ export class GameStateHelper {
       result.gameState.boards.push(board);
       return result;
    }
+
+
 }

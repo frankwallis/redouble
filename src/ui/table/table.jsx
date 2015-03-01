@@ -1,36 +1,43 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Rubber} from "../../model/gameplay/rubber";
+import React from 'react';
+import Reflux from 'reflux';
+
+import {GameStore, GameActions} from "../../model/game/game-store";
+import {GameState} from "../../model/game/game-state";
+
 import {HandComponent} from "../player/hand.jsx";
 import {BiddingBox} from "../player/bidding-box.jsx";
 import {BiddingTable} from "../board/bidding-table.jsx";
-import React from 'react';
+
+import {Human} from "../../model/players/human";
+import {Computer} from "../../model/players/computer";
 
 export class Table extends React.Component {
 
    constructor(props) {
       super(props);
-      this.rubber = new Rubber();
-      this.game = this.rubber.newGame();
-   }
 
-   // async componentDidMount() {
-   //    console.log('mounted ' + JSON.stringify(this.props));
-   //    this.game = await this.rubber.nextState(this.game);
-   //
-   //    // while(true) {
-   //    //   this.game = await this.rubber.nextState(this.game);
-   //    //   console.log(JSON.stringify(this.game));
-   //    // }
-   // }
+      // TODO - make a player store
+      this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
+      this.players.forEach((player, idx) => {
+         player.game = this;
+         player.seat = idx;
+      });
+
+      this.game = GameStore.currentState();
+      // Registers a console logging callback to the statusStore updates
+      GameStore.listen((state) => {
+         this.game = state;
+         this.forceUpdate();
+         console.log('state: ', state);
+      });
+
+      console.log(JSON.stringify(GameStore.currentState()));
+   }
 
    componentDidMount() {
       console.log('mounted ' + JSON.stringify(this.props));
-      this.rubber.nextState(this.game)
-         .then((game) => {
-            this.setState(game);
-            this.render();
-         });
    }
 
    static seatName(seat) {
@@ -48,24 +55,16 @@ export class Table extends React.Component {
       }
    }
 
-   gameStateChanged(state) {
-      console.log('in stateChanged')
-      this.game = state;
-      this.setState(state);
-      this.render();
-   }
-
    render() {
       console.log('rendering');
 
-      var players = this.rubber.players.map((player) => {
+      var players = this.players.map((player) => {
          return (
             <div className={"table-edge-" + Table.seatName(player.seat)} key={player.seat}>
                <header className="table-player-name">{player.name}</header>
                <HandComponent className={"table-hand-" + Table.seatName(player.seat)}
                               seat={player.seat}
-                              game={this.game}
-                              onGameStateChanged={(state) => this.gameStateChanged(state)}/>
+                              game={this.game}/>
             </div>
          );
       });
@@ -79,8 +78,7 @@ export class Table extends React.Component {
 
       var biddingBox = (
          <BiddingBox className="table-bidding-box"
-                     game={this.game}
-                     onGameStateChanged={(state) => this.gameStateChanged(state)}/>
+                     game={this.game}/>
       );
 
       return (

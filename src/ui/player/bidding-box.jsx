@@ -3,6 +3,7 @@
 import React from 'react';
 import {BidComponent} from '../board/bid.jsx';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
+import {GameActions} from '../../model/game/game-store';
 
 export class BiddingBox extends React.Component {
 
@@ -24,12 +25,13 @@ export class BiddingBox extends React.Component {
 
    makeBid(bid) {
       console.log('in makeBid');
-      var newstate = this.props.game.makeBid(bid);
-      this.props.onGameStateChanged(newstate);
+      GameActions.makeBid(bid);
+      //var newstate = this.props.game.makeBid(bid);
+      //this.props.onGameStateChanged(newstate);
    }
 
    render() {
-      console.log('rendering');
+      console.log('rendering bidding-box');
       var levels = [];
       for (let i = 1; i <= 7; i++) {
          let cells = [];

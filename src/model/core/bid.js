@@ -1,5 +1,6 @@
 /* @flow */
 
+
 export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
 export const BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };
 
@@ -9,7 +10,7 @@ export class Bid {
         case BidType.NoBid:
           return "No Bid";
         case BidType.Call:
-          return bid.level.toString() + bid.suit.toString();
+          return bid.level.toString() + '-' + bid.suit.toString();
         case BidType.Double:
           return "Double";
         case BidType.Redouble:
@@ -17,6 +18,15 @@ export class Bid {
         default:
           throw new Error("unrecognised bid");
       }
+   }
+
+   static key(bid): string {
+      return Bid.stringify(bid);
+   }
+
+   static suitName(suit: BidSuit) {
+      var names = [ "", "clubs", "diamonds", "hearts", "spades", "no-trumps"];
+      return names[suit];
    }
 
    static compare(bid1, bid2): number {

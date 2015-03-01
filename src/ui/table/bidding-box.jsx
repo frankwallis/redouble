@@ -15,7 +15,7 @@ export class BiddingBox extends React.Component {
    bidButton(bid: tower.IBid, colspan: number) {
       return (
          <td key={BidComponent.key(bid)} className="bidding-box-cell" colSpan={colspan}>
-            <button className="bidding-box-button md-raised"
+            <button className="bidding-box-button pure-button"
                     onClick={() => this.makeBid(bid)}>
                <BidComponent bid={bid}/>
             </button>

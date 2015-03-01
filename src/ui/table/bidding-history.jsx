@@ -1,7 +1,9 @@
 /// <reference path="../../_references.d.ts" />
 
 import React from 'react';
+
 import {BidComponent} from '../components/bid.jsx';
+import {Seat, seatName} from "../../model/core/seat";
 
 export class BiddingHistory extends React.Component {
 
@@ -12,22 +14,22 @@ export class BiddingHistory extends React.Component {
     render() {
       var headings = [];
 
-      for (var idx = 0; idx < 4; idx ++) {
+      for (var seat = Seat.North; seat <= Seat.West; seat ++) {
         headings.push(
-          <th class="bidding-cell">North</th>
+          <th class="bidding-cell">{seatName(seat)}</th>
         );
       }
 
       var rows = [];
 
-      for (var i = 0; i < 6; i ++) {
-        var cells = [];
+      for (let i = 0; i < 6; i ++) {
+        let cells = [];
 
-        for (var j = 0; j < 4; j ++) {
-          var position = (i*4) + j;
+        for (let j = 0; j < 4; j ++) {
+          let position = (i*4) + j;
 
           if (this.props.board.bids.length > position) {
-            var bid = this.props.board.bids[position];
+            let bid = this.props.board.bids[position];
             cells.push(
               <td key={position} className="bidding-cell">
                   <BidComponent bid={bid}/>
@@ -46,7 +48,7 @@ export class BiddingHistory extends React.Component {
       }
 
       return (
-        <table className="bidding-container">
+        <table className="bidding-container pure-table">
           <thead>
             <tr>{headings}</tr>
           </thead>

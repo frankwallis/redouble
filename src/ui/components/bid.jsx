@@ -15,7 +15,7 @@ export class BidComponent extends React.Component {
         case BidType.NoBid:
           return "No Bid";
         case BidType.Call:
-          return bid.level.toString() + bid.suit.toString();
+          return Bid.key(bid);
         case BidType.Double:
           return "Double";
         case BidType.Redouble:
@@ -33,7 +33,7 @@ export class BidComponent extends React.Component {
           return (
             <div className="bid-container">
               <span className="bid-level">{this.props.bid.level}</span>
-              <span className="bid-suit suit-{this.props.bid.suit}"></span>
+              <span className={"bid-suit suit-" + Bid.suitName(this.props.bid.suit)}></span>
             </div>
         );
         case BidType.Double:

@@ -12,17 +12,15 @@
    <base href="/"></base>
 
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
+   <!-- <link rel="shortcut icon" href="/resources/london-bridge-icon.png" /> -->
 
-   <link rel="stylesheet" type="text/css" href="jspm_packages/npm/font-awesome@4.3.0/css/font-awesome.min.css">
-   <link rel="stylesheet" type="text/css" href="jspm_packages/github/angular/bower-material@0.7.1/angular-material.css">
-   <link rel="stylesheet" type="text/css" href="src/ui/app.css">
-
+   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"></link>
    <!--<script src="jspm_packages/system.js" data-babel-src="node_modules/babel/browser.js"></script>-->
+
    <script src="jspm_packages/system.js"></script>
    <script src="config.js"></script>
 
    <script type="module">
-      /*System.transpiler = 'babel';*/
 
       /* Workaround for https://github.com/systemjs/systemjs/issues/319 */
       var systemLocate = System.locate;
@@ -48,15 +46,19 @@
          });
       }
 
-      System.import('./src/ui/app.jsx!')
+      /*System.transpiler = 'babel';*/
+      Promise.all(System.import('necolas/normalize.css'),
+                  //System.import('yahoo/pure'),
+                  //System.import('FortAwesome/Font-Awesome'),
+                  System.import('./src/ui/app.css!'))
          .catch(function (err) {
             console.log('ERROR: ', err);
          });
 
-      // System.import('./src/ui/table/table.jsx!')
-      //    .catch(function (err) {
-      //       console.log('ERROR: ', err);
-      //    });
+      System.import('./src/ui/app.jsx!')
+         .catch(function (err) {
+            console.log('ERROR: ', err);
+         });
    </script>
 </head>
 

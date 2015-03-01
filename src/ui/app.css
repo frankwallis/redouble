@@ -1,4 +1,5 @@
 @import './components/card.css';
+@import './navbar/navbar.css';
 @import './table/table.css';
 @import './table/board.css';
 @import './table/hand.css';

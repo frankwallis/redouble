@@ -16,13 +16,8 @@ export class CardComponent extends React.Component {
           case Suit.Hearts: return "hearts";
           case Suit.Diamonds: return "diamonds";
           case Suit.Clubs: return "clubs";
-          case Suit.NoTrumps: return "no-trumps";
           default: return "unknown";
       }
-    }
-
-    get suit() {
-      return CardComponent.suitName(this.props.suit);
     }
 
     static pipName(pip) {
@@ -48,14 +43,14 @@ export class CardComponent extends React.Component {
         <div className="card-container">
             <div className="card-edge-left">
                 <div className="card-pip-small">{this.pip}</div>
-                <div className="card-suit suit-{this.suit}"></div>
+                <div className={"card-suit suit-" + CardComponent.suitName(this.props.suit)}></div>
             </div>
 
             <div className="card-pip">{this.pip}</div>
 
             <div className="card-edge-right">
                 <div className="card-pip-small">{this.pip}</div>
-                <div className="card-suit suit-{this.suit}"></div>
+                <div className={"card-suit suit-" + CardComponent.suitName(this.props.suit)}></div>
             </div>
         </div>
       );

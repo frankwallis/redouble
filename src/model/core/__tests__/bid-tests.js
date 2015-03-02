@@ -19,7 +19,7 @@ describe("Bid", () => {
          expect(Bid.compare(bid2, bid1)).toBe(0);
       });
 
-      it("obeys order of preference of suits", () => {
+      it("obeys order of precedence of suits", () => {
          var bid1 = { type: BidType.Call, level: 1, suit: BidSuit.Clubs };
          var bid2 = { type: BidType.Call, level: 1, suit: BidSuit.Diamonds };
          expect(Bid.compare(bid1, bid2)).toBeLessThan(0);

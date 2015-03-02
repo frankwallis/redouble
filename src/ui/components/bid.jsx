@@ -7,7 +7,6 @@ export class BidComponent extends React.Component {
 
     constructor(props) {
       super(props);
-      console.log('creating bid');
     }
 
     static key(bid) {

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "contract bridge",
   "main": "src/index.ts",
+  "dependencies": {
+  },
   "devDependencies": {
     "babel": "^4.6.0",
     "connect-livereload-safe": "0.0.5",
@@ -15,6 +17,7 @@
     "node-notifier": "^4.1.0",
     "open": "0.0.5",
     "react": "^0.13.0-beta.1",
+    "reflux": "^0.2.5",
     "tiny-lr": "^0.1.5"
   },
   "scripts": {

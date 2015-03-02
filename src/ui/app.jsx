@@ -13,6 +13,7 @@ export class App extends React.Component {
 
    routeClicked(route) {
       this.setState({"route": route});
+      return false;
    }
 
    render() {
@@ -20,7 +21,9 @@ export class App extends React.Component {
       var routes = ["home", "table", "settings", "about"].map((route) => {
          return (
             <li key={route}>
-               <a className={this.state.route == route ? "active" : ""} onClick={() => this.routeClicked(route)}>
+               <a className={this.state.route == route ? "active" : ""}
+                  href=""
+                  onClick={() => this.routeClicked(route)}>
                   {route}
                </a>
             </li>

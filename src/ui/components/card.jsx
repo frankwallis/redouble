@@ -24,7 +24,7 @@ export class CardComponent extends React.Component {
                 <div className={"card-suit suit-" + suitName(this.props.card.suit)}></div>
             </div>
 
-            <div className="card-pip">{this.props.card.pip}</div>
+            <div className="card-pip">{pipName(this.props.card.pip)}</div>
 
             <div className="card-edge-right">
                 <div className="card-pip-small">{pipName(this.props.card.pip)}</div>

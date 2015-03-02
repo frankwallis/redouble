@@ -3,6 +3,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 
+import {PlayerStore} from "../../model/players/player-store";
 import {GameStore, GameActions} from "../../model/game/game-store";
 import {GameState} from "../../model/game/game-state";
 import {Seat, seatName} from "../../model/core/seat";
@@ -12,32 +13,30 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
-import {Human} from "../../model/players/human";
-import {Computer} from "../../model/players/computer";
-
 export class Table extends React.Component {
 
    constructor(props) {
       super(props);
 
-      // TODO - make a player store
-      this.players = [ new Computer("player1"), new Computer("player2"), new Human("player3"), new Computer("player4") ];
-      this.players.forEach((player, idx) => {
-         player.game = this;
-         player.seat = idx;
+      this.players = PlayerStore.players;
+      this.game = GameStore.currentState();
+   }
+
+   componentDidMount() {
+      this.unsubscribePlayers = PlayerStore.listen((players) => {
+         this.players = players;
+         this.forceUpdate();
       });
 
-      this.game = GameStore.currentState();
-
-      // Registers a callback for game updates
-      GameStore.listen((state) => {
+      this.unsubscribeGame = GameStore.listen((state) => {
          this.game = state;
          this.forceUpdate();
       });
    }
 
-   componentDidMount() {
-      console.log('mounted ' + JSON.stringify(this.props));
+   componentWillUnmount() {
+      this.unsubscribePlayers();
+      this.unsubscribeGame();
    }
 
    render() {

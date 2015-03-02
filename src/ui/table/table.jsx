@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import Reflux from 'reflux';
 
@@ -8,7 +10,7 @@ import {Seat, seatName} from "../../model/core/seat";
 import {HandComponent} from "./hand.jsx";
 import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
-import {Trick} from "./trick.jsx";
+import {TrickComponent} from "./trick.jsx";
 
 import {Human} from "../../model/players/human";
 import {Computer} from "../../model/players/computer";
@@ -43,26 +45,20 @@ export class Table extends React.Component {
 
       var players = this.players.map((player) => {
          return (
-            <div className={"table-edge-" + seatName(player.seat)} key={player.seat}>
+            <div className={"table-edge-" + Seat.name(player.seat)} key={player.seat}>
                <header className="table-player-name">{player.name}</header>
-               <HandComponent className={"table-hand-" + seatName(player.seat)}
+               <HandComponent className={"table-hand-" + Seat.name(player.seat)}
                               seat={player.seat}
                               game={this.game}/>
             </div>
          );
       });
 
-      var board;
+      var board = this.game.biddingHasEnded ?
+         board = <TrickComponent game={this.game}/>
+         : board = <BiddingHistory board={this.game.currentBoard}/>;
 
-      if (this.game.biddingHasEnded)
-         board = <Trick game={this.game}/>;
-      else
-         board = <BiddingHistory board={this.game.currentBoard}/>
-
-      var biddingBox = (
-         <BiddingBox className="table-bidding-box"
-                     game={this.game}/>
-      );
+      var biddingBox = <BiddingBox className="table-bidding-box" game={this.game}/>
 
       return (
          <div className="bridge-table">

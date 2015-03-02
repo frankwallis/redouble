@@ -15,7 +15,8 @@ export class GameStateHelper {
    }
 
    get currentTrick(): tower.IBoard {
-      return this.currentBoards.tricks[this.currentBoards.tricks.length -1];
+      var played = this.currentBoard.cards.length % 4;
+      return this.currentBoard.cards.slice(played * -1);
    }
 
    get lastBid(): tower.IBid {

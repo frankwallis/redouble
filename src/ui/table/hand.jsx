@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import React from 'react';
 import {CardComponent} from '../components/card.jsx';
@@ -16,8 +16,6 @@ export class HandComponent extends React.Component {
    }
 
    playCard(card) {
-      //var state = this.props.game.playCard(card);
-      //this.props.onGameStateChanged(state);
       GameActions.playCard(card);
    }
 
@@ -28,8 +26,8 @@ export class HandComponent extends React.Component {
          return (
             <li className="hand-card" key={CardComponent.key(card)}>
                <button className="hand-card-button"
-                     onClick={() => this.playCard(card)}>
-                  <CardComponent pip={card.pip} suit={card.suit}/>
+                       onClick={() => this.playCard(card)}>
+                  <CardComponent card={card}/>
                </button>
             </li>
          );

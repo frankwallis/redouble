@@ -48,7 +48,7 @@ export class Deck {
          var hand = current % hands;
 
          if (!result[hand])
-         result[hand] = [];
+            result[hand] = [];
 
          result[hand].push(this.cards[current]);
 

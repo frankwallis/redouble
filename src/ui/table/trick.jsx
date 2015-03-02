@@ -1,7 +1,8 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import React from 'react';
 import {CardComponent} from '../components/card.jsx';
+import {Seat} from '../../model/core/seat';
 
 export class TrickComponent extends React.Component {
 
@@ -10,23 +11,15 @@ export class TrickComponent extends React.Component {
    }
 
    render() {
+      var cards = Seat.all().map((seat) => {
+         return <li key={seat} className={"table-edge-" + Seat.name(seat)}>
+            <CardComponent card={this.props.game.currentTrick[seat]}/>
+         </li>
+      });
+
       return (
          <ol className="trick-container">
-            <li className="table-edge-north">
-               <CardComponent pip={this.props.trick.northCard.pip} suit={this.props.trick.northCard.suit}/>
-            </li>
-
-            <li class="table-edge-west">
-               <CardComponent pip={this.props.trick.westCard.pip} suit={this.props.trick.westCard.suit}/>
-            </li>
-
-            <li class="table-edge-east">
-               <CardComponent pip={this.props.trick.eastCard.pip} suit={this.props.trick.eastCard.suit}/>
-            </li>
-
-            <li class="table-edge-south">
-               <CardComponent pip={this.props.trick.southCard.pip} suit={this.props.trick.southCard.suit}/>
-            </li>
+            {cards}
          </ol>
       );
    }

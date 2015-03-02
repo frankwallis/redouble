@@ -37,3 +37,23 @@ export class Card {
       }
    }
 }
+
+export function suitName(suit) {
+  switch(suit) {
+      case Suit.Spades: return "spades";
+      case Suit.Hearts: return "hearts";
+      case Suit.Diamonds: return "diamonds";
+      case Suit.Clubs: return "clubs";
+      default: return "unknown";
+  }
+}
+
+export function pipName(pip) {
+  switch(pip) {
+      case Pip.Ace: return "A";
+      case Pip.King: return "K";
+      case Pip.Queen: return "Q";
+      case Pip.Jack: return "J";
+      default: return pip.toString();
+  }
+}

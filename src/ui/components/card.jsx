@@ -1,8 +1,7 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import React from 'react';
-
-import {Suit,Pip,Card} from "../../model/core/card";
+import {Suit,Pip,Card,suitName,pipName} from "../../model/core/card";
 
 export class CardComponent extends React.Component {
 
@@ -10,47 +9,26 @@ export class CardComponent extends React.Component {
       super(props);
     }
 
-    static suitName(suit) {
-      switch(suit) {
-          case Suit.Spades: return "spades";
-          case Suit.Hearts: return "hearts";
-          case Suit.Diamonds: return "diamonds";
-          case Suit.Clubs: return "clubs";
-          default: return "unknown";
-      }
-    }
-
-    static pipName(pip) {
-      switch(pip) {
-          case Pip.Ace: return "A";
-          case Pip.King: return "K";
-          case Pip.Queen: return "Q";
-          case Pip.Jack: return "J";
-          default: return pip.toString();
-      }
-    }
-
-    get pip() {
-      return CardComponent.pipName(this.props.pip);
-    }
-
     static key(card) {
-      return CardComponent.suitName(card.suit) + CardComponent.pipName(card.pip);
+      return suitName(card.suit) + pipName(card.pip);
     }
 
     render() {
+      if (!this.props.card)
+         return <div className="card-container"/>;
+
       return (
         <div className="card-container">
             <div className="card-edge-left">
-                <div className="card-pip-small">{this.pip}</div>
-                <div className={"card-suit suit-" + CardComponent.suitName(this.props.suit)}></div>
+                <div className="card-pip-small">{pipName(this.props.card.pip)}</div>
+                <div className={"card-suit suit-" + suitName(this.props.card.suit)}></div>
             </div>
 
-            <div className="card-pip">{this.pip}</div>
+            <div className="card-pip">{this.props.card.pip}</div>
 
             <div className="card-edge-right">
-                <div className="card-pip-small">{this.pip}</div>
-                <div className={"card-suit suit-" + CardComponent.suitName(this.props.suit)}></div>
+                <div className="card-pip-small">{pipName(this.props.card.pip)}</div>
+                <div className={"card-suit suit-" + suitName(this.props.card.suit)}></div>
             </div>
         </div>
       );

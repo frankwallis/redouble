@@ -14,16 +14,23 @@
 
 .bidding-container {
    background: white;
-   color: black;
+   overflow: hidden;
    position: absolute;
+   border-radius: 10px;
+   height: 70%;
+   border-style: none;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
 }
 
+tbody .bidding-cell {
+   padding: .3em .8em !important;
+}
+
 .bidding-cell {
    margin: 0;
-   padding: 0.2rem;
-   min-width: 3rem;
+   min-width: 4rem;
    width: 25%;
+   text-align: center;
 }

@@ -1,4 +1,6 @@
+@import './components/bid.css';
 @import './components/card.css';
+@import './components/container.css';
 @import './navbar/navbar.css';
 @import './table/table.css';
 @import './table/board.css';

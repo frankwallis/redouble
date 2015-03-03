@@ -3,7 +3,9 @@
    /*background: #017F00;*/
    /*background: #13B219;*/
    /*background: #147A21;*/
-   background: #197519;
+   /*background: #197519;*/
+   background: #00261C;
+   opacity: .95;
    position: absolute;
    top: 0;
    left: 0;
@@ -14,6 +16,7 @@
 .table-edge-north {
    position: absolute;
    left: 50%;
+   height: 33%;
    transform: translateX(-50%);
    top: 1rem;
 }
@@ -21,6 +24,7 @@
 .table-edge-south {
    position: absolute;
    left: 50%;
+   height: 33%;
    transform: translateX(-50%);
    bottom: 1rem;
 }
@@ -28,6 +32,7 @@
 .table-edge-west {
    position: absolute;
    top: 50%;
+   width: 33%;
    transform: translateY(-50%);
    left: 1rem;
 }
@@ -35,6 +40,7 @@
 .table-edge-east {
    position: absolute;
    top: 50%;
+   width: 33%;
    transform: translateY(-50%);
    right: 1rem;
 }
@@ -44,19 +50,25 @@
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   width: 30%;
-   height: 50%;
+   width: 33%;
+   height: 33%;
 }
 
 .table-hand-north, .table-hand-south {
-   display: inline;
+
+}
+
+.table-hand-south {
+   /*transform: translate(0, +50%);   */
+}
+.table-hand-east {
+   /*float: right;*/
 }
 
 .table-bidding-box {
-   right: 0;
-   transform: translateX(-50%);
+   right: 1rem;
+   bottom: 1rem;
    position: absolute;
-   bottom: 0;
 }
 
 .game-menu {

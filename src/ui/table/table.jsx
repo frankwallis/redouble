@@ -44,12 +44,13 @@ export class Table extends React.Component {
 
       var players = this.players.map((player) => {
          return (
-            <div className={"table-edge-" + Seat.name(player.seat)} key={player.seat}>
+            <section className={"table-edge-" + Seat.name(player.seat)} key={player.seat}>
                <header className="table-player-name">{player.name}</header>
-               <HandComponent className={"table-hand-" + Seat.name(player.seat)}
-                              seat={player.seat}
-                              game={this.game}/>
-            </div>
+               <div className={"table-hand-" + Seat.name(player.seat)}>
+                  <HandComponent seat={player.seat}
+                                 game={this.game}/>
+               </div>
+            </section>
          );
       });
 

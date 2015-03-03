@@ -7,10 +7,13 @@
 }
 
 .bidding-box-button {
-   margin: 0;
    width: 100%;
-   line-height: 1.1rem;
    padding: 0.1rem;
+   background: transparent;
+}
+
+.bidding-box-button:hover {
+   background: #E6E6E6;
 }
 
 .bidding-box-cell {

@@ -8,7 +8,7 @@ import {SettingsView} from './settings/settings.jsx';
 export class App extends React.Component {
    constructor(props) {
       super(props);
-      this.state = { route: "home" };
+      this.state = { route: "table" };
    }
 
    routeClicked(route) {
@@ -32,9 +32,7 @@ export class App extends React.Component {
 
       var content;
 
-      if (this.state.route == "table")
-         content = <Table/>;
-      else if (this.state.route == "about")
+      if (this.state.route == "about")
          content = <Table/>;
       else if (this.state.route == "settings")
          content = <SettingsView/>;

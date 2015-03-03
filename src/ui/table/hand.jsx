@@ -3,6 +3,7 @@
 import React from 'react';
 import {CardComponent} from '../components/card.jsx';
 import {GameActions} from '../../model/game/game-store';
+import {Card} from '../../model/core/card';
 
 export class HandComponent extends React.Component {
 
@@ -12,7 +13,8 @@ export class HandComponent extends React.Component {
 
    get availableCards() {
       return this.props.game.currentBoard.hands[this.props.seat]
-         .filter((card) => !this.props.game.hasBeenPlayed(card));
+         .filter((card) => !this.props.game.hasBeenPlayed(card))
+         .sort((c1,c2) => Card.compare(c1,c2, this.props.game.currentBoard.trumpSuit));
    }
 
    playCard(card) {
@@ -33,6 +35,6 @@ export class HandComponent extends React.Component {
          );
       });
 
-      return (<ol className="hand-container">{cards}</ol>);
+      return (<ol className="hand-container container">{cards}</ol>);
    }
 }

@@ -2,32 +2,23 @@
    height: 7rem;
    width: 12rem;
    position: relative;
+   display: table-row;
 }
 
 .hand-card {
-   width: 20em;
-   overflow: hidden;
+   display: inline-block;
+   width: 1.5em;
    list-style: none;
+   box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.hand-card:hover {
+  -webkit-box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
 }
 
 .hand-card-button {
    border: none;
    background: transparent;
-}
-
-.hand-container > .hand-card {
-   position: absolute;
-   top: 0;
-   left: 0;
-   -webkit-transition: top 0.3s ease, left 0.3s ease;
-   -moz-transition: top 0.3s ease, left 0.3s ease;
-   -o-transition: top 0.3s ease, left 0.3s ease;
-   -ms-transition: top 0.3s ease, left 0.3s ease;
-   transition: top 0.3s ease, left 0.3s ease;
-}
-
-.hand-card-button {
    padding: 0;
-   border-radius: 0;
-   border-thickness: none;
 }

@@ -10,17 +10,22 @@ export class GameStateHelper {
       this.gameState = gameState || { boards: [] };
    }
 
-   get currentBoard(): tower.IBoard {
+   get currentBoard(): IBoard {
       return this.gameState.boards[this.gameState.boards.length -1];
    }
 
-   get currentTrick(): tower.IBoard {
+   get currentTrick(): Array<Card> {
       var played = this.currentBoard.cards.length % 4;
       return this.currentBoard.cards.slice(played * -1);
    }
 
-   get lastBid(): tower.IBid {
+   get lastBid(): Bid {
       return this.currentBoard.bids[this.currentBoard.bids.length -1];
+   }
+
+   get trumpSuit(): Suit {
+      if (this.biddingHasEnded)
+         return this.currentBoard.bids[this.currentBoard.bids.length -4].suit;
    }
 
    get biddingHasEnded(): boolean {
@@ -44,7 +49,7 @@ export class GameStateHelper {
 
    hasBeenPlayed(card) {
       return this.currentBoard.cards
-      .some((played) => (played.pip == card.pip) && (played.suit == card.suit));
+         .some((played) => (played.pip == card.pip) && (played.suit == card.suit));
    }
 
    get gameHasEnded(): boolean {

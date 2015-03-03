@@ -2,14 +2,11 @@
 
 .card-container {
    position: relative;
-   display: flex;
-   align-items: center;
-   justify-content: center;
    width: 5rem;
    height: 7rem;
    border-radius: 0.5rem;
-   background: #fff;
-   color: black;
+   background: #fafafa;
+   color: #080808;
 }
 
 .card-suit {
@@ -21,7 +18,6 @@
    font-size: 1rem;
    line-height: 1rem;
    text-align: center;
-
 }
 
 .card-pip {
@@ -31,14 +27,16 @@
 }
 
 .card-edge-left {
-   align-self: flex-start;
-   margin-left: 0.55rem;
-   margin-top: 0.35rem;
+   position: absolute;
+   left: 0;
+   top: 0;
+   margin: 0.3rem;
 }
 
 .card-edge-right {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   margin: 0.3rem;
    transform: rotate(180deg);
-   align-self: flex-end;
-   margin-right: 0.55rem;
-   margin-bottom: 0.35rem;
 }

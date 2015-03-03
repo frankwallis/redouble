@@ -13,15 +13,15 @@
 }
 
 .bidding-container {
-   background: white;
-   overflow: hidden;
-   position: absolute;
+   background: #fafafa;
    border-radius: 10px;
+   border: 0.1rem solid #3B3738;
+   position: absolute;
    height: 70%;
-   border-style: none;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+   overflow: hidden;
 }
 
 tbody .bidding-cell {

@@ -6,16 +6,16 @@
 @import './table/bidding-box.css';
 
 .app-menu {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
+   position: absolute;
+   top: 0;
+   right: 0;
+   left: 0;
 }
 
 .app-content {
-  position: absolute;
-  top: 2.75rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
+   position: absolute;
+   top: 2.75rem;
+   left: 0;
+   right: 0;
+   bottom: 0;
 }

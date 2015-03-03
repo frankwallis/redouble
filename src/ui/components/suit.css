@@ -1,24 +1,24 @@
 .suit-diamonds:after {
-  content: "♦";
-  color: #ff0000;
+   content: "♦";
+   color: #ff0000;
 }
 
 .suit-hearts:after {
-  content: "♥";
-  color: #ff0000;
+   content: "♥";
+   color: #ff0000;
 }
 
 .suit-clubs:after {
-  content: "♣";
-  color: #000;
+   content: "♣";
+   color: #000;
 }
 
 .suit-spades:after {
-  content: "♠";
-  color: #000;
+   content: "♠";
+   color: #000;
 }
 
 .suit-no-trumps:after {
-  content: "NT";
-  color: #000;
+   content: "NT";
+   color: #000;
 }

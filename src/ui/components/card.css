@@ -1,44 +1,44 @@
 @import "./suit.css";
 
 .card-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 7rem;
-  border-radius: 0.5rem;
-  background: #fff;
-  color: black;
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 5rem;
+   height: 7rem;
+   border-radius: 0.5rem;
+   background: #fff;
+   color: black;
 }
 
 .card-suit {
-  font-size: 1.5rem;
-  line-height: 1.5rem;
+   font-size: 1.5rem;
+   line-height: 1.5rem;
 }
 
 .card-pip-small {
-  font-size: 1rem;
-  line-height: 1rem;
-  text-align: center;
+   font-size: 1rem;
+   line-height: 1rem;
+   text-align: center;
 
 }
 
 .card-pip {
-  min-width: 60%;
-  text-align: center;
-  font: 2rem/7rem Georgia, Times New Roman, serif;
+   min-width: 60%;
+   text-align: center;
+   font: 2rem/7rem Georgia, Times New Roman, serif;
 }
 
 .card-edge-left {
-    align-self: flex-start;
-    margin-left: 0.55rem;
-    margin-top: 0.35rem;
+   align-self: flex-start;
+   margin-left: 0.55rem;
+   margin-top: 0.35rem;
 }
 
 .card-edge-right {
-    transform: rotate(180deg);
-    align-self: flex-end;
-    margin-right: 0.55rem;
-    margin-bottom: 0.35rem;
+   transform: rotate(180deg);
+   align-self: flex-end;
+   margin-right: 0.55rem;
+   margin-bottom: 0.35rem;
 }

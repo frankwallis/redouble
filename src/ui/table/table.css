@@ -1,62 +1,62 @@
 
 .bridge-table {
-  /*background: #017F00;*/
-  /*background: #13B219;*/
-  /*background: #147A21;*/
-  background: #197519;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+   /*background: #017F00;*/
+   /*background: #13B219;*/
+   /*background: #147A21;*/
+   background: #197519;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
 }
 
 .table-edge-north {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 1rem;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   top: 1rem;
 }
 
 .table-edge-south {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1rem;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   bottom: 1rem;
 }
 
 .table-edge-west {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 1rem;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   left: 1rem;
 }
 
 .table-edge-east {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1rem;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   right: 1rem;
 }
 
 .table-board {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30%;
-  height: 50%;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 30%;
+   height: 50%;
 }
 
 .table-hand-north, .table-hand-south {
-    display: inline;
+   display: inline;
 }
 
 .table-bidding-box {
-    right: 0;
-    transform: translateX(-50%);
-    position: absolute;
-    bottom: 0;
+   right: 0;
+   transform: translateX(-50%);
+   position: absolute;
+   bottom: 0;
 }
 
 .game-menu {
@@ -64,7 +64,7 @@
 }
 
 .game-icon {
-    color: white;
+   color: white;
 }
 
 /*****************/

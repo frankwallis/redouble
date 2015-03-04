@@ -1,9 +1,5 @@
 
 .bridge-table {
-   /*background: #017F00;*/
-   /*background: #13B219;*/
-   /*background: #147A21;*/
-   /*background: #197519;*/
    background: #00261C;
    opacity: .95;
    position: absolute;
@@ -27,6 +23,8 @@
    height: 33%;
    transform: translateX(-50%);
    bottom: 1rem;
+   display: flex;
+   flex-direction: column-reverse;
 }
 
 .table-edge-west {
@@ -45,6 +43,11 @@
    right: 1rem;
 }
 
+.table-edge-east > div {
+   margin-left: auto;
+   margin-right: 0;
+}
+
 .table-board {
    position: absolute;
    top: 50%;
@@ -58,11 +61,14 @@
 
 }
 
-.table-hand-south {
-   /*transform: translate(0, +50%);   */
+.table-player-name {
+   color: #fafafa;
 }
+
 .table-hand-east {
-   /*float: right;*/
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
 }
 
 .table-bidding-box {
@@ -76,7 +82,7 @@
 }
 
 .game-icon {
-   color: white;
+   color: #fafafa;
 }
 
 /*****************/

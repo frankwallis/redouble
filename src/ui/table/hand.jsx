@@ -35,6 +35,6 @@ export class HandComponent extends React.Component {
          );
       });
 
-      return (<ol className="hand-container container">{cards}</ol>);
+      return (<div className="hand-container"><ol className="container">{cards}</ol></div>);
    }
 }

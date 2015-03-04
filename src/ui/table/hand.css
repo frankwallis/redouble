@@ -1,24 +1,30 @@
 .hand-container {
-   height: 7rem;
-   width: 12rem;
    position: relative;
    display: table-row;
 }
 
 .hand-card {
    display: inline-block;
-   width: 1.5em;
    list-style: none;
    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.hand-card:not(:last-child) {
+   width: 1.5em;
 }
 
 .hand-card:hover {
   -webkit-box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
   box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+  transform: translateY(-.1rem);
 }
 
 .hand-card-button {
    border: none;
    background: transparent;
    padding: 0;
+}
+
+.hand-card-button:focus {
+   outline: 0;
 }

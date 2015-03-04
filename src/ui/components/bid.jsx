@@ -1,4 +1,4 @@
-/// <reference path="../../_references.d.ts" />
+/* @flow */
 
 import React from 'react';
 import {BidType, BidSuit, Bid} from '../../model/core/bid';

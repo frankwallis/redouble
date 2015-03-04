@@ -16,7 +16,7 @@ export class BiddingHistory extends React.Component {
 
       for (var seat = Seat.North; seat <= Seat.West; seat ++) {
         headings.push(
-          <th className="bidding-cell">{seatName(seat)}</th>
+          <th key={seat} className="bidding-cell">{seatName(seat)}</th>
         );
       }
 
@@ -31,9 +31,9 @@ export class BiddingHistory extends React.Component {
           if (this.props.board.bids.length > position) {
             let bid = this.props.board.bids[position];
             cells.push(
-              <th key={position} className="bidding-cell">
+              <td key={position} className="bidding-cell">
                   <BidComponent bid={bid}/>
-              </th>
+              </td>
             );
           }
           else {

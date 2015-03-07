@@ -42,6 +42,22 @@ describe("Bid", () => {
       });
    });
 
+   describe("compare", () => {
+      it("creates bids correctly", () => {
+         var bid = Bid.create("1C");
+         expect(bid.suit).toBe(BidSuit.Clubs);
+         expect(bid.level).toBe(1);
+
+         var bid = Bid.create("4S");
+         expect(bid.suit).toBe(BidSuit.Spades);
+         expect(bid.level).toBe(4);
+
+         var bid = Bid.create("7NT");
+         expect(bid.suit).toBe(BidSuit.NoTrumps);
+         expect(bid.level).toBe(7);
+      });
+   });
+
    describe("stringify", () => {
       it("returns unique values", () => {
 

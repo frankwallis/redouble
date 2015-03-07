@@ -3,7 +3,7 @@
 import React from 'react';
 import {BidComponent} from '../components/bid.jsx';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
-import {GameActions} from '../../model/game/game-store';
+import {GameActions} from '../../stores/game-store';
 
 export class BiddingBox extends React.Component {
 

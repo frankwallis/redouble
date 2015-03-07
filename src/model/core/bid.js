@@ -10,7 +10,7 @@ export class Bid {
         case BidType.NoBid:
           return "No Bid";
         case BidType.Call:
-          return bid.level.toString() + '-' + bid.suit.toString();
+          return bid.level.toString() + ' ' + Bid.suitName(bid.suit, (bid.level == 1));
         case BidType.Double:
           return "Double";
         case BidType.Redouble:
@@ -21,12 +21,35 @@ export class Bid {
    }
 
    static key(bid): string {
-      return Bid.stringify(bid);
+      var result = [ bid.type ];
+
+      if (bid.type == BidType.Call)
+         result = result.concat([ bid.level, bid.suit ]);
+
+      return result.join('-');
    }
 
-   static suitName(suit: BidSuit) {
-      var names = [ "", "clubs", "diamonds", "hearts", "spades", "no-trumps"];
-      return names[suit];
+   static create(bid: string) {
+      var shortNames = [ "", "c", "d", "h", "s", "nt"];
+      bid = bid.toLowerCase();
+
+      if (bid == "double")
+         return { type: BidType.Double };
+      else if (bid == "redouble")
+         return { type: BidType.Redouble };
+      else if (bid == "no bid")
+         return { type: BidType.NoBid };
+      else {
+         var result = { type: BidType.Call };
+         result.level = parseInt(bid[0]);
+         result.suit = shortNames.indexOf(bid.slice(1));
+         return result;
+      }
+   }
+
+   static suitName(suit: BidSuit, singular: boolean) {
+      var names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
+      return names[suit] + (singular ? '' : 's');
    }
 
    static compare(bid1, bid2): number {

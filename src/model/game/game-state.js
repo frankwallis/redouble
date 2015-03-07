@@ -1,33 +1,70 @@
 /* @flow */
 
 import {Deck} from "../core/deck";
-import {Seat, rotate} from "../core/seat";
-import {BidType} from "../core/bid";
+import {Seat} from "../core/seat";
+import {Bid, BidType, BidSuit} from "../core/bid";
+import {Card, Pip, Suit} from "../core/card";
+import {GameScorer} from "./game-scorer";
 
+/**
+ * Helper class for analysing game-state.
+ * This class is designed to be immutable from the outside
+ */
 export class GameStateHelper {
 
    constructor(gameState: tower.IGameState) {
       this.gameState = gameState || { boards: [] };
    }
 
+   /**
+    * Returns the current board
+    */
    get currentBoard(): IBoard {
       return this.gameState.boards[this.gameState.boards.length -1];
    }
 
-   get currentTrick(): Array<Card> {
-      var played = this.currentBoard.cards.length % 4;
-      return this.currentBoard.cards.slice(played * -1);
-   }
-
+   /**
+    * Returns the last bid to be made of any type
+    */
    get lastBid(): Bid {
       return this.currentBoard.bids[this.currentBoard.bids.length -1];
    }
 
-   get trumpSuit(): Suit {
-      if (this.biddingHasEnded)
-         return this.currentBoard.bids[this.currentBoard.bids.length -4].suit;
+   /**
+    * Returns the last bid to be made of type Bid.Call
+    */
+   get lastCall(): Bid {
+      return this.currentBoard.bids.reduce((current, bid) => {
+         if (bid.type == BidType.Call)
+            return bid;
+         else
+            return current;
+      }, undefined);
    }
 
+   /**
+    * Returns the last bid to be made which was not a no-bid
+    */
+   get lastAction(): Bid {
+      return this.currentBoard.bids.reduce((current, bid) => {
+         if (bid.type != BidType.NoBid)
+            return bid;
+         else
+            return current;
+      }, undefined);
+   }
+
+   /**
+    * Returns the suit of the bid contract or undefined if the bidding has not ended
+    */
+   get trumpSuit(): BidSuit {
+      if (this.biddingHasEnded && this.lastCall)
+         return this.lastCall.suit;
+   }
+
+   /**
+    * Returns true when no more bids can be made
+    */
    get biddingHasEnded(): boolean {
       var consecutivePasses = 0;
       var idx = this.currentBoard.bids.length - 1;
@@ -43,30 +80,51 @@ export class GameStateHelper {
       return (consecutivePasses >= 3) && (this.currentBoard.bids.length > 3);
    }
 
+   /**
+    * Returns the current trick, which will be an array of the cards which have been
+    * played to the trick, starting with the lead card. If no cards have been played
+    * yet it returns an empty array.
+    */
+   get currentTrick(): Array<Card> {
+      var played = this.currentBoard.cards.length % 4;
+      return this.currentBoard.cards.slice(this.currentBoard.cards.length - played);
+   }
+
+   /**
+    * Returns true when no more cards can be played
+    */
    get playHasEnded(): boolean {
       return (this.currentBoard.cards.length == 52);
    }
 
+   /**
+    * Returns true if this card has already been played
+    */
    hasBeenPlayed(card) {
       return this.currentBoard.cards
          .some((played) => (played.pip == card.pip) && (played.suit == card.suit));
    }
 
+   /**
+    * Returns true if one team has won the game
+    */
    get gameHasEnded(): boolean {
       return false;
    }
 
-   getRubberScore(): any {
-      return undefined;
-   }
-
+   /**
+    * Returns the seat of the player who's turn it is to play
+    */
    get nextPlayer(): tower.Seat {
       if (this.biddingHasEnded)
-         return rotate(this.currentBoard.leader, this.currentBoard.cards.length);
+         return Seat.rotate(this.currentBoard.leader, this.currentBoard.cards.length);
       else
-         return rotate(this.currentBoard.dealer, this.currentBoard.bids.length);
+         return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.length);
    }
 
+   /**
+    * Tests if the bid is a valid one in this state and throws an exception if not
+    */
    validateBid(bid: tower.IBid) {
       switch(bid.type) {
          case BidType.NoBid:
@@ -74,38 +132,46 @@ export class GameStateHelper {
 
          case BidType.Double:
             if (!this.lastAction || (this.lastAction.type != BidType.Call))
-               throw new Error("invalid double");
+               return new Error("invalid double");
             else
                return;
 
          case BidType.Redouble:
             if (!this.lastAction || (this.lastAction.type != BidType.Double))
-               throw new Error("invalid redouble");
+               return new Error("invalid redouble");
             else
                return;
 
          case BidType.Call: {
             if ((!bid.level) || (!bid.suit))
-               throw new Error("you must provide level and suit");
-            else if (this.lastBid) {
-               if ((bid.level  < this.lastBid.level) ||
-                   (bid.level == this.lastBid.level) && (bid.suit < this.lastBid.suit))
-                  throw new Error("bid must be higher than " + this.lastBid);
+               return new Error("you must provide level and suit");
+            else if (this.lastCall) {
+               if (Bid.compare(bid, this.lastCall) <= 0)
+                  return new Error("bid must be higher than " + Bid.stringify(this.lastCall));
             }
             return;
          }
       }
    }
 
+   /**
+    * Tests if the card is a valid one in this state and throws an exception if not
+    */
    validateCard(card: tower.ICard) {
 
    }
 
+   /**
+    * Creates an identical copy of itself
+    */
    clone(): GameStateHelper {
       var newstate = JSON.parse(JSON.stringify(this.gameState));
       return new GameStateHelper(newstate);
    }
 
+   /**
+    * Starts a new board
+    */
    newBoard(): GameStateHelper {
       var deck = new Deck();
       deck.shuffle();
@@ -123,5 +189,26 @@ export class GameStateHelper {
       return result;
    }
 
+   /**
+    * Called in response to a player playing a card.
+    * If the bid is valid returns the new state-helper,
+    * otherwise an exception is thrown
+    */
+   makeBid(bid: Bid): GameStateHelper {
+      var newstate = this.clone();
+      newstate.currentBoard.bids.push(bid);
+      return newstate;
+   }
+
+   /**
+    * Called in response to a player making a bid.
+    * If the card is valid returns the new state-helper,
+    * otherwise an exception is thrown
+    */
+   playCard(card: Card): GameStateHelper {
+      var newstate = this.clone();
+      newstate.currentBoard.cards.push(card);
+      return newstate;
+   }
 
 }

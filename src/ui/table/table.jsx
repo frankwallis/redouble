@@ -3,8 +3,8 @@
 import React from 'react';
 import Reflux from 'reflux';
 
-import {PlayerStore} from "../../model/players/player-store";
-import {GameStore, GameActions} from "../../model/game/game-store";
+import {PlayerStore} from "../../stores/player-store";
+import {GameStore, GameActions} from "../../stores/game-store";
 import {GameState} from "../../model/game/game-state";
 import {Seat, seatName} from "../../model/core/seat";
 
@@ -13,6 +13,9 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
+/**
+ * Top-Level View for displaying the current game from the GameStore
+ */
 export class Table extends React.Component {
 
    constructor(props) {
@@ -40,7 +43,7 @@ export class Table extends React.Component {
    }
 
    render() {
-      console.log('rendering');
+      console.log('rendering table');
 
       var players = this.players.map((player) => {
          return (

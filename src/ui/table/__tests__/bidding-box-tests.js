@@ -1,9 +1,9 @@
 jest.autoMockOff()
-jest.mock('../../../model/game/game-store');
+jest.mock('../../../stores/game-store');
 
 import {BiddingBox} from "../bidding-box.jsx";
 import {GameStateHelper} from "../../../model/game/game-state";
-import {GameActions} from "../../../model/game/game-store";
+import {GameActions} from "../../../stores/game-store";
 
 import React from "react/addons";
 var TestUtils = React.addons.TestUtils;

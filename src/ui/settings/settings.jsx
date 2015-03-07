@@ -3,9 +3,12 @@
 import React from 'react';
 import Reflux from 'reflux';
 
-import {PlayerStore, PlayerActions} from "../../model/players/player-store";
+import {PlayerStore, PlayerActions} from "../../stores/player-store";
 import {Seat} from "../../model/core/seat";
 
+/**
+ * Top-Level view for the game settings
+ */
 export class SettingsView extends React.Component {
 
    constructor(props) {

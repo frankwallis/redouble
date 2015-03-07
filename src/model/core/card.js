@@ -7,7 +7,11 @@ export const Suit = {
    "Spades": 4
 };
 
-export const Pip = { "Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 11, "Queen": 12, "King": 13, "Ace": 14 };
+export const Pip = {
+   "Two": 2, "Three": 3, "Four": 4, "Five": 5,
+   "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10,
+   "Jack": 11, "Queen": 12, "King": 13, "Ace": 14
+};
 
 export class Card {
    static stringify(card): string {
@@ -36,16 +40,22 @@ export class Card {
          return card1.suit - card2.suit;
       }
    }
+
+   static create(card: string) {
+      var shortSuitNames = [ "", "C", "D", "H", "S"];
+      var shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
+
+      var result = {};
+      result.pip = shortPipNames.indexOf(card[0].toUpperCase());
+      result.suit = shortSuitNames.indexOf(card[1].toUpperCase());
+      return result;
+   }
+
 }
 
 export function suitName(suit) {
-  switch(suit) {
-      case Suit.Spades: return "spades";
-      case Suit.Hearts: return "hearts";
-      case Suit.Diamonds: return "diamonds";
-      case Suit.Clubs: return "clubs";
-      default: return "unknown";
-  }
+   var suitNames = [ "", "clubs", "diamonds", "hearts", "spades"];
+   return suitNames[suit];
 }
 
 export function pipName(pip) {

@@ -31,7 +31,7 @@ describe("Deck", () => {
       for (var i = 0; i < newHands.length; i++) {
          for (var j = 0; j < newHands[i].length; j ++) {
             if (newHands[i][j] != origHands[i][j])
-            different = true;
+               different = true;
          }
       }
 

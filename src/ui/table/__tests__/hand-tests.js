@@ -1,10 +1,10 @@
 jest.autoMockOff()
-jest.mock('../../../model/game/game-store');
+jest.mock('../../../stores/game-store');
 
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";
 import {GameStateHelper} from "../../../model/game/game-state";
-import {GameActions} from "../../../model/game/game-store";
+import {GameActions} from "../../../stores/game-store";
 import {Seat} from "../../../model/core/seat";
 
 import React from "react/addons";

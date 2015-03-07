@@ -1,7 +1,8 @@
 /* @flow */
 
 import Reflux from 'reflux';
-import {GameStateHelper} from "./game-state";
+import {GameStateHelper} from "../model/game/game-state";
+import {NotificationActions} from "./notification-store";
 
 export const GameActions = Reflux.createActions([
    "newGame",
@@ -12,6 +13,11 @@ export const GameActions = Reflux.createActions([
    "forward"
 ]);
 
+/**
+ * Store for managing the current state of the game.
+ * Maintains a cache of all previous game states which
+ * can be used to undo plays
+ */
 export const GameStore = Reflux.createStore({
    init: function() {
       this.listenToMany(GameActions);
@@ -31,16 +37,13 @@ export const GameStore = Reflux.createStore({
       this.trigger(this.currentState());
    },
    onMakeBid: function(bid) {
-      this.currentState().validateBid(bid);
-      var result = this.currentState().clone();
-      result.currentBoard.bids.push(bid);
+      console.log('making bid');
+      var result = this.currentState().makeBid(bid);
       this.pushState(result);
       this.trigger(this.currentState());
    },
    onPlayCard: function(card) {
-      this.currentState().validateCard(card);
-      var result = this.currentState().clone();
-      result.currentBoard.cards.push(card);
+      var result = this.currentState.playCard(card);
       this.pushState(result);
       this.trigger(this.currentState());
    },
@@ -55,3 +58,29 @@ export const GameStore = Reflux.createStore({
       this.trigger(this.currentState());
    }
 });
+
+GameActions.makeBid.shouldEmit = function(bid) {
+   var err = GameStore.currentState().validateBid(bid);
+
+   if (err) {
+      NotificationActions.error({
+         title: "Invalid bid",
+         message: err.message
+      });
+   }
+
+   return !err;
+}
+
+GameActions.playCard.shouldEmit = function(card) {
+   var err = GameStore.currentState().validateCard(card);
+
+   if (err) {
+      NotificationActions.error({
+         title: "Invalid card",
+         message: err.message
+      });
+   }
+
+   return !err;
+}

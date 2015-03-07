@@ -4,8 +4,6 @@ import {Seat, rotate} from '../seat';
 
 describe("Seat", () => {
 
-    beforeEach(() => {});
-
     describe("rotate", () => {
       it("rotates through all the seats", () => {
          var seat = Seat.South;

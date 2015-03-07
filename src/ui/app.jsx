@@ -4,6 +4,7 @@ import React from 'react';
 
 import {Table} from './table/table.jsx';
 import {SettingsView} from './settings/settings.jsx';
+import {GrowlContainer} from './growl/growl.jsx';
 
 export class App extends React.Component {
    constructor(props) {
@@ -48,6 +49,9 @@ export class App extends React.Component {
             </nav>
             <div className="app-content">
                {content}
+            </div>
+            <div className="app-growl">
+               <GrowlContainer/>
             </div>
          </div>
       );

@@ -1,12 +1,15 @@
 /* @flow */
 
 import Reflux from 'reflux';
-import {Seat} from "../core/seat";
+import {Seat} from "../model/core/seat";
 
 export const PlayerActions = Reflux.createActions([
    "updatePlayer"
 ]);
 
+/**
+ * Store for managing the players of the game
+ */
 export const PlayerStore = Reflux.createStore({
    init: function() {
       this.listenToMany(PlayerActions);

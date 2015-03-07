@@ -54,6 +54,7 @@ describe("Card", () => {
 
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card1, card2, Suit.Clubs)).toBeGreaterThan(0);
+         expect(Card.compare(card2, card1, Suit.Clubs)).toBeLessThan(0);
       });
 
       it("uses lead-suit when provided", () => {
@@ -63,6 +64,24 @@ describe("Card", () => {
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card1, card2, Suit.Diamonds, Suit.Clubs)).toBeGreaterThan(0);
       });
+
+   });
+
+   describe("create", () => {
+      it("creates cards correctly", () => {
+         var card = Card.create("2S");
+         expect(card.suit).toBe(Suit.Spades);
+         expect(card.pip).toBe(Pip.Two);
+
+         card = Card.create("JD");
+         expect(card.suit).toBe(Suit.Diamonds);
+         expect(card.pip).toBe(Pip.Jack);
+
+         var card = Card.create("AC");
+         expect(card.suit).toBe(Suit.Clubs);
+         expect(card.pip).toBe(Pip.Ace);
+      });
+
    });
 
    describe("stringify", () => {

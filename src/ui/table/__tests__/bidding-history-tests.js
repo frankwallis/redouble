@@ -1,5 +1,4 @@
 jest.autoMockOff()
-jest.mock('../../../model/game/game-store');
 
 import {BidComponent} from  "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";

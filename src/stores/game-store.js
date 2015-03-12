@@ -43,7 +43,7 @@ export const GameStore = Reflux.createStore({
       this.trigger(this.currentState());
    },
    onPlayCard: function(card) {
-      var result = this.currentState.playCard(card);
+      var result = this.currentState().playCard(card);
       this.pushState(result);
       this.trigger(this.currentState());
    },

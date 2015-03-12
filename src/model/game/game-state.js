@@ -126,6 +126,9 @@ export class GameStateHelper {
     * Tests if the bid is a valid one in this state and throws an exception if not
     */
    validateBid(bid: tower.IBid) {
+      if (this.biddingHasEnded)
+         return new Error("the bidding has already ended");
+
       switch(bid.type) {
          case BidType.NoBid:
             return;

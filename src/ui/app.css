@@ -4,20 +4,30 @@
 @import './navbar/navbar.css';
 @import './growl/growl.css';
 @import './table/table.css';
-@import './table/board.css';
+@import './table/trick.css';
+@import './table/bidding-history.css';
 @import './table/hand.css';
 @import './table/bidding-box.css';
 
-.app-menu {
-   position: absolute;
-   top: 0;
-   right: 0;
-   left: 0;
+ol {
+   padding-left: 0;
+   margin:0;
+}
+
+.app-container {
+   font-size: calc(0.55vw + .6em);
+   /*font-size: calc(0.65vw + .5em);*/
+   /*font-size: calc(0.8vw + .4em);*/
+}
+
+.app-navbar {
+   font-size: calc(.8vh + .7em);
 }
 
 .app-content {
    position: absolute;
-   top: 2.75rem;
+   top: 2em;
+   padding-top: 5em;
    left: 0;
    right: 0;
    bottom: 0;
@@ -25,6 +35,6 @@
 
 .app-growl {
    position: absolute;
-   top: 2.75rem;
+   top: 2.75em;
    left: 0;
 }

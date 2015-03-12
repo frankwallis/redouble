@@ -7,7 +7,7 @@
    top: 0;
    left: 0;
    right: 0;
-   height: 3rem;
+   height: 3em;
    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
    z-index: 100;
 }
@@ -39,9 +39,9 @@
    padding: 0 8px;
    text-transform: uppercase;
    letter-spacing: 1px;
-   line-height: 3rem;
+   line-height: 3em;
    display: inline-block;
-   height: 3rem;
+   height: 3em;
    color: #aaa;
 }
 
@@ -57,8 +57,8 @@
 
 .nav-main .nav-home {
    color: #44B74A;
-   font-size: 24px;
-   line-height: 50px;
+   /*font-size: 24px;*/
+   /*line-height: 50px;*/
 }
 
 .nav-home a {

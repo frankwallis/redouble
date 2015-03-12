@@ -12,7 +12,7 @@ export class TrickComponent extends React.Component {
 
    render() {
       var cards = Seat.all().map((seat) => {
-         return <li key={seat} className={"table-edge-" + Seat.name(seat)}>
+         return <li key={seat} className={"trick-card-" + Seat.name(seat)}>
             <CardComponent card={this.props.game.currentTrick[seat]}/>
          </li>
       });

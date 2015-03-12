@@ -1,0 +1,43 @@
+.trick-container {
+   list-style: none;
+}
+
+.trick-card {
+   margin: 0.1em;
+}
+
+.trick-card-north {
+   position: absolute;
+   left: 50%;
+   height: 50%;
+   transform: translateX(-50%);
+   top: 0;
+}
+
+.trick-card-south {
+   position: absolute;
+   left: 50%;
+   height: 50%;
+   transform: translateX(-50%);
+   bottom: 0;
+   display: flex;
+   flex-direction: column-reverse;
+}
+
+.trick-card-west {
+   position: absolute;
+   top: 50%;
+   width: 50%;
+   transform: translateY(-50%);
+   left: 0;
+}
+
+.trick-card-east {
+   position: absolute;
+   top: 50%;
+   width: 50%;
+   transform: translateY(-50%);
+   right: 0;
+   display: flex;
+   flex-direction: row-reverse;
+}

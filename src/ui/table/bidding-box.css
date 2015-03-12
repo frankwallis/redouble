@@ -1,14 +1,14 @@
 .bidding-box-container {
    background: #fafafa;
-   border: 0.3rem solid #3B3738;
-   border-radius: 15px;
-   padding: 0.3rem;
+   border: 0.2em solid #3B3738;
+   border-radius: 1em;
+   padding: 0.3em;
    overflow: hidden;
 }
 
 .bidding-box-button {
    width: 100%;
-   padding: 0.1rem;
+   padding: 0.1em;
    background: transparent;
 }
 
@@ -18,6 +18,6 @@
 
 .bidding-box-cell {
    margin: 0;
-   padding: 0.1rem;
-   min-width: 3rem;
+   padding: 0.1em;
+   min-width: 3em;
 }

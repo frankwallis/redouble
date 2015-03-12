@@ -24,6 +24,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.6",
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
     "necolas/normalize.css": "github:necolas/normalize.css@3.0.2",
+    "purecss": "npm:purecss@0.6.0",
     "react": "npm:react@0.13.0-beta.1",
     "reflux": "npm:reflux@0.2.5",
     "text": "github:systemjs/plugin-text@0.0.2",

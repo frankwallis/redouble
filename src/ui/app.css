@@ -3,6 +3,7 @@
 @import './components/container.css';
 @import './navbar/navbar.css';
 @import './growl/growl.css';
+@import './settings/settings.css';
 @import './table/table.css';
 @import './table/trick.css';
 @import './table/bidding-history.css';

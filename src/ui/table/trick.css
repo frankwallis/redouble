@@ -4,6 +4,7 @@
 
 .trick-card {
    margin: 0.1em;
+   border: 0.2em solid #3B3738;
 }
 
 .trick-card-north {

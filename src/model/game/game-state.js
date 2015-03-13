@@ -87,7 +87,8 @@ export class GameStateHelper {
     */
    get currentTrick(): Array<Card> {
       var played = this.currentBoard.cards.length % 4;
-      return this.currentBoard.cards.slice(this.currentBoard.cards.length - played);
+      played = played || 4;
+      return this.currentBoard.cards.slice(played * -1);
    }
 
    /**

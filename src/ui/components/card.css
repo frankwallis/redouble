@@ -4,9 +4,13 @@
    position: relative;
    width: 5em;
    height: 7em;
-   border-radius: 0.5em;
+   border-radius: 0.35em;
    background: #fafafa;
    color: #080808;
+}
+
+.card-container.empty-container {
+   background: transparent;
 }
 
 .card-suit {

@@ -15,7 +15,7 @@ export class CardComponent extends React.Component {
 
     render() {
       if (!this.props.card)
-         return <div className="card-container"/>;
+         return <div className="card-container empty-container"/>;
 
       return (
         <div className="card-container">

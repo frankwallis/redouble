@@ -22,6 +22,20 @@ export const NotificationStore = Reflux.createStore({
       this.listenToMany(NotificationActions);
       this.notifications = [];
       this.currentId = 1;
+
+      setInterval(() => {
+         this.autoDismiss();
+      }, 7500);
+   },
+   autoDismiss: function() {
+      var now = new Date();
+      this.notifications.forEach((notif) => {
+         if (!notif.dismissed && !(notif.type == 'question')) {
+            if (now.getTime() - notif.timestamp.getTime() > 10000) {
+               NotificationActions.dismiss({ id: notif.id });
+            }
+         }
+      })
    },
    onInfo: function(opts) {
       opts = opts || {};

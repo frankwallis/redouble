@@ -156,7 +156,7 @@ describe('Game State Helper', () => {
          gameState = gameState
             .playCard(Card.create("4H"))
             .playCard(Card.create("5H"));
-         expect(gameState.currentTrick.length).toBe(0);
+         expect(gameState.currentTrick.length).toBe(4);
 
          gameState = gameState.playCard(Card.create("AS"));
          expect(gameState.currentTrick.length).toBe(1);

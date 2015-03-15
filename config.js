@@ -15,7 +15,9 @@ System.config({
     "atscript": true,
     "memberVariables": true,
     "annotations": true,
-    "experimental": false
+    "experimental": false,
+    "typeAssertions": true,
+    "typeAssertionModule": "rtts_assert/rtts_assert"
   }
 });
 

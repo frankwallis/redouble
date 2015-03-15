@@ -1,0 +1,20 @@
+<div class="app-container">
+   <nav role="navigation" class="app-navbar nav-main">
+      <ul class="nav-site">
+         <li *foreach="#route in routes">
+            <a [class.active]="state.route == route"
+               href=""
+               (click)="routeClicked($event, route)">
+               {{route}}
+            </a>
+         </li>
+      </ul>
+   </nav>
+   <div class="app-content">
+      <settings-view/>
+      <!-- {content} -->
+   </div>
+   <div class="app-growl">
+      <!-- <GrowlContainer/> -->
+   </div>
+</div>

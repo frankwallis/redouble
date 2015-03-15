@@ -57,7 +57,8 @@
             console.log('ERROR: ', err);
          });
 
-         System.import('./src/index_common')
+         //System.import('./src/index_common')
+         System.import('./src/ui/app')
             .then(function(m) { m.main(); },
                   console.error.bind(console))
 

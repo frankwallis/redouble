@@ -1,0 +1,22 @@
+<div>
+   <h1>Settings</h1>
+   <ul class="settings-players">
+      <li *foreach="#seat in seats" class="settings-player">
+         <h3 class="settings-player-header">{{Seat.name(seat)}}</h3>
+         <div class="settings-field">
+            <label class="settings-label">Name</label>
+            <input class="settings-input-name"
+                   type="text"
+                   [value]="players[seat].name"
+                   (change)="handleChangeName(seat, $event)"></input>
+         </div>
+         <div class="settings-field">
+            <label class="settings-label">Human?</label>
+            <input class="settings-input-human"
+                   type="checkbox"
+                   [checked]="players[seat].ishuman"
+                   (change)="handleChangeHuman(seat, $event)"></input>
+         </div>
+      </li>
+   </ul>
+</div>

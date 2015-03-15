@@ -52,6 +52,7 @@
     },
     "dependencies": {
       "FortAwesome/Font-Awesome": "github:FortAwesome/Font-Awesome@^4.3.0",
+      "angular2": "npm:angular2@^2.0.0-alpha.13",
       "babel": "npm:babel@^4.6.1",
       "css": "github:systemjs/plugin-css@^0.1.0",
       "jsx": "github:floatdrop/plugin-jsx@^0.1.1",

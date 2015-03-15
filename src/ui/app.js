@@ -1,7 +1,5 @@
 /* @flow */
 
-import React from 'react';
-
 import {Table} from './table/table.jsx';
 import {SettingsView} from './settings/settings.jsx';
 import {GrowlContainer} from './growl/growl.jsx';

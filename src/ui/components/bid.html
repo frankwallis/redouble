@@ -1,0 +1,15 @@
+<div [switch]="bid.type" class="bid-container">
+   <template [switch-when]="BidType.NoBid">
+      No Bid
+   </template>
+   <template [switch-when]="BidType.Double">
+      Double
+   </template>
+   <template [switch-when]="BidType.Redouble">
+      Redouble
+   </template>
+   <template [switch-when]="BidType.Call">
+      <span class="bid-level">{{bid.level}}</span>
+      <span class="bid-suit suit-spades"></span>
+   </template>
+</div>

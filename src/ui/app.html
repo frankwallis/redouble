@@ -10,9 +10,13 @@
          </li>
       </ul>
    </nav>
-   <div class="app-content">
-      <settings-view/>
-      <!-- {content} -->
+   <div [switch]="state.route" class="app-content">
+      <template [switch-when]="settings">
+         <settings-view />
+      </template>
+      <template [switch-default]>
+         <table-view />
+      </template>
    </div>
    <div class="app-growl">
       <!-- <GrowlContainer/> -->

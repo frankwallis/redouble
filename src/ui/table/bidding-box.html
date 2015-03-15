@@ -1,0 +1,46 @@
+<div class="bidding-box-container">
+   <table>
+      <colgroup>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style={{width: '10%'}}></col>
+      </colgroup>
+         <tbody>
+            <tr *foreach="#level in levels" class="bidding-box-level">
+               <td *foreach="#bid in level" class="bidding-box-cell" colSpan="2">
+                  <button class="bidding-box-button pure-button"
+                          (click)="makeBid(bid)">
+                     <bid-component bind-bid="bid"/>
+                  </button>
+               </td>
+            </tr>
+            <tr class="bidding-box-level">
+               <td class="bidding-box-cell" colSpan="3">
+                  <button class="bidding-box-button pure-button"
+                          (click)="makeBid({type: BidType.Double})">
+                     <bid-component bind-bid="{type: BidType.Double}"/>
+                  </button>
+               </td>
+               <td class="bidding-box-cell" colSpan="3">
+                  <button class="bidding-box-button pure-button"
+                          (click)="makeBid({type: BidType.Redouble})">
+                     <bid-component bind-bid="{type: BidType.Redouble}"/>
+                  </button>
+               </td>
+               <td class="bidding-box-cell" colSpan="4">
+                  <button class="bidding-box-button pure-button"
+                          (click)="makeBid({type: BidType.NoBid})">
+                     <bid-component bind-bid="{type: BidType.NoBid}"/>
+                  </button>
+               </td>
+            </tr>
+         </tbody>
+   </table>
+</div>

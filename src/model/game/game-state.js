@@ -6,34 +6,39 @@ import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card, Pip, Suit} from "../core/card";
 import {GameScorer} from "./game-scorer";
 
+interface ICard {
+
+}
+
+
 /**
  * Helper class for analysing game-state.
  * This class is designed to be immutable from the outside
  */
 export class GameStateHelper {
 
-   constructor(gameState: tower.IGameState) {
+   constructor(gameState) {
       this.gameState = gameState || { boards: [] };
    }
 
    /**
     * Returns the current board
     */
-   get currentBoard(): IBoard {
+   get currentBoard(): any {
       return this.gameState.boards[this.gameState.boards.length -1];
    }
 
    /**
     * Returns the last bid to be made of any type
     */
-   get lastBid(): Bid {
+   get lastBid(): any {
       return this.currentBoard.bids[this.currentBoard.bids.length -1];
    }
 
    /**
     * Returns the last bid to be made of type Bid.Call
     */
-   get lastCall(): Bid {
+   get lastCall(): any {
       return this.currentBoard.bids.reduce((current, bid) => {
          if (bid.type == BidType.Call)
             return bid;
@@ -45,7 +50,7 @@ export class GameStateHelper {
    /**
     * Returns the last bid to be made which was not a no-bid
     */
-   get lastAction(): Bid {
+   get lastAction(): any {
       return this.currentBoard.bids.reduce((current, bid) => {
          if (bid.type != BidType.NoBid)
             return bid;
@@ -85,7 +90,7 @@ export class GameStateHelper {
     * played to the trick, starting with the lead card. If no cards have been played
     * yet it returns an empty array.
     */
-   get currentTrick(): Array<Card> {
+   get currentTrick(): Array<any> {
       var played = this.currentBoard.cards.length % 4;
       played = played || 4;
       return this.currentBoard.cards.slice(played * -1);
@@ -116,7 +121,7 @@ export class GameStateHelper {
    /**
     * Returns the seat of the player who's turn it is to play
     */
-   get nextPlayer(): tower.Seat {
+   get nextPlayer(): any {
       if (this.biddingHasEnded)
          return Seat.rotate(this.currentBoard.leader, this.currentBoard.cards.length);
       else
@@ -126,7 +131,7 @@ export class GameStateHelper {
    /**
     * Tests if the bid is a valid one in this state and throws an exception if not
     */
-   validateBid(bid: tower.IBid) {
+   validateBid(bid: any) {
       if (this.biddingHasEnded)
          return new Error("the bidding has already ended");
 
@@ -161,7 +166,7 @@ export class GameStateHelper {
    /**
     * Tests if the card is a valid one in this state and throws an exception if not
     */
-   validateCard(card: tower.ICard) {
+   validateCard(card: any) {
 
    }
 
@@ -198,7 +203,7 @@ export class GameStateHelper {
     * If the bid is valid returns the new state-helper,
     * otherwise an exception is thrown
     */
-   makeBid(bid: Bid): GameStateHelper {
+   makeBid(bid: any): GameStateHelper {
       var newstate = this.clone();
       newstate.currentBoard.bids.push(bid);
       return newstate;
@@ -209,7 +214,7 @@ export class GameStateHelper {
     * If the card is valid returns the new state-helper,
     * otherwise an exception is thrown
     */
-   playCard(card: Card): GameStateHelper {
+   playCard(card: any): GameStateHelper {
       var newstate = this.clone();
       newstate.currentBoard.cards.push(card);
       return newstate;

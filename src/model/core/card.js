@@ -13,6 +13,11 @@ export const Pip = {
    "Jack": 11, "Queen": 12, "King": 13, "Ace": 14
 };
 
+// export interface ICard {
+//    suit: Suit;
+//    pip: Pip;
+// }
+
 export class Card {
    static stringify(card): string {
 

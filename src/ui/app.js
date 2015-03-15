@@ -1,9 +1,8 @@
-import {bootstrap, Component, Decorator, Template, NgElement, Foreach} from 'angular2/angular2';
+import {bootstrap, Component, Decorator, Template, NgElement, Foreach, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2';
 import {SettingsView} from './settings/settings';
-
-// import {Table} from './table/table.jsx';
-// import {SettingsView} from './settings/settings.jsx';
+import {TableView} from './table/table';
 // import {GrowlContainer} from './growl/growl.jsx';
+
 @Component({
   // The Selector prop tells Angular on which elements to instantiate this
   // class. The syntax supported is a basic subset of CSS selectors, for example
@@ -24,12 +23,11 @@ import {SettingsView} from './settings/settings';
   // modularity (RedDec can only be used in this template)
   // and better tooling (the template can be invalidated if the attribute is
   // misspelled).
-  directives: [Foreach, SettingsView]//[RedDec]
+  directives: [Foreach, Switch, SwitchWhen, SwitchDefault, SettingsView, TableView]//[RedDec]
 })
 
 export class App {
    constructor() {
-      //super();
       this.state = { route: "table" };
       this.routes = ["home", "table", "settings", "about"];
    }
@@ -39,46 +37,6 @@ export class App {
       $event.preventDefault();
       this.state = { route: newroute };
    }
-
-   // render() {
-   //    console.log('rendering app')
-   //    var routes = .map((route) => {
-   //       return (
-   //          <li key={route}>
-   //             <a className={this.state.route == route ? "active" : ""}
-   //                href=""
-   //                onClick={() => this.routeClicked(route)}>
-   //                {route}
-   //             </a>
-   //          </li>
-   //       );
-   //    });
-   //
-   //    var content;
-   //
-   //    if (this.state.route == "about")
-   //       content = <Table/>;
-   //    else if (this.state.route == "settings")
-   //       content = <SettingsView/>;
-   //    else
-   //       content = <Table/>;
-   //
-   //    return (
-   //       <div className="app-container">
-   //          <nav role="navigation" className="app-navbar nav-main">
-   //             <ul className="nav-site">
-   //                {routes}
-   //             </ul>
-   //          </nav>
-   //          <div className="app-content">
-   //             {content}
-   //          </div>
-   //          <div className="app-growl">
-   //             <GrowlContainer/>
-   //          </div>
-   //       </div>
-   //    );
-   // }
 }
 
 export function main() {
@@ -91,5 +49,3 @@ export function main() {
   // example 'Loading...') before the application is ready.
   bootstrap(App);
 }
-
-//React.render(<App/>, document.body);

@@ -1,0 +1,10 @@
+<div class="hand-container">
+   <ol class="container">
+      <li class="hand-card" *foreach="#card in availableCards">
+         <button class="hand-card-button"
+                 (click)="playCard(card)">
+            <card-component bind-card="card"/>
+         </button>
+      </li>
+   </ol>
+</div>

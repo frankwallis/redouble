@@ -1,11 +1,10 @@
 <div class="bridge-table">
    <div class="table-players">
       <section *foreach="#seat in seats"
-               class={"table-edge-" + Seat.name(player.seat)}>
-         <header class="table-player-name">{player.name}</header>
-         <div class={"table-hand-" + Seat.name(player.seat)}>
-            <!-- <HandComponent seat={player.seat}
-                           game={this.game}/> -->
+               class={"table-edge-" + Seat.name(seat)}>
+         <header class="table-player-name">{{players[seat].name}}</header>
+         <div class={"table-hand-" + Seat.name(seat)}>
+            <hand-component seat="{{seat}}"/>
          </div>
       </section>
    </div>

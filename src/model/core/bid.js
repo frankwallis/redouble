@@ -3,28 +3,13 @@
 export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
 export const BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };
 
-interface IBid {
-   type: BidType;
-   suit: BidSuit;
-   level: number;
-}
+// interface IBid {
+//    type: BidType;
+//    suit: BidSuit;
+//    level: number;
+// }
 
 export class Bid {
-   static stringify(bid): string {
-      switch(bid.type) {
-        case BidType.NoBid:
-          return "No Bid";
-        case BidType.Call:
-          return bid.level.toString() + ' ' + Bid.suitName(bid.suit, (bid.level == 1));
-        case BidType.Double:
-          return "Double";
-        case BidType.Redouble:
-          return "Redouble";
-        default:
-          throw new Error("unrecognised bid");
-      }
-   }
-
    static key(bid): string {
       var result = [ bid.type ];
 
@@ -52,7 +37,7 @@ export class Bid {
       }
    }
 
-   static suitName(suit: BidSuit, singular: boolean) {
+   static suitName(suit: any, singular: boolean): string {
       var names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
       return names[suit] + (singular ? '' : 's');
    }
@@ -71,6 +56,21 @@ export class Bid {
          else {
             return 0;
          }
+      }
+   }
+
+   static stringify(bid): string {
+      switch(bid.type) {
+        case BidType.NoBid:
+          return "No Bid";
+        case BidType.Call:
+          return bid.level.toString() + ' ' + Bid.suitName(bid.suit, (bid.level == 1));
+        case BidType.Double:
+          return "Double";
+        case BidType.Redouble:
+          return "Redouble";
+        default:
+          throw new Error("unrecognised bid");
       }
    }
 }

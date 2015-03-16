@@ -1,7 +1,6 @@
 import {Component, Decorator, Template, NgElement, Foreach} from 'angular2/angular2';
 
-import {PlayerStore, PlayerActions} from "../../stores/player-store";
-import {PlayerService} from "../../stores/player-store";
+import {PlayerService} from "../../services/player-service";
 import {Seat} from "../../model/core/seat";
 
 @Component({

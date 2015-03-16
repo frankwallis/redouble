@@ -1,0 +1,9 @@
+<ol class="growl-list">
+   <li class="growl-item growl-error"
+       *foreach="#notification in notificationService.notifications"
+       (click)="handleResponse(notification.id, notification.defaultButton)">
+      <h3 class="growl-title">{{notification.title}}</h3>
+      <p class="growl-message">{{notification.message}}</p>
+      <div class="growl-buttons">{{buttons}}</div>
+   </li>
+</ol>

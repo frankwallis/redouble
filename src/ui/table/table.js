@@ -1,7 +1,7 @@
 import {Component, Template, Foreach, Switch, SwitchWhen} from 'angular2/angular2';
 
-import {PlayerService} from "../../stores/player-store";
-import {GameService} from "../../stores/game-store";
+import {PlayerService} from "../../services/player-service";
+import {GameService} from "../../services/game-service";
 import {GameState} from "../../model/game/game-state";
 import {Seat, seatName} from "../../model/core/seat";
 

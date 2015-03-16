@@ -39,11 +39,11 @@ export class GameStateHelper {
     * Returns the last bid to be made of type Bid.Call
     */
    get lastCall(): any {
-      return this.currentBoard.bids.reduce((current, bid) => {
+      return this.currentBoard.bids.reduce((result, bid) => {
          if (bid.type == BidType.Call)
             return bid;
          else
-            return current;
+            return result;
       }, undefined);
    }
 

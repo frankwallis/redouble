@@ -2,7 +2,7 @@ import {Component, Decorator, Template, Foreach} from 'angular2/angular2';
 
 import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
-import {GameService} from '../../stores/game-store';
+import {GameService} from '../../services/game-service';
 
 @Component({
   selector: 'bidding-box',

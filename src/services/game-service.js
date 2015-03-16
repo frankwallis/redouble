@@ -1,10 +1,17 @@
+import {Inject} from 'angular2/angular2';
 import {GameStateHelper} from "../model/game/game-state";
-//import {NotificationActions} from "./notification-store";
+import {NotificationService} from "./notification-service";
 
 export class GameService {
    constructor() {
+      //this.notificationService = notificationService;
       this.states = [ new GameStateHelper().newBoard() ];
       this.currentStateIdx = 0;
+   }
+
+   get notificationService() {
+      // DI not working!
+      return NotificationService.instance();
    }
 
    get currentState() {
@@ -22,8 +29,6 @@ export class GameService {
    }
 
    makeBid(bid) {
-      console.log('making bid');
-
       var err = this.currentState.validateBid(bid);
 
       if (err) {

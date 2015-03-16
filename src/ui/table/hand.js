@@ -1,7 +1,7 @@
 import {Component, Template, Foreach} from 'angular2/angular2';
 
 import {CardComponent} from '../components/card';
-import {GameService} from '../../stores/game-store';
+import {GameService} from '../../services/game-service';
 import {Card} from '../../model/core/card';
 
 @Component({

@@ -1,12 +1,21 @@
-import {Inject} from 'angular2/angular2';
+import {Inject} from 'angular2/di';
 import {GameStateHelper} from "../model/game/game-state";
 import {NotificationService} from "./notification-service";
 
+var instance = null;
+
 export class GameService {
+   //constructor(@Inject(NotificationService) notificationService) {
    constructor() {
+      if (!instance)
+         instance = this;
+      else
+         return instance;
+
       //this.notificationService = notificationService;
       this.states = [ new GameStateHelper().newBoard() ];
       this.currentStateIdx = 0;
+      console.log('created game');
    }
 
    get notificationService() {

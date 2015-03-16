@@ -7,7 +7,7 @@ import {Seat, seatName} from "../../model/core/seat";
 
 import {HandComponent} from "./hand";
 import {BiddingBox} from "./bidding-box";
-// import {BiddingHistory} from "./bidding-history";
+import {BiddingHistory} from "./bidding-history";
 // import {TrickComponent} from "./trick";
 
 /**
@@ -19,7 +19,7 @@ import {BiddingBox} from "./bidding-box";
 })
 @Template({
    url: 'src/ui/table/table.html',
-   directives: [Foreach, BiddingBox, HandComponent, Switch, SwitchWhen]
+   directives: [Foreach, BiddingBox, HandComponent, BiddingHistory, Switch, SwitchWhen]
 })
 
 export class TableView {

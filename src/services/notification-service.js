@@ -1,3 +1,4 @@
+import {Injectable} from 'angular2/di';
 
 /**
  * Store for showing notifications to the user and
@@ -6,7 +7,7 @@
  */
 var instance = null;
 
-class Deferred {
+export class Deferred {
    constructor() {
       this.promise = new Promise((resolve, reject) => {
          this.resolve = resolve;
@@ -15,16 +16,20 @@ class Deferred {
    }
 }
 
+@Injectable()
 export class NotificationService {
    constructor() {
+      if (!instance)
+         instance = this;
+      else
+         return instance;
+
       this.notifications = [];
       this.currentId = 1;
 
-      setInterval(() => {
-         this.autoDismiss();
-      }, 7500);
-
-      instance = this;
+      //setInterval(() => {
+      //   this.autoDismiss();
+      //}, 7500);
    }
 
    static instance() {

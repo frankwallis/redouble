@@ -1,0 +1,18 @@
+<table class="bidding-container pure-table">
+   <thead>
+      <tr>
+         <th class="bidding-cell"
+             *foreach="#seat in seats">{{seatName(seat)}}</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr class="bidding-round"
+          *foreach="#round in rounds">
+         <td class="bidding-cell"
+             *foreach="#seat in seats">
+             <bid-component bind-bid="getBid(round, seat)"/>
+            <!-- <bid-component bind-bid="round[seat]"/> -->
+         </td>
+      </tr>
+   </tbody>
+</table>

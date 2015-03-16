@@ -28,7 +28,7 @@ export class App {
 }
 
 export function main() {
-  // You can use the light dom of the <hello-app> tag as temporary content (for
-  // example 'Loading...') before the application is ready.
-  bootstrap(App);
+   // You can use the light dom of the <hello-app> tag as temporary content (for
+   // example 'Loading...') before the application is ready.
+   bootstrap(App);
 }

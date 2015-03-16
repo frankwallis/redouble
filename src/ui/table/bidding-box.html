@@ -1,43 +1,43 @@
 <div class="bidding-box-container">
    <table>
       <colgroup>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
-         <col span="1" style={{width: '10%'}}></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
+         <col span="1" style="width: '10%'"></col>
       </colgroup>
-         <tbody>
+         <tbody (click)="sayHello($event)">
             <tr *foreach="#level in levels" class="bidding-box-level">
-               <td *foreach="#bid in level" class="bidding-box-cell" colSpan="2">
-                  <button class="bidding-box-button pure-button"
-                          (click)="makeBid(bid)">
-                     <bid-component bind-bid="bid"/>
-                  </button>
+               <td *foreach="#thebid in level" class="bidding-box-cell" colspan="2">
+                  <a class="bidding-box-button pure-button"
+                     (^click)="makeBid(thebid)">
+                     <bid-component [bid]="thebid"/>
+                  </a>
                </td>
             </tr>
             <tr class="bidding-box-level">
-               <td class="bidding-box-cell" colSpan="3">
+               <td class="bidding-box-cell" colspan="3">
                   <button class="bidding-box-button pure-button"
-                          (click)="makeBid({type: BidType.Double})">
-                     <bid-component bind-bid="{type: BidType.Double}"/>
+                          (^click)="makeBid({type: BidType.Double})">
+                     <bid-component [bid]="{type: BidType.Double}"/>
                   </button>
                </td>
-               <td class="bidding-box-cell" colSpan="3">
+               <td class="bidding-box-cell" colspan="3">
                   <button class="bidding-box-button pure-button"
-                          (click)="makeBid({type: BidType.Redouble})">
-                     <bid-component bind-bid="{type: BidType.Redouble}"/>
+                          (^click)="makeBid({type: BidType.Redouble})">
+                     <bid-component [bid]="{type: BidType.Redouble}"/>
                   </button>
                </td>
-               <td class="bidding-box-cell" colSpan="4">
+               <td class="bidding-box-cell" colspan="4">
                   <button class="bidding-box-button pure-button"
-                          (click)="makeBid({type: BidType.NoBid})">
-                     <bid-component bind-bid="{type: BidType.NoBid}"/>
+                          (^click)="makeBid({type: BidType.NoBid})">
+                     <bid-component [bid]="{type: BidType.NoBid}"/>
                   </button>
                </td>
             </tr>

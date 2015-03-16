@@ -15,13 +15,13 @@ import {BidType, BidSuit, Bid} from '../../model/core/bid';
 
 export class BidComponent {
 
-   bid: any;
-   
    constructor() {
       this.Bid = Bid;
       this.BidSuit = BidSuit;
       this.BidType = BidType;
    }
+
+   bid: any;
 
    suitClass(suit): any {
       console.log('in suitClass ' + suit);

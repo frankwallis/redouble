@@ -26,6 +26,7 @@ export class BiddingBox {
          this.levels.push(cells);
       }
 
+      this.Bid = Bid;
       this.BidType = BidType;
       this.BidSuit = BidSuit;
       console.log('created bidding-box')

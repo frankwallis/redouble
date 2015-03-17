@@ -10,14 +10,19 @@
          </li>
       </ul>
    </nav>
-   <div [switch]="state.route" class="app-content">
+   <div class="app-content">
+      <settings-view *if="state.route == 'settings'" ></settings-view>
+      <table-view *if="state.route != 'settings'" ></table-view>
+   </div>
+
+   <!-- <div [switch]="state.route" class="app-content">
       <template [switch-when]="settings">
-         <settings-view />
+         <settings-view></settings-view>
       </template>
       <template [switch-default]>
-         <table-view />
+         <table-view></table-view>
       </template>
-   </div>
+   </div> -->
    <div class="app-growl">
       <growler />
    </div>

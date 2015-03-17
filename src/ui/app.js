@@ -1,17 +1,20 @@
-import {bootstrap, Component, Template, Foreach, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2';
+import {bootstrap, Component, Template, Foreach, If, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2';
 import {SettingsView} from './settings/settings';
 import {TableView} from './table/table';
 import {GrowlContainer} from './growl/growl';
 
 @Component({
-  selector: 'hello-app',
+  selector: 'tower-app',
   services: []
 })
 @Template({
   url: 'src/ui/app.html',
   // inline: `<div class="greeting">{{greeting}} <span red>world</span>!</div>
   //          <button class="changeButton" (click)="changeGreeting()">change greeting</button>`,
-  directives: [Foreach, Switch, SwitchWhen, SwitchDefault, SettingsView, TableView, GrowlContainer]
+  directives: [
+     Foreach, If, Switch, SwitchWhen, SwitchDefault,
+     SettingsView, TableView, GrowlContainer
+  ]
 })
 
 export class App {
@@ -20,11 +23,12 @@ export class App {
       this.routes = ["home", "table", "settings", "about"];
    }
 
-   routeClicked($event, newroute) {
+   routeClicked ($event, newroute) {
       console.log('in routeClicked ' + newroute);
       $event.preventDefault();
       this.state = { route: newroute };
    }
+
 }
 
 export function main() {

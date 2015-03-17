@@ -1,13 +1,12 @@
 System.config({
   "paths": {
     "*": "./",
-    "*.jsx": "*.jsx",
     "src/*": "src/*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js",
     "tower/*": "src/*.js",
-    "angular2/*": "../angular/dist/js/dev/es6/angular2/*.es6",
-    "rtts_assert/*": "../angular/dist/js/dev/es6/rtts_assert/*.es6"
+    "angular2/*": "../jspm_packages/npm/angular2@2.0.0-alpha.13/es6/prod/*.es6",
+    "rtts_assert/*": "../jspm_packages/npm/rtts_assert@2.0.0-alpha.13/es6/*.es6"
   },
   "traceurOptions": {
     "asyncFunctions": true,
@@ -33,6 +32,7 @@ System.config({
     "reflux": "npm:reflux@0.2.5",
     "text": "github:systemjs/plugin-text@0.0.2",
     "yahoo/pure": "github:yahoo/pure@0.6.0",
+    "zone.js": "npm:zone.js@0.4.1",
     "github:floatdrop/plugin-jsx@0.1.1": {
       "react-tools": "npm:react-tools@0.12.2"
     },
@@ -828,6 +828,10 @@ System.config({
       "indexof": "npm:indexof@0.0.1"
     },
     "npm:zone.js@0.4.0": {
+      "fs": "github:jspm/nodelibs-fs@0.1.1",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:zone.js@0.4.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.1",
       "process": "github:jspm/nodelibs-process@0.1.1"
     }

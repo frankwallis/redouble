@@ -16,7 +16,7 @@ export class Deferred {
    }
 }
 
-@Injectable()
+//@Injectable()
 export class NotificationService {
    constructor() {
       if (!instance)

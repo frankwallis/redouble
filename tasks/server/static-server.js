@@ -32,8 +32,23 @@ function staticServer(options) {
    // serve index
    app.get('/', index);
 
-   // redirect all other routes without file extensions to the index
-   app.get(/^([^.]+)$/, index);
+   // redirect all other *routes* to the index, angular will take care of the rest
+   // if the route is a filepath (has a file extension) then let it through to 404
+   app.get('*', function(req, res, next) {
+      var route = req.path;
+
+      // strip query params from end
+      route = route.split('?')[0];
+
+      // strip directories from front
+      route = route.slice(route.lastIndexOf('/') + 1);
+
+      if (route.indexOf(".") < 0)
+         return index(req, res);
+         else
+         return next();
+   });
+   //app.get(/^([^.]+)$/, index);?
 
    var server = http.createServer(app).listen(options.port, function () {
       console.log('express server listening on port ' + options.port);

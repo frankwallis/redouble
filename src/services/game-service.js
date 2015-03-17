@@ -7,6 +7,7 @@ var instance = null;
 export class GameService {
    //constructor(@Inject(NotificationService) notificationService) {
    constructor() {
+      // singleton!
       if (!instance)
          instance = this;
       else

@@ -18,7 +18,6 @@ export class SettingsView {
       this.playerService = playerService;
       this.players = playerService.players;
       this.Seat = Seat;
-      this.seats = Seat.all();
    }
 
    handleChangeName(seat, event) {

@@ -1,24 +1,27 @@
-/// <reference path="../../../_references.d.ts" />
+/* @flow */
 
-export class CardplayStrategy { //implements tower.ICardplayStrategy {
+export class CardplayStrategy {
 
-    constructor() {
+   constructor() {
 
-    }
+   }
 
-    getCard(game: tower.IGame, player: tower.IPlayer): tower.ICard {
-        var trick = game.currentBoard.cardplay.currentTrick;
-        return this.getAnyCard(trick.leadCard, player.hand);
-    }
+   getCard(game): tower.ICard {
+      var trick = game.currentTrick;
+      var cards = game.hands[game.nextPlayer].filter((card) => !game.hasBeenPlayed(card));
+      return this.getAnyCard(trick[0], cards);
+   }
 
-    getAnyCard(lead: tower.ICard, hand: tower.IHand) {
+   getAnyCard(lead: tower.ICard, cards: tower.IHand) {
+      var availableCards = cards;
 
-        if (lead) {
-            for (var i = 0; i < hand.availableCards.length; i ++)
-                if (hand.availableCards[i].suit == lead.suit)
-                    return hand.availableCards[i];
-        }
+      if (lead) {
+         var followers = availableCards.filter((card) => card.suit == lead.suit);
 
-        return hand.availableCards[0];
-    }
+         if (followers.length > 0)
+            availableCards = followers;
+      }
+
+      return hand.availableCards[0];
+   }
 }

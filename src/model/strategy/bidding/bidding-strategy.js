@@ -1,20 +1,20 @@
-/// <reference path="../../../_references.d.ts" />
+/* @flow */
 
-export class BiddingStrategy { //implements tower.IBiddingStrategy {
+import {BidSuit, BidType, Bid} from "../../core/bid";
 
-    constructor() {
+export class BiddingStrategy {
 
-    }
+    constructor() {}
 
     getBid(game: tower.IGame): tower.IBid {
         if ((game.currentBoard.bids.length > 0) &&
             (game.currentBoard.bids.length < 4))
             return {
-              type: tower.BidType.Call,
-              suit: game.lastBid.suit +1 || tower.BidSuit.Clubs,
-              level: game.lastBid.level +1 || 1
+              type: BidType.Call,
+              suit: game.lastCall.suit +1 || BidSuit.Clubs,
+              level: game.lastCall.level +1 || 1
             };
         else
-            return {type: tower.BidType.NoBid};
+            return {type: BidType.NoBid};
     }
 }

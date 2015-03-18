@@ -24,6 +24,9 @@ export const GameStore = Reflux.createStore({
       this.states = [ new GameStateHelper().newBoard() ];
       this.currentStateIdx = 0;
    },
+   getInitialState: function() {
+      return this.states[this.currentStateIdx];
+   },
    currentState: function() {
       return this.states[this.currentStateIdx];
    },

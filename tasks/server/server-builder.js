@@ -3,12 +3,12 @@ module.exports = function(options) {
    var path = require('path');
 
    options = options || {};
-   options.liveReload = options.liveReload || true;
-   options.launchBrowser = options.launchBrowser || true;
    options.webRoot = path.join(process.cwd(), options.webRoot || '');
-   options.bridgeAddress = options.bridgeAddress || 'http://172.30.30.252:8888';
+   options.webIndex = options.webIndex || "index-dev.html";
    options.port = options.port || 8888;
+   options.liveReload = options.liveReload || true;
    options.liveReloadDelay = options.liveReloadDelay || 1200;
+   options.launchBrowser = options.launchBrowser || true;
    options.verbose = options.verbose || false;
 
    return function(gulp) {

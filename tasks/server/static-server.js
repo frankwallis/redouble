@@ -26,7 +26,7 @@ function staticServer(options) {
    app.use(express.static(options.webRoot));
 
    function index(req, res) {
-      res.sendFile('index.html', {'root': options.webRoot});
+      res.sendFile(options.webIndex, {'root': options.webRoot});
    };
 
    // serve index

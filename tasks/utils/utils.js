@@ -62,6 +62,12 @@ function endsWith(str, post) {
    return str.lastIndexOf(post) + post.length === str.length;
 }
 
+function changeExtension(file, newext) {
+   var ext = path.extname(file);
+   return file.slice(0, file.length - ext.length) + '.' + newext;
+}
+
+module.exports.changeExtension = changeExtension;
 module.exports.ensureDirectory = ensureDirectory;
 module.exports.ensureWriteFile = ensureWriteFile;
 module.exports.unglob = unglob;

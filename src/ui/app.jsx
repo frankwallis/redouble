@@ -6,6 +6,12 @@ import {Table} from './table/table.jsx';
 import {SettingsView} from './settings/settings.jsx';
 import {GrowlContainer} from './growl/growl.jsx';
 
+/* these should probably be somewhere else */
+import a from 'necolas/normalize.css';
+import b from 'purecss/build/pure.css!';
+import c from 'FortAwesome/Font-Awesome/css/font-awesome.css!';
+import d from './app.css!';
+
 export class App extends React.Component {
    constructor(props) {
       super(props);

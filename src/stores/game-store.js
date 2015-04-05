@@ -3,6 +3,7 @@
 import Reflux from 'reflux';
 import {GameStateHelper} from "../model/game/game-state";
 import {NotificationActions} from "./notification-store";
+import {Seat} from "../model/core/seat";
 
 export const GameActions = Reflux.createActions([
    "newGame",
@@ -21,7 +22,7 @@ export const GameActions = Reflux.createActions([
 export const GameStore = Reflux.createStore({
    init: function() {
       this.listenToMany(GameActions);
-      this.states = [ new GameStateHelper().newBoard() ];
+      this.states = [ new GameStateHelper().newBoard(Seat.North) ];
       this.currentStateIdx = 0;
    },
    getInitialState: function() {

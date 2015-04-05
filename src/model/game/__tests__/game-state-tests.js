@@ -4,6 +4,7 @@ jest.dontMock('../game-state.js');
 import {GameStateHelper} from '../game-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';
+import {Seat} from '../../core/seat';
 
 describe('Game State Helper', () => {
    describe('currentBoard', () => {
@@ -173,6 +174,52 @@ describe('Game State Helper', () => {
    });
 
    describe('nextPlayer', () => {
+      it('returns the dealer when bidding starts', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+         expect(gameState.nextPlayer).toEqual(Seat.West);
+      });
+
+      it('returns the next player when bidding', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+         expect(gameState.nextPlayer).toEqual(Seat.West);
+
+         gameState = gameState.makeBid(Bid.create("4NT"));
+         expect(gameState.nextPlayer).toEqual(Seat.North);
+
+         gameState = gameState.makeBid(Bid.create("double"));
+         expect(gameState.nextPlayer).toEqual(Seat.East);
+      });
+
+      it('returns the leader when bidding ends', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+         expect(gameState.nextPlayer).toEqual(Seat.West);
+
+         gameState = gameState.makeBid(Bid.create("1H"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         expect(gameState.nextPlayer).toEqual(Seat.North);
+      });
+
+      it('returns the trick winner when playing', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+         expect(gameState.nextPlayer).toEqual(Seat.West);
+
+         gameState = gameState.makeBid(Bid.create("1H"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         gameState = gameState.makeBid(Bid.create("no bid"));
+         expect(gameState.nextPlayer).toEqual(Seat.North);
+
+         gameState = gameState.playCard(Card.create("2H"));
+         gameState = gameState.playCard(Card.create("3H"));
+         gameState = gameState.playCard(Card.create("4H"));
+         gameState = gameState.playCard(Card.create("5H"));
+
+         expect(gameState.nextPlayer).toEqual(Seat.East);
+         gameState = gameState.playCard(Card.create("6H"));
+         expect(gameState.nextPlayer).toEqual(Seat.North);
+      });
 
    });
 

@@ -8,7 +8,7 @@ export class CardplayStrategy {
 
    getCard(game): tower.ICard {
       var trick = game.currentTrick;
-      var cards = game.hands[game.nextPlayer].filter((card) => !game.hasBeenPlayed(card));
+      var cards = game.currentBoard.hands[game.nextPlayer].filter((card) => !game.hasBeenPlayed(card));
       return this.getAnyCard(trick[0], cards);
    }
 
@@ -22,6 +22,6 @@ export class CardplayStrategy {
             availableCards = followers;
       }
 
-      return hand.availableCards[0];
+      return availableCards[0];
    }
 }

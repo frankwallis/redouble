@@ -29,9 +29,9 @@ export const PlayerStore = Reflux.createStore({
       this.cardplayStrategy = new CardplayStrategy();
       this.biddingStrategy = new BiddingStrategy();
 
-      this.unsubscribeGame = GameStore.listen((game) => this.onGameTurn(game),
-                                              (game) => this.onGameTurn(game));
-      //this.onGameTurn(GameStore.currentState);
+      this.unsubscribeGame = this.listenTo(GameStore,
+                                           (game) => this.onGameTurn(game),
+                                           (game) => this.onGameTurn(game));
    },
    onUpdatePlayer: function(seat, delta) {
       console.log('updating player');
@@ -41,6 +41,7 @@ export const PlayerStore = Reflux.createStore({
       this.trigger(this.players);
    },
    onGameTurn: function(game) {
+      console.log('onGameTurn');
       if (!this.players[game.nextPlayer].ishuman) {
          if (game.biddingHasEnded) {
             var card = this.cardplayStrategy.getCard(game);

@@ -7,7 +7,10 @@ export class BiddingStrategy {
     constructor() {}
 
     getBid(game: tower.IGame): tower.IBid {
-        if ((game.currentBoard.bids.length > 0) &&
+        if (!game.lastCall) {
+           return {type: BidType.NoBid};
+        }
+        else if ((game.currentBoard.bids.length > 0) &&
             (game.currentBoard.bids.length < 4))
             return {
               type: BidType.Call,

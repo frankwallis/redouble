@@ -114,13 +114,31 @@ export class GameStateHelper {
    }
 
    /**
+    * Returns the seat of the lead card
+    */
+   get declarer(): Seat {
+      if (!this.biddingHasEnded)
+         throw new Error("the bidding has not ended yet");
+
+      for (var i = 0; i < this.currentBoard.bids.length -1; i ++)
+         if (this.currentBoard.bids[i].suit == this.lastCall.suit)
+            return Seat.rotate(this.currentBoard.dealer, i);
+
+      throw new Error("declarer not found");
+   }
+
+   get leader(): Seat {
+      return Seat.rotate(this.declarer, 1);
+   }
+
+   /**
     * Returns the seat of the player who's turn it is to play
     */
    get nextPlayer(): tower.Seat {
-      if (this.biddingHasEnded)
-         return Seat.rotate(this.currentBoard.leader, this.currentBoard.cards.length);
-      else
+      if (!this.biddingHasEnded)
          return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.length);
+      else
+         return Seat.rotate(this.leader, this.currentBoard.cards.length);
    }
 
    /**
@@ -176,13 +194,13 @@ export class GameStateHelper {
    /**
     * Starts a new board
     */
-   newBoard(): GameStateHelper {
+   newBoard(dealer): GameStateHelper {
       var deck = new Deck();
       deck.shuffle();
 
       var hands = deck.deal(4);
       var board = {
-         dealer: Seat.North, // TODO
+         dealer: dealer,
          hands: hands,
          bids: [],
          cards: []

@@ -26,7 +26,7 @@ export const Seat = {
    },
 
    rotate: function(seat, count) {
-      count = count || 1;
+      count = count || 0;
       return ((seat + count - Seat.North) % 4) + Seat.North;
    }
 };

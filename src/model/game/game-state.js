@@ -34,24 +34,26 @@ export class GameStateHelper {
     * Returns the last bid to be made of type Bid.Call
     */
    get lastCall(): Bid {
-      return this.currentBoard.bids.reduce((current, bid) => {
-         if (bid.type == BidType.Call)
-            return bid;
-         else
-            return current;
-      }, undefined);
+      return this.currentBoard.bids
+         .reduce((current, bid) => {
+            if (bid.type == BidType.Call)
+               return bid;
+            else
+               return current;
+         }, undefined);
    }
 
    /**
     * Returns the last bid to be made which was not a no-bid
     */
    get lastAction(): Bid {
-      return this.currentBoard.bids.reduce((current, bid) => {
-         if (bid.type != BidType.NoBid)
-            return bid;
-         else
-            return current;
-      }, undefined);
+      return this.currentBoard.bids
+         .reduce((current, bid) => {
+            if (bid.type != BidType.NoBid)
+               return bid;
+            else
+               return current;
+         }, undefined);
    }
 
    /**
@@ -167,6 +169,8 @@ export class GameStateHelper {
          case BidType.Call: {
             if ((!bid.level) || (!bid.suit))
                return new Error("you must provide level and suit");
+            else if ((bid.level < 1) || (bid.level > 7))
+               return new Error("invalid level");
             else if (this.lastCall) {
                if (Bid.compare(bid, this.lastCall) <= 0)
                   return new Error("bid must be higher than " + Bid.stringify(this.lastCall));

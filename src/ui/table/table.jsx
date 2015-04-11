@@ -58,8 +58,8 @@ export class Table extends React.Component {
       });
 
       var board = this.game.biddingHasEnded ?
-         board = <TrickComponent game={this.game}/>
-         : board = <BiddingHistory board={this.game.currentBoard}/>;
+         <TrickComponent game={this.game}/>
+         : <BiddingHistory board={this.game.currentBoard}/>;
 
       var biddingBox = <BiddingBox className="table-bidding-box" game={this.game}/>
 

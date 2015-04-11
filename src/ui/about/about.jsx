@@ -19,9 +19,9 @@ export class AboutView extends React.Component {
             <section>
               <h3>About Tower</h3>
               <p>
-                This application is my combined sandpit &amp; life work. As a both a keen bridge player and developer I always wanted to 
+                Welcome to Tower!. As a both a keen bridge player and developer I always wanted to 
                 develop this Bridge game and I finally got around to it. I use it as sandpit for trying out new technologies, 
-                tools and techniques which I am interested in.
+                tools and techniques which I am interested in. I expect it will also be my life's work.
 
                 The application you are using is developed in ES6 using ReactJS and uses the Flux architecture. It is built using SystemJS, JSPM and Babel.
                 I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
@@ -33,7 +33,6 @@ export class AboutView extends React.Component {
               <h3>Roadmap</h3>
               <ul>
                 <li>Implement the playing strategies based on <a href="http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm">Information Set Monte Carlo Tree Search</a> algorithm</li>
-                <li>Save settings to local storage</li>
                 <li>Select a proper immutable data library</li>
                 <li>Integration Tests</li>
                 <li>Better shuffling algorithm</li>

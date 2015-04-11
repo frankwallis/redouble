@@ -10,6 +10,8 @@ export const PlayerActions = Reflux.createActions([
    "updatePlayer"
 ]);
 
+const STORAGE_KEY = 'players';
+
 /**
  * Store for managing the players of the game
  */
@@ -17,14 +19,19 @@ export const PlayerStore = Reflux.createStore({
    init: function() {
       this.listenToMany(PlayerActions);
 
-      this.players = Seat.all()
-         .map((seat) => {
-            return {
-               seat: seat,
-               name: Seat.name(seat),
-               ishuman: (seat == Seat.South)
-            };
-         });
+      var playersStr = localStorage.getItem(STORAGE_KEY);
+
+      if (playersStr)
+         this.players = JSON.parse(playersStr);
+      else
+         this.players = Seat.all()
+            .map((seat) => {
+               return {
+                  seat: seat,
+                  name: Seat.name(seat),
+                  ishuman: (seat == Seat.South)
+               };
+            });
 
       this.cardplayStrategy = new CardplayStrategy();
       this.biddingStrategy = new BiddingStrategy();
@@ -38,6 +45,7 @@ export const PlayerStore = Reflux.createStore({
       Object.keys(delta).forEach((key) => {
          this.players[seat][key] = delta[key];
       })
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.players));      
       this.trigger(this.players);
    },
    onGameTurn: function(game) {

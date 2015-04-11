@@ -32,7 +32,7 @@ export class SettingsView extends React.Component {
    }
 
    handleChangeHuman(seat, event) {
-      PlayerActions.updatePlayer(seat, {ishuman: event.target.value});
+      PlayerActions.updatePlayer(seat, {ishuman: !event.target.value});
    }
 
    render() {
@@ -51,18 +51,17 @@ export class SettingsView extends React.Component {
             </div>
             <div className="settings-field">
                <label className="settings-label"
-                      htmlFor={"human-input-" + Seat.name(seat)}>Human?</label>
+                      htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
                <input className="settings-input-human"
                       type="checkbox" id={"human-input-" + Seat.name(seat)}
-                      defaultChecked={this.players[seat].ishuman}
+                      defaultChecked={!this.players[seat].ishuman}
                       onChange={(event) => this.handleChangeHuman(seat, event)}></input>
             </div>
          </li>
       });
 
       return (
-         <div>
-            <h1>Settings</h1>
+         <div className="settings-container">
             <ul className="settings-players">
                {players}
             </ul>

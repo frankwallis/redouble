@@ -1,3 +1,15 @@
+.settings-container h1 {
+	margin: 1em;
+	margin-top: 2em;
+}
+
+.settings-player h3 {
+	text-transform: uppercase;
+	color: rgb(159, 45, 52);
+	margin-top: 1.5em;
+	margin-bottom: .75em;
+}
+
 .settings-players {
    list-style: none;
 }

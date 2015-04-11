@@ -23,15 +23,16 @@ export const PlayerStore = Reflux.createStore({
 
       if (playersStr)
          this.players = JSON.parse(playersStr);
-      else
-         this.players = Seat.all()
-            .map((seat) => {
-               return {
-                  seat: seat,
-                  name: Seat.name(seat),
-                  ishuman: (seat == Seat.South)
-               };
-            });
+      else {
+         this.players = {};
+         Seat.all().forEach((seat) => {
+            this.players[seat] = {
+               seat: seat,
+               name: Seat.name(seat),
+               ishuman: (seat == Seat.South)
+            };
+         });
+      }
 
       this.cardplayStrategy = new CardplayStrategy();
       this.biddingStrategy = new BiddingStrategy();
@@ -50,6 +51,9 @@ export const PlayerStore = Reflux.createStore({
    },
    onGameTurn: function(game) {
       console.log('onGameTurn');
+
+      if (!game.nextPlayer) return;
+
       if (!this.players[game.nextPlayer].ishuman) {
          if (game.biddingHasEnded) {
             var card = this.cardplayStrategy.getCard(game);

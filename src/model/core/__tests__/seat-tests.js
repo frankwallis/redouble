@@ -1,26 +1,36 @@
 jest.autoMockOff()
 
-import {Seat, rotate} from '../seat';
+import {Seat} from '../seat';
 
 describe("Seat", () => {
 
     describe("rotate", () => {
       it("rotates through all the seats", () => {
          var seat = Seat.South;
-         seat = rotate(seat, 1);
+         seat = Seat.rotate(seat, 1);
          expect(seat).toBe(Seat.West);
-         seat = rotate(seat, 1);
+         seat = Seat.rotate(seat, 1);
          expect(seat).toBe(Seat.North);
-         seat = rotate(seat, 1);
+         seat = Seat.rotate(seat, 1);
          expect(seat).toBe(Seat.East);
-         seat = rotate(seat, 1);
+         seat = Seat.rotate(seat, 1);
          expect(seat).toBe(Seat.South);
       });
 
       it("rotates more than 4 positions at once", () => {
          var seat = Seat.South;
-         seat = rotate(seat, 4001);
+         seat = Seat.rotate(seat, 4001);
          expect(seat).toBe(Seat.West);
       });
     });
+
+    describe("isPartner", () => {
+      it("knows the partnerships", () => {
+        expect(Seat.isPartner(Seat.West, Seat.East)).toBeTruthy();
+        expect(Seat.isPartner(Seat.North, Seat.South)).toBeTruthy();
+        expect(Seat.isPartner(Seat.West, Seat.South)).toBeFalsy();
+        expect(Seat.isPartner(Seat.North, Seat.West)).toBeFalsy();
+      });
+    });
+
 });

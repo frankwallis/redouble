@@ -2,6 +2,7 @@
 
 import Reflux from 'reflux';
 import {GameStateHelper} from "../model/game/game-state";
+import {validateBid, validateCard} from "../model/game/validators";
 import {NotificationActions} from "./notification-store";
 import {Seat} from "../model/core/seat";
 
@@ -22,6 +23,9 @@ export const GameActions = Reflux.createActions([
 export const GameStore = Reflux.createStore({
    init: function() {
       this.listenToMany(GameActions);
+      this.reset();
+   },
+   reset: function() {
       this.states = [ new GameStateHelper().newBoard(Seat.North) ];
       this.currentStateIdx = 0;
    },
@@ -64,7 +68,7 @@ export const GameStore = Reflux.createStore({
 });
 
 GameActions.makeBid.shouldEmit = function(bid) {
-   var err = GameStore.currentState().validateBid(bid);
+   var err = validateBid(bid, GameStore.currentState());
 
    if (err) {
       NotificationActions.error({
@@ -77,7 +81,7 @@ GameActions.makeBid.shouldEmit = function(bid) {
 }
 
 GameActions.playCard.shouldEmit = function(card) {
-   var err = GameStore.currentState().validateCard(card);
+   var err = validateCard(card, GameStore.currentState());
 
    if (err) {
       NotificationActions.error({

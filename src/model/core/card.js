@@ -51,19 +51,27 @@ export class Card {
       return result;
    }
 
+   static suitName(suit: Suit) {
+      const suitNames = [ "", "clubs", "diamonds", "hearts", "spades"];
+      return suitNames[suit];
+   }
+
+   static pipName(pip) {
+     switch(pip) {
+         case Pip.Ace: return "A";
+         case Pip.King: return "K";
+         case Pip.Queen: return "Q";
+         case Pip.Jack: return "J";
+         default: return pip.toString();
+     }
+   }
 }
 
+// deprecated 
 export function suitName(suit) {
-   var suitNames = [ "", "clubs", "diamonds", "hearts", "spades"];
-   return suitNames[suit];
+   return Card.suitName(suit);
 }
 
 export function pipName(pip) {
-  switch(pip) {
-      case Pip.Ace: return "A";
-      case Pip.King: return "K";
-      case Pip.Queen: return "Q";
-      case Pip.Jack: return "J";
-      default: return pip.toString();
-  }
+   return Card.pipName(pip);
 }

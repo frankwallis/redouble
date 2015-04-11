@@ -8,9 +8,9 @@ export class Deck {
       this.cards = this.createCards();
    }
 
-   cards: Array<tower.ICard>;
+   cards: Array<Card>;
 
-   createCards(): Array<tower.ICard> {
+   createCards(): Array<Card> {
       var result = [];
 
       for (var asuit = Suit.Clubs; asuit <= Suit.Spades; asuit++) {
@@ -22,7 +22,7 @@ export class Deck {
       return result;
    }
 
-   shuffleCards(array: Array<tower.ICard>): Array<tower.ICard> {
+   shuffleCards(array: Array<Card>): Array<Card> {
       var i = array.length, j, swap;
 
       while (--i) {
@@ -39,7 +39,7 @@ export class Deck {
       this.cards = this.shuffleCards(this.cards);
    }
 
-   deal(hands: number): any {//Array<Array<tower.ICard> {
+   deal(hands: number): any {//Array<Array<Card> {
 
       var current = 0;
       var result = [];

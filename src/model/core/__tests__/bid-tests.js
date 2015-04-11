@@ -42,7 +42,7 @@ describe("Bid", () => {
       });
    });
 
-   describe("compare", () => {
+   describe("create", () => {
       it("creates bids correctly", () => {
          var bid = Bid.create("1C");
          expect(bid.suit).toBe(BidSuit.Clubs);

@@ -6,7 +6,7 @@ import Reflux from 'reflux';
 import {PlayerStore} from "../../stores/player-store";
 import {GameStore, GameActions} from "../../stores/game-store";
 import {GameState} from "../../model/game/game-state";
-import {Seat, seatName} from "../../model/core/seat";
+import {Seat} from "../../model/core/seat";
 
 import {HandComponent} from "./hand.jsx";
 import {BiddingBox} from "./bidding-box.jsx";
@@ -45,12 +45,12 @@ export class Table extends React.Component {
    render() {
       console.log('rendering table');
 
-      var players = this.players.map((player) => {
+      var players = Seat.all().map((seat) => {
          return (
-            <section className={"table-edge-" + Seat.name(player.seat)} key={player.seat}>
-               <header className="table-player-name">{player.name}</header>
-               <div className={"table-hand-" + Seat.name(player.seat)}>
-                  <HandComponent seat={player.seat}
+            <section className={"table-edge-" + Seat.name(seat)} key={seat}>
+               <header className="table-player-name">{this.players[seat].name}</header>
+               <div className={"table-hand-" + Seat.name(seat)}>
+                  <HandComponent seat={seat}
                                  game={this.game}/>
                </div>
             </section>
@@ -58,10 +58,12 @@ export class Table extends React.Component {
       });
 
       var board = this.game.biddingHasEnded ?
-         <TrickComponent game={this.game}/>
-         : <BiddingHistory board={this.game.currentBoard}/>;
+         <TrickComponent game={this.game}/> :
+         <BiddingHistory board={this.game.currentBoard}/>;
 
-      var biddingBox = <BiddingBox className="table-bidding-box" game={this.game}/>
+      var biddingBox = this.game.biddingHasEnded ? 
+         undefined : 
+         <BiddingBox className="table-bidding-box" game={this.game}/>;
 
       return (
          <div className="bridge-table">

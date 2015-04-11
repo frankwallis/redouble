@@ -3,7 +3,7 @@
 import React from 'react';
 
 import {BidComponent} from '../components/bid.jsx';
-import {Seat, seatName} from "../../model/core/seat";
+import {Seat} from "../../model/core/seat";
 
 export class BiddingHistory extends React.Component {
 
@@ -16,7 +16,7 @@ export class BiddingHistory extends React.Component {
 
       for (var seat = Seat.North; seat <= Seat.West; seat ++) {
         headings.push(
-          <th key={seat} className="bidding-cell">{seatName(seat)}</th>
+          <th key={seat} className="bidding-cell">{Seat.name(seat)}</th>
         );
       }
 

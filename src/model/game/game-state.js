@@ -5,8 +5,9 @@ import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card, Pip, Suit} from "../core/card";
 import {GameScorer} from "./game-scorer";
+import {validateBid, validateCard} from "./validators";
 
-/**
+/** 
  * Helper class for analysing game-state.
  * This class is designed to be immutable from the outside
  */
@@ -44,6 +45,14 @@ export class GameStateHelper {
    }
 
    /**
+    * Returns the player who made the lastCall
+    */
+   get lastCaller(): Seat {
+      var call = this.lastCall;
+      if (call) return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.indexOf(call));
+   }
+
+   /**
     * Returns the last bid to be made which was not a no-bid
     */
    get lastAction(): Bid {
@@ -54,6 +63,14 @@ export class GameStateHelper {
             else
                return current;
          }, undefined);
+   }
+
+   /**
+    * Returns the seat whic made the lastAction
+    */
+   get lastActor(): Seat {
+      var act = this.lastAction;
+      if (act) return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.indexOf(act));
    }
 
    /**
@@ -79,7 +96,7 @@ export class GameStateHelper {
 
          idx --;
       }
-      return (consecutivePasses >= 3) && (this.currentBoard.bids.length > 3);
+      return (consecutivePasses >= 3) && (this.currentBoard.bids.length >= 4);
    }
 
    /**
@@ -122,9 +139,11 @@ export class GameStateHelper {
       if (!this.biddingHasEnded)
          throw new Error("the bidding has not ended yet");
 
-      for (var i = 0; i < this.currentBoard.bids.length -1; i ++)
-         if (this.currentBoard.bids[i].suit == this.lastCall.suit)
-            return Seat.rotate(this.currentBoard.dealer, i);
+      if (this.lastCall) {
+        for (var i = 0; i < this.currentBoard.bids.length -1; i ++)
+           if (this.currentBoard.bids[i].suit == this.lastCall.suit)
+              return Seat.rotate(this.currentBoard.dealer, i);
+      }
 
       throw new Error("declarer not found");
    }
@@ -139,52 +158,10 @@ export class GameStateHelper {
    get nextPlayer(): tower.Seat {
       if (!this.biddingHasEnded)
          return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.length);
+      else if (!this.lastCall)
+         return undefined;
       else
          return Seat.rotate(this.leader, this.currentBoard.cards.length);
-   }
-
-   /**
-    * Tests if the bid is a valid one in this state and throws an exception if not
-    */
-   validateBid(bid: tower.IBid) {
-      if (this.biddingHasEnded)
-         return new Error("the bidding has already ended");
-
-      switch(bid.type) {
-         case BidType.NoBid:
-            return;
-
-         case BidType.Double:
-            if (!this.lastAction || (this.lastAction.type != BidType.Call))
-               return new Error("invalid double");
-            else
-               return;
-
-         case BidType.Redouble:
-            if (!this.lastAction || (this.lastAction.type != BidType.Double))
-               return new Error("invalid redouble");
-            else
-               return;
-
-         case BidType.Call: {
-            if ((!bid.level) || (!bid.suit))
-               return new Error("you must provide level and suit");
-            else if ((bid.level < 1) || (bid.level > 7))
-               return new Error("invalid level");
-            else if (this.lastCall) {
-               if (Bid.compare(bid, this.lastCall) <= 0)
-                  return new Error("bid must be higher than " + Bid.stringify(this.lastCall));
-            }
-            return;
-         }
-      }
-   }
-
-   /**
-    * Tests if the card is a valid one in this state and throws an exception if not
-    */
-   validateCard(card: tower.ICard) {
-
    }
 
    /**
@@ -198,11 +175,18 @@ export class GameStateHelper {
    /**
     * Starts a new board
     */
-   newBoard(dealer): GameStateHelper {
+   newBoard(dealer: Seat): GameStateHelper {
+      // TODO remove this
+      dealer = dealer || Seat.North;
+
       var deck = new Deck();
       deck.shuffle();
 
-      var hands = deck.deal(4);
+      var hands = {};
+      deck.deal(4).forEach((hand, idx) => {
+        hands[Seat.rotate(dealer, idx + 1)] = hand;
+      });
+
       var board = {
          dealer: dealer,
          hands: hands,
@@ -221,6 +205,9 @@ export class GameStateHelper {
     * otherwise an exception is thrown
     */
    makeBid(bid: Bid): GameStateHelper {
+      var err = validateBid(bid, this);
+      if (err) throw err;
+
       var newstate = this.clone();
       newstate.currentBoard.bids.push(bid);
       return newstate;
@@ -232,9 +219,16 @@ export class GameStateHelper {
     * otherwise an exception is thrown
     */
    playCard(card: Card): GameStateHelper {
+      var err = validateCard(card, this);
+      if (err) throw err;
+
       var newstate = this.clone();
       newstate.currentBoard.cards.push(card);
       return newstate;
    }
+
+}
+
+export class Game extends GameStateHelper {
 
 }

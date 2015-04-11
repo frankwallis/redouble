@@ -19,9 +19,8 @@ export class AboutView extends React.Component {
             <section>
               <h3>About Tower</h3>
               <p>
-                Welcome to Tower!. As a both a keen bridge player and developer I always wanted to 
-                develop this Bridge game and I finally got around to it. I use it as sandpit for trying out new technologies, 
-                tools and techniques which I am interested in. I expect it will also be my life's work.
+                Welcome to Tower!. I use it as sandpit where I can try out new technologies, 
+                tools and techniques which I am interested in. At some point during my lifetime I may even finish it, but that's not what's important right now.
 
                 The application you are using is developed in ES6 using ReactJS and uses the Flux architecture. It is built using SystemJS, JSPM and Babel.
                 I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
@@ -41,7 +40,7 @@ export class AboutView extends React.Component {
             </section>
             <section>
               <h3>About Me</h3>
-              <p>I am a software developer based in London</p>
+              <p>I am a software developer based in London, I am currently available for work</p>
             </section>
             
          </div>

@@ -1,13 +1,13 @@
 /* @flow */
 
 export const Seat = {
-   North: 0,
-   East: 1,
-   South: 2,
-   West: 3,
+   North: 1,
+   East: 2,
+   South: 3,
+   West: 4,
 
    all: function() {
-      return [0,1,2,3];
+      return [Seat.North, Seat.East, Seat.South, Seat.West];
    },
 
    name: function(seat) {
@@ -28,13 +28,10 @@ export const Seat = {
    rotate: function(seat, count) {
       count = count || 0;
       return ((seat + count - Seat.North) % 4) + Seat.North;
+   },
+   
+   isPartner: function(seat1, seat2) {
+      return (Seat.rotate(seat1, 2) === seat2);
    }
-};
 
-// deprecated
-export function seatName(seat) {
-   return Seat.name(seat);
-}
-export const rotate = function(seat, count) {
-   return Seat.rotate(seat, count);
-}
+};

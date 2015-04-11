@@ -1,5 +1,8 @@
 jest.autoMockOff()
-jest.dontMock('../game-state.js');
+jest.mock("../validators", {
+   validateBid: () => {},
+   validateCard: () => {}
+})
 
 import {GameStateHelper} from '../game-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
@@ -173,6 +176,24 @@ describe('Game State Helper', () => {
 
    });
 
+   describe('declarer', () => {
+      it('returns the dealer when bidding starts', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+
+         gameState = gameState
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("1H"))
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("2H"))
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("no bid"))
+
+         expect(gameState.declarer).toEqual(Seat.North);
+      });
+
+   });
+
    describe('nextPlayer', () => {
       it('returns the dealer when bidding starts', () => {
          var gameState = new GameStateHelper().newBoard(Seat.West);
@@ -220,6 +241,19 @@ describe('Game State Helper', () => {
          gameState = gameState.playCard(Card.create("6H"));
          expect(gameState.nextPlayer).toEqual(Seat.North);
       });
+
+      it('returns undefined if the hand is passed out', () => {
+         var gameState = new GameStateHelper().newBoard(Seat.West);
+
+         gameState = gameState
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("no bid"))
+            .makeBid(Bid.create("no bid"));
+
+         expect(gameState.nextPlayer).toBeUndefined();
+      });
+
 
    });
 

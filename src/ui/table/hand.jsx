@@ -22,8 +22,6 @@ export class HandComponent extends React.Component {
    }
 
    render() {
-      console.log('rendering hand');
-
       var cards = this.availableCards.map((card) => {
          return (
             <li className="hand-card" key={CardComponent.key(card)}>

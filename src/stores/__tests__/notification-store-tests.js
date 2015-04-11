@@ -23,6 +23,7 @@ describe('Notification Store', () => {
             message: 'something else just happened'
          };
 
+         /* add some notifications of each type */
          NotificationActions.notify(opts);
          NotificationActions.info(opts);
          NotificationActions.warn(opts);
@@ -31,6 +32,7 @@ describe('Notification Store', () => {
          jest.runAllTimers();
          expect(NotificationStore.notifications.length).toBeGreaterThan(3);
 
+         /* look for duplicates */
          NotificationStore.notifications.forEach((not1, idx1) => {
             expect(NotificationStore.notifications.some((not2, idx2) => {
                return ((idx2 > idx1) && (not1.id == not2.id));

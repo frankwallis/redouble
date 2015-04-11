@@ -3,6 +3,7 @@
 import React from 'react';
 
 import {Table} from './table/table.jsx';
+import {AboutView} from './about/about.jsx';
 import {SettingsView} from './settings/settings.jsx';
 import {GrowlContainer} from './growl/growl.jsx';
 
@@ -40,7 +41,7 @@ export class App extends React.Component {
       var content;
 
       if (this.state.route == "about")
-         content = <Table/>;
+         content = <AboutView/>;
       else if (this.state.route == "settings")
          content = <SettingsView/>;
       else

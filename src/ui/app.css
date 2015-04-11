@@ -4,6 +4,7 @@
 @import './navbar/navbar.css';
 @import './growl/growl.css';
 @import './settings/settings.css';
+@import './about/about.css';
 @import './table/table.css';
 @import './table/trick.css';
 @import './table/bidding-history.css';

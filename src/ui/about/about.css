@@ -1,0 +1,8 @@
+.about-container {
+	margin: 2em;
+}
+
+.about-container h3 {
+	text-transform: uppercase;
+	color: rgb(159, 45, 52);
+}

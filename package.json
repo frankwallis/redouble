@@ -58,6 +58,7 @@
       "necolas/normalize.css": "github:necolas/normalize.css@^3.0.2",
       "purecss": "npm:purecss@^0.6.0",
       "react": "npm:react@^0.13.0",
+      "react-router": "npm:react-router@^0.13.2",
       "reflux": "npm:reflux@^0.2.5",
       "text": "github:systemjs/plugin-text@^0.0.2"
     },

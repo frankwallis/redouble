@@ -33,7 +33,6 @@ export class AboutView extends React.Component {
               <h3>Roadmap</h3>
               <ul>
                 <li>Implement the playing strategies based on <a href="http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm">Information Set Monte Carlo Tree Search</a> algorithm</li>
-                <li>Add proper routing</li>
                 <li>Save settings to local storage</li>
                 <li>Select a proper immutable data library</li>
                 <li>Integration Tests</li>

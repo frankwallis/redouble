@@ -1,6 +1,8 @@
 /* @flow */
 
 import React from 'react';
+import Router from 'react-router';
+var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 import {Table} from './table/table.jsx';
 import {AboutView} from './about/about.jsx';
@@ -26,26 +28,13 @@ export class App extends React.Component {
 
    render() {
       console.log('rendering app')
-      var routes = ["home", "table", "settings", "about"].map((route) => {
+      var routes = ["table", "settings", "about"].map((route) => {
          return (
             <li key={route}>
-               <a className={this.state.route == route ? "active" : ""}
-                  href=""
-                  onClick={() => this.routeClicked(route)}>
-                  {route}
-               </a>
+               <Link to={route}>{route}</Link>
             </li>
          );
       });
-
-      var content;
-
-      if (this.state.route == "about")
-         content = <AboutView/>;
-      else if (this.state.route == "settings")
-         content = <SettingsView/>;
-      else
-         content = <Table/>;
 
       return (
          <div className="app-container">
@@ -55,7 +44,7 @@ export class App extends React.Component {
                </ul>
             </nav>
             <div className="app-content">
-               {content}
+               <RouteHandler/>
             </div>
             <div className="app-growl">
                <GrowlContainer/>
@@ -65,4 +54,14 @@ export class App extends React.Component {
    }
 }
 
-React.render(<App/>, document.body);
+var routes = (
+   <Route handler={App} path="/">
+      <DefaultRoute name="table" handler={Table} />
+      <Route name="about" handler={AboutView} />
+      <Route name="settings" handler={SettingsView} />
+   </Route>
+);
+
+Router.run(routes, Router.HistoryLocation, function (Handler) {
+   React.render(<Handler/>, document.body);
+});

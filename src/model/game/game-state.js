@@ -110,6 +110,18 @@ export class GameStateHelper {
       return this.currentBoard.cards.slice(played * -1);
    }
 
+   get previousTrickWinner(): Seat {
+      if (this.currentBoard.cards.length < 4) return undefined;
+      var played = this.currentBoard.cards.length % 4;
+      var trick = this.currentBoard.cards.slice(this.currentBoard.cards.length - played - 4, this.currentBoard.cards.length - played);
+
+      var winner = trick.sort((played1, played2) => {
+        return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
+      })[3].seat;
+
+      return winner;
+   }
+
    /**
     * Returns true when no more cards can be played
     */
@@ -122,7 +134,7 @@ export class GameStateHelper {
     */
    hasBeenPlayed(card) {
       return this.currentBoard.cards
-         .some((played) => (played.pip == card.pip) && (played.suit == card.suit));
+         .some((played) => !Card.compare(card, played.card));
    }
 
    /**
@@ -149,7 +161,10 @@ export class GameStateHelper {
    }
 
    get leader(): Seat {
-      return Seat.rotate(this.declarer, 1);
+      if (this.currentBoard.cards.length < 4)
+        return Seat.rotate(this.declarer, 1);
+      else
+        return this.previousTrickWinner;
    }
 
    /**
@@ -161,7 +176,7 @@ export class GameStateHelper {
       else if (!this.lastCall)
          return undefined;
       else
-         return Seat.rotate(this.leader, this.currentBoard.cards.length);
+         return Seat.rotate(this.leader, this.currentTrick.length);
    }
 
    /**
@@ -223,7 +238,7 @@ export class GameStateHelper {
       if (err) throw err;
 
       var newstate = this.clone();
-      newstate.currentBoard.cards.push(card);
+      newstate.currentBoard.cards.push({"seat": this.nextPlayer, "card": card });
       return newstate;
    }
 

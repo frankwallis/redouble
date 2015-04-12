@@ -10,10 +10,21 @@ export class TrickComponent extends React.Component {
       super(props);
    }
 
+   getCard(seat: Seat): Card {
+      var card = undefined;
+
+      this.props.game.currentTrick.forEach((played) => {
+         if (played.seat == seat)
+            card = played.card;
+      });
+
+      return card;
+   }
+
    render() {
       var cards = Seat.all().map((seat) => {
          return <li key={seat} className={"trick-card-" + Seat.name(seat)}>
-            <CardComponent card={this.props.game.currentTrick[seat]}/>
+            <CardComponent card={this.getCard(seat)}/>
          </li>
       });
 

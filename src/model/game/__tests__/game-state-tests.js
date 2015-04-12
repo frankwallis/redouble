@@ -154,8 +154,8 @@ describe('Game State Helper', () => {
 
          gameState = gameState.playCard(Card.create("3H"));
          expect(gameState.currentTrick.length).toBe(2);
-         expect(gameState.currentTrick[0]).toEqual({ suit: Suit.Hearts, pip: Pip.Two });
-         expect(gameState.currentTrick[1]).toEqual({ suit: Suit.Hearts, pip: Pip.Three });
+         expect(gameState.currentTrick[0].card).toEqual({ suit: Suit.Hearts, pip: Pip.Two });
+         expect(gameState.currentTrick[1].card).toEqual({ suit: Suit.Hearts, pip: Pip.Three });
 
          gameState = gameState
             .playCard(Card.create("4H"))
@@ -164,7 +164,7 @@ describe('Game State Helper', () => {
 
          gameState = gameState.playCard(Card.create("AS"));
          expect(gameState.currentTrick.length).toBe(1);
-         expect(gameState.currentTrick[0]).toEqual({ suit: Suit.Spades, pip: Pip.Ace });
+         expect(gameState.currentTrick[0].card).toEqual({ suit: Suit.Spades, pip: Pip.Ace });
       });
    });
 
@@ -237,7 +237,7 @@ describe('Game State Helper', () => {
          gameState = gameState.playCard(Card.create("4H"));
          gameState = gameState.playCard(Card.create("5H"));
 
-         expect(gameState.nextPlayer).toEqual(Seat.East);
+         expect(gameState.nextPlayer).toEqual(Seat.West);
          gameState = gameState.playCard(Card.create("6H"));
          expect(gameState.nextPlayer).toEqual(Seat.North);
       });

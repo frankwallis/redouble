@@ -28,7 +28,7 @@ describe('Hand Component', () => {
       expect(cards.length).toEqual(13);
 
       // play a card
-      game.currentBoard.cards.push(cards[0].props.card);
+      game.currentBoard.cards.push({ seat: Seat.North, card: cards[0].props.card });
       hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
 
       cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);

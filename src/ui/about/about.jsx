@@ -24,7 +24,7 @@ export class AboutView extends React.Component {
 
                 The application you are using is developed in ES6 using ReactJS and uses the Flux architecture. It is built using SystemJS, JSPM and Babel.
                 I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
-                and combined Angular2 Zones with ReactJS to create the world's first <a href="https://github.com/frankwallis/tower/blob/react-zones/src/ui/">Rectangular</a> application!
+                and combined Angular2 Zones with ReactJS to create the world's first <a href="https://github.com/frankwallis/tower/blob/react-zones/src/ui/">react zones</a> application!
                 It is a work in progress, so please excuse any strange behaviours, or send a pull request :)
               </p>
             </section>
@@ -40,7 +40,7 @@ export class AboutView extends React.Component {
             </section>
             <section>
               <h3>About Me</h3>
-              <p>I am a software developer based in London, I am currently available for work</p>
+              <p>I am a software developer based in London</p>
             </section>
             
          </div>

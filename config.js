@@ -22,6 +22,7 @@ System.config({
     "FortAwesome/Font-Awesome": "github:FortAwesome/Font-Awesome@4.3.0",
     "babel": "npm:babel@4.7.16",
     "css": "github:systemjs/plugin-css@0.1.7",
+    "font-awesome": "npm:font-awesome@4.3.0",
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
     "necolas/normalize.css": "github:necolas/normalize.css@3.0.3",
     "purecss": "npm:purecss@0.6.0",
@@ -274,6 +275,9 @@ System.config({
     },
     "npm:events-browserify@0.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:font-awesome@4.3.0": {
+      "css": "github:systemjs/plugin-css@0.1.7"
     },
     "npm:glob@4.2.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

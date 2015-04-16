@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import {Suit,Pip,Card,suitName,pipName} from "../../model/core/card";
+import {Suit,Pip,Card} from "../../model/core/card";
 
 export class CardComponent extends React.Component {
 
@@ -10,7 +10,7 @@ export class CardComponent extends React.Component {
     }
 
     static key(card) {
-      return suitName(card.suit) + pipName(card.pip);
+      return Card.suitName(card.suit) + Card.pipName(card.pip);
     }
 
     render() {
@@ -20,15 +20,15 @@ export class CardComponent extends React.Component {
       return (
         <div className="card-container">
             <div className="card-edge-left">
-                <div className="card-pip-small">{pipName(this.props.card.pip)}</div>
-                <div className={"card-suit suit-" + suitName(this.props.card.suit)}></div>
+                <div className="card-pip-small">{Card.pipName(this.props.card.pip)}</div>
+                <div className={"card-suit suit-" + Card.suitName(this.props.card.suit)}></div>
             </div>
 
-            <div className="card-pip">{pipName(this.props.card.pip)}</div>
+            <div className="card-pip">{Card.pipName(this.props.card.pip)}</div>
 
             <div className="card-edge-right">
-                <div className="card-pip-small">{pipName(this.props.card.pip)}</div>
-                <div className={"card-suit suit-" + suitName(this.props.card.suit)}></div>
+                <div className="card-pip-small">{Card.pipName(this.props.card.pip)}</div>
+                <div className={"card-suit suit-" + Card.suitName(this.props.card.suit)}></div>
             </div>
         </div>
       );

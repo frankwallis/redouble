@@ -46,12 +46,12 @@ export const GameStore = Reflux.createStore({
    },
    onMakeBid: function(bid) {
       console.log('making bid');
-      var result = this.currentState().makeBid(bid);
+      let result = this.currentState().makeBid(bid);
       this.pushState(result);
       this.trigger(this.currentState());
    },
    onPlayCard: function(card) {
-      var result = this.currentState().playCard(card);
+      let result = this.currentState().playCard(card);
       this.pushState(result);
       this.trigger(this.currentState());
    },
@@ -68,7 +68,7 @@ export const GameStore = Reflux.createStore({
 });
 
 GameActions.makeBid.shouldEmit = function(bid) {
-   var err = validateBid(bid, GameStore.currentState());
+   let err = validateBid(bid, GameStore.currentState());
 
    if (err) {
       NotificationActions.error({
@@ -81,7 +81,7 @@ GameActions.makeBid.shouldEmit = function(bid) {
 }
 
 GameActions.playCard.shouldEmit = function(card) {
-   var err = validateCard(card, GameStore.currentState());
+   let err = validateCard(card, GameStore.currentState());
 
    if (err) {
       NotificationActions.error({

@@ -18,7 +18,7 @@ describe('Notification Store', () => {
       });
 
       it('generates unique ids', () => {
-         var opts = {
+         let opts = {
             title: 'you!',
             message: 'something else just happened'
          };
@@ -43,10 +43,10 @@ describe('Notification Store', () => {
 
    describe('question', () => {
       it('gets the correct response', () => {
-         var response = undefined;
+         let response = undefined;
          NotificationStore.notifications = [];
 
-         var unsubscribeToken = NotificationStore.listen((notification) => {
+         let unsubscribeToken = NotificationStore.listen((notification) => {
             if (notification.source === unsubscribeToken) {
                if (notification.response) {
                   unsubscribeToken();
@@ -77,7 +77,7 @@ describe('Notification Store', () => {
 
    describe('dismiss', () => {
       it('removes notifications', () => {
-         var opts = {
+         let opts = {
             title: 'achtung',
             message: 'parking est genant',
             buttons: ['aye']
@@ -90,7 +90,7 @@ describe('Notification Store', () => {
          jest.runAllTimers();
 
          expect(NotificationStore.notifications.length).toBe(3);
-         var ids = NotificationStore.notifications.map((not) => not.id);
+         let ids = NotificationStore.notifications.map((not) => not.id);
 
          NotificationActions.dismiss({ id: ids[2] });
          jest.runAllTimers();

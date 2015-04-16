@@ -45,7 +45,7 @@ export class Table extends React.Component {
    render() {
       console.log('rendering table');
 
-      var players = Seat.all().map((seat) => {
+      let players = Seat.all().map((seat) => {
          return (
             <section className={"table-edge-" + Seat.name(seat)} key={seat}>
                <header className="table-player-name">{this.players[seat].name}</header>
@@ -57,11 +57,11 @@ export class Table extends React.Component {
          );
       });
 
-      var board = this.game.biddingHasEnded ?
+      let board = this.game.biddingHasEnded ?
          <TrickComponent game={this.game}/> :
          <BiddingHistory board={this.game.currentBoard}/>;
 
-      var biddingBox = this.game.biddingHasEnded ? 
+      let biddingBox = this.game.biddingHasEnded ? 
          undefined : 
          <BiddingBox className="table-bidding-box" game={this.game}/>;
 

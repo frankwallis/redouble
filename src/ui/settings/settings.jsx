@@ -38,7 +38,7 @@ export class SettingsView extends React.Component {
    render() {
       console.log('rendering setings');
 
-      var players = Seat.all().map((seat) => {
+      let players = Seat.all().map((seat) => {
          return <li className="settings-player" key={seat}>
             <h3 className="settings-player-header">{Seat.name(seat)}</h3>
             <div className="settings-field">

@@ -12,15 +12,15 @@ export class BiddingHistory extends React.Component {
     }
 
     render() {
-      var headings = [];
+      let headings = [];
 
-      for (var seat = Seat.North; seat <= Seat.West; seat ++) {
+      for (let seat = Seat.North; seat <= Seat.West; seat ++) {
         headings.push(
           <th key={seat} className="bidding-cell">{Seat.name(seat)}</th>
         );
       }
 
-      var rows = [];
+      let rows = [];
 
       for (let i = 0; i < 6; i ++) {
         let cells = [];

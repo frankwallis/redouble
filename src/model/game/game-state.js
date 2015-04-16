@@ -48,7 +48,7 @@ export class GameStateHelper {
     * Returns the player who made the lastCall
     */
    get lastCaller(): Seat {
-      var call = this.lastCall;
+      let call = this.lastCall;
       if (call) return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.indexOf(call));
    }
 
@@ -69,7 +69,7 @@ export class GameStateHelper {
     * Returns the seat whic made the lastAction
     */
    get lastActor(): Seat {
-      var act = this.lastAction;
+      let act = this.lastAction;
       if (act) return Seat.rotate(this.currentBoard.dealer, this.currentBoard.bids.indexOf(act));
    }
 
@@ -85,8 +85,8 @@ export class GameStateHelper {
     * Returns true when no more bids can be made
     */
    get biddingHasEnded(): boolean {
-      var consecutivePasses = 0;
-      var idx = this.currentBoard.bids.length - 1;
+      let consecutivePasses = 0;
+      let idx = this.currentBoard.bids.length - 1;
 
       while(idx >= 0) {
          if (this.currentBoard.bids[idx].type == BidType.NoBid)
@@ -105,17 +105,17 @@ export class GameStateHelper {
     * yet it returns an empty array.
     */
    get currentTrick(): Array<Card> {
-      var played = this.currentBoard.cards.length % 4;
+      let played = this.currentBoard.cards.length % 4;
       played = played || 4;
       return this.currentBoard.cards.slice(played * -1);
    }
 
    get previousTrickWinner(): Seat {
       if (this.currentBoard.cards.length < 4) return undefined;
-      var played = this.currentBoard.cards.length % 4;
-      var trick = this.currentBoard.cards.slice(this.currentBoard.cards.length - played - 4, this.currentBoard.cards.length - played);
+      let played = this.currentBoard.cards.length % 4;
+      let trick = this.currentBoard.cards.slice(this.currentBoard.cards.length - played - 4, this.currentBoard.cards.length - played);
 
-      var winner = trick.sort((played1, played2) => {
+      let winner = trick.sort((played1, played2) => {
         return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
       })[3].seat;
 
@@ -152,7 +152,7 @@ export class GameStateHelper {
          throw new Error("the bidding has not ended yet");
 
       if (this.lastCall) {
-        for (var i = 0; i < this.currentBoard.bids.length -1; i ++)
+        for (let i = 0; i < this.currentBoard.bids.length -1; i ++)
            if (this.currentBoard.bids[i].suit == this.lastCall.suit)
               return Seat.rotate(this.currentBoard.dealer, i);
       }
@@ -183,7 +183,7 @@ export class GameStateHelper {
     * Creates an identical copy of itself
     */
    clone(): GameStateHelper {
-      var newstate = JSON.parse(JSON.stringify(this.gameState));
+      let newstate = JSON.parse(JSON.stringify(this.gameState));
       return new GameStateHelper(newstate);
    }
 
@@ -194,22 +194,22 @@ export class GameStateHelper {
       // TODO remove this
       dealer = dealer || Seat.North;
 
-      var deck = new Deck();
+      let deck = new Deck();
       deck.shuffle();
 
-      var hands = {};
+      let hands = {};
       deck.deal(4).forEach((hand, idx) => {
         hands[Seat.rotate(dealer, idx + 1)] = hand;
       });
 
-      var board = {
+      let board = {
          dealer: dealer,
          hands: hands,
          bids: [],
          cards: []
       }
 
-      var result = this.clone();
+      let result = this.clone();
       result.gameState.boards.push(board);
       return result;
    }
@@ -220,10 +220,10 @@ export class GameStateHelper {
     * otherwise an exception is thrown
     */
    makeBid(bid: Bid): GameStateHelper {
-      var err = validateBid(bid, this);
+      let err = validateBid(bid, this);
       if (err) throw err;
 
-      var newstate = this.clone();
+      let newstate = this.clone();
       newstate.currentBoard.bids.push(bid);
       return newstate;
    }
@@ -234,10 +234,10 @@ export class GameStateHelper {
     * otherwise an exception is thrown
     */
    playCard(card: Card): GameStateHelper {
-      var err = validateCard(card, this);
+      let err = validateCard(card, this);
       if (err) throw err;
 
-      var newstate = this.clone();
+      let newstate = this.clone();
       newstate.currentBoard.cards.push({"seat": this.nextPlayer, "card": card });
       return newstate;
    }

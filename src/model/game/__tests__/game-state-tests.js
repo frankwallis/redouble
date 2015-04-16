@@ -12,13 +12,13 @@ import {Seat} from '../../core/seat';
 describe('Game State Helper', () => {
    describe('currentBoard', () => {
       it('returns the last board', () => {
-         var gameState = new GameStateHelper();
+         let gameState = new GameStateHelper();
          expect(gameState.currentBoard).not.toBeDefined();
 
          gameState = gameState.newBoard();
          expect(gameState.currentBoard).toBeDefined();
 
-         var lastBoard = gameState.currentBoard;
+         let lastBoard = gameState.currentBoard;
          gameState = gameState.newBoard();
          expect(gameState.currentBoard).toBeDefined();
          expect(gameState.currentBoard).not.toBe(lastBoard);
@@ -27,7 +27,7 @@ describe('Game State Helper', () => {
 
    describe('lastBid', () => {
       it('returns the last bid of any type', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.lastBid).toBeUndefined();
 
          gameState = gameState.makeBid(Bid.create("2H"));
@@ -43,7 +43,7 @@ describe('Game State Helper', () => {
 
    describe('lastCall', () => {
       it('returns the last call of a suit', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.lastCall).toBeUndefined();
 
          gameState = gameState.makeBid(Bid.create("no bid"));
@@ -62,7 +62,7 @@ describe('Game State Helper', () => {
 
    describe('lastAction', () => {
       it('returns the last bid which was not a no-bid', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.lastAction).toBeUndefined();
 
          gameState = gameState.makeBid(Bid.create("2H"));
@@ -78,12 +78,12 @@ describe('Game State Helper', () => {
 
    describe('trumpSuit', () => {
       it('returns undefined if the bidding has not ended', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.trumpBid).toBeUndefined();
       });
 
       it('returns the suit of the bid contract', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
 
          gameState = gameState
             .makeBid(Bid.create("4H"))
@@ -94,7 +94,7 @@ describe('Game State Helper', () => {
       });
 
       it('returns the suit of the bid contract for doubled no-trumps', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
 
          gameState = gameState
             .makeBid(Bid.create("4NT"))
@@ -108,7 +108,7 @@ describe('Game State Helper', () => {
 
    describe('biddingHasEnded', () => {
       it('returns false if there have not been three passes', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.biddingHasEnded).toBeFalsy();
 
          gameState = gameState.makeBid(Bid.create("4NT"));
@@ -128,7 +128,7 @@ describe('Game State Helper', () => {
       });
 
       it('requires four no bids to throw in a hand', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
 
          gameState = gameState.makeBid(Bid.create("no bid"));
          expect(gameState.biddingHasEnded).toBeFalsy();
@@ -146,7 +146,7 @@ describe('Game State Helper', () => {
 
    describe('currentTrick', () => {
       it('returns the current trick', () => {
-         var gameState = new GameStateHelper().newBoard();
+         let gameState = new GameStateHelper().newBoard();
          expect(gameState.currentTrick).toEqual([]);
 
          gameState = gameState.playCard(Card.create("2H"));
@@ -178,7 +178,7 @@ describe('Game State Helper', () => {
 
    describe('declarer', () => {
       it('returns the dealer when bidding starts', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
 
          gameState = gameState
             .makeBid(Bid.create("no bid"))
@@ -196,12 +196,12 @@ describe('Game State Helper', () => {
 
    describe('nextPlayer', () => {
       it('returns the dealer when bidding starts', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
          expect(gameState.nextPlayer).toEqual(Seat.West);
       });
 
       it('returns the next player when bidding', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
          expect(gameState.nextPlayer).toEqual(Seat.West);
 
          gameState = gameState.makeBid(Bid.create("4NT"));
@@ -212,7 +212,7 @@ describe('Game State Helper', () => {
       });
 
       it('returns the leader when bidding ends', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
          expect(gameState.nextPlayer).toEqual(Seat.West);
 
          gameState = gameState.makeBid(Bid.create("1H"));
@@ -223,7 +223,7 @@ describe('Game State Helper', () => {
       });
 
       it('returns the trick winner when playing', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
          expect(gameState.nextPlayer).toEqual(Seat.West);
 
          gameState = gameState.makeBid(Bid.create("1H"));
@@ -243,7 +243,7 @@ describe('Game State Helper', () => {
       });
 
       it('returns undefined if the hand is passed out', () => {
-         var gameState = new GameStateHelper().newBoard(Seat.West);
+         let gameState = new GameStateHelper().newBoard(Seat.West);
 
          gameState = gameState
             .makeBid(Bid.create("no bid"))

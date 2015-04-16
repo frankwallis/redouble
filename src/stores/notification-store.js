@@ -28,7 +28,7 @@ export const NotificationStore = Reflux.createStore({
       }, 7500);
    },
    autoDismiss: function() {
-      var now = new Date();
+      let now = new Date();
       this.notifications.forEach((notif) => {
          if (!notif.dismissed && !(notif.type == 'question')) {
             if (now.getTime() - notif.timestamp.getTime() > 10000) {
@@ -41,21 +41,21 @@ export const NotificationStore = Reflux.createStore({
       opts = opts || {};
       opts.type = 'info';
 
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    onWarn: function(opts) {
       opts = opts || {};
       opts.type = 'warn';
 
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    onError: function(opts) {
       opts = opts || {};
       opts.type = 'error';
 
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    onQuestion: function(opts) {
@@ -63,22 +63,22 @@ export const NotificationStore = Reflux.createStore({
       opts.type = 'question';
       opts.timeout = opts.timeout || -1;
 
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    onSuccess: function(opts) {
       opts = opts || {};
       opts.type = 'success';
 
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    onNotify: function(opts) {
-      var notification = this.notify(opts);
+      let notification = this.notify(opts);
       this.trigger(notification);
    },
    notify: function(opts) {
-      var notification = {};
+      let notification = {};
       notification.id = this.generateId();
       notification.timestamp = new Date();
       notification.source = opts.source;
@@ -92,7 +92,7 @@ export const NotificationStore = Reflux.createStore({
       return notification;
    },
    onDismiss: function(opts) {
-      var notification = this.notifications.filter((notif) => notif.id == opts.id)[0];
+      let notification = this.notifications.filter((notif) => notif.id == opts.id)[0];
 
       if (notification) {
          this.notifications = this.notifications.filter((notif) => notif.id != opts.id);

@@ -8,15 +8,15 @@ describe("Card", () => {
 
    describe("compare", () => {
       it("recognises equality", () => {
-         var card1 = { suit: Suit.Clubs, pip: Pip.Three };
-         var card2 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card1 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card2 = { suit: Suit.Clubs, pip: Pip.Three };
          expect(Card.compare(card1, card2)).toBe(0);
          expect(Card.compare(card2, card1)).toBe(0);
       });
 
       it("obeys order of precedence of pips", () => {
-         var card1 = { suit: Suit.Clubs, pip: Pip.Three };
-         var card2 = { suit: Suit.Clubs, pip: Pip.Four };
+         let card1 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card2 = { suit: Suit.Clubs, pip: Pip.Four };
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card2, card1)).toBeGreaterThan(0);
 
@@ -32,8 +32,8 @@ describe("Card", () => {
       });
 
       it("obeys order of precedence of suits", () => {
-         var card1 = { suit: Suit.Clubs, pip: Pip.Three };
-         var card2 = { suit: Suit.Diamonds, pip: Pip.Three };
+         let card1 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card2 = { suit: Suit.Diamonds, pip: Pip.Three };
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card2, card1)).toBeGreaterThan(0);
 
@@ -49,8 +49,8 @@ describe("Card", () => {
       });
 
       it("uses trump-suit when provided", () => {
-         var card1 = { suit: Suit.Clubs, pip: Pip.Three };
-         var card2 = { suit: Suit.Hearts, pip: Pip.Five };
+         let card1 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card2 = { suit: Suit.Hearts, pip: Pip.Five };
 
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card1, card2, Suit.Clubs)).toBeGreaterThan(0);
@@ -58,8 +58,8 @@ describe("Card", () => {
       });
 
       it("uses lead-suit when provided", () => {
-         var card1 = { suit: Suit.Clubs, pip: Pip.Three };
-         var card2 = { suit: Suit.Hearts, pip: Pip.Five };
+         let card1 = { suit: Suit.Clubs, pip: Pip.Three };
+         let card2 = { suit: Suit.Hearts, pip: Pip.Five };
 
          expect(Card.compare(card1, card2)).toBeLessThan(0);
          expect(Card.compare(card1, card2, Suit.Diamonds, Suit.Clubs)).toBeGreaterThan(0);
@@ -69,7 +69,7 @@ describe("Card", () => {
 
    describe("create", () => {
       it("creates cards correctly", () => {
-         var card = Card.create("2S");
+         let card = Card.create("2S");
          expect(card.suit).toBe(Suit.Spades);
          expect(card.pip).toBe(Pip.Two);
 
@@ -77,7 +77,7 @@ describe("Card", () => {
          expect(card.suit).toBe(Suit.Diamonds);
          expect(card.pip).toBe(Pip.Jack);
 
-         var card = Card.create("AC");
+         card = Card.create("AC");
          expect(card.suit).toBe(Suit.Clubs);
          expect(card.pip).toBe(Pip.Ace);
       });

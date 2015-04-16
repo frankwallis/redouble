@@ -21,7 +21,7 @@ export class Bid {
    }
 
    static key(bid): string {
-      var result = [ bid.type ];
+      let result = [ bid.type ];
 
       if (bid.type == BidType.Call)
          result = result.concat([ bid.level, bid.suit ]);
@@ -30,7 +30,7 @@ export class Bid {
    }
 
    static create(bid: string) {
-      var shortNames = [ "", "c", "d", "h", "s", "nt"];
+      let shortNames = [ "", "c", "d", "h", "s", "nt"];
       bid = bid.toLowerCase();
 
       if (bid == "double")
@@ -40,7 +40,7 @@ export class Bid {
       else if (bid == "no bid")
          return { type: BidType.NoBid };
       else {
-         var result = { type: BidType.Call };
+         let result = { type: BidType.Call };
          result.level = parseInt(bid[0]);
          result.suit = shortNames.indexOf(bid.slice(1));
          return result;
@@ -48,7 +48,7 @@ export class Bid {
    }
 
    static suitName(suit: BidSuit, singular: boolean) {
-      var names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
+      let names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
       return names[suit] + (singular ? '' : 's');
    }
 

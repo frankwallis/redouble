@@ -8,23 +8,23 @@ import {GameActions} from "../../../stores/game-store";
 import {Seat} from "../../../model/core/seat";
 
 import React from "react/addons";
-var TestUtils = React.addons.TestUtils;
+let TestUtils = React.addons.TestUtils;
 
 describe('Hand Component', () => {
 
   it('displays cards which are available', () => {
-      var game = new GameStateHelper().newBoard();
-      var hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
+      let game = new GameStateHelper().newBoard();
+      let hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
 
-      var buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
+      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
       expect(buttons.length).toEqual(13);
   });
 
   it('hides cards which are not available', () => {
-      var game = new GameStateHelper().newBoard();
-      var hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
+      let game = new GameStateHelper().newBoard();
+      let hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
 
-      var cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
+      let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
       expect(cards.length).toEqual(13);
 
       // play a card
@@ -36,13 +36,13 @@ describe('Hand Component', () => {
   });
 
   it('sorts the cards', () => {
-      var game = new GameStateHelper().newBoard();
-      var hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
+      let game = new GameStateHelper().newBoard();
+      let hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
 
-      var buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
+      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
       expect(buttons.length).toEqual(13);
 
-      var suits = {};
+      let suits = {};
       buttons.reduce((prev, current) => {
          if (!prev || (prev.suit != current.suit)) {
             expect(suits[current.suit]).toBeUndefined();
@@ -53,10 +53,10 @@ describe('Hand Component', () => {
   });
 
   it('plays a card when a button is clicked', () => {
-     var game = new GameStateHelper().newBoard();
-     var hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
+     let game = new GameStateHelper().newBoard();
+     let hand = TestUtils.renderIntoDocument(<HandComponent game={game} seat={Seat.North}/>);
 
-     var buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
+     let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
      expect(buttons.length).toEqual(13);
      expect(GameActions.playCard.mock.calls.length).toBe(0);
      TestUtils.Simulate.click(buttons[0]);

@@ -42,10 +42,10 @@ export class Card {
    }
 
    static create(card: string) {
-      var shortSuitNames = [ "", "C", "D", "H", "S"];
-      var shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
+      let shortSuitNames = [ "", "C", "D", "H", "S"];
+      let shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
 
-      var result = {};
+      let result = {};
       result.pip = shortPipNames.indexOf(card[0].toUpperCase());
       result.suit = shortSuitNames.indexOf(card[1].toUpperCase());
       return result;
@@ -65,13 +65,4 @@ export class Card {
          default: return pip.toString();
      }
    }
-}
-
-// deprecated 
-export function suitName(suit) {
-   return Card.suitName(suit);
-}
-
-export function pipName(pip) {
-   return Card.pipName(pip);
 }

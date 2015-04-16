@@ -19,7 +19,7 @@ export const PlayerStore = Reflux.createStore({
    init: function() {
       this.listenToMany(PlayerActions);
 
-      var playersStr = localStorage.getItem(STORAGE_KEY);
+      let playersStr = localStorage.getItem(STORAGE_KEY);
 
       if (playersStr)
          this.players = JSON.parse(playersStr);
@@ -56,14 +56,14 @@ export const PlayerStore = Reflux.createStore({
 
       if (!this.players[game.nextPlayer].ishuman) {
          if (game.biddingHasEnded) {
-            var card = this.cardplayStrategy.getCard(game);
+            let card = this.cardplayStrategy.getCard(game);
 
             setTimeout(() => {
                GameActions.playCard(card, game);
             }, 800);
          }
          else {
-            var bid = this.biddingStrategy.getBid(game);
+            let bid = this.biddingStrategy.getBid(game);
 
             setTimeout(() => {
                GameActions.makeBid(bid, game);

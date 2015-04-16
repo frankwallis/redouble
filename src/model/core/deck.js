@@ -11,10 +11,10 @@ export class Deck {
    cards: Array<Card>;
 
    createCards(): Array<Card> {
-      var result = [];
+      let result = [];
 
-      for (var asuit = Suit.Clubs; asuit <= Suit.Spades; asuit++) {
-         for (var apip = Pip.Two; apip <= Pip.Ace; apip++) {
+      for (let asuit = Suit.Clubs; asuit <= Suit.Spades; asuit++) {
+         for (let apip = Pip.Two; apip <= Pip.Ace; apip++) {
             result.push({ suit: asuit, pip: apip });
          }
       }
@@ -23,7 +23,7 @@ export class Deck {
    }
 
    shuffleCards(array: Array<Card>): Array<Card> {
-      var i = array.length, j, swap;
+      let i = array.length, j, swap;
 
       while (--i) {
          j = Math.random() * (i + 1) | 0;
@@ -41,11 +41,11 @@ export class Deck {
 
    deal(hands: number): any {//Array<Array<Card> {
 
-      var current = 0;
-      var result = [];
+      let current = 0;
+      let result = [];
 
       while (current < this.cards.length) {
-         var hand = current % hands;
+         let hand = current % hands;
 
          if (!result[hand])
             result[hand] = [];

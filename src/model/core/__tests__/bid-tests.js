@@ -8,8 +8,8 @@ describe("Bid", () => {
 
    describe("compare", () => {
       it("recognises equality", () => {
-         var bid1 = { type: BidType.Call, level: 3, suit: BidSuit.Hearts };
-         var bid2 = { type: BidType.Call, level: 3, suit: BidSuit.Hearts };
+         let bid1 = { type: BidType.Call, level: 3, suit: BidSuit.Hearts };
+         let bid2 = { type: BidType.Call, level: 3, suit: BidSuit.Hearts };
          expect(Bid.compare(bid1, bid2)).toBe(0);
          expect(Bid.compare(bid2, bid1)).toBe(0);
 
@@ -20,8 +20,8 @@ describe("Bid", () => {
       });
 
       it("obeys order of precedence of suits", () => {
-         var bid1 = { type: BidType.Call, level: 1, suit: BidSuit.Clubs };
-         var bid2 = { type: BidType.Call, level: 1, suit: BidSuit.Diamonds };
+         let bid1 = { type: BidType.Call, level: 1, suit: BidSuit.Clubs };
+         let bid2 = { type: BidType.Call, level: 1, suit: BidSuit.Diamonds };
          expect(Bid.compare(bid1, bid2)).toBeLessThan(0);
          expect(Bid.compare(bid2, bid1)).toBeGreaterThan(0);
 
@@ -44,15 +44,15 @@ describe("Bid", () => {
 
    describe("create", () => {
       it("creates bids correctly", () => {
-         var bid = Bid.create("1C");
+         let bid = Bid.create("1C");
          expect(bid.suit).toBe(BidSuit.Clubs);
          expect(bid.level).toBe(1);
 
-         var bid = Bid.create("4S");
+         bid = Bid.create("4S");
          expect(bid.suit).toBe(BidSuit.Spades);
          expect(bid.level).toBe(4);
 
-         var bid = Bid.create("7NT");
+         bid = Bid.create("7NT");
          expect(bid.suit).toBe(BidSuit.NoTrumps);
          expect(bid.level).toBe(7);
       });

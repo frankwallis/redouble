@@ -4,14 +4,14 @@ import {Deck} from '../deck';
 
 describe("Deck", () => {
 
-   var deck;
+   let deck;
 
    beforeEach(() => {
       deck = new Deck();
    });
 
    it("should deal 4 hands of 13 cards", () => {
-      var hands = deck.deal(4);
+      let hands = deck.deal(4);
       expect(hands.length).toBe(4);
 
       hands.forEach((hand) => {
@@ -20,16 +20,16 @@ describe("Deck", () => {
    });
 
    it("should shuffle the cards", () => {
-      var origHands = deck.deal(4);
+      let origHands = deck.deal(4);
       deck.shuffle();
-      var newHands = deck.deal(4);
+      let newHands = deck.deal(4);
 
       expect(newHands.length).toBe(4);
 
-      var different = false;
+      let different = false;
 
-      for (var i = 0; i < newHands.length; i++) {
-         for (var j = 0; j < newHands[i].length; j ++) {
+      for (let i = 0; i < newHands.length; i++) {
+         for (let j = 0; j < newHands[i].length; j ++) {
             if (newHands[i][j] != origHands[i][j])
                different = true;
          }

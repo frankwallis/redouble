@@ -6,7 +6,7 @@ describe("Seat", () => {
 
     describe("rotate", () => {
       it("rotates through all the seats", () => {
-         var seat = Seat.South;
+         let seat = Seat.South;
          seat = Seat.rotate(seat, 1);
          expect(seat).toBe(Seat.West);
          seat = Seat.rotate(seat, 1);
@@ -18,7 +18,7 @@ describe("Seat", () => {
       });
 
       it("rotates more than 4 positions at once", () => {
-         var seat = Seat.South;
+         let seat = Seat.South;
          seat = Seat.rotate(seat, 4001);
          expect(seat).toBe(Seat.West);
       });

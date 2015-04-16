@@ -11,7 +11,7 @@ export class TrickComponent extends React.Component {
    }
 
    getCard(seat: Seat): Card {
-      var card = undefined;
+      let card = undefined;
 
       this.props.game.currentTrick.forEach((played) => {
          if (played.seat == seat)
@@ -22,7 +22,7 @@ export class TrickComponent extends React.Component {
    }
 
    render() {
-      var cards = Seat.all().map((seat) => {
+      let cards = Seat.all().map((seat) => {
          return <li key={seat} className={"trick-card-" + Seat.name(seat)}>
             <CardComponent card={this.getCard(seat)}/>
          </li>

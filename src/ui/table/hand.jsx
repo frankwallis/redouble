@@ -22,7 +22,7 @@ export class HandComponent extends React.Component {
    }
 
    render() {
-      var cards = this.availableCards.map((card) => {
+      let cards = this.availableCards.map((card) => {
          return (
             <li className="hand-card" key={CardComponent.key(card)}>
                <button className="hand-card-button"

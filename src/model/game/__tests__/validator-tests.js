@@ -9,7 +9,7 @@ import {validateBid, validateCard} from '../validators';
 describe('Validators', () => {
    describe('validateBid', () => {
       it('checks the range', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard();
 
          expect(validateBid(Bid.create("0S"), game)).toBeDefined();
@@ -17,7 +17,7 @@ describe('Validators', () => {
       });
 
       it('allows only valid bids over no bids', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard();
 
          expect(validateBid(Bid.create("1H"), game)).toBeUndefined();
@@ -28,7 +28,7 @@ describe('Validators', () => {
       });
 
       it('allows only valid bids over calls', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard()
          	.makeBid(Bid.create("1H"));
 
@@ -40,7 +40,7 @@ describe('Validators', () => {
       });
 
       it('allows only valid bids over doubles', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("no bid"))
@@ -55,7 +55,7 @@ describe('Validators', () => {
       });
 
       it('allows only valid bids over redoubles', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("double"))
@@ -69,7 +69,7 @@ describe('Validators', () => {
       });
 
       it('disallows bids after the bidding has ended', () => {
-         var game = new GameStateHelper()
+         let game = new GameStateHelper()
          	.newBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("no bid"))

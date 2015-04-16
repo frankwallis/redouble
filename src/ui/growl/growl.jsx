@@ -32,8 +32,8 @@ export class GrowlContainer extends React.Component {
    render() {
       console.log('rendering growls');
 
-      var growls = NotificationStore.notifications.map((notification) => {
-         var buttons = notification.buttons.map((button) => {
+      let growls = NotificationStore.notifications.map((notification) => {
+         let buttons = notification.buttons.map((button) => {
             return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>
          });
 

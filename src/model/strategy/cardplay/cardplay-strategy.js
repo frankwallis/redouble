@@ -7,16 +7,16 @@ export class CardplayStrategy {
    }
 
    getCard(game): tower.ICard {
-      var trick = game.currentTrick;
-      var cards = game.currentBoard.hands[game.nextPlayer].filter((card) => !game.hasBeenPlayed(card));
+      let trick = game.currentTrick;
+      let cards = game.currentBoard.hands[game.nextPlayer].filter((card) => !game.hasBeenPlayed(card));
       return this.getAnyCard(trick[0], cards);
    }
 
    getAnyCard(lead: tower.ICard, cards: tower.IHand) {
-      var availableCards = cards;
+      let availableCards = cards;
 
       if (lead) {
-         var followers = availableCards.filter((card) => card.suit == lead.suit);
+         let followers = availableCards.filter((card) => card.suit == lead.suit);
 
          if (followers.length > 0)
             availableCards = followers;

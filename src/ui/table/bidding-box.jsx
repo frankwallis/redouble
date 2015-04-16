@@ -30,16 +30,16 @@ export class BiddingBox extends React.Component {
 
    render() {
       console.log('rendering bidding-box');
-      var levels = [];
+      let levels = [];
       for (let i = 1; i <= 7; i++) {
          let cells = [];
-         for (var s = BidSuit.Clubs; s <= BidSuit.NoTrumps; s ++) {
+         for (let s = BidSuit.Clubs; s <= BidSuit.NoTrumps; s ++) {
             cells.push(this.bidButton({type: BidType.Call, suit: s, level: i}, 2));
          }
 
          levels.push(<tr key={i} className="bidding-box-level">{cells}</tr>);
       }
-      var modButtons = [
+      let modButtons = [
          this.bidButton({type: BidType.Double}, 3),
          this.bidButton({type: BidType.Redouble}, 3),
          this.bidButton({type: BidType.NoBid}, 4)

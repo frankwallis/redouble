@@ -32,7 +32,7 @@ export class SettingsView extends React.Component {
    }
 
    handleChangeHuman(seat, event) {
-      PlayerActions.updatePlayer(seat, {ishuman: !event.target.value});
+      PlayerActions.updatePlayer(seat, {ishuman: !event.target.checked});
    }
 
    render() {

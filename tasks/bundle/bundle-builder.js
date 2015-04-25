@@ -28,7 +28,6 @@ module.exports = function(options) {
             options.entryJs = options.entryJs + '!github:floatdrop/plugin-jsx@0.1.1';
 
          var builder = new Builder();
-         builder.reset();
          builder.loadConfig(options.config)
             .then(function() {
                overrideSystemJS(builder.loader);

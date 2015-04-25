@@ -3,7 +3,6 @@ bin/
 lib/
 deps/
 obj/
-jspm_packages/
 node_modules/
 mods/
 reports/
@@ -11,3 +10,4 @@ coverage/
 js/
 tmp/
 build/
+jspm_packages/

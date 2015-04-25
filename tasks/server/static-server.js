@@ -23,7 +23,7 @@ function staticServer(options) {
    }
 
    // serve the static assets
-   app.use(express.static(options.webRoot));
+   app.use(options.baseURL, express.static(options.webRoot));
 
    function index(req, res) {
       res.sendFile(options.webIndex, {'root': options.webRoot});

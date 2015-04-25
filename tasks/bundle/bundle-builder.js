@@ -4,6 +4,7 @@ var del = require('del');
 var gutil = require('gulp-util');
 var utils = require('../utils/utils');
 var notify = require('../utils/notify');
+var mkdirp = require('mkdirp');
 var Builder = require('systemjs-builder');
 var overrideSystemJS = require("../utils/systemjs-overrides");
 
@@ -19,13 +20,14 @@ module.exports = function(options) {
       gulp.task('clean-bundles', function(cb) {
          del([ options.outputJs, options.outputCss ], function (err) {
             gutil.log("Deleted " + options.outputJs + ", " + options.outputCss);
+            mkdirp(path.dirname(options.outputJs));
             cb(err);
          });
       });
 
       gulp.task('bundle', ['clean-bundles'], function (cb) {
          if (options.entryJs.slice(-4) == '.jsx')
-            options.entryJs = options.entryJs + '!github:floatdrop/plugin-jsx@0.1.1';
+            options.entryJs = options.entryJs + '!';
 
          var builder = new Builder();
          builder.loadConfig(options.config)
@@ -33,7 +35,8 @@ module.exports = function(options) {
                overrideSystemJS(builder.loader);
                builder.config({
                   buildCSS: true,
-                  separateCSS: true
+                  separateCSS: true,
+                  rootURL: "/tower/"
                });
                return builder.buildSFX(options.entryJs, options.outputJs);
             })

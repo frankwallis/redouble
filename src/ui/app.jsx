@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Router from 'react-router';
-let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
 
 import {Table} from './table/table.jsx';
 import {AboutView} from './about/about.jsx';
@@ -55,10 +55,11 @@ export class App extends React.Component {
 }
 
 let routes = (
-   <Route handler={App} path="/">
+   <Route handler={App} path="/tower/">
       <DefaultRoute name="table" handler={Table} />
       <Route name="about" handler={AboutView} />
       <Route name="settings" handler={SettingsView} />
+      <Redirect from="/" to="/tower/" />
    </Route>
 );
 

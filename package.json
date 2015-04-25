@@ -13,6 +13,7 @@
     "glob": "^4.3.5",
     "gulp": "^3.8.11",
     "gulp-util": "^3.0.2",
+    "mkdirp": "^0.5.0",
     "morgan": "^1.5.1",
     "node-notifier": "^4.1.0",
     "open": "0.0.5",
@@ -51,18 +52,18 @@
       "lib": "src"
     },
     "dependencies": {
-      "babel": "npm:babel@^4.6.1",
-      "css": "github:systemjs/plugin-css@0.1.7",
       "font-awesome": "npm:font-awesome@^4.3.0",
-      "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
       "necolas/normalize.css": "github:necolas/normalize.css@^3.0.2",
       "purecss": "npm:purecss@^0.6.0",
       "react": "npm:react@^0.13.0",
       "react-router": "npm:react-router@^0.13.2",
-      "reflux": "npm:reflux@^0.2.5",
-      "text": "github:systemjs/plugin-text@^0.0.2"
+      "reflux": "npm:reflux@^0.2.5"
     },
     "devDependencies": {
+      "babel": "npm:babel@^4.6.1",
+      "css": "github:systemjs/plugin-css@0.1.9",
+      "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
+      "text": "github:systemjs/plugin-text@^0.0.2",
       "traceur": "github:jmcriffey/bower-traceur@0.0.87",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87"
     }

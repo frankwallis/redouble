@@ -19,7 +19,7 @@ module.exports = function(System) {
       return systemNormalize.call(this, arg1, arg2)
          .then(function(normed) {
             if ((normed.slice(-4) == '.css') && (normed.indexOf('app.') < 0)) {
-               normed = normed + '!github:systemjs/plugin-css@0.1.7';
+               normed = normed + '!github:systemjs/plugin-css@0.1.9';
             }
             if ((normed.slice(-4) == '.jsx') && (normed.indexOf('app.') < 0)) {
                normed = normed + '!github:floatdrop/plugin-jsx@0.1.1';

@@ -4,7 +4,8 @@ module.exports = function(options) {
 
    options = options || {};
    options.webRoot = path.join(process.cwd(), options.webRoot || '');
-   options.webIndex = options.webIndex || "index-dev.html";
+   options.baseURL = options.baseURL || '';
+   options.webIndex = options.webIndex || "index.html";
    options.port = options.port || 8888;
    options.liveReload = options.liveReload || true;
    options.liveReloadDelay = options.liveReloadDelay || 1200;

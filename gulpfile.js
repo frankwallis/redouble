@@ -9,6 +9,7 @@ tasks
    })
    .addServer({
       port: 8888,
-      verbose: true
+      verbose: true,
+      baseURL: "/tower/"
    })
    .build(gulp);

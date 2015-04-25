@@ -16,7 +16,7 @@ export class CardplayStrategy {
       let availableCards = cards;
 
       if (lead) {
-         let followers = availableCards.filter((card) => card.suit == lead.suit);
+         let followers = availableCards.filter((card) => card.suit == lead.card.suit);
 
          if (followers.length > 0)
             availableCards = followers;

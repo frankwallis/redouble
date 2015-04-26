@@ -10,6 +10,7 @@ tasks
    .addServer({
       port: 8888,
       verbose: true,
-      baseURL: "/tower/"
+      baseURL: "/tower/",
+      webIndex: "index-dev.html"
    })
    .build(gulp);

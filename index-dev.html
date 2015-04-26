@@ -9,7 +9,7 @@
    <meta name="fragment" content="!" />
 
    <title>tower</title>
-   <base href="/"></base>
+   <base href="/tower/"></base>
 
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
    <!-- <link rel="shortcut icon" href="/resources/london-bridge-icon.png" /> -->
@@ -20,6 +20,10 @@
    <script src="config.js"></script>
 
    <script type="module">
+
+      System.config({
+         "baseURL": "/tower/"
+      })
 
       /* Workaround for https://github.com/systemjs/systemjs/issues/319 */
       var systemLocate = System.locate;

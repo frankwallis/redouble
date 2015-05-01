@@ -2,7 +2,7 @@
 
 import {
    Component, View,
-   Foreach, Switch, SwitchWhen} from 'angular2/angular2.js';
+   For, Switch, SwitchWhen} from 'angular2/angular2.js';
 
 import {PlayerService, IPlayer} from "../../services/player-service";
 import {GameService} from "../../services/game-service";
@@ -18,12 +18,12 @@ import {TrickComponent} from "./trick";
  */
 @Component({
    selector: 'table-view',
-   services: [GameService, PlayerService]
+   injectables: [GameService, PlayerService]
 })
 @View({
-   url: 'src/ui/table/table.html',
+   templateUrl: 'src/ui/table/table.html',
    directives: [
-      Foreach, Switch, SwitchWhen,
+      For, Switch, SwitchWhen,
       BiddingBox, HandComponent, BiddingHistory, TrickComponent,
    ]
 })

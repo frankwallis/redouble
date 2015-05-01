@@ -1,7 +1,5 @@
 /// <reference path="../_references.d.ts" />
 
-import {Injectable} from 'angular2/di.js';
-
 /**
  * Store for showing notifications to the user and
  * optionally receiving a response. Notifications are

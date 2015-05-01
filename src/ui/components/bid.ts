@@ -6,12 +6,12 @@ import {BidType, BidSuit, Bid, IBid} from '../../model/core/bid';
 @Component({
    selector: 'bid-component',
    services: [],
-   bind: {
+   properties: {
       bid: "bid"
    }
 })
 @View({
-   url: 'src/ui/components/bid.html',
+   templateUrl: 'src/ui/components/bid.html',
    directives: [Switch, SwitchWhen]
 })
 

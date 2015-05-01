@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, Foreach, If} from 'angular2/angular2.js';
+import {Component, View, For, If} from 'angular2/angular2.js';
 
 import {CardComponent} from '../components/card';
 import {Seat} from '../../model/core/seat';
@@ -8,14 +8,14 @@ import {GameService} from "../../services/game-service";
 
 @Component({
    selector: 'trick-component',
-   services: [GameService],
+   injectables: [GameService],
    bind: {
       card: "card"
    }
 })
 @View({
-   url: 'src/ui/table/trick.html',
-   directives: [CardComponent, Foreach, If]
+   templateUrl: 'src/ui/table/trick.html',
+   directives: [CardComponent, For, If]
 })
 export class TrickComponent {
    constructor(gameService: GameService) {

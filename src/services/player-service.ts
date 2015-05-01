@@ -1,5 +1,4 @@
 /// <reference path="../_references.d.ts" />
-
 import {Seat} from "../model/core/seat";
 
 export interface IPlayer {

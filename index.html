@@ -12,14 +12,11 @@
    <base href="/"></base>
 
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
-   <!-- <link rel="shortcut icon" href="/resources/london-bridge-icon.png" /> -->
-
-   <!-- <script src="jspm_packages/system.js" data-babel-src="node_modules/babel/browser.js"></script> -->
-   <!--<script src="jspm_packages/npm/zone.js@0.4.3/zone.js" type="text/javascript"></script>
-   <script src="jspm_packages/npm/zone.js@0.4.3/long-stack-trace-zone.js" type="text/javascript"></script> --></script>
 
    <script src="jspm_packages/system.js"></script>
    <script src="config.js"></script>
+   <script src="lib/angular2.dev.js"></script>
+      
 </head>
 
 <body>
@@ -28,6 +25,16 @@
    </tower-app>
 
    <script type="module">
+      System.config({
+        "meta": {
+          "angular2/angular2.js": {
+            "build": false
+          },
+          "angular2/di.js": {
+            "build": false
+          }
+        }
+      });
 
       System.import('./src/ui/app.ts!')
          .then(function(app){

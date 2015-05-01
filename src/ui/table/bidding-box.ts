@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, Foreach} from 'angular2/angular2.js';
+import {Component, View, For} from 'angular2/angular2.js';
 
 import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
@@ -8,11 +8,11 @@ import {GameService} from '../../services/game-service';
 
 @Component({
   selector: 'bidding-box',
-  services: [GameService]
+  injectables: [GameService]
 })
 @View({
-  url: 'src/ui/table/bidding-box.html',
-  directives: [Foreach, BidComponent]
+  templateUrl: 'src/ui/table/bidding-box.html',
+  directives: [For, BidComponent]
 })
 export class BiddingBox {
    constructor(gameService: GameService) {

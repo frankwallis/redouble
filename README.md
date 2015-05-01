@@ -2,12 +2,13 @@
 
 contract bridge
 
-developed in Es6 using ReactJS, Reflux, SystemJS, jspm, Jest, babel
+developed in TypeScript using Angular2, Reflux, SystemJS
 
 ### How do I get set up? ###
 
 * npm install
 * jspm install
+* jspm install --dev
 * npm start
 
 ### Issues

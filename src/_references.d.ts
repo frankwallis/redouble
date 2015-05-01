@@ -24,27 +24,7 @@ declare module "angular2/angular2.js" {
       changeDetection?:string
     });
 
-  function Directive({
-    selector,
-    properties,
-    hostListeners,
-    injectables,
-    lifecycle,
-    changeDetection,
-    services
-    }:{
-      selector:string,
-      properties?:Object,
-      hostListeners?:Object,
-      injectables?:List<any>,
-      services?:List<any>,
-      lifecycle?:List<any>,
-      changeDetection?:string
-    });
-
-
   function View({
-      url,
       templateUrl,
       template,
       directives,
@@ -53,7 +33,6 @@ declare module "angular2/angular2.js" {
       locale,
       device
     }: {
-      url?: string,
       templateUrl?: string,
       template?: string,
       directives?: List<any>,
@@ -68,10 +47,6 @@ declare module "angular2/angular2.js" {
   function Foreach();
   function Switch();
   function SwitchWhen();
+  
   function SwitchDefault();
-  function Template();
-}
-
-declare module "angular2/di.js" {
-    var Injectable: any;
 }

@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, Foreach} from 'angular2/angular2.js';
+import {Component, View, For} from 'angular2/angular2.js';
 import {NotificationService} from "../../services/notification-service";
 
 /**
@@ -9,11 +9,11 @@ import {NotificationService} from "../../services/notification-service";
  */
 @Component({
    selector: 'growler',
-   services: [NotificationService]
+   injectables: [NotificationService]
 })
 @View({
-   url: 'src/ui/growl/growl.html',
-   directives: [Foreach]
+   templateUrl: 'src/ui/growl/growl.html',
+   directives: [For]
 })
 
 export class GrowlContainer {

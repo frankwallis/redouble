@@ -2,26 +2,30 @@ System.config({
   "transpiler": "traceur",
   "traceurOptions": {
     "asyncFunctions": true,
-    "types": true,
-    "atscript": true,
+    "types": false,
+    "atscript": false,
     "memberVariables": true,
-    "annotations": true,
+    "annotations": false,
     "experimental": false,
     "typeAssertions": true,
     "typeAssertionModule": "rtts_assert/rtts_assert"
   },
+  "typescriptOptions": {
+    "emitDecoratorMetadata": true
+  },
+
   "paths": {
     "*": "./",
     "src/*": "src/*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js",
     "tower/*": "src/*.js"
-   }
+  }
 });
 
 System.config({
   "map": {
-    "angular2": "npm:angular2@2.0.0-alpha.21",
+    "angular21": "github:angular/angular@master",
     "babel": "npm:babel@4.7.16",
     "css": "github:systemjs/plugin-css@0.1.10",
     "font-awesome": "npm:font-awesome@4.3.0",
@@ -29,6 +33,7 @@ System.config({
     "necolas/normalize.css": "github:necolas/normalize.css@3.0.3",
     "purecss": "npm:purecss@0.6.0",
     "react": "npm:react@0.13.2",
+    "reflect-metadata": "npm:reflect-metadata@0.1.0",
     "reflux": "npm:reflux@0.2.7",
     "text": "github:systemjs/plugin-text@0.0.2",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
@@ -79,9 +84,6 @@ System.config({
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
     },
-    "github:jspm/nodelibs-querystring@0.1.0": {
-      "querystring": "npm:querystring@0.2.0"
-    },
     "github:jspm/nodelibs-stream@0.1.0": {
       "stream-browserify": "npm:stream-browserify@1.0.0"
     },
@@ -111,16 +113,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:angular2@2.0.0-alpha.21": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "rtts_assert": "npm:rtts_assert@2.0.0-alpha.21",
-      "rx": "npm:rx@2.5.1",
-      "traceur": "npm:traceur@0.0.87",
-      "url": "github:jspm/nodelibs-url@0.1.0",
-      "zone.js": "npm:zone.js@0.4.3"
-    },
     "npm:asn1.js@1.0.4": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "bn.js": "npm:bn.js@1.3.0",
@@ -135,10 +127,6 @@ System.config({
     "npm:ast-types@0.6.16": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:brace-expansion@1.1.0": {
-      "balanced-match": "npm:balanced-match@0.2.0",
-      "concat-map": "npm:concat-map@0.0.1"
     },
     "npm:browserify-aes@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -319,18 +307,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:glob@4.3.5": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "events": "github:jspm/nodelibs-events@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "inflight": "npm:inflight@1.0.4",
-      "inherits": "npm:inherits@2.0.1",
-      "minimatch": "npm:minimatch@2.0.7",
-      "once": "npm:once@1.3.1",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "util": "github:jspm/nodelibs-util@0.1.0"
-    },
     "npm:graceful-fs@3.0.6": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "constants": "github:jspm/nodelibs-constants@0.1.0",
@@ -391,10 +367,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "sigmund": "npm:sigmund@1.0.0"
-    },
-    "npm:minimatch@2.0.7": {
-      "brace-expansion": "npm:brace-expansion@1.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0"
     },
     "npm:mkdirp@0.5.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -500,27 +472,16 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1",
       "source-map": "npm:source-map@0.1.43"
     },
+    "npm:reflect-metadata@0.1.0": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "crypto": "github:jspm/nodelibs-crypto@0.1.0"
+    },
     "npm:reflux@0.2.7": {
       "eventemitter3": "npm:eventemitter3@0.1.6",
       "native-promise-only": "npm:native-promise-only@0.7.6-a"
     },
     "npm:ripemd160@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:rsvp@3.0.18": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:rtts_assert@2.0.0-alpha.21": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0"
-    },
-    "npm:rx@2.5.1": {
-      "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:semver@2.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:sha.js@2.4.0": {
@@ -533,24 +494,7 @@ System.config({
       "http": "github:jspm/nodelibs-http@1.7.1",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:source-map-support@0.2.10": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "http": "github:jspm/nodelibs-http@1.7.1",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "querystring": "github:jspm/nodelibs-querystring@0.1.0",
-      "source-map": "npm:source-map@0.1.32"
-    },
     "npm:source-map@0.1.31": {
-      "amdefine": "npm:amdefine@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:source-map@0.1.32": {
       "amdefine": "npm:amdefine@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -573,20 +517,6 @@ System.config({
     "npm:through@2.3.7": {
       "process": "github:jspm/nodelibs-process@0.1.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
-    },
-    "npm:traceur@0.0.87": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "commander": "npm:commander@2.6.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "glob": "npm:glob@4.3.5",
-      "module": "github:jspm/nodelibs-module@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "rsvp": "npm:rsvp@3.0.18",
-      "semver": "npm:semver@2.3.2",
-      "source-map-support": "npm:source-map-support@0.2.10",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0",
-      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:typescript@1.5.0-beta": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

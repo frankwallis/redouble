@@ -1,6 +1,5 @@
 /// <reference path="../_references.d.ts" />
 
-//import {Inject} from 'angular2/di.js';
 import {GameStateHelper} from "../model/game/game-state";
 import {NotificationService} from "./notification-service";
 

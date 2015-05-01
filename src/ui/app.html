@@ -1,10 +1,10 @@
 <div class="app-container">
    <nav role="navigation" class="app-navbar nav-main">
       <ul class="nav-site">
-         <li *foreach="#route in routes">
+         <li *for="#route of routes">
             <a [class.active]="state.route == route"
-               href=""
-               (click)="routeClicked($event, route)">
+               href="#"
+               (^click)="routeClicked($event, route)">
                {{route}}
             </a>
          </li>

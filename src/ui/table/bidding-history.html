@@ -2,14 +2,14 @@
    <thead>
       <tr>
          <th class="bidding-cell"
-             *foreach="#seat in seats">{{seatName(seat)}}</th>
+             *for="#seat of seats">{{seatName(seat)}}</th>
       </tr>
    </thead>
    <tbody>
       <tr class="bidding-round"
-          *foreach="#round in rounds">
+          *for="#round of rounds">
          <td class="bidding-cell"
-             *foreach="#seat in seats">
+             *for="#seat of seats">
              <bid-component bind-bid="getBid(round, seat)"/>
          </td>
       </tr>

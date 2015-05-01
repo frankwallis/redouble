@@ -1,4 +1,4 @@
-/* @flow */
+/// <reference path="../../_references.d.ts" />
 
 export const Suit = {
    "Clubs": 1,
@@ -13,17 +13,13 @@ export const Pip = {
    "Jack": 11, "Queen": 12, "King": 13, "Ace": 14
 };
 
-// export interface ICard {
-//    suit: Suit;
-//    pip: Pip;
-// }
+ export interface ICard {
+    suit: number;
+    pip: number;
+ }
 
 export class Card {
-   static stringify(card): string {
-
-   }
-
-   static compare(card1, card2, trumpSuit, leadSuit): number {
+   static compare(card1: ICard, card2: ICard, trumpSuit?: number, leadSuit?: number): number {
       if (card1.suit == card2.suit) {
          return card1.pip - card2.pip;
       }
@@ -46,14 +42,14 @@ export class Card {
       }
    }
 
-   static create(card: string) {
+   static create(card: string): ICard {
       var shortSuitNames = [ "", "C", "D", "H", "S"];
       var shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
 
-      var result = {};
-      result.pip = shortPipNames.indexOf(card[0].toUpperCase());
-      result.suit = shortSuitNames.indexOf(card[1].toUpperCase());
-      return result;
+      return {
+         pip: shortPipNames.indexOf(card[0].toUpperCase()),
+         suit: shortSuitNames.indexOf(card[1].toUpperCase())
+      };
    }
 
 }

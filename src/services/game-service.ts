@@ -1,4 +1,6 @@
-import {Inject} from 'angular2/di';
+/// <reference path="../_references.d.ts" />
+
+//import {Inject} from 'angular2/di.js';
 import {GameStateHelper} from "../model/game/game-state";
 import {NotificationService} from "./notification-service";
 
@@ -18,13 +20,16 @@ export class GameService {
       this.currentStateIdx = 0;
       console.log('created game');
    }
+   
+   private states: Array<GameStateHelper>;
+   private currentStateIdx: number;
 
    get notificationService() {
       // DI not working!
       return NotificationService.instance();
    }
 
-   get currentState() {
+   get currentState(): GameStateHelper {
       return this.states[this.currentStateIdx];
    }
 
@@ -58,7 +63,7 @@ export class GameService {
       if (err) {
          this.notificationService.error({
             title: "Invalid bid",
-            message: err.message
+            message: (<any>err).message
          });
       } else {
          var newstate = this.currentState.playCard(card);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-strict-di>
+<html lang="en">
 <head>
    <meta charset="utf-8"/>
    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -15,40 +15,21 @@
    <!-- <link rel="shortcut icon" href="/resources/london-bridge-icon.png" /> -->
 
    <!-- <script src="jspm_packages/system.js" data-babel-src="node_modules/babel/browser.js"></script> -->
-   <script src="jspm_packages/npm/zone.js@0.4.1/zone.js" type="text/javascript"></script>
-   <script src="jspm_packages/npm/zone.js@0.4.1/long-stack-trace-zone.js" type="text/javascript"></script>
+   <!--<script src="jspm_packages/npm/zone.js@0.4.3/zone.js" type="text/javascript"></script>
+   <script src="jspm_packages/npm/zone.js@0.4.3/long-stack-trace-zone.js" type="text/javascript"></script> --></script>
 
-   <script src="jspm_packages/traceur-runtime.js"></script>
    <script src="jspm_packages/system.js"></script>
    <script src="config.js"></script>
+</head>
+
+<body>
+   <tower-app>
+      Loading...
+   </tower-app>
 
    <script type="module">
 
-      /* Workaround for https://github.com/systemjs/systemjs/issues/319 */
-      var systemLocate = System.locate;
-      System.locate = function(load) {
-         var System = this; // its good to ensure exact instance-binding
-         return systemLocate.call(this, load).then(function(address) {
-            if (address.slice(-7) == '.jsx.js')
-               address = address.slice(0, address.length -3);
-
-            return address;
-         });
-      }
-
-      /* So we don't have to put '!' characters in our imports */
-      var systemNormalize = System.normalize;
-      System.normalize = function(arg1, arg2) {
-         var System = this; // its good to ensure exact instance-binding
-         return systemNormalize.call(this, arg1, arg2).then(function(normed) {
-            if (normed && (normed.slice(-4) == '.jsx'))
-               normed = normed + '!github:floatdrop/plugin-jsx@0.1.1';
-
-            return normed;
-         });
-      }
-
-      System.import('./src/ui/app')
+      System.import('./src/ui/app.ts!')
          .then(function(app){
             app.main();
          })
@@ -58,18 +39,12 @@
 
       Promise.all(System.import('./necolas/normalize.css'),
                   System.import('purecss/build/pure.css!'),
-                  System.import('FortAwesome/Font-Awesome/css/font-awesome.css!'),
+                  System.import('font-awesome/css/font-awesome.css!'),
                   System.import('./src/ui/app.css!'))
          .catch(function (err){
             console.log('ERROR: ', err)
          });
    </script>
-</head>
-
-<body>
-   <tower-app>
-      Loading...
-   </tower-app>
 </body>
 
 </html>

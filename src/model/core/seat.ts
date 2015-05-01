@@ -1,4 +1,4 @@
-/* @flow */
+/// <reference path="../../_references.d.ts" />
 
 export const Seat = {
    North: 0,
@@ -10,7 +10,7 @@ export const Seat = {
       return [0,1,2,3];
    },
 
-   name: function(seat) {
+   name: function(seat: number) {
       switch(seat) {
          case Seat.North:
             return "north";

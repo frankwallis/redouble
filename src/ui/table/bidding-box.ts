@@ -1,14 +1,16 @@
-import {Component, Decorator, Template, Foreach} from 'angular2/angular2';
+/// <reference path="../../_references.d.ts" />
+
+import {Component, View, Foreach} from 'angular2/angular2.js';
 
 import {BidComponent} from '../components/bid';
-import {BidSuit, BidType, Bid} from '../../model/core/bid';
+import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
 import {GameService} from '../../services/game-service';
 
 @Component({
   selector: 'bidding-box',
   services: [GameService]
 })
-@Template({
+@View({
   url: 'src/ui/table/bidding-box.html',
   directives: [Foreach, BidComponent]
 })
@@ -32,6 +34,13 @@ export class BiddingBox {
       console.log('created bidding-box')
    }
 
+   private gameService: GameService;
+   public levels: Array<Array<IBid>>;
+   
+   public Bid: typeof Bid;
+   public BidType: typeof BidType;
+   public BidSuit: typeof BidSuit;
+   
    makeBid(bid) {
       console.log('in makeBid + ' + JSON.stringify(bid));
       this.gameService.makeBid(bid);

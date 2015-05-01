@@ -1,5 +1,7 @@
-import {Component, Template, Switch, SwitchWhen} from 'angular2/angular2';
-import {BidType, BidSuit, Bid} from '../../model/core/bid';
+/// <reference path="../../_references.d.ts" />
+
+import {Component, View, Switch, SwitchWhen} from 'angular2/angular2.js';
+import {BidType, BidSuit, Bid, IBid} from '../../model/core/bid';
 
 @Component({
    selector: 'bid-component',
@@ -8,7 +10,7 @@ import {BidType, BidSuit, Bid} from '../../model/core/bid';
       bid: "bid"
    }
 })
-@Template({
+@View({
    url: 'src/ui/components/bid.html',
    directives: [Switch, SwitchWhen]
 })
@@ -21,7 +23,10 @@ export class BidComponent {
       this.BidType = BidType;
    }
 
-   bid: any;
+   bid: IBid;
+   Bid: typeof Bid;
+   BidSuit: typeof BidSuit;
+   BidType: typeof BidType;
 
    suitClass(suit): any {
       console.log('in suitClass ' + suit);

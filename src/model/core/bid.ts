@@ -1,13 +1,13 @@
-/* @flow */
+/// <reference path="../../_references.d.ts" />
 
 export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
 export const BidType = { "NoBid": 0, "Call": 1, "Double": 2, "Redouble": 3 };
 
-// interface IBid {
-//    type: BidType;
-//    suit: BidSuit;
-//    level: number;
-// }
+export interface IBid {
+    type: number;
+    suit?: number;
+    level?: number;
+ }
 
 export class Bid {
    static key(bid): string {
@@ -19,7 +19,7 @@ export class Bid {
       return result.join('-');
    }
 
-   static create(bid: string) {
+   static create(bid: string): IBid {
       var shortNames = [ "", "c", "d", "h", "s", "nt"];
       bid = bid.toLowerCase();
 
@@ -30,7 +30,7 @@ export class Bid {
       else if (bid == "no bid")
          return { type: BidType.NoBid };
       else {
-         var result = { type: BidType.Call };
+         var result: IBid = { type: BidType.Call };
          result.level = parseInt(bid[0]);
          result.suit = shortNames.indexOf(bid.slice(1));
          return result;

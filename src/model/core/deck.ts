@@ -1,6 +1,6 @@
-/* @flow */
+/// <reference path="../../_references.d.ts" />
 
-import {Suit, Pip, Card} from "./card";
+import {Suit, Pip, Card, ICard} from "./card";
 
 export class Deck {
 
@@ -10,7 +10,7 @@ export class Deck {
 
    cards: Array<any>;
 
-   createCards(): Array<any> {
+   createCards(): Array<ICard> {
       var result = [];
 
       for (var asuit = Suit.Clubs; asuit <= Suit.Spades; asuit++) {
@@ -22,7 +22,7 @@ export class Deck {
       return result;
    }
 
-   shuffleCards(array: Array<any>): Array<any> {
+   shuffleCards(array: Array<ICard>): Array<ICard> {
       var i = array.length, j, swap;
 
       while (--i) {
@@ -39,7 +39,7 @@ export class Deck {
       this.cards = this.shuffleCards(this.cards);
    }
 
-   deal(hands: number): any {//Array<Array<tower.any> {
+   deal(hands: number): Array<Array<ICard>> {
 
       var current = 0;
       var result = [];

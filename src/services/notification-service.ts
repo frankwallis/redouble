@@ -1,4 +1,6 @@
-import {Injectable} from 'angular2/di';
+/// <reference path="../_references.d.ts" />
+
+import {Injectable} from 'angular2/di.js';
 
 /**
  * Store for showing notifications to the user and
@@ -7,13 +9,31 @@ import {Injectable} from 'angular2/di';
  */
 var instance = null;
 
-export class Deferred {
+class Deferred<T> {
    constructor() {
-      this.promise = new Promise((resolve, reject) => {
+      this.promise = new Promise<T>((resolve, reject) => {
          this.resolve = resolve;
          this.reject = reject;
       })
    }
+   public promise: Promise<T>;
+   public resolve: (res: T) => void;
+   public reject: (err: any) => void;   
+}
+
+export interface INotification {
+   id: number;
+   timestamp: Date;
+   source: any;
+   type: string;
+   title: string;
+   timeout: number;
+   message: string;
+   buttons: Array<string>;
+   defaultButton: string;
+   deferred: Deferred<any>;
+   response: string;
+   dismissed: boolean;
 }
 
 //@Injectable()
@@ -32,6 +52,9 @@ export class NotificationService {
       //}, 7500);
    }
 
+   public notifications: Array<INotification>;
+   private currentId: number;
+   
    static instance() {
       return instance;
    }
@@ -84,7 +107,7 @@ export class NotificationService {
    }
 
    notify(opts) {
-      var notification = {};
+      var notification: INotification = <any> {};
       notification.id = this.generateId();
       notification.timestamp = new Date();
       notification.source = opts.source;
@@ -94,7 +117,7 @@ export class NotificationService {
       notification.message = opts.message;
       notification.buttons = opts.buttons || [];
       notification.defaultButton = opts.defaultButton;
-      notification.deferred = new Deferred();
+      notification.deferred = new Deferred<any>();
       this.notifications.push(notification);
       return notification.deferred.promise;
    }

@@ -1,4 +1,6 @@
-import {Component, Template, Foreach} from 'angular2/angular2';
+/// <reference path="../../_references.d.ts" />
+
+import {Component, View, Foreach} from 'angular2/angular2.js';
 import {NotificationService} from "../../services/notification-service";
 
 /**
@@ -9,7 +11,7 @@ import {NotificationService} from "../../services/notification-service";
    selector: 'growler',
    services: [NotificationService]
 })
-@Template({
+@View({
    url: 'src/ui/growl/growl.html',
    directives: [Foreach]
 })
@@ -22,4 +24,6 @@ export class GrowlContainer {
    handleResponse(id, response) {
       this.notificationService.dismiss({id: id, response: response});
    }
+   
+   private notificationService: NotificationService;
 }

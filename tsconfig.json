@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "removeComments": true,
+        "preserveConstEnums": true
+    },
+    "files": [
+		"src/**/*.ts",
+		"declarations/**/*.d.ts"
+    ]
+}

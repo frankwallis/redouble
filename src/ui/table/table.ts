@@ -1,10 +1,11 @@
-import {
-   Component, Template,
-   Foreach, Switch, SwitchWhen} from 'angular2/angular2';
+/// <reference path="../../_references.d.ts" />
 
-import {PlayerService} from "../../services/player-service";
+import {
+   Component, View,
+   Foreach, Switch, SwitchWhen} from 'angular2/angular2.js';
+
+import {PlayerService, IPlayer} from "../../services/player-service";
 import {GameService} from "../../services/game-service";
-import {GameState} from "../../model/game/game-state";
 import {Seat, seatName} from "../../model/core/seat";
 
 import {HandComponent} from "./hand";
@@ -19,7 +20,7 @@ import {TrickComponent} from "./trick";
    selector: 'table-view',
    services: [GameService, PlayerService]
 })
-@Template({
+@View({
    url: 'src/ui/table/table.html',
    directives: [
       Foreach, Switch, SwitchWhen,
@@ -34,4 +35,9 @@ export class TableView {
       this.gameService = gameService;
       this.Seat = Seat;
    }
+   
+   public seats: Array<number>;
+   public players: Array<IPlayer>;
+   public gameService: GameService;
+   public Seat: any;
 }

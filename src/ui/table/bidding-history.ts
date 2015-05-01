@@ -1,4 +1,6 @@
-import {Component, Decorator, Template, Foreach, If} from 'angular2/angular2';
+/// <reference path="../../_references.d.ts" />
+
+import {Component, View, Foreach, If} from 'angular2/angular2.js';
 
 import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
@@ -9,7 +11,7 @@ import {Seat, seatName} from "../../model/core/seat";
   selector: 'bidding-history',
   services: [GameService]
 })
-@Template({
+@View({
   url: 'src/ui/table/bidding-history.html',
   directives: [Foreach, If, BidComponent]
 })
@@ -23,6 +25,12 @@ export class BiddingHistory {
       this.empty = { type: -1 };
    }
 
+   private gameService: GameService;
+   private seats: Array<number>;
+   public seatName: any;
+   public rounds: Array<any>;
+   private empty: any;
+   
    getBid(round, seat) {
       var position = (round * 4) + seat;
 

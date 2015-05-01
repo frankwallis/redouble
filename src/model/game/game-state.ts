@@ -1,13 +1,21 @@
-/* @flow */
+/// <reference path="../../_references.d.ts" />
 
 import {Deck} from "../core/deck";
 import {Seat} from "../core/seat";
-import {Bid, BidType, BidSuit} from "../core/bid";
-import {Card, Pip, Suit} from "../core/card";
+import {Bid, BidType, BidSuit, IBid} from "../core/bid";
+import {Card, Pip, Suit, ICard} from "../core/card";
 import {GameScorer} from "./game-scorer";
 
-interface ICard {
+interface IGameState {
+   boards: Array<IBoard>;
+}
 
+interface IBoard {
+   dealer: number;
+   hands: Array<Array<ICard>>;
+   bids: Array<IBid>;
+   leader?: number;
+   cards: Array<ICard>;
 }
 
 
@@ -17,28 +25,30 @@ interface ICard {
  */
 export class GameStateHelper {
 
-   constructor(gameState) {
+   constructor(gameState?: IGameState) {
       this.gameState = gameState || { boards: [] };
    }
 
+   private gameState: IGameState;
+   
    /**
     * Returns the current board
     */
-   get currentBoard(): any {
+   get currentBoard(): IBoard {
       return this.gameState.boards[this.gameState.boards.length -1];
    }
 
    /**
     * Returns the last bid to be made of any type
     */
-   get lastBid(): any {
+   get lastBid(): IBid {
       return this.currentBoard.bids[this.currentBoard.bids.length -1];
    }
 
    /**
     * Returns the last bid to be made of type Bid.Call
     */
-   get lastCall(): any {
+   get lastCall(): IBid {
       return this.currentBoard.bids.reduce((result, bid) => {
          if (bid.type == BidType.Call)
             return bid;
@@ -50,7 +60,7 @@ export class GameStateHelper {
    /**
     * Returns the last bid to be made which was not a no-bid
     */
-   get lastAction(): any {
+   get lastAction(): IBid {
       return this.currentBoard.bids.reduce((current, bid) => {
          if (bid.type != BidType.NoBid)
             return bid;
@@ -62,7 +72,7 @@ export class GameStateHelper {
    /**
     * Returns the suit of the bid contract or undefined if the bidding has not ended
     */
-   get trumpSuit(): BidSuit {
+   get trumpSuit(): number {
       if (this.biddingHasEnded && this.lastCall)
          return this.lastCall.suit;
    }
@@ -90,7 +100,7 @@ export class GameStateHelper {
     * played to the trick, starting with the lead card. If no cards have been played
     * yet it returns an empty array.
     */
-   get currentTrick(): Array<any> {
+   get currentTrick(): Array<ICard> {
       var played = this.currentBoard.cards.length % 4;
       played = played || 4;
       return this.currentBoard.cards.slice(played * -1);
@@ -106,7 +116,7 @@ export class GameStateHelper {
    /**
     * Returns true if this card has already been played
     */
-   hasBeenPlayed(card) {
+   hasBeenPlayed(card: ICard) {
       return this.currentBoard.cards
          .some((played) => (played.pip == card.pip) && (played.suit == card.suit));
    }
@@ -121,7 +131,7 @@ export class GameStateHelper {
    /**
     * Returns the seat of the player who's turn it is to play
     */
-   get nextPlayer(): any {
+   get nextPlayer(): number {
       if (this.biddingHasEnded)
          return Seat.rotate(this.currentBoard.leader, this.currentBoard.cards.length);
       else
@@ -166,7 +176,7 @@ export class GameStateHelper {
    /**
     * Tests if the card is a valid one in this state and throws an exception if not
     */
-   validateCard(card: any) {
+   validateCard(card: ICard) {
 
    }
 
@@ -203,7 +213,7 @@ export class GameStateHelper {
     * If the bid is valid returns the new state-helper,
     * otherwise an exception is thrown
     */
-   makeBid(bid: any): GameStateHelper {
+   makeBid(bid: IBid): GameStateHelper {
       var newstate = this.clone();
       newstate.currentBoard.bids.push(bid);
       return newstate;
@@ -214,7 +224,7 @@ export class GameStateHelper {
     * If the card is valid returns the new state-helper,
     * otherwise an exception is thrown
     */
-   playCard(card: any): GameStateHelper {
+   playCard(card: ICard): GameStateHelper {
       var newstate = this.clone();
       newstate.currentBoard.cards.push(card);
       return newstate;

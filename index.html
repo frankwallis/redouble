@@ -25,17 +25,6 @@
    </tower-app>
 
    <script type="module">
-      System.config({
-        "meta": {
-          "angular2/angular2.js": {
-            "build": false
-          },
-          "angular2/di.js": {
-            "build": false
-          }
-        }
-      });
-
       System.import('./src/ui/app.ts!')
          .then(function(app){
             app.main();

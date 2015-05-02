@@ -2,7 +2,7 @@
 
 contract bridge
 
-developed in TypeScript using Angular2, Reflux, SystemJS
+developed in TypeScript using Angular2, SystemJS
 
 ### How do I get set up? ###
 

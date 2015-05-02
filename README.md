@@ -14,6 +14,4 @@ see the angular2 branch for an angular2 version
 
 ### Issues
 
-injectables are not singletons
-runtime errors when binding to functions or es5 properties
-
+none!

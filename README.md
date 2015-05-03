@@ -13,4 +13,6 @@ developed in TypeScript using Angular2, SystemJS
 
 ### Issues
 
-none!
+* injectables are not singletons
+* runtime errors when binding to functions or es5 properties
+

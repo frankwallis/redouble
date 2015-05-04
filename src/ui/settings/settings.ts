@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For} from 'angular2/angular2.js';
+import {Component, View, For} from 'angular2/angular2';
 
 import {PlayerService} from "../../services/player-service";
 import {Seat} from "../../model/core/seat";

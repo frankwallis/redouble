@@ -13,7 +13,9 @@
 
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
 
-   <script src="jspm_packages/system.js"></script>
+   <script src="jspm_packages/github/jmcriffey/bower-traceur-runtime@0.0.88/traceur-runtime.js"></script>
+   <script src="lib/es6-module-loader.src.js"></script>
+   <script src="lib/system.src.js"></script>
    <script src="config.js"></script>
    <script src="lib/angular2.dev.js"></script>
       
@@ -25,7 +27,14 @@
    </tower-app>
 
    <script type="module">
-      System.import('./src/ui/app.ts!')
+      System.config({
+         "transpiler": "typescript",
+         "typescriptOptions": {
+          "emitDecoratorMetadata": true
+         }
+      });
+      
+      System.import('./src/ui/app')
          .then(function(app){
             app.main();
          })

@@ -2,7 +2,7 @@
 
 import {
    Component, View,
-   For, Switch, SwitchWhen} from 'angular2/angular2.js';
+   For, Switch, SwitchWhen} from 'angular2/angular2';
 
 import {PlayerService, IPlayer} from "../../services/player-service";
 import {GameService} from "../../services/game-service";

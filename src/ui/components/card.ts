@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, Switch, SwitchWhen} from 'angular2/angular2.js';
+import {Component, View, Switch, SwitchWhen} from 'angular2/angular2';
 import {Suit,Pip,Card,suitName,pipName, ICard} from "../../model/core/card";
 
 @Component({

@@ -4,7 +4,7 @@ interface List<T> extends Array<T> {
 }
 interface Type {}
 
-declare module "angular2/angular2.js" {
+declare module "angular2/angular2" {
   function bootstrap(appComponentType: any): void;
   function Component({
     selector,

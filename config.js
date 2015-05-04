@@ -1,24 +1,11 @@
 System.config({
   "transpiler": "traceur",
-  "traceurOptions": {
-    "asyncFunctions": true,
-    "types": false,
-    "atscript": false,
-    "memberVariables": true,
-    "annotations": false,
-    "experimental": false,
-    "typeAssertions": true,
-    "typeAssertionModule": "rtts_assert/rtts_assert"
-  },
   "paths": {
-    "*": "./",
-    "src/*": "src/*.js",
+    "src/ui/app.css": "src/ui/app.css",
+    "src/*": "src/*.ts",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js",
-    "tower/*": "src/*.js"
-  },
-  "typescriptOptions": {
-    "emitDecoratorMetadata": true
+    "*": "*.js"
   }
 });
 
@@ -31,13 +18,7 @@ System.config({
     "text": "github:systemjs/plugin-text@0.0.2",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
-    "ts": "github:frankwallis/plugin-typescript@1.0.2",
-    "github:frankwallis/plugin-typescript@1.0.2": {
-      "convert-source-map": "npm:convert-source-map@0.4.1",
-      "path": "npm:path@0.11.14",
-      "requires": "npm:requires@1.0.2",
-      "typescript": "npm:typescript@1.5.0-beta"
-    },
+    "typescript": "github:Arnavion/typescript-github@master",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -117,11 +98,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:convert-source-map@0.4.1": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0"
-    },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
@@ -142,11 +118,6 @@ System.config({
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:path@0.11.14": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.1"
@@ -176,14 +147,6 @@ System.config({
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
-    },
-    "npm:typescript@1.5.0-beta": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "readline": "github:jspm/nodelibs-readline@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

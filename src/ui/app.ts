@@ -1,5 +1,5 @@
 /// <reference path="../_references.d.ts" />
-import {bootstrap, Component, View, For, If, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2.js';
+import {bootstrap, Component, View, For, If, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2';
 import {SettingsView} from './settings/settings';
 import {TableView} from './table/table';
 import {GrowlContainer} from './growl/growl';

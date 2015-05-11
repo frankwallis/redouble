@@ -134,7 +134,7 @@ export class GameStateHelper {
     */
    hasBeenPlayed(card) {
       return this.currentBoard.cards
-         .some((played) => !Card.compare(card, played.card));
+         .some((played) => Card.equals(card, played.card));
    }
 
    /**

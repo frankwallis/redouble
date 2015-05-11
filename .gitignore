@@ -11,3 +11,4 @@ js/
 tmp/
 build/
 jspm_packages/
+.settings/

@@ -27,7 +27,7 @@ export function validateBid(bid: tower.IBid, game: GameStateHelper) {
          if (!game.lastAction || (game.lastAction.type != BidType.Double))
             return new Error("invalid redouble");
          else if (Seat.isPartner(game.lastActor, game.nextPlayer))
-            return new Error("you cannot redouble your partner");
+            return new Error("you cannot redouble your partner's double");
          else
             return;
 
@@ -46,8 +46,27 @@ export function validateBid(bid: tower.IBid, game: GameStateHelper) {
 }
 
 /**
- * Tests if the card is a valid one in game state and returns an error if not
+ * Tests if the card is a valid one given the current game state and returns an error if not
  */
-export function validateCard(card: tower.ICard, game: GameStateHelper) {
+export function validateCard(playedCard: tower.ICard, game: GameStateHelper) {
+   if (!game.currentBoard.hands[game.nextPlayer].some((card) => Card.equals(playedCard, card)))
+      return new Error("That is not your card to play");
+      
+   if (game.hasBeenPlayed(playedCard))
+     return new Error("That card has already been played");
 
+   let trick = game.currentTrick;
+   
+   if ((trick.length > 0) && (trick.length < 4)) {
+      let lead = trick[0].card;
+    
+      if (playedCard.suit != lead.suit) {
+         var available = game.currentBoard.hands[game.nextPlayer].filter((card) => {
+            return !game.hasBeenPlayed(card) && (card.suit == lead.suit);
+         });
+         
+         if (available.length > 0)
+            return new Error("You must follow suit when you can");
+      }
+   } 
 }

@@ -17,7 +17,7 @@ export class Card {
    static stringify(card): string {
 
    }
-
+      
    static compare(card1, card2, trumpSuit, leadSuit): number {
       if (card1.suit == card2.suit) {
          return card1.pip - card2.pip;
@@ -39,6 +39,10 @@ export class Card {
 
          return card1.suit - card2.suit;
       }
+   }
+
+   static equals(card1, card2): boolean {
+      return !Card.compare(card1, card2);
    }
 
    static create(card: string) {

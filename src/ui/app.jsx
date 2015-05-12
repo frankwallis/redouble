@@ -18,12 +18,6 @@ import d from './app.css!';
 export class App extends React.Component {
    constructor(props) {
       super(props);
-      this.state = { route: "table" };
-   }
-
-   routeClicked(route) {
-      this.setState({"route": route});
-      return false;
    }
 
    render() {

@@ -110,6 +110,9 @@ export class GameStateHelper {
       return this.currentBoard.cards.slice(played * -1);
    }
 
+   /* 
+    * Returns the winner of the previous trick
+    */
    get previousTrickWinner(): Seat {
       if (this.currentBoard.cards.length < 4) return undefined;
       let played = this.currentBoard.cards.length % 4;
@@ -120,6 +123,25 @@ export class GameStateHelper {
       })[3].seat;
 
       return winner;
+   }
+
+   get declarerTricks(): number {
+      let trickCount = Math.floor(this.currentBoard.cards.length / 4);
+      let result = 0;
+      
+      for (let i = 0; i < trickCount; i ++) {
+         let trick = this.currentBoard.cards.slice(i * 4, (i * 4) + 4);
+         
+         //console.log('' + i + ': ' + 'len= ' + trick.length + ' / ' + this.currentBoard.cards.length);
+         let winner = trick.sort((played1, played2) => {
+           return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
+         })[3].seat;
+         
+         if ((winner == this.declarer) || Seat.isPartner(this.declarer, winner))
+            result ++;
+      }
+
+      return result;
    }
 
    /**
@@ -177,6 +199,26 @@ export class GameStateHelper {
          return undefined;
       else
          return Seat.rotate(this.leader, this.currentTrick.length);
+   }
+
+   /*
+    * Returns an array of the cards which can legally be played
+    */
+   get legalCards(): Array<ICard> {
+      let hand = this.currentBoard.hands[this.nextPlayer];
+      let available = hand.filter((card) => !this.hasBeenPlayed(card));
+   
+      let trick = this.currentTrick;
+   
+      if ((trick.length > 0) && (trick.length < 4)) {
+         let lead = trick[0].card;
+         let followers = available.filter((card) => (card.suit == lead.suit));
+      
+         if (followers.length > 0)
+            return followers;
+      }
+      
+      return available;
    }
 
    /**

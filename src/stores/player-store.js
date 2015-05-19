@@ -3,7 +3,8 @@
 import Reflux from 'reflux';
 import {Seat} from "../model/core/seat";
 import {GameStore, GameActions} from "./game-store";
-import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
+//import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
+import {CardplayStrategy} from "../model/strategy/cardplay/mcts-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 export const PlayerActions = Reflux.createActions([

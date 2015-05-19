@@ -9,7 +9,7 @@ import {GameStateHelper} from "./game-state";
  */
 export function validateBid(bid: tower.IBid, game: GameStateHelper) {
    if (game.biddingHasEnded)
-      return new Error("the bidding has already ended");
+      return new Error("The bidding has already ended");
 
    switch(bid.type) {
       case BidType.NoBid:
@@ -17,28 +17,28 @@ export function validateBid(bid: tower.IBid, game: GameStateHelper) {
 
       case BidType.Double:
          if (!game.lastAction || (game.lastAction.type != BidType.Call))
-            return new Error("invalid double");
+            return new Error("Invalid double");
          else if (Seat.isPartner(game.lastCaller, game.nextPlayer))
-            return new Error("you cannot double your partner!");
+            return new Error("You cannot double your partner!");
          else
             return;
 
       case BidType.Redouble:
          if (!game.lastAction || (game.lastAction.type != BidType.Double))
-            return new Error("invalid redouble");
+            return new Error("Invalid redouble");
          else if (Seat.isPartner(game.lastActor, game.nextPlayer))
-            return new Error("you cannot redouble your partner's double");
+            return new Error("You cannot redouble your partner's double");
          else
             return;
 
       case BidType.Call: {
          if ((!bid.level) || (!bid.suit))
-            return new Error("you must say the level and the suit");
+            return new Error("You must say the level and the suit");
          else if ((bid.level < 1) || (bid.level > 7))
-            return new Error("invalid bid level");
+            return new Error("Invalid bid level");
          else if (game.lastCall) {
             if (Bid.compare(bid, game.lastCall) <= 0)
-               return new Error("bid must be higher than " + Bid.stringify(game.lastCall));
+               return new Error("Bid must be higher than " + Bid.stringify(game.lastCall));
          }
          return;
       }
@@ -49,6 +49,9 @@ export function validateBid(bid: tower.IBid, game: GameStateHelper) {
  * Tests if the card is a valid one given the current game state and returns an error if not
  */
 export function validateCard(playedCard: tower.ICard, game: GameStateHelper) {
+   if (!game.biddingHasEnded)
+      return new Error("The bidding has not ended yet");
+
    if (!game.currentBoard.hands[game.nextPlayer].some((card) => Card.equals(playedCard, card)))
       return new Error("That is not your card to play");
       

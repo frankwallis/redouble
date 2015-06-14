@@ -9,12 +9,10 @@ System.config({
     "experimental": false
   },
   "paths": {
-    "*": "./",
     "*.jsx": "*.jsx",
-    "src/*": "src/*.js",
+    "*": "*.js",
     "github:*": "jspm_packages/github/*.js",
-    "npm:*": "jspm_packages/npm/*.js",
-    "tower/*": "src/*.js"
+    "npm:*": "jspm_packages/npm/*.js"
   }
 });
 
@@ -25,6 +23,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.3.0",
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
     "necolas/normalize.css": "github:necolas/normalize.css@3.0.3",
+    "operative": "npm:operative@0.4.4",
     "purecss": "npm:purecss@0.6.0",
     "react": "npm:react@0.13.3",
     "react-router": "npm:react-router@0.13.3",
@@ -363,6 +362,9 @@ System.config({
     },
     "npm:once@1.3.2": {
       "wrappy": "npm:wrappy@1.0.1"
+    },
+    "npm:operative@0.4.4": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"

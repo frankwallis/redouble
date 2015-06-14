@@ -1,24 +1,32 @@
 /* @flow */
 
 import {Node} from "./mcts-node";
+import {GameStateHelper} from "../../game/game-state";
 
 export class CardplayStrategy {
 
    constructor() {
       this.boards = {};
-      this.rounds = 100;
+      this.rootNode = undefined;      
    }
 
-   getCard(game): tower.ICard {
-      var rootNode = this.getRootNode(game);
-      
-      for (let round = 0; round < this.rounds; round += 1)
-         rootNode.visit();
-      
-      //console.log(JSON.stringify(rootNode));
-	   return rootNode.bestCard();
+   updateGameState(gameState) {
+      var game = new GameStateHelper(gameState);
+      if (game.biddingHasEnded) // TODO
+         this.rootNode = this.getRootNode(game);
    }
    
+   getCard() {
+      this.visit(100);
+	   return Promise.resolve(this.rootNode.bestCard());
+   }
+   
+   visit(rounds) {
+      rounds = rounds || 1;
+      for (let round = 0; round < rounds; round += 1)
+         this.rootNode.visit();
+   }
+
    getRootNode(game) {
       let key = JSON.stringify(game.currentBoard.hands);
       

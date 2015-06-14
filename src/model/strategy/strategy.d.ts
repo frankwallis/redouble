@@ -1,9 +1,9 @@
 declare module tower {
     interface IBiddingStrategy {
-        getBid(game: tower.IGame);    
+        getBid(game: tower.IGameState);    
     }
     
     interface ICardplayStrategy {
-        getCard(game: tower.IGame);    
+        getCard(game: tower.IGameState);    
     }
 }

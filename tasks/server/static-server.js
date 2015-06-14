@@ -22,9 +22,6 @@ function staticServer(options) {
       console.log('livereload client injected for host ' + liveReloadHost);
    }
 
-   // serve the static assets
-   app.use(options.baseURL, express.static(options.webRoot));
-
    function index(req, res) {
       res.sendFile(options.webIndex, {'root': options.webRoot});
    };
@@ -34,6 +31,9 @@ function staticServer(options) {
 
    // redirect all other routes without file extensions to the index
    app.get(/^([^.]+)$/, index);
+
+   // serve the static assets
+   app.use(options.baseURL, express.static(options.webRoot));
 
    var server = http.createServer(app).listen(options.port, function () {
       console.log('express server listening on port ' + options.port);

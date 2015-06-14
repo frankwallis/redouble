@@ -13,74 +13,33 @@ import {Seat} from '../../../core/seat';
 describe('Cardplay Strategy', () => {
    describe('getCard', () => {
       it('plays a suitable card', () => {
-         let gameState = new GameStateHelper().newBoard(Seat.West)
+         let game = new GameStateHelper().newBoard(Seat.West)
             .makeBid(Bid.create("1H"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
-			let card = strategy.getCard(gameState);
+			let card = strategy.getCard(game.gameState);
          expect(card).toBeDefined();
       });
       
       it('tries each card at least once', () => {
-         let gameState = new GameStateHelper().newBoard(Seat.West)
+         let game = new GameStateHelper().newBoard(Seat.West)
             .makeBid(Bid.create("1H"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
-			let card = strategy.getCard(gameState);
+			let card = strategy.getCard(game.gameState);
          
-         var node = strategy.getRootNode(gameState); 
+         var node = strategy.getRootNode(game.gameState); 
          expect(node.children.length).toEqual(13);
          
          for(let i = 0; i < node.children.length; i ++)         
             expect(node.children[i].visits).toBeGreaterThan(0);
       });
    });
-
-/*   describe('declarer', () => {
-      it('returns the dealer when bidding starts', () => {
-         let gameState = new GameStateHelper().newBoard(Seat.West);
-
-         gameState = gameState
-            .makeBid(Bid.create("no bid"))
-            .makeBid(Bid.create("1H"))
-            .makeBid(Bid.create("no bid"))
-            .makeBid(Bid.create("2H"))
-            .makeBid(Bid.create("no bid"))
-            .makeBid(Bid.create("no bid"))
-            .makeBid(Bid.create("no bid"))
-
-         expect(gameState.declarer).toEqual(Seat.North);
-      });
-
-   });
-
-   describe('nextPlayer', () => {
-      it('returns the trick winner when playing', () => {
-         let gameState = new GameStateHelper().newBoard(Seat.West);
-         expect(gameState.nextPlayer).toEqual(Seat.West);
-
-         gameState = gameState.makeBid(Bid.create("1H"));
-         gameState = gameState.makeBid(Bid.create("no bid"));
-         gameState = gameState.makeBid(Bid.create("no bid"));
-         gameState = gameState.makeBid(Bid.create("no bid"));
-         expect(gameState.nextPlayer).toEqual(Seat.North);
-
-         gameState = gameState.playCard(Card.create("2H"));
-         gameState = gameState.playCard(Card.create("3H"));
-         gameState = gameState.playCard(Card.create("4H"));
-         gameState = gameState.playCard(Card.create("5H"));
-
-         expect(gameState.nextPlayer).toEqual(Seat.West);
-         gameState = gameState.playCard(Card.create("6H"));
-         expect(gameState.nextPlayer).toEqual(Seat.North);
-      });
-
-   });*/
 
 });

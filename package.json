@@ -54,6 +54,7 @@
     "dependencies": {
       "font-awesome": "npm:font-awesome@^4.3.0",
       "necolas/normalize.css": "github:necolas/normalize.css@^3.0.2",
+      "operative": "npm:operative@^0.4.4",
       "purecss": "npm:purecss@^0.6.0",
       "react": "npm:react@^0.13.0",
       "react-router": "npm:react-router@^0.13.2",

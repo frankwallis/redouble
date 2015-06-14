@@ -1,4 +1,5 @@
 import {Card} from "../../core/card";
+import {Seat} from "../../core/seat";
 
 export class Node {
 	constructor(parent, game, card, depth) {
@@ -44,7 +45,13 @@ export class Node {
 	getUCB1() {
 		if (this.visits == 0) return Number.MAX_VALUE;
 	  	// See https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Exploration_and_exploitation
-		let wins = this.tricks.filter((trickCount) => trickCount > this.game.lastCall.level).length;
+		let wins = 0;
+		
+		if ((this.game.nextPlayer == this.game.declarer) || Seat.isPartner(this.game.nextPlayer, this.game.declarer))
+			wins = this.tricks.filter((trickCount) => trickCount < this.game.lastCall.level).length;
+		else		
+			wins = this.tricks.filter((trickCount) => trickCount >= this.game.lastCall.level).length;
+		
 	  	return (wins / this.visits) + Math.sqrt(2 * Math.log(this.parent.visits) / this.visits);
 	}
 	

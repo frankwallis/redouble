@@ -2,10 +2,6 @@
 
 import Reflux from 'reflux';
 import {Seat} from "../model/core/seat";
-import {GameStore, GameActions} from "./game-store";
-//import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
-import {CardplayStrategy} from "../model/strategy/cardplay/mcts-strategy";
-import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 export const PlayerActions = Reflux.createActions([
    "updatePlayer"
@@ -22,8 +18,9 @@ export const PlayerStore = Reflux.createStore({
 
       let playersStr = localStorage.getItem(STORAGE_KEY);
 
-      if (playersStr)
+      if (playersStr) {
          this.players = JSON.parse(playersStr);
+      }
       else {
          this.players = {};
          Seat.all().forEach((seat) => {
@@ -34,13 +31,6 @@ export const PlayerStore = Reflux.createStore({
             };
          });
       }
-
-      this.cardplayStrategy = new CardplayStrategy();
-      this.biddingStrategy = new BiddingStrategy();
-
-      this.unsubscribeGame = this.listenTo(GameStore,
-                                           (game) => this.onGameTurn(game),
-                                           (game) => this.onGameTurn(game));
    },
    onUpdatePlayer: function(seat, delta) {
       console.log('updating player');
@@ -49,27 +39,5 @@ export const PlayerStore = Reflux.createStore({
       })
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.players));      
       this.trigger(this.players);
-   },
-   onGameTurn: function(game) {
-      console.log('onGameTurn');
-
-      if (!game.nextPlayer) return;
-
-      if (!this.players[game.nextPlayer].ishuman) {
-         if (game.biddingHasEnded) {
-            let card = this.cardplayStrategy.getCard(game);
-
-            setTimeout(() => {
-               GameActions.playCard(card, game);
-            }, 800);
-         }
-         else {
-            let bid = this.biddingStrategy.getBid(game);
-
-            setTimeout(() => {
-               GameActions.makeBid(bid, game);
-            }, 800);
-         }
-      }
    }
 });

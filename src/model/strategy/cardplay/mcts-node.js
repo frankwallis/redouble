@@ -1,15 +1,20 @@
 import {Card} from "../../core/card";
 import {Seat} from "../../core/seat";
 
+var count = 0;
+
 export class Node {
-	constructor(parent, game, card, depth) {
-		this.game = game;
+	constructor(parent, board, card, depth) {
+		this.board = board;
 		this.parent = parent;
 		this.card = card;
 		this.tricks = [];
 		this.visits = 0;
 		this.children = null;
 		this.depth = depth || 0;
+		
+		//console.log("node " + count);
+		//count ++;
 	}
 
 	visit() {
@@ -24,7 +29,7 @@ export class Node {
 			return declarerTricks;
 		}
 		else {
-			let declarerTricks = this.game.declarerTricks;
+			let declarerTricks = this.board.declarerTricks;
 			this.tricks.push(declarerTricks);
 			return declarerTricks;			
 		}
@@ -47,10 +52,10 @@ export class Node {
 	  	// See https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Exploration_and_exploitation
 		let wins = 0;
 		
-		if ((this.game.nextPlayer == this.game.declarer) || Seat.isPartner(this.game.nextPlayer, this.game.declarer))
-			wins = this.tricks.filter((trickCount) => trickCount < this.game.lastCall.level).length;
+		if ((this.board.nextPlayer == this.board.declarer) || Seat.isPartner(this.board.nextPlayer, this.board.declarer))
+			wins = this.tricks.filter((trickCount) => trickCount < this.board.lastCall.level).length;
 		else		
-			wins = this.tricks.filter((trickCount) => trickCount >= this.game.lastCall.level).length;
+			wins = this.tricks.filter((trickCount) => trickCount >= this.board.lastCall.level).length;
 		
 	  	return (wins / this.visits) + Math.sqrt(2 * Math.log(this.parent.visits) / this.visits);
 	}
@@ -61,25 +66,24 @@ export class Node {
 
 	ensureChildren() {
 		if (this.children === null) {
-			let availableCards = this.getAvailableCards();		
-			
-	    	this.children = availableCards.map((card) => new Node(this, this.game.playCard(card), card));
+			let availableCards = this.getAvailableCards();
+	    	this.children = availableCards.map((card) => new Node(this, this.board.playCard(card), card, this.depth + 1));
 	  	}
 	}
 
 	seek(playedCards) {
-		if (playedCards.length == 0) {
+		if (playedCards.length == this.depth) {
 			return this;
 		}
 		else {
-			let child = this.children.find((child) => Card.equals(child.card, playedCards[0].card));
-			return child.seek(playedCards.slice(1));
+			let child = this.children.find((child) => Card.equals(child.card, playedCards[this.depth].card));
+			return child.seek(playedCards);
 		} 
 	}
 	
 	getAvailableCards() {
 		// TODO - some cards are visible, some cards are not.
-		return this.game.legalCards;
+		return this.board.legalCards;
 	}
 	
 	bestCard() {

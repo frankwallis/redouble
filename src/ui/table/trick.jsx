@@ -13,7 +13,7 @@ export class TrickComponent extends React.Component {
    getCard(seat: Seat): Card {
       let card = undefined;
 
-      this.props.game.currentTrick.forEach((played) => {
+      this.props.board.currentTrick.forEach((played) => {
          if (played.seat == seat)
             card = played.card;
       });

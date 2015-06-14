@@ -2,7 +2,7 @@ jest.autoMockOff()
 jest.mock('../../../stores/game-store');
 
 import {BiddingBox} from "../bidding-box.jsx";
-import {GameStateHelper} from "../../../model/game/game-state";
+import {Game} from "../../../model/game/game-state";
 import {GameActions} from "../../../stores/game-store";
 
 import React from "react/addons";
@@ -11,7 +11,7 @@ let TestUtils = React.addons.TestUtils;
 describe('Bidding Box', () => {
 
   it('displays the right number of buttons', () => {
-      let game = new GameStateHelper().newBoard();
+      let game = new Game().newBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
@@ -19,7 +19,7 @@ describe('Bidding Box', () => {
   });
 
   it('disables buttons which are invalid', () => {
-      let game = new GameStateHelper({board: { biding: [] }});
+      let game = new Game().newBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
@@ -27,7 +27,7 @@ describe('Bidding Box', () => {
   });
 
   it('makes a bid when a button is clicked', () => {
-      let game = new GameStateHelper({board: { biding: [] }});
+      let game = new Game().newBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');

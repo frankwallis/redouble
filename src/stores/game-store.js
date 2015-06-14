@@ -1,7 +1,8 @@
 /* @flow */
 
 import Reflux from 'reflux';
-import {GameStateHelper} from "../model/game/game-state";
+import {Game} from "../model/game/game-state";
+import {Board} from "../model/game/board-state";
 import {validateBid, validateCard} from "../model/game/validators";
 import {NotificationActions} from "./notification-store";
 import {Seat} from "../model/core/seat";
@@ -26,7 +27,7 @@ export const GameStore = Reflux.createStore({
       this.reset();
    },
    reset: function() {
-      this.states = [ new GameStateHelper().newBoard(Seat.North) ];
+      this.states = [ new Game().newBoard(Seat.North) ];
       this.currentStateIdx = 0;
    },
    getInitialState: function() {
@@ -68,7 +69,7 @@ export const GameStore = Reflux.createStore({
 });
 
 GameActions.makeBid.shouldEmit = function(bid) {
-   let err = validateBid(bid, GameStore.currentState());
+   let err = validateBid(bid, GameStore.currentState().currentBoard); // TODO
 
    if (err) {
       NotificationActions.error({
@@ -81,7 +82,7 @@ GameActions.makeBid.shouldEmit = function(bid) {
 }
 
 GameActions.playCard.shouldEmit = function(card) {
-   let err = validateCard(card, GameStore.currentState());
+   let err = validateCard(card, GameStore.currentState().currentBoard); // TODO
 
    if (err) {
       NotificationActions.error({

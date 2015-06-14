@@ -12,9 +12,9 @@ export class HandComponent extends React.Component {
    }
 
    get availableCards() {
-      return this.props.game.currentBoard.hands[this.props.seat]
-         .filter((card) => !this.props.game.hasBeenPlayed(card))
-         .sort((c1,c2) => Card.compare(c1,c2, this.props.game.currentBoard.trumpSuit));
+      return this.props.board.hands[this.props.seat]
+         .filter((card) => !this.props.board.hasBeenPlayed(card))
+         .sort((c1,c2) => Card.compare(c1,c2, this.props.board.trumpSuit));
    }
 
    playCard(card) {

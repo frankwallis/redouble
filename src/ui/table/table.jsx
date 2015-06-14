@@ -52,17 +52,17 @@ export class Table extends React.Component {
                <header className="table-player-name">{this.players[seat].name}</header>
                <div className={"table-hand-" + Seat.name(seat)}>
                   <HandComponent seat={seat}
-                                 game={this.game}/>
+                                 board={this.game.currentBoard}/>
                </div>
             </section>
          );
       });
 
-      let board = this.game.biddingHasEnded ?
-         <TrickComponent game={this.game}/> :
+      let board = this.game.currentBoard.biddingHasEnded ?
+         <TrickComponent board={this.game.currentBoard}/> :
          <BiddingHistory board={this.game.currentBoard}/>;
 
-      let biddingBox = this.game.biddingHasEnded ? 
+      let biddingBox = this.game.currentBoard.biddingHasEnded ? 
          undefined : 
          <BiddingBox className="table-bidding-box" game={this.game}/>;
 

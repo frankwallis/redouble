@@ -1,7 +1,8 @@
 /* @flow */
 
 import {Node} from "./mcts-node";
-import {GameStateHelper} from "../../game/game-state";
+import {Game} from "../../game/game-state";
+import {Board} from "../../game/board-state";
 
 export class CardplayStrategy {
 
@@ -11,9 +12,10 @@ export class CardplayStrategy {
    }
 
    updateGameState(gameState) {
-      var game = new GameStateHelper(gameState);
-      if (game.biddingHasEnded) // TODO
-         this.rootNode = this.getRootNode(game);
+      let game = new Game(gameState);
+      
+      if (game.currentBoard.biddingHasEnded) // TODO
+         this.rootNode = this.getRootNode(game.currentBoard);
    }
    
    getCard() {
@@ -27,12 +29,12 @@ export class CardplayStrategy {
          this.rootNode.visit();
    }
 
-   getRootNode(game) {
-      let key = JSON.stringify(game.currentBoard.hands);
+   getRootNode(board) {
+      let key = JSON.stringify(board.hands);
       
       if (!this.boards[key])
-         this.boards[key] = new Node(null, game, null); 
+         this.boards[key] = new Node(null, board, null); 
       
-      return this.boards[key].seek(game.currentBoard.cards);
+      return this.boards[key].seek(board.boardState.cards);
    }
 }

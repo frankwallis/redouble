@@ -31,11 +31,11 @@ export const StrategyStore = Reflux.createStore({
    onGameTurn: function(game) {
       console.log('onGameTurn');
 
-      if (!game.nextPlayer) return;
+      if (!game.currentBoard.nextPlayer) return;
       this.cardplayStrategy.updateGameState(game);
       
-      if (!PlayerStore.players[game.nextPlayer].ishuman) {
-         if (game.biddingHasEnded) {
+      if (!PlayerStore.players[game.currentBoard.nextPlayer].ishuman) {
+         if (game.currentBoard.biddingHasEnded) {
             this.cardplayStrategy.getCard(game.gameState)
 					.then((card) => {
 						GameActions.playCard(card, game);

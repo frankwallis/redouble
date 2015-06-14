@@ -10,6 +10,9 @@ import {Bid, BidType, BidSuit} from '../../../core/bid';
 import {Card, Pip, Suit} from '../../../core/card';
 import {Seat} from '../../../core/seat';
 
+import bluebird from "bluebird";
+global.Promise = bluebird;
+
 describe('Cardplay Strategy', () => {
    describe('getCard', () => {
       it('plays a suitable card', () => {
@@ -20,6 +23,7 @@ describe('Cardplay Strategy', () => {
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
+			strategy.updateGameState(game.gameState);
 			let card = strategy.getCard(game.gameState);
          expect(card).toBeDefined();
       });
@@ -32,9 +36,10 @@ describe('Cardplay Strategy', () => {
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
+			strategy.updateGameState(game.gameState);
 			let card = strategy.getCard(game.gameState);
          
-         var node = strategy.getRootNode(game.gameState); 
+         var node = strategy.getRootNode(game); 
          expect(node.children.length).toEqual(13);
          
          for(let i = 0; i < node.children.length; i ++)         

@@ -8,7 +8,7 @@ export class CardplayStrategy {
 
    getCard(gameState): tower.ICard {
       var game = new GameStateHelper(gameState);
-      return game.legalCards[0];
+      return Promise.resolve(game.legalCards[0]);
    }
    
    updateGameState(gameState) {

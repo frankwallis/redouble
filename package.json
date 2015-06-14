@@ -6,6 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "babel": "^4.6.0",
+    "bluebird": "^2.9.30",
     "connect-livereload-safe": "0.0.5",
     "debounce": "^1.0.0",
     "del": "^1.1.1",

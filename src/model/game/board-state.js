@@ -216,7 +216,13 @@ export class Board {
     * Creates an identical copy of itself
     */
    clone(): Board {
-      let newstate = JSON.parse(JSON.stringify(this.boardState));
+      // optimisation: minimise the number of objects created
+      let newstate = {
+         hands: this.boardState.hands,
+         dealer: this.boardState.dealer,
+         bids: this.boardState.bids,
+         cards: this.boardState.cards
+      }
       return new Board(newstate);
    }
 
@@ -230,7 +236,7 @@ export class Board {
       if (err) throw err;
 
       let newstate = this.clone();
-      newstate.boardState.bids.push(bid);
+      newstate.boardState.bids = newstate.boardState.bids.concat(bid);
       return newstate;
    }
 
@@ -244,7 +250,7 @@ export class Board {
       if (err) throw err;
 
       let newstate = this.clone();
-      newstate.boardState.cards.push({"seat": this.nextPlayer, "card": card });
+      newstate.boardState.cards = newstate.boardState.cards.concat({"seat": this.nextPlayer, "card": card });
       return newstate;
    }
 

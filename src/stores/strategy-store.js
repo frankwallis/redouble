@@ -4,7 +4,6 @@ import Reflux from 'reflux';
 import {Seat} from "../model/core/seat";
 import {GameStore, GameActions} from "./game-store";
 import {PlayerStore} from "./player-store";
-//import {CardplayStrategy} from "../model/strategy/cardplay/mcts-strategy";
 import {CardplayStrategyProxy} from "./strategy-proxy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 

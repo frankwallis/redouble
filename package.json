@@ -2,7 +2,7 @@
   "name": "tower",
   "version": "0.1.0",
   "description": "contract bridge",
-  "main": "src/index.ts",
+  "main": "src/ui/app.jsx",
   "dependencies": {},
   "devDependencies": {
     "babel": "^4.6.0",

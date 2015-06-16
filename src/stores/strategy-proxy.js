@@ -2,7 +2,7 @@ import "operative";
 
 export class CardplayStrategyProxy {
 	constructor() {
-		operative.setBaseURL('http://localhost:8888/tower');
+		operative.setBaseURL(System.baseURL);
 		
 		this._operative = operative({
 			getCard: function(gameState, cb) {

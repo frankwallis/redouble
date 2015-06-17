@@ -2,7 +2,15 @@ import "operative";
 
 export class CardplayStrategyProxy {
 	constructor() {
-		operative.setBaseURL(System.baseURL);
+		let imports = [];
+				
+		if (System.baseURL) {
+			operative.setBaseURL(System.baseURL);
+			imports = ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"]; 
+		}
+		else {
+			imports = ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"];						
+		}
 		
 		this._operative = operative({
 			getCard: function(gameState, cb) {
@@ -21,7 +29,7 @@ export class CardplayStrategyProxy {
 						cb();
 					})
 			}
-		}, ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"]);
+		}, imports);
 	}
 	
 	getCard(game: GameState) {

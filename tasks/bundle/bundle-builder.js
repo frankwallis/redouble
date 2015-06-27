@@ -26,9 +26,6 @@ module.exports = function(options) {
       });
 
       gulp.task('bundle', ['clean-bundles'], function (cb) {
-         if (options.entryJs.slice(-4) == '.jsx')
-            options.entryJs = options.entryJs + '!';
-
          var builder = new Builder();
          builder.loadConfig(options.config)
             .then(function() {

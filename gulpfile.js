@@ -4,8 +4,10 @@ var tasks = require('./tasks');
 tasks
    .addClean(['jspm_packages/**', 'build/**', 'reports/**'])
    .addBundle({
-       entryJs: "src/ui/app.jsx",
-       outputJs: "build/build.js"
+      /* main entry point and web-worker entry point */
+      entryJs: "src/ui/app.jsx + src/model/strategy/cardplay/mcts-strategy",
+      outputJs: "build/build.js",
+      minify: true
    })
    .addServer({
       port: 8888,

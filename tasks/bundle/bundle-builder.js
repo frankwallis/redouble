@@ -35,7 +35,7 @@ module.exports = function(options) {
                   separateCSS: true,
                   rootURL: "/tower/"
                });
-               return builder.buildSFX(options.entryJs, options.outputJs);
+               return builder.build(options.entryJs, options.outputJs, {minify: options.minify});
             })
             .then(function() {
                gutil.log("Output " + options.outputJs + ", " + options.outputCss);

@@ -4,9 +4,11 @@ export class CardplayStrategyProxy {
 	constructor() {
 		let imports = [];
 				
-		if (System.baseURL) {
+		if (System.baseURL)
 			operative.setBaseURL(System.baseURL);
-			imports = ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"]; 
+			
+		if (System.towerOptions && System.towerOptions.bundle) {
+			imports = ["jspm_packages/system.js", System.towerOptions.bundle, "src/stores/strategy-worker.js"];
 		}
 		else {
 			imports = ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"];						

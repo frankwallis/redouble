@@ -17,7 +17,7 @@ global.Promise = bluebird;
 describe('Cardplay Strategy', () => {
    describe('getCard', () => {
       it('plays a suitable card', () => {
-         let game = new Game().newBoard(Seat.West)
+         let game = new Game().dealBoard(Seat.West)
             .makeBid(Bid.create("1H"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"))
@@ -30,7 +30,7 @@ describe('Cardplay Strategy', () => {
       });
       
       it('tries each card at least once', () => {
-         let game = new Game().newBoard(Seat.West)
+         let game = new Game().dealBoard(Seat.West)
             .makeBid(Bid.create("1H"))
             .makeBid(Bid.create("no bid"))
             .makeBid(Bid.create("no bid"))
@@ -46,6 +46,41 @@ describe('Cardplay Strategy', () => {
          for(let i = 0; i < node.children.length; i ++)         
             expect(node.children[i].visits).toBeGreaterThan(0);
       });
+   });
+
+   describe('getCard:scenarios', () => {
+
+      function playAll(game, strategy) {
+         strategy.updateGameState(game.gameState);
+         return strategy.getCard()
+            .then((card) => {
+               let nextgame = game.playCard(card);
+               
+               console.log('here');
+               //console.log(JSON.stringify(strategy));
+               if (nextgame.currentBoard.playHasEnded)
+                  return nextgame;
+               else
+                  return playAll(nextgame, strategy);
+            });
+      }
+
+      xit('unblocks in 3 card ending', () => {
+         let game = new Game().newBoard(
+            Seat.West,
+            Card.createAll(["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"]),
+            Bid.createAll("no bid", "no bid", "1NT", "no bid", "no bid", "no bid")
+         );
+
+         let strategy = new CardplayStrategy();            
+
+         return playAll(game, strategy)
+            .then((endgame) => {
+               //console.log(JSON.stringify(endgame.gameState));
+               expect(endgame.declarerTricks).toBe(3);      
+            })   
+      });
+
    });
 
 });

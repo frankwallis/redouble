@@ -9,7 +9,7 @@ describe('Game Store', () => {
       GameStore.reset();
    });
 
-   describe('newBoard', () => {
+   describe('dealBoard', () => {
       it('creates a new board', () => {
 
       });

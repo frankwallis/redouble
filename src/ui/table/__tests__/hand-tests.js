@@ -13,7 +13,7 @@ let TestUtils = React.addons.TestUtils;
 describe('Hand Component', () => {
 
   it('displays cards which are available', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
@@ -21,7 +21,7 @@ describe('Hand Component', () => {
   });
 
   it('hides cards which are not available', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
       let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
@@ -36,7 +36,7 @@ describe('Hand Component', () => {
   });
 
   it('sorts the cards', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
@@ -53,7 +53,7 @@ describe('Hand Component', () => {
   });
 
   it('plays a card when a button is clicked', () => {
-     let game = new Game().newBoard();
+     let game = new Game().dealBoard();
      let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');

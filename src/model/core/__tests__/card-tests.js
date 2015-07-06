@@ -82,6 +82,20 @@ describe("Card", () => {
          expect(card.pip).toBe(Pip.Ace);
       });
 
+      it("creates hands correctly", () => {
+         let hand = Card.createAll("2S", "3S");
+         expect(hand.length).toBe(2);
+         expect(hand[0].pip).toBe(Pip.Two);
+         expect(hand[1].pip).toBe(Pip.Three);
+      });
+
+      it("creates multiple hands correctly", () => {
+         let hands = Card.createAll(["3H", "5H"], ["2S", "3S"]);
+         expect(hands.length).toBe(2);
+         expect(hands[1].length).toBe(2);
+         expect(hands[1][0].pip).toBe(Pip.Two);
+         expect(hands[1][1].pip).toBe(Pip.Three);
+      });
    });
 
    describe("stringify", () => {

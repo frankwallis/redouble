@@ -15,18 +15,18 @@ describe('Game State Helper', () => {
          let game = new Game();
          expect(game.currentBoard).not.toBeDefined();
 
-         game = game.newBoard();
+         game = game.dealBoard();
          expect(game.currentBoard).toBeDefined();
 
          let lastBoard = game.currentBoard;
-         game = game.newBoard();
+         game = game.dealBoard();
          expect(game.currentBoard).toBeDefined();
          expect(game.currentBoard).not.toBe(lastBoard);
       });
    });
 
 
-   describe('newBoard', () => {
+   describe('dealBoard', () => {
 
    });
 

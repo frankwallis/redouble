@@ -40,33 +40,40 @@ export class Game {
    /**
     * Starts a new board
     */
-   newBoard(dealer: Seat): Game {
-      // TODO remove this
-      dealer = dealer || Seat.North;
+    dealBoard(dealer: Seat): Game {      
+      return this.newBoard(dealer);
+   }
 
-      let deck = new Deck();
-      deck.shuffle();
+   /**
+    * Adds a new board with the passed in state
+    */
+   newBoard(dealer, handlist, bids, cards): Game {
+      let newstate = this.cloneState();
+      
+      let board = {};
+      board.dealer = dealer || Seat.North;
 
-      let hands = {};
-      deck.deal(4).forEach((hand, idx) => {
-        hands[Seat.rotate(dealer, idx + 1)] = hand;
-      });
-
-      let board = {
-         dealer: dealer,
-         hands: hands,
-         bids: [],
-         cards: []
+      if (!handlist) {
+        let deck = new Deck();
+        deck.shuffle();
+        handlist = deck.deal(4);
       }
 
-      let newstate = this.cloneState();
+      board.hands = {};
+      handlist.forEach((hand, idx) => {
+        board.hands[Seat.rotate(board.dealer, idx + 1)] = hand;
+      });
+
+      board.bids = bids || [];
+      board.cards = cards || [];
+
       newstate.boards.push(board);
       return new Game(newstate);
    }
 
    /**
     * Called in response to a player playing a card.
-    * If the bid is valid returns the new state-helper,
+    * If the bid is valid returns the new game,
     * otherwise an exception is thrown
     */
    makeBid(bid: Bid): Game {
@@ -80,7 +87,7 @@ export class Game {
 
    /**
     * Called in response to a player making a bid.
-    * If the card is valid returns the new state-helper,
+    * If the card is valid returns the new game,
     * otherwise an exception is thrown
     */
    playCard(card: Card): Game {

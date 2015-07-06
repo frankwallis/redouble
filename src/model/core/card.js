@@ -45,6 +45,9 @@ export class Card {
       return !Card.compare(card1, card2);
    }
 
+   /*
+    * creates a card from a string e.g. "5H"
+    */
    static create(card: string) {
       let shortSuitNames = [ "", "C", "D", "H", "S"];
       let shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
@@ -52,6 +55,23 @@ export class Card {
       let result = {};
       result.pip = shortPipNames.indexOf(card[0].toUpperCase());
       result.suit = shortSuitNames.indexOf(card[1].toUpperCase());
+      return result;
+   }
+
+   /*
+    * creates an array of cards or hands.
+    * takes a variable length argument list of strings or arrays e.g. "5H", "6H" or ["5H"], ["6H"] etc
+    */
+   static createAll() {
+      let result = [];
+
+      for (let i = 0; i < arguments.length; i ++) {
+         if (Array.isArray(arguments[i]))
+            result.push(Card.createAll.apply(Card, arguments[i]));
+         else
+            result.push(Card.create(arguments[i]));
+      }
+
       return result;
    }
 

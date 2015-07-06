@@ -10,7 +10,7 @@ describe('Validators', () => {
    describe('validateBid', () => {
       it('checks the range', () => {
          let game = new Game()
-         	.newBoard();
+         	.dealBoard();
 
          expect(validateBid(Bid.create("0S"), game.currentBoard)).toBeDefined();
          expect(validateBid(Bid.create("8H"), game.currentBoard)).toBeDefined();
@@ -18,7 +18,7 @@ describe('Validators', () => {
 
       it('allows only valid bids over no bids', () => {
          let game = new Game()
-         	.newBoard();
+         	.dealBoard();
 
          expect(validateBid(Bid.create("1H"), game.currentBoard)).toBeUndefined();
          expect(validateBid(Bid.create("2H"), game.currentBoard)).toBeUndefined();
@@ -29,7 +29,7 @@ describe('Validators', () => {
 
       it('allows only valid bids over calls', () => {
          let game = new Game()
-         	.newBoard()
+         	.dealBoard()
          	.makeBid(Bid.create("1H"));
 
          expect(validateBid(Bid.create("1D"), game.currentBoard)).toBeDefined();
@@ -41,7 +41,7 @@ describe('Validators', () => {
 
       it('allows only valid bids over doubles', () => {
          let game = new Game()
-         	.newBoard()
+         	.dealBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("no bid"))
          	.makeBid(Bid.create("no bid"))
@@ -56,7 +56,7 @@ describe('Validators', () => {
 
       it('allows only valid bids over redoubles', () => {
          let game = new Game()
-         	.newBoard()
+         	.dealBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("double"))
          	.makeBid(Bid.create("redouble"));
@@ -70,7 +70,7 @@ describe('Validators', () => {
 
       it('disallows bids after the bidding has ended', () => {
          let game = new Game()
-         	.newBoard()
+         	.dealBoard()
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("no bid"))
          	.makeBid(Bid.create("no bid"))
@@ -90,7 +90,7 @@ describe('Validators', () => {
       
       beforeEach(() => {
          game = new Game()
-         	.newBoard(Seat.South)
+         	.dealBoard(Seat.South)
          	.makeBid(Bid.create("1H"))
          	.makeBid(Bid.create("no bid"))
          	.makeBid(Bid.create("no bid"))

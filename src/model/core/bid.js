@@ -1,26 +1,33 @@
 /* @flow */
 
-
 export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
 export const BidType = { "NoBid": 1, "Call": 2, "Double": 3, "Redouble": 4 };
 
+/*
+  interface Bid {
+    type: BidType;
+    suit?: BidSuit;
+    level?: number;  
+  }
+*/
+  
 export class Bid {
-   static stringify(bid): string {
+   static stringify(bid) {
       switch(bid.type) {
-        case BidType.NoBid:
-          return "No Bid";
-        case BidType.Call:
-          return bid.level.toString() + ' ' + Bid.suitName(bid.suit, (bid.level == 1));
-        case BidType.Double:
-          return "Double";
-        case BidType.Redouble:
-          return "Redouble";
-        default:
-          throw new Error("unrecognised bid");
+         case BidType.NoBid:
+            return "No Bid";
+         case BidType.Call:
+            return `${bid.level} ${Bid.suitName(bid.suit, (bid.level === 1))}`;
+         case BidType.Double:
+            return "Double";
+         case BidType.Redouble:
+            return "Redouble";
+         default:
+            throw new Error("unrecognised bid");
       }
    }
 
-   static key(bid): string {
+   static key(bid) {
       let result = [ bid.type ];
 
       if (bid.type == BidType.Call)
@@ -47,12 +54,26 @@ export class Bid {
       }
    }
 
+   /*
+    * creates an array of bids
+    * takes a variable length argument list of strings e.g. "1H", "double", "no bid"
+    */
+   static createAll() {
+      var result = [];
+
+      for (let i = 0; i < arguments.length; i ++) {
+         result.push(Bid.create(arguments[i]));
+      }
+
+      return result;
+   }
+
    static suitName(suit: BidSuit, singular: boolean) {
       let names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
       return names[suit] + (singular ? '' : 's');
    }
 
-   static compare(bid1, bid2): number {
+   static compare(bid1, bid2) {
       if (bid1.type != bid2.type) {
          return bid1.type - bid2.type;
       }

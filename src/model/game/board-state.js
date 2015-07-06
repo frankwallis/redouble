@@ -146,7 +146,7 @@ export class Board {
     * Returns true when no more cards can be played
     */
    get playHasEnded(): boolean {
-      return (this.boardState.cards.length == 52);
+      return (this.boardState.cards.length == Seat.all().reduce((total, seat) => total + this.boardState.hands[seat].length));
    }
 
    /**

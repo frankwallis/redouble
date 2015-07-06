@@ -9,7 +9,7 @@ import {Seat} from "../model/core/seat";
 
 export const GameActions = Reflux.createActions([
    "newGame",
-   "newBoard",
+   "dealBoard",
    "makeBid",
    "playCard",
    "back",
@@ -27,7 +27,7 @@ export const GameStore = Reflux.createStore({
       this.reset();
    },
    reset: function() {
-      this.states = [ new Game().newBoard(Seat.North) ];
+      this.states = [ new Game().dealBoard(Seat.North) ];
       this.currentStateIdx = 0;
    },
    getInitialState: function() {
@@ -41,8 +41,8 @@ export const GameStore = Reflux.createStore({
       this.states.push(state);
       this.currentStateIdx = this.states.length -1;
    },
-   onNewBoard: function() {
-      this.pushState(this.currentState().newBoard());
+   ondealBoard: function() {
+      this.pushState(this.currentState().dealBoard());
       this.trigger(this.currentState());
    },
    onMakeBid: function(bid) {

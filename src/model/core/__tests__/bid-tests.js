@@ -58,9 +58,16 @@ describe("Bid", () => {
       });
    });
 
-   describe("stringify", () => {
-      it("returns unique values", () => {
-
+   
+   describe("createAll", () => {   
+      it("creates lists of bids correctly", () => {
+         let bids = Bid.createAll("1C", "double", "1S");
+         expect(bids.length).toBe(3);
+         expect(bids[0].suit).toBe(BidSuit.Clubs);
+         expect(bids[0].level).toBe(1);
+         expect(bids[2].suit).toBe(BidSuit.Spades);
+         expect(bids[2].level).toBe(1);
       });
    });
+
 });

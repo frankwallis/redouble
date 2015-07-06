@@ -11,7 +11,7 @@ let TestUtils = React.addons.TestUtils;
 describe('Bidding Box', () => {
 
   it('displays the right number of buttons', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
@@ -19,7 +19,7 @@ describe('Bidding Box', () => {
   });
 
   it('disables buttons which are invalid', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
@@ -27,7 +27,7 @@ describe('Bidding Box', () => {
   });
 
   it('makes a bid when a button is clicked', () => {
-      let game = new Game().newBoard();
+      let game = new Game().dealBoard();
       let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');

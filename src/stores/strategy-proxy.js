@@ -39,6 +39,6 @@ export class CardplayStrategyProxy {
 	}
 	
 	updateGameState(game: Game) {
-		return this._operative.updateGameState(game.gameState.toJS());
+		return this._operative.updateGameState(game.gameState);
 	}
 }

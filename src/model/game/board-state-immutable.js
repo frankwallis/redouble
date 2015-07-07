@@ -1,59 +1,98 @@
 /* @flow */
 
-import {Deck} from "../core/deck";
+import Immutable from "immutable";
+
 import {Seat} from "../core/seat";
-import {Bid, BidType, BidSuit} from "../core/bid";
+import {Deck} from "../core/deck";
 import {Card, Pip, Suit} from "../core/card";
+import {Bid, BidType, BidSuit} from "../core/bid";
 import {validateBid, validateCard} from "./validators";
 
 /** 
  * Helper class for analysing board-state.
- * This class is designed to be immutable from the outside
  */
 export class Board {
 
-   constructor(boardState: BoardState) {
-      this.boardState = boardState;
+   constructor(boardState: Immutable.Map) {
+     	this.boardState = boardState;
    }
 
-   // TODO - create -> hydrate
    static create(dealer, handlist, bids, cards) {
-      dealer = dealer || Seat.North;
+   	dealer = dealer || Seat.North;
 
-      if (!handlist) {
-        let deck = new Deck();
-          deck.shuffle();
-          handlist = deck.deal(4);
+   	if (!handlist) {
+       	let deck = new Deck();
+        	deck.shuffle();
+        	handlist = deck.deal(4);
       }
 
       let hands = [];
       handlist.forEach((hand, idx) => {
-        hands[Seat.rotate(dealer, idx + 1)] = hand;
+      	hands.push([Seat.rotate(dealer, idx + 1), hand]);
       });
 
       bids = bids || [];
       cards = cards || [];
 
-      return new Board({dealer, hands, bids, cards});
+   	return new Board(Immutable.Map({ 
+   		dealer: dealer, 
+   		hands: Immutable.Map(hands),
+   		bids: Immutable.List(bids), 
+   		cards: Immutable.List(cards) 
+   	}));
    }
 
-   get hands() { return this.boardState.hands; }
-   get dealer() { return this.boardState.dealer; }
-   get bids() { return this.boardState.bids; }
-   get cards() { return this.boardState.cards; }
+   /*
+   	getXXX functions are private and return Immutables.
+   	properties are public and return the expected data
+   */
+   getDealer() {
+   	return this.boardState.get("dealer");
+   }
+   get dealer() { return this.getDealer(); }
+	
+	getHands() {
+   	return this.boardState.get("hands");	
+   }
+   get hands() { return this.getHands().toJS(); }
+   
+   getBids() {
+   	return this.boardState.get("bids");
+   }
+   get bids() { return this.getBids().toJS(); }
+
+   getCards() {
+		return this.boardState.get("cards");
+   }
+   get cards() { return this.getCards().toJS(); }
+
+   /**
+    * Returns the current trick, which will be an array of the cards which have been
+    * played to the trick, starting with the lead card. If no cards have been played
+    * yet it returns an empty array.
+    */
+   getCurrentTrick() {
+      let played = this.getCards().size % 4;
+      played = played || 4;
+      return this.getCards().slice(played * -1);   	
+   }
+
+   get currentTrick(): Array<Card> {
+   	return this.getCurrentTrick().toJS();
+   }
 
    /**
     * Returns the last bid to be made of any type
     */
    get lastBid(): Bid {
-      return this.boardState.bids[this.boardState.bids.length -1];
+      return this.getBids().last();
    }
 
    /**
     * Returns the last bid to be made of type Bid.Call
     */
    get lastCall(): Bid {
-      return this.boardState.bids
+      return this.getBids()
          .reduce((current, bid) => {
             if (bid.type == BidType.Call)
                return bid;
@@ -67,14 +106,14 @@ export class Board {
     */
    get lastCaller(): Seat {
       let call = this.lastCall;
-      if (call) return Seat.rotate(this.boardState.dealer, this.boardState.bids.indexOf(call));
+      if (call) return Seat.rotate(this.dealer, this.getBids().indexOf(call));
    }
 
    /**
     * Returns the last bid to be made which was not a no-bid
     */
    get lastAction(): Bid {
-      return this.boardState.bids
+      return this.getBids()
          .reduce((current, bid) => {
             if (bid.type != BidType.NoBid)
                return bid;
@@ -88,7 +127,7 @@ export class Board {
     */
    get lastActor(): Seat {
       let act = this.lastAction;
-      if (act) return Seat.rotate(this.boardState.dealer, this.boardState.bids.indexOf(act));
+      if (act) return Seat.rotate(this.dealer, this.getBids().indexOf(act));
    }
 
    /**
@@ -104,49 +143,37 @@ export class Board {
     * Returns true when no more bids can be made
     */
    get biddingHasEnded(): boolean {
-      return (this.bids.length >= 4) && !this.bids.slice(-3).some(bid => bid.type != BidType.NoBid);
-   }
-
-   /**
-    * Returns the current trick, which will be an array of the cards which have been
-    * played to the trick, starting with the lead card. If no cards have been played
-    * yet it returns an empty array.
-    */
-   get currentTrick(): Array<Card> {
-      let played = this.boardState.cards.length % 4;
-      played = played || 4;
-      return this.boardState.cards.slice(played * -1);
+      return (this.getBids().size >= 4) && this.getBids().takeLast(3).every(bid => bid.type == BidType.NoBid);
    }
 
    /* 
     * Returns the winner of the previous trick
     */
    get previousTrickWinner(): Seat {
-      if (this.boardState.cards.length < 4) return undefined;
-      let played = this.boardState.cards.length % 4;
-      let trick = this.boardState.cards.slice(this.boardState.cards.length - played - 4, this.boardState.cards.length - played);
+      if (this.getCards().size < 4) return undefined;
+      let played = this.getCards().size % 4;
+      let trick = this.getCards().slice(this.getCards().size - played - 4, this.getCards().size - played);
 
-      let winner = trick.sort((played1, played2) => {
-        return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
-      })[3].seat;
+      let winningCard = trick.sort((played1, played2) => {
+       	return Card.compare(played1.card, played2.card, this.trumpSuit, trick.first().card.suit);
+      }).last();
 
-      return winner;
+      return winningCard.seat;
    }
 
    /* 
     * Returns the number of tricks declarer has won
     */
    get declarerTricks(): number {
-      let trickCount = Math.floor(this.boardState.cards.length / 4);
+      let trickCount = Math.floor(this.getCards().size / 4);
       let result = 0;
       
       for (let i = 0; i < trickCount; i ++) {
-         let trick = this.boardState.cards.slice(i * 4, (i * 4) + 4);
+         let trick = this.getCards().slice(i * 4, (i * 4) + 4);
          
-         //console.log('' + i + ': ' + 'len= ' + trick.length + ' / ' + this.boardState.cards.length);
          let winner = trick.sort((played1, played2) => {
-           return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
-         })[3].seat;
+           return Card.compare(played1.card, played2.card, this.trumpSuit, trick.first().card.suit);
+         }).last().seat;
          
          if ((winner == this.declarer) || Seat.isPartner(this.declarer, winner))
             result ++;
@@ -156,31 +183,29 @@ export class Board {
    }
 
    /**
-    * Returns true when no more cards can be played
+    * Returns true when all the cards have been played
     */
    get playHasEnded(): boolean {
-      return (this.boardState.cards.length == Seat.all().reduce((total, seat) => total + this.hands[seat].length, 0));
+      return (this.getCards().size == this.getHands().reduce((total, hand) => total + hand.length, 0));
    }
 
    /**
     * Returns true if this card has already been played
     */
    hasBeenPlayed(card) {
-      return this.boardState.cards
-         .some((played) => Card.equals(card, played.card));
+      return this.getCards().some(played => Card.equals(card, played.card));
    }
 
    /**
-    * Returns the seat of the lead card
+    * Returns the seat of the declarer
     */
    get declarer(): Seat {
       if (!this.biddingHasEnded)
          throw new Error("the bidding has not ended yet");
 
       if (this.lastCall) {
-        for (let i = 0; i < this.boardState.bids.length -1; i ++)
-           if (this.boardState.bids[i].suit == this.lastCall.suit)
-              return Seat.rotate(this.boardState.dealer, i);
+      	let idx = this.getBids().findIndex(bid => bid.suit == this.lastCall.suit);
+         return Seat.rotate(this.dealer, idx);
       }
 
       throw new Error("declarer not found");
@@ -190,10 +215,10 @@ export class Board {
     * Returns the seat of the lead card
     */
    get leader(): Seat {
-      if (this.boardState.cards.length < 4)
-         return Seat.rotate(this.declarer, 1);
+      if (this.getCards().size < 4)
+       	return Seat.rotate(this.declarer, 1);
       else
-         return this.previousTrickWinner;
+        	return this.previousTrickWinner;
    }
 
    /**
@@ -201,18 +226,18 @@ export class Board {
     */
    get nextPlayer(): tower.Seat {
       if (!this.biddingHasEnded)
-         return Seat.rotate(this.boardState.dealer, this.boardState.bids.length);
+         return Seat.rotate(this.dealer, this.getBids().size);
       else if (!this.lastCall)
          return undefined;
       else
-         return Seat.rotate(this.leader, this.currentTrick.length);
+         return Seat.rotate(this.leader, this.getCurrentTrick().size);
    }
 
    /*
     * Returns an array of the cards which can legally be played
     */
    get legalCards(): Array<ICard> {
-      let hand = this.boardState.hands[this.nextPlayer];
+      let hand = this.hands[this.nextPlayer];
       let available = hand.filter((card) => !this.hasBeenPlayed(card));
    
       let trick = this.currentTrick;
@@ -229,20 +254,6 @@ export class Board {
    }
 
    /**
-    * Creates an identical copy of itself
-    */
-   clone(): Board {
-      // optimisation: minimise the number of objects created
-      let newstate = {
-         hands: this.boardState.hands,
-         dealer: this.boardState.dealer,
-         bids: this.boardState.bids,
-         cards: this.boardState.cards
-      }
-      return new Board(newstate);
-   }
-
-   /**
     * Called in response to a player playing a card.
     * If the bid is valid returns the new state-helper,
     * otherwise an exception is thrown
@@ -250,10 +261,7 @@ export class Board {
    makeBid(bid: Bid): Board {
       let err = validateBid(bid, this);
       if (err) throw err;
-
-      let newstate = this.clone();
-      newstate.boardState.bids = newstate.boardState.bids.concat(bid);
-      return newstate;
+      return new Board(this.boardState.updateIn(["bids"], bids => bids.push(bid)));
    }
 
    /**
@@ -264,10 +272,10 @@ export class Board {
    playCard(card: Card): Board {
       let err = validateCard(card, this);
       if (err) throw err;
-
-      let newstate = this.clone();
-      newstate.boardState.cards = newstate.boardState.cards.concat({"seat": this.nextPlayer, "card": card });
-      return newstate;
+      let playedCard = {
+      	"seat": this.nextPlayer, 
+      	"card": card 
+   	};
+      return new Board(this.boardState.updateIn(["cards"], cards => cards.push(playedCard)));
    }
-
 }

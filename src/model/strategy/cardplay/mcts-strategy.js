@@ -26,11 +26,8 @@ export class CardplayStrategy {
    }
    
    getCard() {
-      console.log('visiting');
       this.visit(100);
-      console.log('getting card for ' + this.rootNode.board.nextPlayer );
       let card = this.rootNode.bestCard();
-      console.log('got card ' + JSON.stringify(card));
 	   return Promise.resolve(card);
    }
    
@@ -43,9 +40,8 @@ export class CardplayStrategy {
    getRootNode(board) {
       let key = JSON.stringify(board.hands);
       
-      if (!this.boards[key]) {
+      if (!this.boards[key])
          this.boards[key] = new Node(null, board, null); 
-      }
       
       return this.boards[key].seek(board.cards);
    }

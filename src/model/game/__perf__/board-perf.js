@@ -6,7 +6,7 @@ let board = Board.create();
 let states = [];
 
 global.gc();
-console.time("immutableboard");
+console.time("board");
 let startMem = process.memoryUsage();
 
 board = board
@@ -21,7 +21,7 @@ while(!board.playHasEnded) {
    board = board.playCard(card);
 }
 
-console.timeEnd("immutableboard");
+console.timeEnd("board");
 let totalMem = process.memoryUsage();
 global.gc();
 let endMem = process.memoryUsage();

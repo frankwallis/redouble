@@ -24,7 +24,7 @@ describe('Cardplay Strategy', () => {
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
-			strategy.updateGameState(game.gameState.toJS());
+			strategy.updateGameState(game.gameState);
 			let card = strategy.getCard();
          expect(card).toBeDefined();
       });

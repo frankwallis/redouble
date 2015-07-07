@@ -1,5 +1,7 @@
 /* @flow */
 
+import Immutable from "immutable";
+
 import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card, Pip, Suit} from "../core/card";
@@ -12,25 +14,26 @@ import {Board} from "./board-state";
  */
 export class Game {
 
-   constructor(gameState) {
-      this.gameState = gameState || { boards: [] };
-   }
+   constructor(gameState: Immutable.Map) {
+      this.gameState = gameState || Immutable.fromJS({ boards: [] });
+      
+      let boardCount = this.gameState.get("boards").size;
 
-   get boards() {
-		return this.gameState.boards;
+      if (boardCount > 0)
+         this._currentBoard = new Board(this.gameState.get("boards").get(boardCount -1));
    }
 
    /**
     * Returns the current board
     */
    get currentBoard(): Board {
-      return this.boards[this.boards.length -1];
+      return this._currentBoard;
    }
 
    /**
     * Starts a new board
     */
-   dealBoard(dealer: Seat): Game {      
+    dealBoard(dealer: Seat): Game {      
       return this.newBoard(dealer);
    }
 
@@ -39,8 +42,8 @@ export class Game {
     */
    newBoard(dealer, handlist, bids, cards): Game {
       let board = Board.create(dealer, handlist, bids, cards);
-      let boards = this.boards.slice(0).concat(board);
-      return new Game({boards});
+      let newstate = this.gameState.update("boards", boards => boards.push(board.boardState));
+      return new Game(newstate);
    }
 
    /**
@@ -50,8 +53,8 @@ export class Game {
     */
    makeBid(bid: Bid): Game {
       let board = this.currentBoard.makeBid(bid);
-      let boards = this.boards.slice(0, this.boards.length -1).concat(board);
-      return new Game({boards});
+      let newstate = this.gameState.update("boards", boards => boards.set(boards.size -1, board.boardState));
+      return new Game(newstate);
    }
 
    /**
@@ -61,8 +64,8 @@ export class Game {
     */
    playCard(card: Card): Game {
       let board = this.currentBoard.playCard(card);
-      let boards = this.boards.slice(0, this.boards.length -1).concat(board);
-      return new Game({boards});
+      let newstate = this.gameState.update("boards", boards => boards.set(boards.size -1, board.boardState));
+      return new Game(newstate);
    }
 
 }

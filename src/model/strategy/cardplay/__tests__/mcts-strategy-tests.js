@@ -9,6 +9,7 @@ import {Game} from '../../../game/game-state';
 import {Board} from '../../../game/board-state';
 import {Bid, BidType, BidSuit} from '../../../core/bid';
 import {Card, Pip, Suit} from '../../../core/card';
+import {Deck} from '../../../core/deck';
 import {Seat} from '../../../core/seat';
 
 import bluebird from "bluebird";
@@ -66,7 +67,7 @@ describe('Cardplay Strategy', () => {
       xit('unblocks in 3 card ending', () => {
          let game = new Game().newBoard(
             Seat.West,
-            Card.createAll(["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"]),
+            Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"]),
             Bid.createAll("no bid", "no bid", "1NT", "no bid", "no bid", "no bid")
          );
 

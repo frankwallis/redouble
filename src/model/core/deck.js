@@ -1,6 +1,7 @@
 /* @flow */
 
 import {Suit, Pip, Card} from "./card";
+import {Seat} from "./seat";
 
 export class Deck {
 
@@ -39,21 +40,43 @@ export class Deck {
       this.cards = this.shuffleCards(this.cards);
    }
 
-   deal(hands: number): any {//Array<Array<Card> {
+   /**
+    * Deals 13 cards to each player.
+    * hands are returned as a map of Seat -> Array<Card>
+    */
+   deal(dealer: Seat): any {
+      let result = {};
+      let current = Seat.rotate(dealer, 1);
+      
+      this.cards.forEach((card, idx) => {
+         if (!result[current])
+            result[current] = [];
 
-      let current = 0;
-      let result = [];
+         result[current].push(card);
+         current = Seat.rotate(current, 1);
+      });
 
-      while (current < this.cards.length) {
-         let hand = current % hands;
+      return result;
+   }
 
-         if (!result[hand])
-            result[hand] = [];
+   /**
+    * rigs the returned hands
+    * hands should be arrays of strings e.g. [ "5H", "6H" ]
+    */
+   static rig(dealer, hand1, hand2, hand3, hand4) {
+      let result = {};
 
-         result[hand].push(this.cards[current]);
+      let current = Seat.rotate(dealer, 1);
+      result[current] = hand1.map((card) => Card.create(card));
 
-         current ++;
-      }
+      current = Seat.rotate(current, 1);
+      result[current] = hand2.map((card) => Card.create(card));
+
+      current = Seat.rotate(current, 1);
+      result[current] = hand3.map((card) => Card.create(card));
+
+      current = Seat.rotate(current, 1);
+      result[current] = hand4.map((card) => Card.create(card));
 
       return result;
    }

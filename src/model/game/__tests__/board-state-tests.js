@@ -8,6 +8,7 @@ import {Board} from '../board-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';
 import {Seat} from '../../core/seat';
+import {Deck} from '../../core/deck';
 
 describe.only('Board State Helper', () => {
    describe('create', () => {
@@ -23,7 +24,7 @@ describe.only('Board State Helper', () => {
       it('handles parameters', () => {
          let board = Board.create(
             Seat.West, 
-            Card.createAll(["2S"], ["2H"], ["2D"], ["2C"]), 
+            Deck.rig(Seat.West, ["2S"], ["2H"], ["2D"], ["2C"]), 
             Bid.createAll("no bid", "no bid"), 
             Card.createAll("2S", "2H", "2D")
          );
@@ -182,7 +183,7 @@ describe.only('Board State Helper', () => {
       it('returns true after all the cards have been played', () => {
          let board = Board.create(
             Seat.West,
-            Card.createAll(["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"])
+            Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"])
          );
 
          for(let idx = 0; idx < 3; idx ++) {
@@ -216,7 +217,7 @@ describe.only('Board State Helper', () => {
       it('returns the number of tricks won by declarer', () => {
          let board = Board.create(
             Seat.West,
-            Card.createAll(["2S", "AH", "2C"], ["AS", "3H", "3C"], [ "4S", "4H", "4C"], ["5S", "5H", "AC"])
+            Deck.rig(Seat.West, ["2S", "AH", "2C"], ["AS", "3H", "3C"], [ "4S", "4H", "4C"], ["5S", "5H", "AC"])
          );
 
          board = board

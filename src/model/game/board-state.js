@@ -17,19 +17,14 @@ export class Board {
    }
 
    // TODO - create -> hydrate
-   static create(dealer, handlist, bids, cards) {
+   static create(dealer, hands, bids, cards) {
       dealer = dealer || Seat.North;
 
-      if (!handlist) {
-        let deck = new Deck();
-          deck.shuffle();
-          handlist = deck.deal(4);
+      if (!hands) {
+         let deck = new Deck();
+         deck.shuffle();
+         hands = deck.deal(dealer);
       }
-
-      let hands = [];
-      handlist.forEach((hand, idx) => {
-        hands[Seat.rotate(dealer, idx + 1)] = hand;
-      });
 
       bids = bids || [];
       cards = cards || [];

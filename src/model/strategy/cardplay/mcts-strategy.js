@@ -15,9 +15,8 @@ export class CardplayStrategy {
    }
 
    updateGameState(gameState) {
-      let currentBoardState = gameState.boards[gameState.boards.length -1];
-      let handlist = Seat.all().map(seat => currentBoardState.hands[seat]);
-      let board = Board.create(currentBoardState.dealer, handlist, currentBoardState.bids, currentBoardState.cards);
+      let currentBoardState = gameState.boards[gameState.boards.length -1].boardState;
+      let board = Board.create(currentBoardState.dealer, currentBoardState.hands, currentBoardState.bids, currentBoardState.cards);
 
       if (board.biddingHasEnded)
          this.rootNode = this.getRootNode(board);

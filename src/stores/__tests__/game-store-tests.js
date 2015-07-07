@@ -29,7 +29,6 @@ describe('Game Store', () => {
          jest.runAllTimers();
          expect(GameStore.currentState().currentBoard.bids.length).toBe(0);
       });
-
    });
 
    describe('playCard', () => {

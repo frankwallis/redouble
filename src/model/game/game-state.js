@@ -1,10 +1,10 @@
 /* @flow */
 
-import {Deck} from "../core/deck";
+import Immutable from "immutable";
+
 import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card, Pip, Suit} from "../core/card";
-import {GameScorer} from "./game-scorer";
 import {validateBid, validateCard} from "./validators";
 import {Board} from "./board-state";
 
@@ -14,11 +14,13 @@ import {Board} from "./board-state";
  */
 export class Game {
 
-   constructor(gameState: IGameState) {
-      this.gameState = gameState || { boards: [] };
+   constructor(gameState: Immutable.Map) {
+      this.gameState = gameState || Immutable.fromJS({ boards: [] });
       
-      if (this.gameState.boards.length > 0)
-         this._currentBoard = new Board(this.gameState.boards[this.gameState.boards.length -1])
+      let boardCount = this.gameState.get("boards").size;
+
+      if (boardCount > 0)
+         this._currentBoard = new Board(this.gameState.get("boards").get(boardCount -1));
    }
 
    /**
@@ -26,15 +28,6 @@ export class Game {
     */
    get currentBoard(): Board {
       return this._currentBoard;
-   }
-
-   /**
-    * Create an identical copy of our state
-    */
-   cloneState(): Game {
-      let newstate = JSON.parse(JSON.stringify(this.gameState));
-      return newstate;
-      //return Object.assign(this.gameState);
    }
 
    /**
@@ -48,26 +41,8 @@ export class Game {
     * Adds a new board with the passed in state
     */
    newBoard(dealer, handlist, bids, cards): Game {
-      let newstate = this.cloneState();
-      
-      let board = {};
-      board.dealer = dealer || Seat.North;
-
-      if (!handlist) {
-        let deck = new Deck();
-        deck.shuffle();
-        handlist = deck.deal(4);
-      }
-
-      board.hands = {};
-      handlist.forEach((hand, idx) => {
-        board.hands[Seat.rotate(board.dealer, idx + 1)] = hand;
-      });
-
-      board.bids = bids || [];
-      board.cards = cards || [];
-
-      newstate.boards.push(board);
+      let board = Board.create(dealer, handlist, bids, cards);
+      let newstate = this.gameState.update("boards", boards => boards.push(board.boardState));
       return new Game(newstate);
    }
 
@@ -77,12 +52,9 @@ export class Game {
     * otherwise an exception is thrown
     */
    makeBid(bid: Bid): Game {
-      let err = validateBid(bid, this.currentBoard);
-      if (err) throw err;
-
-      let newgame = new Game(this.cloneState());
-      newgame.currentBoard.bids.push(bid);
-      return newgame;
+      let board = this.currentBoard.makeBid(bid);
+      let newstate = this.gameState.update("boards", boards => boards.set(boards.size -1, board.boardState));
+      return new Game(newstate);
    }
 
    /**
@@ -91,12 +63,9 @@ export class Game {
     * otherwise an exception is thrown
     */
    playCard(card: Card): Game {
-      let err = validateCard(card, this.currentBoard);
-      if (err) throw err;
-
-      let newgame = new Game(this.cloneState());
-      newgame.currentBoard.cards.push({"seat": this.currentBoard.nextPlayer, "card": card });
-      return newgame;
+      let board = this.currentBoard.playCard(card);
+      let newstate = this.gameState.update("boards", boards => boards.set(boards.size -1, board.boardState));
+      return new Game(newstate);
    }
 
 }

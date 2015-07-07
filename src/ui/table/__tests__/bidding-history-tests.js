@@ -12,7 +12,7 @@ let TestUtils = React.addons.TestUtils;
 describe('Bidding History', () => {
 
    it('displays the right headings', () => {
-      let board = new Board({ dealer: Seat.West, bids: [], cards: [] })
+      let board = Board.create();
       let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
       let thead = TestUtils.findRenderedDOMComponentWithTag(biddingHistory, 'thead');
       let headings = TestUtils.scryRenderedDOMComponentsWithTag(thead, 'th');
@@ -22,7 +22,7 @@ describe('Bidding History', () => {
    });
 
    it('displays all the bids', () => {
-      let board = new Board({ dealer: Seat.West, bids: [], cards: [] })
+      let board = Board.create()
          .makeBid(Bid.create("no bid"))
 
       let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);

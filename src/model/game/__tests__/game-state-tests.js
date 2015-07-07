@@ -1,4 +1,6 @@
 jest.autoMockOff()
+
+/* disable all validation */
 jest.mock("../validators", {
    validateBid: () => {},
    validateCard: () => {}
@@ -25,17 +27,27 @@ describe('Game State Helper', () => {
       });
    });
 
-
    describe('dealBoard', () => {
 
    });
 
    describe('playCard', () => {
-
+      let game = new Game()
+         .newBoard()
+         .playCard(Card.create("2H"));
+      
+      expect(game.currentBoard.cards.length).toEqual(1);
+      expect(game.currentBoard.cards[0].card.pip).toEqual(Pip.Two);
+      expect(game.currentBoard.cards[0].card.suit).toEqual(Suit.Hearts);
    });
 
    describe('makeBid', () => {
-
+      let game = new Game()
+         .newBoard()
+         .makeBid(Bid.create("no bid"));
+      
+      expect(game.currentBoard.bids.length).toEqual(1);
+      expect(game.currentBoard.bids[0].type).toEqual(BidType.NoBid);
    });
 
    describe('gameHasEnded', () => {

@@ -24,8 +24,8 @@ describe('Cardplay Strategy', () => {
             .makeBid(Bid.create("no bid"));
 
          let strategy = new CardplayStrategy();
-			strategy.updateGameState(game.gameState);
-			let card = strategy.getCard(game.gameState);
+			strategy.updateGameState(game.gameState.toJS());
+			let card = strategy.getCard();
          expect(card).toBeDefined();
       });
       
@@ -56,8 +56,6 @@ describe('Cardplay Strategy', () => {
             .then((card) => {
                let nextgame = game.playCard(card);
                
-               console.log('here');
-               //console.log(JSON.stringify(strategy));
                if (nextgame.currentBoard.playHasEnded)
                   return nextgame;
                else

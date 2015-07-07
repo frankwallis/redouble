@@ -8,7 +8,7 @@ import {validateBid, validateCard} from '../validators';
 
 describe('Validators', () => {
    describe('validateBid', () => {
-      it('checks the range', () => {
+      it.only('checks the range', () => {
          let game = new Game()
          	.dealBoard();
 

@@ -1,5 +1,0 @@
-/* @flow */
-
-export class GameScorer {
-   
-}

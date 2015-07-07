@@ -21,6 +21,7 @@ System.config({
     "core-js": "npm:core-js@0.9.18",
     "css": "github:systemjs/plugin-css@0.1.9",
     "font-awesome": "npm:font-awesome@4.3.0",
+    "immutable": "npm:immutable@3.7.4",
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
     "necolas/normalize.css": "github:necolas/normalize.css@3.0.3",
     "operative": "npm:operative@0.4.4",

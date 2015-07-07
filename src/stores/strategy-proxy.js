@@ -15,10 +15,10 @@ export class CardplayStrategyProxy {
 		}
 		
 		this._operative = operative({
-			getCard: function(gameState, cb) {
+			getCard: function(cb) {
 				instance
 					.then((strategy) => {
-						return strategy.getCard(gameState);
+						return strategy.getCard();
 					})
 					.then((card) => {
 						cb(card);
@@ -34,12 +34,11 @@ export class CardplayStrategyProxy {
 		}, imports);
 	}
 	
-	getCard(game: GameState) {
-		return this._operative.getCard(game.gameState);
+	getCard() {
+		return this._operative.getCard();
 	}
 	
-	updateGameState(game: GameState) {
-		return this._operative.updateGameState(game.gameState);
+	updateGameState(game: Game) {
+		return this._operative.updateGameState(game.gameState.toJS());
 	}
-
 }

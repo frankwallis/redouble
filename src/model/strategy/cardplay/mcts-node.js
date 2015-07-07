@@ -68,6 +68,7 @@ export class Node {
 		if (this.children === null) {
 			let availableCards = this.getAvailableCards();
 	    	this.children = availableCards.map((card) => new Node(this, this.board.playCard(card), card, this.depth + 1));
+	    	//console.log('length: ' + JSON.stringify(this.children.length));
 	  	}
 	}
 

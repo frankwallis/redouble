@@ -6,6 +6,7 @@ import {HandComponent} from "../hand.jsx";
 import {Game} from "../../../model/game/game-state";
 import {GameActions} from "../../../stores/game-store";
 import {Seat} from "../../../model/core/seat";
+import {Bid} from "../../../model/core/bid";
 
 import React from "react/addons";
 let TestUtils = React.addons.TestUtils;
@@ -20,16 +21,22 @@ describe('Hand Component', () => {
       expect(buttons.length).toEqual(13);
   });
 
-  it('hides cards which are not available', () => {
-      let game = new Game().dealBoard();
-      let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+  it('hides cards which have been played', () => {
+      let board = new Game().dealBoard(Seat.North).currentBoard;
+      let hand = TestUtils.renderIntoDocument(<HandComponent board={board} seat={Seat.East}/>);
 
       let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
       expect(cards.length).toEqual(13);
 
-      // play a card
-      game.currentBoard.cards.push({ seat: Seat.North, card: cards[0].props.card });
-      hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+      board = board
+        .makeBid(Bid.create("1H"))
+        .makeBid(Bid.create("no bid"))
+        .makeBid(Bid.create("no bid"))
+        .makeBid(Bid.create("no bid"));
+
+      expect(board.nextPlayer).toEqual(Seat.East);
+      board = board.playCard(board.hands[Seat.East][0]);
+      hand = TestUtils.renderIntoDocument(<HandComponent board={board} seat={Seat.East}/>);
 
       cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
       expect(cards.length).toEqual(12);

@@ -39,7 +39,7 @@ describe('Cardplay Strategy', () => {
 
          let strategy = new CardplayStrategy();
 			strategy.updateGameState(game.gameState);
-			let card = strategy.getCard(game.gameState);
+			let card = strategy.getCard();
          
          var node = strategy.getRootNode(new Board(game.currentBoard)); 
          expect(node.children.length).toEqual(13);
@@ -64,7 +64,7 @@ describe('Cardplay Strategy', () => {
             });
       }
 
-      xit('unblocks in 3 card ending', () => {
+      it('unblocks in 3 card ending', () => {
          let game = new Game().newBoard(
             Seat.West,
             Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"]),
@@ -75,11 +75,27 @@ describe('Cardplay Strategy', () => {
 
          return playAll(game, strategy)
             .then((endgame) => {
-               //console.log(JSON.stringify(endgame.gameState));
                expect(endgame.declarerTricks).toBe(3);      
-            })   
+            });
       });
 
+      it('Bond beats Drax', () => {
+         let game = new Game().newBoard(
+            Seat.West,
+            Deck.rig(Seat.West, ["QD", "8D", "7D", "6D", "5D", "4D", "3D", "2D", "AC", "QC", "TC", "8C", "4C"], 
+                                ["6S", "5S", "4S", "3S", "2S", "TH", "9H", "8H", "7H", "2H", "JD", "TD", "9D"], 
+                                ["TS", "9S", "8S", "7S", "6H", "5H", "4H", "3H", "7C", "6C", "5C", "3C", "2C"],
+                                ["AS", "KS", "QS", "JS", "AH", "KH", "QH", "JH", "AD", "KD", "KC", "JC", "9C"]),
+            Bid.createAll("7C", "no bid", "no bid", "double", "redouble", "no bid", "no bid", "no bid")
+         );
+
+         let strategy = new CardplayStrategy();            
+
+         return playAll(game, strategy)
+            .then((endgame) => {
+               expect(endgame.declarerTricks).toBe(13);      
+            });
+      });
    });
 
 });

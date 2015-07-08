@@ -25,7 +25,7 @@ export class CardplayStrategy {
    }
    
    getCard() {
-      this.visit(100);
+      this.visit(200);
       let card = this.rootNode.bestCard();
 	   return Promise.resolve(card);
    }

@@ -17,19 +17,14 @@ export class Board {
      	this.boardState = boardState;
    }
 
-   static create(dealer, handlist, bids, cards) {
+   static create(dealer, hands, bids, cards) {
    	dealer = dealer || Seat.North;
 
-   	if (!handlist) {
+   	if (!hands) {
        	let deck = new Deck();
         	deck.shuffle();
-        	handlist = deck.deal(4);
+        	hands = deck.deal(dealer);
       }
-
-      let hands = [];
-      handlist.forEach((hand, idx) => {
-      	hands.push([Seat.rotate(dealer, idx + 1), hand]);
-      });
 
       bids = bids || [];
       cards = cards || [];

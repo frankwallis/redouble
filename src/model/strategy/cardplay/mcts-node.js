@@ -77,7 +77,7 @@ export class Node {
 			return this;
 		}
 		else {
-			let child = this.children.find((child) => Card.equals(child.card, playedCards[this.depth].card));
+			let child = this.children.filter((child) => Card.equals(child.card, playedCards[this.depth].card))[0];
 			return child.seek(playedCards);
 		} 
 	}

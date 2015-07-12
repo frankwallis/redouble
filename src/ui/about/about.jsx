@@ -17,30 +17,30 @@ export class AboutView extends React.Component {
       return (
          <div className="about-container">
             <section>
-              <h3>About Tower</h3>
-              <p>
-                Welcome to Tower! 
-              </p>                
-              <p>
-                The application you are using is developed in ES6 using ReactJS and the Flux architecture. It is built using SystemJS, JSPM and Babel.
-                I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
-                and combined Angular2 Zones with ReactJS to create the world's first <a href="https://github.com/frankwallis/react-zones">react zones</a> application!
-                It is a work in progress, so please excuse any strange behaviours, or send a <a href="https://github.com/frankwallis/tower/">pull request</a>
-              </p>
+               <h3>About Tower</h3>
+               <p>
+                  Welcome to Tower! 
+               </p>                
+               <p>
+                  The application you are using is developed in ES6 using ReactJS and the Flux architecture. It is built using SystemJS, JSPM and Babel.
+                  I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
+                  and combined Angular2 Zones with ReactJS to create the world's first <a href="https://github.com/frankwallis/react-zones">react zones</a> application!
+                  It is a work in progress, so please excuse any strange behaviours, or send a <a href="https://github.com/frankwallis/tower/">pull request</a>
+               </p>
             </section>
             <section>
-              <h3>Roadmap</h3>
-              <ul>
-                <li>Implement the playing strategies based on <a href="http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm">Information Set Monte Carlo Tree Search</a> algorithm</li>
-                <li>Select a proper immutable data library (probably <a href="https://github.com/Yomguithereal/baobab">Baobab</a>)</li>
-                <li>Integration Tests</li>
-                <li>Better shuffling algorithm</li>
-                <li>Rewrite in Om!</li>
-              </ul>
+               <h3>Roadmap</h3>
+               <ul>
+                  <li>Implement the playing strategies based on <a href="http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm">Information Set Monte Carlo Tree Search</a> algorithm</li>
+                  <li>Select a proper immutable data library (probably <a href="https://github.com/Yomguithereal/baobab">Baobab</a>)</li>
+                  <li>Integration Tests</li>
+                  <li>Better shuffling algorithm</li>
+                  <li>Rewrite in Om!</li>
+               </ul>
             </section>
             <section>
-              <h3>About Me</h3>
-              <p>I am a software developer based in London</p>
+               <h3>About Me</h3>
+               <p>I am a software developer based in London</p>
             </section>
             
          </div>

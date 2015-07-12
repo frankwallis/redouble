@@ -5,15 +5,18 @@ import {Game} from "../model/game/game-state";
 import {Board} from "../model/game/board-state";
 import {validateBid, validateCard} from "../model/game/validators";
 import {NotificationActions} from "./notification-store";
-import {Seat} from "../model/core/seat";
+import {GameHistory} from "./game-history";
 
 export const GameActions = Reflux.createActions([
    "newGame",
    "dealBoard",
    "makeBid",
    "playCard",
+   "resume",
+   "pause",
    "back",
-   "forward"
+   "forward",
+   "jumpBack"
 ]);
 
 /**
@@ -26,50 +29,73 @@ export const GameStore = Reflux.createStore({
       this.listenToMany(GameActions);
       this.reset();
    },
+   // used by tests
    reset: function() {
-      this.states = [ new Game().dealBoard(Seat.North) ];
-      this.currentStateIdx = 0;
+      this.autoPlay = true;
+      this.history = new GameHistory();
+      this.history.push(new Game().newBoard());
    },
    getInitialState: function() {
-      return this.states[this.currentStateIdx];
+      return this.currentState();
+   },
+   doStateChanged: function() {
+      //this.scheduleNext();
+      this.trigger(this.currentState());
    },
    currentState: function() {
-      return this.states[this.currentStateIdx];
+      return {
+         game: this.history.current(),
+         actions: {
+            canPause: this.autoPlay,
+            canResume: !this.autoPlay,
+            canBack: this.history.canBack(),
+            canForward: this.history.canForward(),
+            canJumpBack: this.history.canJumpBack()
+         }
+      }
    },
-   pushState(state) {
-      this.states = this.states.slice(0, this.currentStateIdx);
-      this.states.push(state);
-      this.currentStateIdx = this.states.length -1;
+   onDealBoard: function() {
+      let game = this.history.current().dealBoard();
+      this.history.push(game);
+      this.doStateChanged();
    },
-   ondealBoard: function() {
-      this.pushState(this.currentState().dealBoard());
-      this.trigger(this.currentState());
+   onMakeBid: function(bid, player) {
+      let game = this.history.current().makeBid(bid);
+      this.history.push(game);
+      this.doStateChanged();
    },
-   onMakeBid: function(bid) {
-      console.log('making bid');
-      let result = this.currentState().makeBid(bid);
-      this.pushState(result);
-      this.trigger(this.currentState());
-   },
-   onPlayCard: function(card) {
-      let result = this.currentState().playCard(card);
-      this.pushState(result);
-      this.trigger(this.currentState());
+   onPlayCard: function(card, player) {
+      let game = this.history.current().playCard(card);
+      this.history.push(game);
+      this.doStateChanged();
    },
    onBack: function() {
-      if (this.currentStateIdx > 0)
-         this.currentStateIdx --;
-      this.trigger(this.currentState());
+      this.history.back();
+      this.autoPlay = false;
+      this.doStateChanged();
    },
    onForward: function() {
-      if (this.currentStateIdx < this.states.length -1)
-         this.currentStateIdx ++;
-      this.trigger(this.currentState());
-   }
+      this.history.forward();
+      this.autoPlay = false;
+      this.doStateChanged();
+   },
+   onJumpBack: function() {
+      this.history.jumpBack();
+      this.autoPlay = false;
+      this.doStateChanged();
+   },
+   onPause: function() {
+      this.autoPlay = false;
+      this.doStateChanged();
+   },
+   onResume: function() {
+      this.autoPlay = true;
+      this.doStateChanged();
+   },
 });
 
 GameActions.makeBid.shouldEmit = function(bid) {
-   let err = validateBid(bid, GameStore.currentState().currentBoard); // TODO
+   let err = validateBid(bid, GameStore.currentState().game.currentBoard); // TODO
 
    if (err) {
       NotificationActions.error({
@@ -82,7 +108,7 @@ GameActions.makeBid.shouldEmit = function(bid) {
 }
 
 GameActions.playCard.shouldEmit = function(card) {
-   let err = validateCard(card, GameStore.currentState().currentBoard); // TODO
+   let err = validateCard(card, GameStore.currentState().game.currentBoard); // TODO
 
    if (err) {
       NotificationActions.error({

@@ -44,3 +44,8 @@ export class BidComponent extends React.Component {
       }
     }
 }
+
+BidComponent.propTypes = {
+   bid: React.PropTypes.object.isRequired
+}
+

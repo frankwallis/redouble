@@ -1,0 +1,58 @@
+.control-bar-container {
+	list-style: none;
+	background: #fafafa;
+   border: 0.2em solid #3B3738;
+   border-radius: .5em;
+   padding: 0.1em;
+   overflow: hidden;
+}
+
+.control-bar-item {
+	display: inline;
+}
+
+.control-bar-button {
+   font-family: FontAwesome;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 1.25em;
+   width: 2em;
+   border: none;
+   background: transparent;
+}
+
+.control-bar-button:hover {
+   background: #E6E6E6;
+}
+
+.control-bar-button:focus {
+   outline: 0;
+}
+
+.control-bar-button.disabled {
+   color: gray;
+}
+
+.control-bar-button.disabled:hover {
+ 	background: transparent;
+}
+
+.btn-pause:before {
+	content: "\f04c";
+}
+
+.btn-resume:before {
+	content: "\f04b";	
+}
+
+.btn-back:before {
+	content: "\f04a";
+}
+
+.btn-forward:before {
+	content: "\f04e";
+}
+
+.btn-jump-back:before {
+	content: "\f048";
+}

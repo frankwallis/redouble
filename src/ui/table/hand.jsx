@@ -14,7 +14,7 @@ export class HandComponent extends React.Component {
    get availableCards() {
       return this.props.board.hands[this.props.seat]
          .filter((card) => !this.props.board.hasBeenPlayed(card))
-         .sort((c1,c2) => Card.compare(c1,c2, this.props.board.trumpSuit));
+         .sort((c1,c2) => Card.compare(c1, c2, this.props.board.trumpSuit));
    }
 
    playCard(card) {

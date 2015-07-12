@@ -77,6 +77,12 @@
    align-items: flex-end;
 }
 
+.table-controls {
+   left: 1em;
+   top: .5em;
+   position: absolute;
+}
+
 .table-bidding-box {
    right: 1em;
    bottom: 1em;

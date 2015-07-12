@@ -20,6 +20,7 @@
     "morgan": "^1.5.1",
     "node-notifier": "^4.1.0",
     "open": "0.0.5",
+    "operative": "^0.4.4",
     "react": "^0.13.0",
     "reflux": "^0.2.5",
     "systemjs-builder": "^0.10.3",

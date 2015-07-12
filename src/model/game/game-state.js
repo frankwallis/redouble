@@ -17,7 +17,7 @@ export class Game {
    }
 
    get boards() {
-		return this.gameState.boards;
+      return this.gameState.boards;
    }
 
    /**

@@ -13,15 +13,15 @@ let TestUtils = React.addons.TestUtils;
 
 describe('Hand Component', () => {
 
-  it('displays cards which are available', () => {
+   it('displays cards which are available', () => {
       let game = new Game().dealBoard();
       let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
       let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
       expect(buttons.length).toEqual(13);
-  });
+   });
 
-  it('hides cards which have been played', () => {
+   it('hides cards which have been played', () => {
       let board = new Game().dealBoard(Seat.North).currentBoard;
       let hand = TestUtils.renderIntoDocument(<HandComponent board={board} seat={Seat.East}/>);
 
@@ -40,9 +40,9 @@ describe('Hand Component', () => {
 
       cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
       expect(cards.length).toEqual(12);
-  });
+   });
 
-  it('sorts the cards', () => {
+   it('sorts the cards', () => {
       let game = new Game().dealBoard();
       let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
@@ -57,16 +57,16 @@ describe('Hand Component', () => {
          }
          return current;
       })
-  });
+   });
 
-  it('plays a card when a button is clicked', () => {
-     let game = new Game().dealBoard();
-     let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+   it('plays a card when a button is clicked', () => {
+      let game = new Game().dealBoard();
+      let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
 
-     let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
-     expect(buttons.length).toEqual(13);
-     expect(GameActions.playCard.mock.calls.length).toBe(0);
-     TestUtils.Simulate.click(buttons[0]);
-     expect(GameActions.playCard.mock.calls.length).toBe(1);
-  });
+      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
+      expect(buttons.length).toEqual(13);
+      expect(GameActions.playCard.mock.calls.length).toBe(0);
+      TestUtils.Simulate.click(buttons[0]);
+      expect(GameActions.playCard.mock.calls.length).toBe(1);
+   });
 });

@@ -9,6 +9,7 @@ import {GameStore, GameActions} from "../../stores/game-store";
 import {GameState} from "../../model/game/game-state";
 import {Seat} from "../../model/core/seat";
 
+import {ControlBar} from "./control-bar.jsx";
 import {HandComponent} from "./hand.jsx";
 import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
@@ -23,18 +24,25 @@ export class Table extends React.Component {
       super(props);
 
       this.players = PlayerStore.players;
-      this.game = GameStore.currentState();
+      this.game = GameStore.currentState().game;
+      this.actions = GameStore.currentState().actions;
    }
 
    componentDidMount() {
       this.unsubscribePlayers = PlayerStore.listen((players) => {
          this.players = players;
          this.forceUpdate();
+      }, (players) => {
+         this.players = players;
       });
 
       this.unsubscribeGame = GameStore.listen((state) => {
-         this.game = state;
+         this.game = state.game;
+         this.actions = state.actions;
          this.forceUpdate();
+      }, (state) => {
+         this.game = state.game;
+         this.actions = state.actions;
       });
    }
 
@@ -46,13 +54,14 @@ export class Table extends React.Component {
    render() {
       console.log('rendering table');
 
+      let controlBar = <ControlBar actions={this.actions}/>
+
       let players = Seat.all().map((seat) => {
          return (
             <section className={"table-edge-" + Seat.name(seat)} key={seat}>
                <header className="table-player-name">{this.players[seat].name}</header>
                <div className={"table-hand-" + Seat.name(seat)}>
-                  <HandComponent seat={seat}
-                                 board={this.game.currentBoard}/>
+                  <HandComponent seat={seat} board={this.game.currentBoard}/>
                </div>
             </section>
          );
@@ -68,6 +77,9 @@ export class Table extends React.Component {
 
       return (
          <div className="bridge-table">
+            <div className="table-controls">
+               {controlBar}
+            </div>
             <div className="table-players">
                {players}
             </div>

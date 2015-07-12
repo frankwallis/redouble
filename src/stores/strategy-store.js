@@ -11,8 +11,6 @@ export const StrategyActions = Reflux.createActions([
    
 ]);
 
-const STORAGE_KEY = 'strategy';
-
 /**
  * Store for managing the game strategies
  */
@@ -27,9 +25,10 @@ export const StrategyStore = Reflux.createStore({
                                            (game) => this.onGameTurn(game),
                                            (game) => this.onGameTurn(game));
    },
-   onGameTurn: function(game) {
+   onGameTurn: function(state) {
       console.log('onGameTurn');
-
+      let game = state.game;
+      
       if (!game.currentBoard.nextPlayer) return;
       this.cardplayStrategy.updateGameState(game);
       

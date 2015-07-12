@@ -6,6 +6,7 @@
 @import './settings/settings.css';
 @import './about/about.css';
 @import './table/table.css';
+@import './table/control-bar.css';
 @import './table/trick.css';
 @import './table/bidding-history.css';
 @import './table/hand.css';

@@ -14,9 +14,9 @@
 }
 
 .hand-card:hover {
-  -webkit-box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
-  box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
-  transform: translateY(-.1rem);
+   -webkit-box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+   box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+   transform: translateY(-.1rem);
 }
 
 .hand-card-button {

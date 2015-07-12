@@ -49,11 +49,11 @@ export class Board {
     */
    get lastCall(): Bid {
       return this.boardState.bids
-         .reduce((current, bid) => {
-            if (bid.type == BidType.Call)
-               return bid;
-            else
+         .reduce((lastCall, current) => {
+            if (current.type == BidType.Call)
                return current;
+            else
+               return lastCall;
          }, undefined);
    }
 
@@ -70,11 +70,11 @@ export class Board {
     */
    get lastAction(): Bid {
       return this.boardState.bids
-         .reduce((current, bid) => {
-            if (bid.type != BidType.NoBid)
-               return bid;
-            else
+         .reduce((lastAction, current) => {
+            if (current.type != BidType.NoBid)
                return current;
+            else
+               return lastAction;
          }, undefined);
    }
 
@@ -122,7 +122,7 @@ export class Board {
       let trick = this.boardState.cards.slice(this.boardState.cards.length - played - 4, this.boardState.cards.length - played);
 
       let winner = trick.sort((played1, played2) => {
-        return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
+         return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
       })[3].seat;
 
       return winner;
@@ -140,7 +140,7 @@ export class Board {
          
          //console.log('' + i + ': ' + 'len= ' + trick.length + ' / ' + this.boardState.cards.length);
          let winner = trick.sort((played1, played2) => {
-           return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
+            return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
          })[3].seat;
          
          if ((winner == this.declarer) || Seat.isPartner(this.declarer, winner))

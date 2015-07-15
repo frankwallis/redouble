@@ -16,7 +16,7 @@ export const PlayerStore = Reflux.createStore({
    init: function() {
       this.listenToMany(PlayerActions);
 
-      let playersStr = localStorage.getItem(STORAGE_KEY);
+      let playersStr = window.localStorage ? window.localStorage.getItem(STORAGE_KEY) : undefined;
 
       if (playersStr) {
          this.players = JSON.parse(playersStr);

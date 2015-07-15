@@ -1,10 +1,16 @@
-jest.autoMockOff()
-jest.mock('../../../stores/game-store');
+//jest.autoMockOff()
+//jest.mock('../../../stores/game-store.js');
+//jest.mock('../../../stores/auto-player.js');
+
+jest.dontMock("../../components/card.jsx");
+jest.dontMock("../hand.jsx");
+jest.dontMock("../../../model/game/game-state");
+jest.dontMock("../../../model/core/seat");
+jest.dontMock("../../../model/core/bid");
 
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";
 import {Game} from "../../../model/game/game-state";
-import {GameActions} from "../../../stores/game-store";
 import {Seat} from "../../../model/core/seat";
 import {Bid} from "../../../model/core/bid";
 

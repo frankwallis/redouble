@@ -1,7 +1,6 @@
 jest.autoMockOff()
 jest.mock('../../../stores/game-store');
 
-import {GameActions} from "../../../stores/game-store";
 import {ControlBar} from "../control-bar.jsx";
 
 import React from "react/addons";

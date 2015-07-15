@@ -3,7 +3,6 @@ jest.mock('../../../stores/game-store');
 
 import {BiddingBox} from "../bidding-box.jsx";
 import {Game} from "../../../model/game/game-state";
-import {GameActions} from "../../../stores/game-store";
 
 import React from "react/addons";
 let TestUtils = React.addons.TestUtils;

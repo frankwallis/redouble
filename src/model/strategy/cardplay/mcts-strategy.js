@@ -11,25 +11,49 @@ export class CardplayStrategy {
 
    constructor() {
       this.boards = {};
-      this.rootNode = undefined;      
+      this.rootNode = undefined;
+      this.started = false;
    }
 
    updateGameState(gameState) {
       let currentBoardState = gameState.boards[gameState.boards.length -1].boardState;
       let board = Board.create(currentBoardState.dealer, currentBoardState.hands, currentBoardState.bids, currentBoardState.cards);
 
-      if (board.biddingHasEnded)
+      if (board.biddingHasEnded) {
          this.rootNode = this.getRootNode(board);
+         this.start();
+      }
+      else {
+         this.stop();
+      }
 
       console.log('updated game state');
    }
    
    getCard() {
-      this.visit(200);
       let card = this.rootNode.bestCard();
+      console.log("visits = " + this.rootNode.visits);
 	   return Promise.resolve(card);
    }
    
+   start() {
+      if (!this.started) {
+         this.started = true;
+         this.nextVisit();
+      }
+   }
+   
+   stop() {
+      this.started = false;
+   }
+
+   nextVisit() {
+      if (this.started) {
+         this.visit(15);
+         setTimeout(() => this.nextVisit(), 0);
+      }
+   }
+
    visit(rounds) {
       rounds = rounds || 1;
       for (let round = 0; round < rounds; round += 1)

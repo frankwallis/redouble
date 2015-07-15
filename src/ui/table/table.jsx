@@ -4,7 +4,6 @@ import React from 'react';
 import Reflux from 'reflux';
 
 import {PlayerStore} from "../../stores/player-store";
-import {StrategyStore} from "../../stores/strategy-store";
 import {GameStore, GameActions} from "../../stores/game-store";
 import {GameState} from "../../model/game/game-state";
 import {Seat} from "../../model/core/seat";

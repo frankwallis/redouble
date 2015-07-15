@@ -3,6 +3,7 @@
 import Reflux from 'reflux';
 import {Game} from "../model/game/game-state";
 import {Board} from "../model/game/board-state";
+import {AutoPlayer} from "./auto-player"
 import {validateBid, validateCard} from "../model/game/validators";
 import {NotificationActions} from "./notification-store";
 import {GameHistory} from "./game-history";
@@ -31,15 +32,19 @@ export const GameStore = Reflux.createStore({
    },
    // used by tests
    reset: function() {
+      this.autoPlayer = new AutoPlayer();
       this.autoPlay = true;
       this.history = new GameHistory();
       this.history.push(new Game().newBoard());
+      this.doStateChanged();
    },
    getInitialState: function() {
       return this.currentState();
    },
    doStateChanged: function() {
-      //this.scheduleNext();
+      this.autoPlayer.updateGameState(this.currentState().game);
+      if (this.autoPlay)
+         this.autoPlayer.scheduleAutoPlay(this.currentState().game);
       this.trigger(this.currentState());
    },
    currentState: function() {

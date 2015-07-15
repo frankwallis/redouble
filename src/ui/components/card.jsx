@@ -36,6 +36,6 @@ export class CardComponent extends React.Component {
 }
 
 CardComponent.propTypes = {
-   card: React.PropTypes.object.isRequired
+   card: React.PropTypes.object
 }
 

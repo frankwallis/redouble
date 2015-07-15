@@ -26,6 +26,7 @@ describe('Cardplay Strategy', () => {
 
          let strategy = new CardplayStrategy();
 			strategy.updateGameState(game.gameState);
+         strategy.visit(20);
 			let card = strategy.getCard();
          expect(card).toBeDefined();
       });
@@ -39,6 +40,7 @@ describe('Cardplay Strategy', () => {
 
          let strategy = new CardplayStrategy();
 			strategy.updateGameState(game.gameState);
+         strategy.visit(20);
 			let card = strategy.getCard();
          
          var node = strategy.getRootNode(new Board(game.currentBoard)); 
@@ -53,6 +55,8 @@ describe('Cardplay Strategy', () => {
 
       function playAll(game, strategy) {
          strategy.updateGameState(game.gameState);
+         strategy.visit(20);
+         
          return strategy.getCard()
             .then((card) => {
                let nextgame = game.playCard(card);

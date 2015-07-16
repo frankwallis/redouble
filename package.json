@@ -56,6 +56,7 @@
       "lib": "src"
     },
     "dependencies": {
+      "css": "github:systemjs/plugin-css@0.1.10",
       "font-awesome": "npm:font-awesome@^4.3.0",
       "immutable": "npm:immutable@^3.7.4",
       "necolas/normalize.css": "github:necolas/normalize.css@^3.0.2",
@@ -69,7 +70,7 @@
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
       "core-js": "npm:core-js@^0.9.4",
-      "css": "github:systemjs/plugin-css@0.1.9",
+      "css": "github:systemjs/plugin-css@0.1.10",
       "text": "github:systemjs/plugin-text@^0.0.2"
     }
   }

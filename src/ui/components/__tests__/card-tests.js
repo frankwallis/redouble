@@ -4,7 +4,7 @@ import {CardComponent} from "../card.jsx";
 import {Card, Pip, Suit} from "../../../model/core/card";
 
 import React from "react/addons";
-let TestUtils = React.addons.TestUtils;
+const TestUtils = React.addons.TestUtils;
 
 describe('Card', () => {
 

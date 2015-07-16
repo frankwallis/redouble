@@ -1,5 +1,6 @@
 jest.autoMockOff()
 jest.mock('../../../stores/game-store');
+jest.mock('../../../stores/auto-player.js');
 
 import {BidComponent} from  "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";
@@ -8,7 +9,7 @@ import {Bid, BidType, BidSuit} from "../../../model/core/bid";
 import {Seat} from "../../../model/core/seat";
 
 import React from "react/addons";
-let TestUtils = React.addons.TestUtils;
+const TestUtils = React.addons.TestUtils;
 
 describe('Bidding History', () => {
 

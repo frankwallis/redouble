@@ -1,11 +1,13 @@
 jest.autoMockOff()
 jest.mock('../../../stores/game-store');
+jest.mock('../../../stores/auto-player.js');
 
 import {BiddingBox} from "../bidding-box.jsx";
 import {Game} from "../../../model/game/game-state";
+import {GameActions} from "../../../stores/game-store";
 
 import React from "react/addons";
-let TestUtils = React.addons.TestUtils;
+const TestUtils = React.addons.TestUtils;
 
 describe('Bidding Box', () => {
 

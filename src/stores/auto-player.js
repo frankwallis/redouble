@@ -11,8 +11,8 @@ import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
  */
 export class AutoPlayer {
 	constructor() {
-      this.cardplayStrategy = new CardplayStrategyProxy();
-      this.biddingStrategy = new BiddingStrategy();		
+		this.cardplayStrategy = new CardplayStrategyProxy();
+		this.biddingStrategy = new BiddingStrategy();		
 	}
 
 	updateGameState(game) {
@@ -21,12 +21,12 @@ export class AutoPlayer {
 	}
 
 	scheduleAutoPlay(game) {
-      if (!game.currentBoard.nextPlayer) return;
-      if (PlayerStore.players[game.currentBoard.nextPlayer].ishuman) return;
+		if (!game.currentBoard.nextPlayer) return;
+		if (PlayerStore.players[game.currentBoard.nextPlayer].ishuman) return;
 
 		setTimeout(() => {
-         if (game.currentBoard.biddingHasEnded) {
-            this.cardplayStrategy.getCard()
+			if (game.currentBoard.biddingHasEnded) {
+				this.cardplayStrategy.getCard()
 					.then((card) => {
 						if (game === this.game)
 							GameActions.playCard(card);
@@ -34,12 +34,12 @@ export class AutoPlayer {
 							console.log("The game has moved on!");
 					});
 
-         }
-         else {
+			}
+			else {
 				if (game === this.game) {
-            	let bid = this.biddingStrategy.getBid(game.gameState);
-             	GameActions.makeBid(bid, game);
-         	}
+					let bid = this.biddingStrategy.getBid(game.gameState);
+					GameActions.makeBid(bid, game);
+				}
 			}
 		}, 2000);
 	}

@@ -1,13 +1,8 @@
-//jest.autoMockOff()
-//jest.mock('../../../stores/game-store.js');
-//jest.mock('../../../stores/auto-player.js');
+jest.autoMockOff()
+jest.mock('../../../stores/game-store.js');
+jest.mock('../../../stores/auto-player.js');
 
-jest.dontMock("../../components/card.jsx");
-jest.dontMock("../hand.jsx");
-jest.dontMock("../../../model/game/game-state");
-jest.dontMock("../../../model/core/seat");
-jest.dontMock("../../../model/core/bid");
-
+import {GameActions} from "../../../stores/game-store";
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";
 import {Game} from "../../../model/game/game-state";
@@ -15,7 +10,7 @@ import {Seat} from "../../../model/core/seat";
 import {Bid} from "../../../model/core/bid";
 
 import React from "react/addons";
-let TestUtils = React.addons.TestUtils;
+const TestUtils = React.addons.TestUtils;
 
 describe('Hand Component', () => {
 

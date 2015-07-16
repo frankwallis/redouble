@@ -22,7 +22,7 @@ export class AboutView extends React.Component {
 						Welcome to Tower! 
 					</p>                
 					<p>
-						The application you are using is developed in ES6 using ReactJS and the Flux architecture. It is built using SystemJS, JSPM and Babel.
+						The application you are using is developed in ES6 using ReactJS and the Flux architecture. It is built using WebPack, React-Hot-Loader and Babel.
 						I have also ported this application to <a href="https://github.com/frankwallis/tower/tree/angular2">Angular2</a>, 
 						and combined Angular2 Zones with ReactJS to create the world's first <a href="https://github.com/frankwallis/react-zones">react zones</a> application!
 						It is a work in progress, so please excuse any strange behaviours, or send a <a href="https://github.com/frankwallis/tower/">pull request</a>

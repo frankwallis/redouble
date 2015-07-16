@@ -1,3 +1,3 @@
-module.exports = require('./make-webpack-config')({
-  devtool: 'eval',
+module.exports = require('./webpack-config-builder')({
+	devtool: 'eval',
 });

@@ -19,7 +19,6 @@ module.exports = function(options) {
 		cssLoaders = extractForProduction(cssLoaders);
 		sassLoaders = extractForProduction(sassLoaders);
 		scssLoaders = extractForProduction(scssLoaders);
-		lessLoaders = extractForProduction(lessLoaders);
 	}
 
 	var jsLoaders = ['babel'];
@@ -104,12 +103,12 @@ module.exports = function(options) {
 		}),
 		new ExtractTextPlugin("app.[hash].css"),
 		new HtmlWebpackPlugin({
-			template: './config/tmpl.html',
+			template: './config/index-template.html',
 			production: true,
 		}),
 		] : [
 		new HtmlWebpackPlugin({
-			template: './config/tmpl.html',
+			template: './config/index-template.html',
 		}),
 		],
 	};

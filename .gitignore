@@ -9,6 +9,7 @@ reports/
 coverage/
 js/
 tmp/
+dist/
 build/
 jspm_packages/
 .settings/

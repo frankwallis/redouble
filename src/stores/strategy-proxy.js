@@ -1,12 +1,20 @@
 import "operative";
 
+
+function getBaseUrl() {
+	let bases = document.getElementsByTagName('base');
+	return bases.length > 0 ? bases[0].href : undefined;
+}
+
 export class CardplayStrategyProxy {
 	constructor() {
 		let imports = [];
-				
-		if (System.baseURL)
-			operative.setBaseURL(System.baseURL);
-			
+		
+		let baseURL = getBaseUrl();
+
+		if (baseURL)
+			operative.setBaseURL(baseURL);
+
 		if (System.towerOptions && System.towerOptions.bundle) {
 			imports = ["jspm_packages/system.js", System.towerOptions.bundle, "src/stores/strategy-worker.js"];
 		}

@@ -1,7 +1,5 @@
 /* @flow */
 
-import Immutable from "immutable";
-
 import {Node} from "./mcts-node";
 import {Seat} from "../../core/seat";
 import {Game} from "../../game/game-state";

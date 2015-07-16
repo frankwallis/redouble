@@ -1,5 +1,3 @@
-jest.dontMock('../notification-store.js');
-
 import {NotificationStore, NotificationActions} from '../notification-store';
 
 describe('Notification Store', () => {

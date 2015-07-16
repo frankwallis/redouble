@@ -15,29 +15,29 @@ export class CardplayStrategyProxy {
 		if (baseURL)
 			operative.setBaseURL(baseURL);
 
-		if (System.towerOptions && System.towerOptions.bundle) {
+/*		if (System.towerOptions && System.towerOptions.bundle) {
 			imports = ["jspm_packages/system.js", System.towerOptions.bundle, "src/stores/strategy-worker.js"];
 		}
 		else {
 			imports = ["jspm_packages/system.js", "config.js", "src/stores/strategy-worker.js"];						
-		}
+		}*/
 		
 		this._operative = operative({
 			getCard: function(cb) {
-				instance
+/*				instance
 					.then((strategy) => {
 						return strategy.getCard();
 					})
 					.then((card) => {
 						cb(card);
-					})
+					})*/
 			},
 			updateGameState: function(gameState, cb) {
-				instance
+/*				instance
 					.then((strategy) => {
 						strategy.updateGameState(gameState);
 						cb();
-					})
+					})*/
 			}
 		}, imports);
 	}

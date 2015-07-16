@@ -1,11 +1,3 @@
-jest.autoMockOff()
-
-/* disable all validation */
-jest.mock("../validators", {
-	validateBid: () => {},
-	validateCard: () => {}
-})
-
 import {Game} from '../game-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';

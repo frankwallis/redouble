@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {Game} from '../game-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';

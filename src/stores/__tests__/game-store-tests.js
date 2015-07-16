@@ -1,6 +1,3 @@
-jest.autoMockOff();
-jest.mock("../auto-player.js");
-
 import {Bid} from '../../model/core/bid';
 import {GameStore, GameActions} from '../game-store';
 

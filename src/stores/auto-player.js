@@ -3,7 +3,8 @@
 
 import {GameActions} from "./game-store";
 import {PlayerStore} from "./player-store";
-import {CardplayStrategyProxy} from "./strategy-proxy";
+//import {CardplayStrategyProxy} from "./strategy-proxy";
+import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 /**
@@ -11,7 +12,7 @@ import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
  */
 export class AutoPlayer {
 	constructor() {
-		this.cardplayStrategy = new CardplayStrategyProxy();
+		this.cardplayStrategy = new CardplayStrategy();
 		this.biddingStrategy = new BiddingStrategy();		
 	}
 

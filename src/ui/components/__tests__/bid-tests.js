@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {BidComponent} from "../bid.jsx";
 import {Bid, BidType, BidSuit} from "../../../model/core/bid";
 

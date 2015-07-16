@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {Seat} from '../seat';
 
 describe("Seat", () => {

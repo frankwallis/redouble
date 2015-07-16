@@ -1,9 +1,3 @@
-jest.autoMockOff()
-jest.mock("../../../game/validators", {
-	validateBid: () => {},
-	validateCard: () => {}
-})
-
 import {CardplayStrategy} from '../mcts-strategy';
 import {Game} from '../../../game/game-state';
 import {Board} from '../../../game/board-state';

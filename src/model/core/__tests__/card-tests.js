@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {Card, Suit, Pip} from '../card';
 
 describe("Card", () => {

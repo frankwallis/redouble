@@ -1,16 +1,10 @@
-jest.autoMockOff()
-jest.mock("../validators", {
-	validateBid: () => {},
-	validateCard: () => {}
-})
-
 import {Board} from '../board-state';
 import {Bid, BidType, BidSuit} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';
 import {Seat} from '../../core/seat';
 import {Deck} from '../../core/deck';
 
-describe.only('Board State Helper', () => {
+describe('Board State Helper', () => {
 	describe('create', () => {
 		it('defaults parameters', () => {
 			let board = Board.create();

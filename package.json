@@ -3,75 +3,56 @@
   "version": "0.1.0",
   "description": "contract bridge",
   "main": "src/ui/app.jsx",
-  "dependencies": {},
-  "devDependencies": {
-    "babel": "^4.6.0",
-    "bluebird": "^2.9.30",
-    "connect-livereload-safe": "0.0.5",
-    "debounce": "^1.0.0",
-    "del": "^1.1.1",
-    "express": "^4.11.2",
-    "glob": "^4.3.5",
-    "gulp": "^3.8.11",
-    "gulp-util": "^3.0.2",
-    "immutable": "^3.7.4",
-    "jspm": "^0.15.7",
-    "mkdirp": "^0.5.0",
-    "morgan": "^1.5.1",
-    "node-notifier": "^4.1.0",
-    "open": "0.0.5",
+  "dependencies": {
+    "font-awesome": "^4.3.0",
+    "normalize.css": "^3.0.3",
     "operative": "^0.4.4",
+    "purecss": "^0.6.0",
     "react": "^0.13.0",
-    "reflux": "^0.2.5",
-    "systemjs-builder": "^0.10.3",
-    "tiny-lr": "^0.1.5"
+    "react-router": "^0.13.2",
+    "reflux": "^0.2.5"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
+    "babel": "^5.1.10",
+    "babel-core": "^4.7.8",
+    "babel-eslint": "^2.0.2",
+    "babel-loader": "^5.0.0",
+    "css-loader": "^0.14.0",
+    "eslint": "^0.17.1",
+    "eslint-loader": "^0.7.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.1",
+    "gh-pages": "^0.2.0",
+    "html-webpack-plugin": "^1.1.0",
+    "isparta": "^2.2.0",
+    "isparta-instrumenter-loader": "^0.1.1",
+    "karma": "^0.12.31",
+    "karma-coverage": "^0.2.7",
+    "karma-jasmine": "^0.3.6",
+    "karma-mocha-reporter": "^1.0.2",
+    "karma-notify-reporter": "^0.1.1",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-webpack": "^1.5.0",
+    "react-hot-loader": "^1.2.3",
+    "style-loader": "^0.12.0",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.9.0",
+    "webpack-dev-server": "^1.9.0"
   },
   "scripts": {
-    "start": "gulp serve",
-    "test": "jest"
+    "test": "./node_modules/karma/bin/karma start config/karma.conf.js --single-run",
+    "test:watch": "./node_modules/karma/bin/karma start config/karma.conf.js",
+    "test:coverage": "./node_modules/karma/bin/karma start config/karma.coverage.conf.js --single-run",
+    "test:ci": "./node_modules/karma/bin/karma start config/karma.ci.conf.js --single-run",
+    "start": "./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --progress --colors --inline --content-base ./build",
+    "build": "./node_modules/.bin/webpack --config config/webpack.production.js",
+    "build:gh": "npm run build && node ./build-gh-pages.js && rm -r ./dist"
   },
   "repository": {
     "type": "git",
     "url": "https://www.github.com/frankwallis/tower.git"
   },
   "author": "Frank Wallis",
-  "license": "MIT",
-  "jest": {
-    "collectCoverage": true,
-    "testPathIgnorePatterns": [
-      "/__tests__/[^/]*/.+"
-    ],
-    "testPathDirs": [
-      "src"
-    ],
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-tools",
-      "<rootDir>/node_modules/reflux"
-    ]
-  },
-  "jspm": {
-    "directories": {
-      "lib": "src"
-    },
-    "dependencies": {
-      "css": "github:systemjs/plugin-css@0.1.10",
-      "font-awesome": "npm:font-awesome@^4.3.0",
-      "immutable": "npm:immutable@^3.7.4",
-      "necolas/normalize.css": "github:necolas/normalize.css@^3.0.2",
-      "operative": "npm:operative@^0.4.4",
-      "purecss": "npm:purecss@^0.6.0",
-      "react": "npm:react@^0.13.0",
-      "react-router": "npm:react-router@^0.13.2",
-      "reflux": "npm:reflux@^0.2.5"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.1.13",
-      "babel-runtime": "npm:babel-runtime@^5.1.13",
-      "core-js": "npm:core-js@^0.9.4",
-      "css": "github:systemjs/plugin-css@0.1.10",
-      "text": "github:systemjs/plugin-text@^0.0.2"
-    }
-  }
+  "license": "MIT"
 }

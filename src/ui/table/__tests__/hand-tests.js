@@ -1,7 +1,3 @@
-jest.autoMockOff()
-jest.mock('../../../stores/game-store.js');
-jest.mock('../../../stores/auto-player.js');
-
 import {GameActions} from "../../../stores/game-store";
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";

@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {Deck} from '../deck';
 import {Seat} from '../seat';
 import {Pip} from '../card';

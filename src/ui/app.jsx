@@ -10,10 +10,10 @@ import {SettingsView} from './settings/settings.jsx';
 import {GrowlContainer} from './growl/growl.jsx';
 
 /* these should probably be somewhere else */
-import a from 'necolas/normalize.css';
-import b from 'purecss/build/pure.css!';
-import c from 'font-awesome/css/font-awesome.css!';
-import d from './app.css!';
+import 'normalize.css';
+import 'purecss';
+import 'font-awesome/css/font-awesome.css';
+import './app.css';
 
 export class App extends React.Component {
 	constructor(props) {

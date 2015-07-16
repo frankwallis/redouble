@@ -1,7 +1,3 @@
-jest.autoMockOff()
-jest.mock('../../../stores/game-store');
-jest.mock('../../../stores/auto-player.js');
-
 import {BidComponent} from  "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";
 import {Board} from "../../../model/game/board-state";

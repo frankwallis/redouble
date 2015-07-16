@@ -1,5 +1,3 @@
-jest.autoMockOff();
-
 import {GameHistory} from '../game-history';
 
 describe('Game History', () => {

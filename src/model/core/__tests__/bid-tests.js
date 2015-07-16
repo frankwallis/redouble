@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {Bid, BidSuit, BidType} from '../bid';
 
 describe("Bid", () => {

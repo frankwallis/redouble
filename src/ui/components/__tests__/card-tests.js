@@ -1,5 +1,3 @@
-jest.autoMockOff()
-
 import {CardComponent} from "../card.jsx";
 import {Card, Pip, Suit} from "../../../model/core/card";
 

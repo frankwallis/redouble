@@ -1,7 +1,3 @@
-jest.autoMockOff()
-jest.mock('../../../stores/game-store');
-jest.mock('../../../stores/auto-player.js');
-
 import {ControlBar} from "../control-bar.jsx";
 import {GameActions} from "../../../stores/game-store";
 

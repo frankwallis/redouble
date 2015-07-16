@@ -49,8 +49,11 @@ export class CardplayStrategy {
 
 	nextVisit() {
 		if (this.started) {
+			// limit to 50% CPU
+			let startTime = new Date();
 			this.visit(15);
-			setTimeout(() => this.nextVisit(), 0);
+			let endTime = new Date();
+			setTimeout(() => this.nextVisit(), endTime - startTime);
 		}
 	}
 

@@ -1,30 +1,30 @@
 
 .fill-parent {
-   position: absolute;
-   width: 100%;
-   height: 100%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
 .bidding-container {
-   background: #fafafa;
-   border-radius: .5em;
-   border: .3em solid #3B3738;
-   position: absolute;
-   height: 70%;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   /*overflow: hidden;*/
-   padding: .3em .8em !important;
+	background: #fafafa;
+	border-radius: .5em;
+	border: .3em solid #3B3738;
+	position: absolute;
+	height: 70%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/*overflow: hidden;*/
+	padding: .3em .8em !important;
 }
 
 tbody.bidding-cell {
-   padding: 0 !important;
+	padding: 0 !important;
 }
 
 .bidding-cell {
-   margin: 0;
-   min-width: 4em;
-   width: 25%;
-   text-align: center;
+	margin: 0;
+	min-width: 4em;
+	width: 25%;
+	text-align: center;
 }

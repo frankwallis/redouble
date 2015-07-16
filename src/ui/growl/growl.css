@@ -1,44 +1,44 @@
 .growl-list {
-   font-size: .8rem;
+	font-size: .8rem;
 }
 
 .growl-item {
-   position: relative;
-   overflow: hidden;
-   padding: .9em 1.2em .9em 1.2em;
-   margin-top: .2em;
-   width: 15vw;
-   border-radius: .5em;
-   background-position: 3em center;
-   background-repeat: no-repeat;
-   box-shadow: 0 0 .3em dimgray;
-   color: #ffffff;
-   opacity: 0.8;
-   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-   filter: alpha(opacity=80);
-   list-style: none;
-   z-index: 999999;
+	position: relative;
+	overflow: hidden;
+	padding: .9em 1.2em .9em 1.2em;
+	margin-top: .2em;
+	width: 15vw;
+	border-radius: .5em;
+	background-position: 3em center;
+	background-repeat: no-repeat;
+	box-shadow: 0 0 .3em dimgray;
+	color: #ffffff;
+	opacity: 0.8;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	filter: alpha(opacity=80);
+	list-style: none;
+	z-index: 999999;
 }
 
 .growl-item:hover {
-   box-shadow: 0 0 .3em #000000;
-   opacity: 1;
-   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-   filter: alpha(opacity=100);
-   cursor: pointer;
+	box-shadow: 0 0 .3em #000000;
+	opacity: 1;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	filter: alpha(opacity=100);
+	cursor: pointer;
 }
 
 .growl-title {
-   font-weight: bold;
-   margin-top: 0;
-   margin-bottom: .6em;
-   text-decoration: none;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: .6em;
+	text-decoration: none;
 }
 
 .growl-message {
-   word-wrap: break-word;
-   text-decoration: none;
-   margin: 0;
+	word-wrap: break-word;
+	text-decoration: none;
+	margin: 0;
 }
 
 .growl-button {
@@ -46,57 +46,57 @@
 }
 
 .growl-item {
-   background-color: #030303;
+	background-color: #030303;
 }
 
 .growl-item.growl-success {
-   background-color: #51a351;
+	background-color: #51a351;
 }
 
 .growl-item.growl-success .growl-title:before {
-   content: "\f071";
-   font-family: FontAwesome;
-   font-weight: bold;
-   margin-right: .4em;
+	content: "\f071";
+	font-family: FontAwesome;
+	font-weight: bold;
+	margin-right: .4em;
 }
 
 .growl-item.growl-error {
-   background-color: #bd362f;
+	background-color: #bd362f;
 }
 
 .growl-item.growl-error .growl-title:before {
-   content: "\f071";
-   font-weight: bold;
-   font-family: FontAwesome;
-   margin-right: .4em;
+	content: "\f071";
+	font-weight: bold;
+	font-family: FontAwesome;
+	margin-right: .4em;
 }
 
 .growl-item.growl-info {
-   background-color: #2f96b4;
+	background-color: #2f96b4;
 }
 
 .growl-item.growl-info .growl-title:before {
-   content: "\f05a";
-   font-family: FontAwesome;
-   margin-right: .4em;
+	content: "\f05a";
+	font-family: FontAwesome;
+	margin-right: .4em;
 }
 
 .growl-item.growl-warn {
-   background-color: #f89406;
+	background-color: #f89406;
 }
 
 .growl-item.growl-warn .growl-title:before {
-   content: "\f071";
-   font-family: FontAwesome;
-   margin-right: .4em;
+	content: "\f071";
+	font-family: FontAwesome;
+	margin-right: .4em;
 }
 
 .growl-item.growl-question {
-   background-color: #f89406;
+	background-color: #f89406;
 }
 
 .growl-item.growl-question .growl-title:before {
-   content: "\f059";
-   font-family: FontAwesome;
-   margin-right: .4em;
+	content: "\f059";
+	font-family: FontAwesome;
+	margin-right: .4em;
 }

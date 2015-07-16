@@ -9,63 +9,63 @@ import {Board} from "../../game/board-state";
 
 export class CardplayStrategy {
 
-   constructor() {
-      this.boards = {};
-      this.rootNode = undefined;
-      this.started = false;
-   }
+	constructor() {
+		this.boards = {};
+		this.rootNode = undefined;
+		this.started = false;
+	}
 
-   updateGameState(gameState) {
-      let currentBoardState = gameState.boards[gameState.boards.length -1].boardState;
-      let board = Board.create(currentBoardState.dealer, currentBoardState.hands, currentBoardState.bids, currentBoardState.cards);
+	updateGameState(gameState) {
+		let currentBoardState = gameState.boards[gameState.boards.length -1].boardState;
+		let board = Board.create(currentBoardState.dealer, currentBoardState.hands, currentBoardState.bids, currentBoardState.cards);
 
-      if (board.biddingHasEnded) {
-         this.rootNode = this.getRootNode(board);
-         this.start();
-      }
-      else {
-         this.stop();
-      }
+		if (board.biddingHasEnded) {
+			this.rootNode = this.getRootNode(board);
+			this.start();
+		}
+		else {
+			this.stop();
+		}
 
-      console.log('updated game state');
-   }
-   
-   getCard() {
-      let card = this.rootNode.bestCard();
-      console.log("visits = " + this.rootNode.visits);
-	   return Promise.resolve(card);
-   }
-   
-   start() {
-      if (!this.started) {
-         this.started = true;
-         this.nextVisit();
-      }
-   }
-   
-   stop() {
-      this.started = false;
-   }
+		console.log('updated game state');
+	}
+	
+	getCard() {
+		let card = this.rootNode.bestCard();
+		console.log("visits = " + this.rootNode.visits);
+		return Promise.resolve(card);
+	}
+	
+	start() {
+		if (!this.started) {
+			this.started = true;
+			this.nextVisit();
+		}
+	}
+	
+	stop() {
+		this.started = false;
+	}
 
-   nextVisit() {
-      if (this.started) {
-         this.visit(15);
-         setTimeout(() => this.nextVisit(), 0);
-      }
-   }
+	nextVisit() {
+		if (this.started) {
+			this.visit(15);
+			setTimeout(() => this.nextVisit(), 0);
+		}
+	}
 
-   visit(rounds) {
-      rounds = rounds || 1;
-      for (let round = 0; round < rounds; round += 1)
-         this.rootNode.visit();
-   }
+	visit(rounds) {
+		rounds = rounds || 1;
+		for (let round = 0; round < rounds; round += 1)
+			this.rootNode.visit();
+	}
 
-   getRootNode(board) {
-      let key = JSON.stringify(board.hands);
-      
-      if (!this.boards[key])
-         this.boards[key] = new Node(null, board, null); 
-      
-      return this.boards[key].seek(board.cards);
-   }
+	getRootNode(board) {
+		let key = JSON.stringify(board.hands);
+		
+		if (!this.boards[key])
+			this.boards[key] = new Node(null, board, null); 
+		
+		return this.boards[key].seek(board.cards);
+	}
 }

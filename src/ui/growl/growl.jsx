@@ -11,47 +11,47 @@ import {NotificationStore, NotificationActions} from "../../stores/notification-
  */
 export class GrowlContainer extends React.Component {
 
-   constructor(props) {
-      super(props);
-   }
+	constructor(props) {
+		super(props);
+	}
 
-   componentDidMount() {
-      this.unsubscribe = NotificationStore.listen(() => {
-         this.forceUpdate();
-      });
-   }
+	componentDidMount() {
+		this.unsubscribe = NotificationStore.listen(() => {
+			this.forceUpdate();
+		});
+	}
 
-   componentWillUnmount() {
-      this.unsubscribe();
-   }
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
 
-   handleResponse(id, response) {
-      NotificationActions.dismiss({id: id, response: response});
-   }
+	handleResponse(id, response) {
+		NotificationActions.dismiss({id: id, response: response});
+	}
 
-   render() {
-      console.log('rendering growls');
+	render() {
+		console.log('rendering growls');
 
-      let growls = NotificationStore.notifications.map((notification) => {
-         let buttons = notification.buttons.map((button) => {
-            return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>
-         });
+		let growls = NotificationStore.notifications.map((notification) => {
+			let buttons = notification.buttons.map((button) => {
+				return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>
+			});
 
-         return (
-            <li className={"growl-item growl-" + notification.type}
-                onClick={() => this.handleResponse(notification.id, notification.defaultButton)}
-                key={notification.id}>
-               <h3 className="growl-title">{notification.title}</h3>
-               <p className="growl-message">{notification.message}</p>
-               <div className="growl-buttons">{buttons}</div>
-            </li>
-         );
-      });
+			return (
+				<li className={"growl-item growl-" + notification.type}
+					 onClick={() => this.handleResponse(notification.id, notification.defaultButton)}
+					 key={notification.id}>
+					<h3 className="growl-title">{notification.title}</h3>
+					<p className="growl-message">{notification.message}</p>
+					<div className="growl-buttons">{buttons}</div>
+				</li>
+			);
+		});
 
-      return (
-         <ol className="growl-list">
-            {growls}
-         </ol>
-      );
-   }
+		return (
+			<ol className="growl-list">
+				{growls}
+			</ol>
+		);
+	}
 }

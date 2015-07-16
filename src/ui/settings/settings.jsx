@@ -11,61 +11,61 @@ import {Seat} from "../../model/core/seat";
  */
 export class SettingsView extends React.Component {
 
-   constructor(props) {
-      super(props);
-      this.players = PlayerStore.players;
-   }
+	constructor(props) {
+		super(props);
+		this.players = PlayerStore.players;
+	}
 
-   componentDidMount() {
-      this.unsubscribePlayers = PlayerStore.listen((players) => {
-         this.players = players;
-         this.forceUpdate();
-      });
-   }
+	componentDidMount() {
+		this.unsubscribePlayers = PlayerStore.listen((players) => {
+			this.players = players;
+			this.forceUpdate();
+		});
+	}
 
-   componentWillUnmount() {
-      this.unsubscribePlayers();
-   }
+	componentWillUnmount() {
+		this.unsubscribePlayers();
+	}
 
-   handleChangeName(seat, event) {
-      PlayerActions.updatePlayer(seat, {name: event.target.value});
-   }
+	handleChangeName(seat, event) {
+		PlayerActions.updatePlayer(seat, {name: event.target.value});
+	}
 
-   handleChangeHuman(seat, event) {
-      PlayerActions.updatePlayer(seat, {ishuman: !event.target.checked});
-   }
+	handleChangeHuman(seat, event) {
+		PlayerActions.updatePlayer(seat, {ishuman: !event.target.checked});
+	}
 
-   render() {
-      console.log('rendering setings');
+	render() {
+		console.log('rendering setings');
 
-      let players = Seat.all().map((seat) => {
-         return <li className="settings-player" key={seat}>
-            <h3 className="settings-player-header">{Seat.name(seat)}</h3>
-            <div className="settings-field">
-               <label className="settings-label"
-                      htmlFor={"name-input-" + Seat.name(seat)}>Name</label>
-               <input className="settings-input-name"
-                      type="text" id={"name-input-" + Seat.name(seat)}
-                      defaultValue={this.players[seat].name}
-                      onChange={(event) => this.handleChangeName(seat, event)}></input>
-            </div>
-            <div className="settings-field">
-               <label className="settings-label"
-                      htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
-               <input className="settings-input-human"
-                      type="checkbox" id={"human-input-" + Seat.name(seat)}
-                      defaultChecked={!this.players[seat].ishuman}
-                      onChange={(event) => this.handleChangeHuman(seat, event)}></input>
-            </div>
-         </li>
-      });
+		let players = Seat.all().map((seat) => {
+			return <li className="settings-player" key={seat}>
+				<h3 className="settings-player-header">{Seat.name(seat)}</h3>
+				<div className="settings-field">
+					<label className="settings-label"
+							 htmlFor={"name-input-" + Seat.name(seat)}>Name</label>
+					<input className="settings-input-name"
+							 type="text" id={"name-input-" + Seat.name(seat)}
+							 defaultValue={this.players[seat].name}
+							 onChange={(event) => this.handleChangeName(seat, event)}></input>
+				</div>
+				<div className="settings-field">
+					<label className="settings-label"
+							 htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
+					<input className="settings-input-human"
+							 type="checkbox" id={"human-input-" + Seat.name(seat)}
+							 defaultChecked={!this.players[seat].ishuman}
+							 onChange={(event) => this.handleChangeHuman(seat, event)}></input>
+				</div>
+			</li>
+		});
 
-      return (
-         <div className="settings-container">
-            <ul className="settings-players">
-               {players}
-            </ul>
-         </div>
-      );
-   }
+		return (
+			<div className="settings-container">
+				<ul className="settings-players">
+					{players}
+				</ul>
+			</div>
+		);
+	}
 }

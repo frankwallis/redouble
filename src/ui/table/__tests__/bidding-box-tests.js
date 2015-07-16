@@ -11,25 +11,25 @@ const TestUtils = React.addons.TestUtils;
 
 describe('Bidding Box', () => {
 
-   it('displays the right number of buttons', () => {
-      let game = new Game().dealBoard();
-      let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
+	it('displays the right number of buttons', () => {
+		let game = new Game().dealBoard();
+		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
-      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
-      expect(buttons.length).toEqual(38);
-   });
+		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
+		expect(buttons.length).toEqual(38);
+	});
 
-   xit('disables buttons which are invalid', () => {
-      // TODO
-   });
+	xit('disables buttons which are invalid', () => {
+		// TODO
+	});
 
-   it('makes a bid when a button is clicked', () => {
-      let game = new Game().dealBoard();
-      let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
+	it('makes a bid when a button is clicked', () => {
+		let game = new Game().dealBoard();
+		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
 
-      let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
-      TestUtils.Simulate.click(buttons[0]);
-      expect(GameActions.makeBid.mock.calls.length).toEqual(1);
-   });
+		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
+		TestUtils.Simulate.click(buttons[0]);
+		expect(GameActions.makeBid.mock.calls.length).toEqual(1);
+	});
 
 });

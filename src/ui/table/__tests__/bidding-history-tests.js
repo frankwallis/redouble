@@ -13,24 +13,24 @@ const TestUtils = React.addons.TestUtils;
 
 describe('Bidding History', () => {
 
-   it('displays the right headings', () => {
-      let board = Board.create();
-      let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
-      let thead = TestUtils.findRenderedDOMComponentWithTag(biddingHistory, 'thead');
-      let headings = TestUtils.scryRenderedDOMComponentsWithTag(thead, 'th');
+	it('displays the right headings', () => {
+		let board = Board.create();
+		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
+		let thead = TestUtils.findRenderedDOMComponentWithTag(biddingHistory, 'thead');
+		let headings = TestUtils.scryRenderedDOMComponentsWithTag(thead, 'th');
 
-      expect(headings.length).toEqual(4);
-      expect(headings[0].getDOMNode().textContent).toBe('north');
-   });
+		expect(headings.length).toEqual(4);
+		expect(headings[0].getDOMNode().textContent).toBe('north');
+	});
 
-   it('displays all the bids', () => {
-      let board = Board.create()
-         .makeBid(Bid.create("no bid"))
+	it('displays all the bids', () => {
+		let board = Board.create()
+			.makeBid(Bid.create("no bid"))
 
-      let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
-      let tbody = TestUtils.findRenderedDOMComponentWithTag(biddingHistory, 'tbody');
+		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
+		let tbody = TestUtils.findRenderedDOMComponentWithTag(biddingHistory, 'tbody');
 
-      let bids = TestUtils.scryRenderedComponentsWithType(tbody, BidComponent);
-      expect(bids.length).toEqual(1);
+		let bids = TestUtils.scryRenderedComponentsWithType(tbody, BidComponent);
+		expect(bids.length).toEqual(1);
   });
 });

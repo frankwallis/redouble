@@ -6,32 +6,32 @@ import {Seat} from '../../model/core/seat';
 
 export class TrickComponent extends React.Component {
 
-   constructor(props) {
-      super(props);
-   }
+	constructor(props) {
+		super(props);
+	}
 
-   getCard(seat: Seat): Card {
-      let card = undefined;
+	getCard(seat: Seat): Card {
+		let card = undefined;
 
-      this.props.board.currentTrick.forEach((played) => {
-         if (played.seat == seat)
-            card = played.card;
-      });
+		this.props.board.currentTrick.forEach((played) => {
+			if (played.seat == seat)
+				card = played.card;
+		});
 
-      return card;
-   }
+		return card;
+	}
 
-   render() {
-      let cards = Seat.all().map((seat) => {
-         return <li key={seat} className={"trick-card-" + Seat.name(seat)}>
-            <CardComponent card={this.getCard(seat)}/>
-         </li>
-      });
+	render() {
+		let cards = Seat.all().map((seat) => {
+			return <li key={seat} className={"trick-card-" + Seat.name(seat)}>
+				<CardComponent card={this.getCard(seat)}/>
+			</li>
+		});
 
-      return (
-         <ol className="trick-container">
-            {cards}
-         </ol>
-      );
-   }
+		return (
+			<ol className="trick-container">
+				{cards}
+			</ol>
+		);
+	}
 }

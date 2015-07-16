@@ -2,13 +2,13 @@
 
 class ResponderStrategy implements tower.IBiddingStrategy {
 
-    constructor() {
+	 constructor() {
 
-    }
+	 }
 
-    public getBid(game: tower.IGame): tower.IBid {
-         return {type: tower.BidType.NoBid};
-    }
+	 public getBid(game: tower.IGame): tower.IBid {
+			return {type: tower.BidType.NoBid};
+	 }
 
 }
 

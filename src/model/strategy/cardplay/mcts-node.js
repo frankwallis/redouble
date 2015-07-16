@@ -37,7 +37,7 @@ export class Node {
 	
 	selectNode() {
 		let nodeSort = function (node1, node2) {
-	      return node2.getUCB1() - node1.getUCB1();
+			return node2.getUCB1() - node1.getUCB1();
 		};
 
 //		this.children.forEach((child) => {
@@ -49,7 +49,7 @@ export class Node {
 	
 	getUCB1() {
 		if (this.visits == 0) return Number.MAX_VALUE;
-	  	// See https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Exploration_and_exploitation
+		// See https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Exploration_and_exploitation
 		let wins = 0;
 		
 		if ((this.board.nextPlayer == this.board.declarer) || Seat.isPartner(this.board.nextPlayer, this.board.declarer))
@@ -57,7 +57,7 @@ export class Node {
 		else		
 			wins = this.tricks.filter((trickCount) => trickCount >= this.board.lastCall.level).length;
 		
-	  	return (wins / this.visits) + Math.sqrt(2 * Math.log(this.parent.visits) / this.visits);
+		return (wins / this.visits) + Math.sqrt(2 * Math.log(this.parent.visits) / this.visits);
 	}
 	
 	get totalTricks() {
@@ -67,9 +67,9 @@ export class Node {
 	ensureChildren() {
 		if (this.children === null) {
 			let availableCards = this.getAvailableCards();
-	    	this.children = availableCards.map((card) => new Node(this, this.board.playCard(card), card, this.depth + 1));
-	    	//console.log('length: ' + JSON.stringify(this.children.length));
-	  	}
+			this.children = availableCards.map((card) => new Node(this, this.board.playCard(card), card, this.depth + 1));
+			//console.log('length: ' + JSON.stringify(this.children.length));
+		}
 	}
 
 	seek(playedCards) {

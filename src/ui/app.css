@@ -13,30 +13,30 @@
 @import './table/bidding-box.css';
 
 ol {
-   padding-left: 0;
-   margin: 0;
+	padding-left: 0;
+	margin: 0;
 }
 
 .app-container {
-   font-size: calc(0.55vw + .6em);
-   /*font-size: calc(0.65vw + .5em);*/
-   /*font-size: calc(0.8vw + .4em);*/
+	font-size: calc(0.55vw + .6em);
+	/*font-size: calc(0.65vw + .5em);*/
+	/*font-size: calc(0.8vw + .4em);*/
 }
 
 .app-navbar {
-   font-size: calc(.8vh + .7em);
+	font-size: calc(.8vh + .7em);
 }
 
 .app-content {
-   position: absolute;
-   top: 2.5em;
-   left: 0;
-   right: 0;
-   bottom: 0;
+	position: absolute;
+	top: 2.5em;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .app-growl {
-   position: absolute;
-   top: 2.75em;
-   left: 0;
+	position: absolute;
+	top: 2.75em;
+	left: 0;
 }

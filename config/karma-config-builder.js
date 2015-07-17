@@ -7,9 +7,9 @@ module.exports = function(options) {
 		browsers: ['PhantomJS'],
 
 		files: [
-		// This shim adds .bind to PhantomJS
-		'./phantomjs-shim.js',
-		'../src/**/__tests__/*.js',
+			// This shim adds .bind to PhantomJS
+			'./phantomjs-shim.js',
+			'../src/**/__tests__/*.js',
 		],
 
 		preprocessors: {
@@ -31,26 +31,24 @@ module.exports = function(options) {
 	};
 
 	if (options.coverage) {
-	 // Needs to load first to prevent linting issues
-	 webpackConfig.module.preLoaders = [
-		 {
+		// Needs to load first to prevent linting issues
+		webpackConfig.module.preLoaders = [{
 		 	test: /\.jsx?$/,
 		 	exclude: /(__tests__|node_modules)/,
 		 	loader: 'isparta-instrumenter-loader',
-		 },
-	 ].concat(webpackConfig.module.preLoaders);
+		}].concat(webpackConfig.module.preLoaders);
 
-	 karmaConfig.plugins.push('karma-coverage');
+		karmaConfig.plugins.push('karma-coverage');
 
-	 karmaConfig.coverageReporter = {
-	 	dir: '../coverage',
-	 	reporters: options.coverageReporters || [
-		 	{ type: 'text' },
-		 	{ type: 'html' },
-	 	],
-	 };
+		karmaConfig.coverageReporter = {
+	 		dir: '../coverage',
+	 		reporters: options.coverageReporters || [
+		 		{ type: 'text' },
+		 		{ type: 'html' },
+	 		],
+		};
 
-	 karmaConfig.reporters.push('coverage');
+		karmaConfig.reporters.push('coverage');
 	}
 
 	if (options.notify) {

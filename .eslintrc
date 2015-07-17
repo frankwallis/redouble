@@ -5,7 +5,7 @@
 		"mocha": true,
 	},
 	"ecmaFeatures": {
-    "jsx": true
+   	"jsx": true
    },
 	"parser": "babel-eslint",
 	"rules": {

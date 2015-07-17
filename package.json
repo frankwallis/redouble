@@ -48,7 +48,7 @@
     "test:ci": "./node_modules/karma/bin/karma start config/karma.ci.conf.js --single-run",
     "start": "./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --progress --colors --inline --content-base ./build",
     "build": "./node_modules/.bin/webpack --config config/webpack.production.js",
-    "build:gh": "npm run build && node ./build-gh-pages.js && rm -r ./dist"
+    "publish": "npm run build && node ./node_modules/.bin/gh-pages -d dist && rm -r ./dist"
   },
   "repository": {
     "type": "git",

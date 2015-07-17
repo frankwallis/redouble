@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import {Suit,Pip,Card} from "../../model/core/card";
+import {Card} from "../../model/core/card";
 
 export class CardComponent extends React.Component {
 
@@ -37,5 +37,5 @@ export class CardComponent extends React.Component {
 
 CardComponent.propTypes = {
 	card: React.PropTypes.object
-}
+};
 

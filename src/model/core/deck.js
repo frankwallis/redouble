@@ -47,8 +47,8 @@ export class Deck {
 	deal(dealer: Seat): any {
 		let result = {};
 		let current = Seat.rotate(dealer, 1);
-		
-		this.cards.forEach((card, idx) => {
+
+		this.cards.forEach((card) => {
 			if (!result[current])
 				result[current] = [];
 

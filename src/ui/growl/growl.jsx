@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import Reflux from 'reflux';
 
 import {NotificationStore, NotificationActions} from "../../stores/notification-store";
 
@@ -34,13 +33,13 @@ export class GrowlContainer extends React.Component {
 
 		let growls = NotificationStore.notifications.map((notification) => {
 			let buttons = notification.buttons.map((button) => {
-				return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>
+				return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>;
 			});
 
 			return (
 				<li className={"growl-item growl-" + notification.type}
-					 onClick={() => this.handleResponse(notification.id, notification.defaultButton)}
-					 key={notification.id}>
+						onClick={() => this.handleResponse(notification.id, notification.defaultButton)}
+						key={notification.id}>
 					<h3 className="growl-title">{notification.title}</h3>
 					<p className="growl-message">{notification.message}</p>
 					<div className="growl-buttons">{buttons}</div>

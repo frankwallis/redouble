@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Router from 'react-router';
-let { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
+const { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
 
 import {Table} from './table/table.jsx';
 import {AboutView} from './about/about.jsx';
@@ -21,8 +21,8 @@ export class App extends React.Component {
 	}
 
 	render() {
-		console.log('rendering app')
-		let routes = ["table", "settings", "about"].map((route) => {
+		console.log('rendering app');
+		let routelinks = ["table", "settings", "about"].map((route) => {
 			return (
 				<li key={route}>
 					<Link to={route}>{route}</Link>
@@ -34,7 +34,7 @@ export class App extends React.Component {
 			<div className="app-container">
 				<nav role="navigation" className="app-navbar nav-main">
 					<ul className="nav-site">
-						{routes}
+						{routelinks}
 					</ul>
 				</nav>
 				<div className="app-content">

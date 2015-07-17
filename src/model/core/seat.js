@@ -29,9 +29,8 @@ export const Seat = {
 		count = count || 0;
 		return ((seat + count - Seat.North) % 4) + Seat.North;
 	},
-	
+
 	isPartner: function(seat1, seat2) {
 		return (Seat.rotate(seat1, 2) === seat2);
 	}
-
 };

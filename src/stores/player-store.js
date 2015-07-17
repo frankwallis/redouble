@@ -27,7 +27,7 @@ export const PlayerStore = Reflux.createStore({
 				this.players[seat] = {
 					seat: seat,
 					name: Seat.name(seat),
-					ishuman: (seat == Seat.South)
+					ishuman: (seat === Seat.South)
 				};
 			});
 		}
@@ -36,8 +36,8 @@ export const PlayerStore = Reflux.createStore({
 		console.log('updating player');
 		Object.keys(delta).forEach((key) => {
 			this.players[seat][key] = delta[key];
-		})
-		localStorage.setItem(STORAGE_KEY, JSON.stringify(this.players));      
+		});
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(this.players));
 		this.trigger(this.players);
 	}
 });

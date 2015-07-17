@@ -6,11 +6,11 @@ export class CardplayStrategy {
 
 	constructor() {}
 
-	getCard(): tower.ICard {
+	getCard() {
 		let game = new Game(this._gameState);
 		return Promise.resolve(game.currentBoard.legalCards[0]);
 	}
-	
+
 	updateGameState(gameState) {
 		this._gameState = gameState;
 	}

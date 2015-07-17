@@ -17,8 +17,8 @@ export class ControlBar extends React.Component {
 
 		return (
 			<button className={className}
-					  disabled={!enabled}
-					  onClick={action}>
+						disabled={!enabled}
+						onClick={action}>
 			</button>
 		);
 	}
@@ -45,4 +45,4 @@ export class ControlBar extends React.Component {
 
 ControlBar.propTypes = {
 	actions: React.PropTypes.object.isRequired
-}
+};

@@ -13,12 +13,12 @@ import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 export class AutoPlayer {
 	constructor() {
 		this.cardplayStrategy = new CardplayStrategy();
-		this.biddingStrategy = new BiddingStrategy();		
+		this.biddingStrategy = new BiddingStrategy();
 	}
 
 	updateGameState(game) {
 		this.game = game;
-		this.cardplayStrategy.updateGameState(game);		
+		this.cardplayStrategy.updateGameState(game);
 	}
 
 	scheduleAutoPlay(game) {

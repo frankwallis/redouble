@@ -7,10 +7,10 @@ export const BidType = { "NoBid": 1, "Call": 2, "Double": 3, "Redouble": 4 };
 	interface Bid {
 		type: BidType;
 		suit?: BidSuit;
-		level?: number;  
+		level?: number;
 	}
 */
-  
+
 export class Bid {
 	static stringify(bid) {
 		switch(bid.type) {
@@ -30,7 +30,7 @@ export class Bid {
 	static key(bid) {
 		let result = [ bid.type ];
 
-		if (bid.type == BidType.Call)
+		if (bid.type === BidType.Call)
 			result = result.concat([ bid.level, bid.suit ]);
 
 		return result.join('-');
@@ -40,11 +40,11 @@ export class Bid {
 		let shortNames = [ "", "c", "d", "h", "s", "nt"];
 		bid = bid.toLowerCase();
 
-		if (bid == "double")
+		if (bid === "double")
 			return { type: BidType.Double };
-		else if (bid == "redouble")
+		else if (bid === "redouble")
 			return { type: BidType.Redouble };
-		else if (bid == "no bid")
+		else if (bid === "no bid")
 			return { type: BidType.NoBid };
 		else {
 			let result = { type: BidType.Call };
@@ -74,12 +74,12 @@ export class Bid {
 	}
 
 	static compare(bid1, bid2) {
-		if (bid1.type != bid2.type) {
+		if (bid1.type !== bid2.type) {
 			return bid1.type - bid2.type;
 		}
 		else {
-			if (bid1.type == BidType.Call) {
-				if (bid1.level == bid2.level)
+			if (bid1.type === BidType.Call) {
+				if (bid1.level === bid2.level)
 					return bid1.suit - bid2.suit;
 				else
 					return bid1.level - bid2.level;

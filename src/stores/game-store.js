@@ -2,8 +2,7 @@
 
 import Reflux from 'reflux';
 import {Game} from "../model/game/game-state";
-import {Board} from "../model/game/board-state";
-import {AutoPlayer} from "./auto-player"
+import {AutoPlayer} from "./auto-player";
 import {validateBid, validateCard} from "../model/game/validators";
 import {NotificationActions} from "./notification-store";
 import {GameHistory} from "./game-history";
@@ -57,19 +56,19 @@ export const GameStore = Reflux.createStore({
 				canForward: this.history.canForward(),
 				canJumpBack: this.history.canJumpBack()
 			}
-		}
+		};
 	},
 	onDealBoard: function() {
 		let game = this.history.current().dealBoard();
 		this.history.push(game);
 		this.doStateChanged();
 	},
-	onMakeBid: function(bid, player) {
+	onMakeBid: function(bid) {
 		let game = this.history.current().makeBid(bid);
 		this.history.push(game);
 		this.doStateChanged();
 	},
-	onPlayCard: function(card, player) {
+	onPlayCard: function(card) {
 		let game = this.history.current().playCard(card);
 		this.history.push(game);
 		this.doStateChanged();
@@ -96,7 +95,7 @@ export const GameStore = Reflux.createStore({
 	onResume: function() {
 		this.autoPlay = true;
 		this.doStateChanged();
-	},
+	}
 });
 
 GameActions.makeBid.shouldEmit = function(bid) {
@@ -110,7 +109,7 @@ GameActions.makeBid.shouldEmit = function(bid) {
 	}
 
 	return !err;
-}
+};
 
 GameActions.playCard.shouldEmit = function(card) {
 	let err = validateCard(card, GameStore.currentState().game.currentBoard); // TODO
@@ -123,4 +122,4 @@ GameActions.playCard.shouldEmit = function(card) {
 	}
 
 	return !err;
-}
+};

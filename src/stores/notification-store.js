@@ -30,12 +30,12 @@ export const NotificationStore = Reflux.createStore({
 	autoDismiss: function() {
 		let now = new Date();
 		this.notifications.forEach((notif) => {
-			if (!notif.dismissed && !(notif.type == 'question')) {
+			if (!notif.dismissed && !(notif.type === 'question')) {
 				if (now.getTime() - notif.timestamp.getTime() > 75000) {
 					NotificationActions.dismiss({ id: notif.id });
 				}
 			}
-		})
+		});
 	},
 	onInfo: function(opts) {
 		opts = opts || {};
@@ -92,10 +92,10 @@ export const NotificationStore = Reflux.createStore({
 		return notification;
 	},
 	onDismiss: function(opts) {
-		let notification = this.notifications.filter((notif) => notif.id == opts.id)[0];
+		let notification = this.notifications.filter((notif) => notif.id === opts.id)[0];
 
 		if (notification) {
-			this.notifications = this.notifications.filter((notif) => notif.id != opts.id);
+			this.notifications = this.notifications.filter((notif) => notif.id !== opts.id);
 			notification.response = opts.response;
 			this.trigger(notification);
 		}

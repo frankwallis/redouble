@@ -2,21 +2,21 @@
 
 import React from 'react';
 import {BidComponent} from '../components/bid.jsx';
-import {BidSuit, BidType, Bid} from '../../model/core/bid';
+import {BidSuit, BidType} from '../../model/core/bid';
 import {GameActions} from '../../stores/game-store';
 
 export class BiddingBox extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log('created bidding-box')
+		console.log('created bidding-box');
 	}
 
-	bidButton(bid: tower.IBid, colspan: number) {
+	bidButton(bid, colspan: number) {
 		return (
 			<td key={BidComponent.key(bid)} className="bidding-box-cell" colSpan={colspan}>
 				<button className="bidding-box-button pure-button"
-						  onClick={() => this.makeBid(bid)}>
+							onClick={() => this.makeBid(bid)}>
 					<BidComponent bid={bid}/>
 				</button>
 			</td>

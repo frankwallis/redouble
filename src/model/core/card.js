@@ -14,26 +14,23 @@ export const Pip = {
 };
 
 export class Card {
-	static stringify(card): string {
 
-	}
-		
 	static compare(card1, card2, trumpSuit, leadSuit): number {
-		if (card1.suit == card2.suit) {
+		if (card1.suit === card2.suit) {
 			return card1.pip - card2.pip;
 		}
 		else {
 			if (trumpSuit) {
-				if(card1.suit == trumpSuit)
+				if(card1.suit === trumpSuit)
 					return 1;
-				else if(card2.suit == trumpSuit)
+				else if(card2.suit === trumpSuit)
 					return -1;
 			}
 
 			if (leadSuit) {
-				if(card1.suit == leadSuit)
+				if(card1.suit === leadSuit)
 					return 1;
-				else if(card2.suit == leadSuit)
+				else if(card2.suit === leadSuit)
 					return -1;
 			}
 
@@ -81,12 +78,12 @@ export class Card {
 	}
 
 	static pipName(pip) {
-	  switch(pip) {
+		switch(pip) {
 			case Pip.Ace: return "A";
 			case Pip.King: return "K";
 			case Pip.Queen: return "Q";
 			case Pip.Jack: return "J";
 			default: return pip.toString();
-	  }
+		}
 	}
 }

@@ -1,11 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import Reflux from 'reflux';
 
 import {PlayerStore} from "../../stores/player-store";
-import {GameStore, GameActions} from "../../stores/game-store";
-import {GameState} from "../../model/game/game-state";
+import {GameStore} from "../../stores/game-store";
 import {Seat} from "../../model/core/seat";
 
 import {ControlBar} from "./control-bar.jsx";
@@ -53,7 +51,7 @@ export class Table extends React.Component {
 	render() {
 		console.log('rendering table');
 
-		let controlBar = <ControlBar actions={this.actions}/>
+		let controlBar = <ControlBar actions={this.actions}/>;
 
 		let players = Seat.all().map((seat) => {
 			return (
@@ -70,8 +68,8 @@ export class Table extends React.Component {
 			<TrickComponent board={this.game.currentBoard}/> :
 			<BiddingHistory board={this.game.currentBoard}/>;
 
-		let biddingBox = this.game.currentBoard.biddingHasEnded ? 
-			undefined : 
+		let biddingBox = this.game.currentBoard.biddingHasEnded ?
+			undefined :
 			<BiddingBox className="table-bidding-box" game={this.game}/>;
 
 		return (

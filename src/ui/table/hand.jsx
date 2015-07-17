@@ -14,7 +14,7 @@ export class HandComponent extends React.Component {
 	getAvailableCards() {
 		return this.props.board.hands[this.props.seat]
 			.filter((card) => !this.props.board.hasBeenPlayed(card))
-			.sort((c1,c2) => Card.compare(c1, c2, this.props.board.trumpSuit));
+			.sort((c1, c2) => Card.compare(c1, c2, this.props.board.trumpSuit));
 	}
 
 	playCard(card) {
@@ -26,7 +26,7 @@ export class HandComponent extends React.Component {
 			return (
 				<li className="hand-card" key={CardComponent.key(card)}>
 					<button className="hand-card-button"
-							  onClick={() => this.playCard(card)}>
+								onClick={() => this.playCard(card)}>
 						<CardComponent card={card}/>
 					</button>
 				</li>

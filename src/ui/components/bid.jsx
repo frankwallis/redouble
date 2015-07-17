@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import {BidType, BidSuit, Bid} from '../../model/core/bid';
+import {BidType, Bid} from '../../model/core/bid';
 
 export class BidComponent extends React.Component {
 
@@ -40,12 +40,12 @@ export class BidComponent extends React.Component {
 			case BidType.Redouble:
 				return <div className="bid-container">Redouble</div>;
 			default:
-				 throw new Error("unrecognised bid");
+				throw new Error("unrecognised bid");
 		}
 	}
 }
 
 BidComponent.propTypes = {
 	bid: React.PropTypes.object.isRequired
-}
+};
 

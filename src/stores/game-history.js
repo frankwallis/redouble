@@ -14,7 +14,7 @@ export class GameHistory {
 
 	push(game: Game) {
 		this.gameStates = this.gameStates.slice(0, this.currentGameIdx + 1).concat(game);
-		this.currentGameIdx = this.gameStates.length -1;
+		this.currentGameIdx = this.gameStates.length - 1;
 	}
 
 	current(): Game {
@@ -31,12 +31,12 @@ export class GameHistory {
 	}
 
 	forward() {
-		if (this.currentGameIdx < this.gameStates.length -1)
+		if (this.currentGameIdx < this.gameStates.length - 1)
 			this.currentGameIdx ++;
 	}
 
 	canForward() {
-		return (this.currentGameIdx < this.gameStates.length -1);
+		return (this.currentGameIdx < this.gameStates.length - 1);
 	}
 
 	jumpBack() {
@@ -44,8 +44,8 @@ export class GameHistory {
 		let playHasEnded = this.current().currentBoard.playHasEnded;
 
 		for(let idx = this.currentGameIdx; idx >= 0; idx --) {
-			if ((this.gameStates[idx].currentBoard.biddingHasEnded != biddingHasEnded) || 
-				 (this.gameStates[idx].currentBoard.playHasEnded != playHasEnded)) {
+			if ((this.gameStates[idx].currentBoard.biddingHasEnded !== biddingHasEnded) ||
+				(this.gameStates[idx].currentBoard.playHasEnded !== playHasEnded)) {
 				this.currentGameIdx = idx;
 				return;
 			}

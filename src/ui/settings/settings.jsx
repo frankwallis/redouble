@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import Reflux from 'reflux';
 
 import {PlayerStore, PlayerActions} from "../../stores/player-store";
 import {Seat} from "../../model/core/seat";
@@ -39,25 +38,27 @@ export class SettingsView extends React.Component {
 		console.log('rendering setings');
 
 		let players = Seat.all().map((seat) => {
-			return <li className="settings-player" key={seat}>
-				<h3 className="settings-player-header">{Seat.name(seat)}</h3>
-				<div className="settings-field">
-					<label className="settings-label"
-							 htmlFor={"name-input-" + Seat.name(seat)}>Name</label>
-					<input className="settings-input-name"
-							 type="text" id={"name-input-" + Seat.name(seat)}
-							 defaultValue={this.players[seat].name}
-							 onChange={(event) => this.handleChangeName(seat, event)}></input>
-				</div>
-				<div className="settings-field">
-					<label className="settings-label"
-							 htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
-					<input className="settings-input-human"
-							 type="checkbox" id={"human-input-" + Seat.name(seat)}
-							 defaultChecked={!this.players[seat].ishuman}
-							 onChange={(event) => this.handleChangeHuman(seat, event)}></input>
-				</div>
-			</li>
+			return (
+				<li className="settings-player" key={seat}>
+					<h3 className="settings-player-header">{Seat.name(seat)}</h3>
+					<div className="settings-field">
+						<label className="settings-label"
+									htmlFor={"name-input-" + Seat.name(seat)}>Name</label>
+						<input className="settings-input-name"
+									type="text" id={"name-input-" + Seat.name(seat)}
+									defaultValue={this.players[seat].name}
+									onChange={(event) => this.handleChangeName(seat, event)}></input>
+					</div>
+					<div className="settings-field">
+						<label className="settings-label"
+									htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
+						<input className="settings-input-human"
+									type="checkbox" id={"human-input-" + Seat.name(seat)}
+									defaultChecked={!this.players[seat].ishuman}
+									onChange={(event) => this.handleChangeHuman(seat, event)}></input>
+					</div>
+				</li>
+			);
 		});
 
 		return (

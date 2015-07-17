@@ -9,7 +9,7 @@ module.exports = function(options) {
 		files: [
 		// This shim adds .bind to PhantomJS
 		'./phantomjs-shim.js',
-		'../src/**/__tests__/*game-history*.js',
+		'../src/**/__tests__/*.js',
 		],
 
 		preprocessors: {
@@ -23,10 +23,10 @@ module.exports = function(options) {
 		reporters: ['mocha'],
 
 		plugins: [
-		'karma-webpack',
-		'karma-jasmine',
-		'karma-phantomjs-launcher',
-		'karma-mocha-reporter',
+			'karma-webpack',
+			'karma-jasmine',
+			'karma-phantomjs-launcher',
+			'karma-mocha-reporter',
 		],
 	};
 

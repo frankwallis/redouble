@@ -4,6 +4,7 @@ import React from 'react';
 import {CardComponent} from '../components/card.jsx';
 import {GameActions} from '../../stores/game-store';
 import {Card} from '../../model/core/card';
+import './hand.css';
 
 export class HandComponent extends React.Component {
 

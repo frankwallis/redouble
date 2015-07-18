@@ -4,6 +4,7 @@ import React from 'react';
 import {BidComponent} from '../components/bid.jsx';
 import {BidSuit, BidType} from '../../model/core/bid';
 import {GameActions} from '../../stores/game-store';
+import './bidding-box.css';
 
 export class BiddingBox extends React.Component {
 

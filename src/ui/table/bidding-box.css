@@ -6,7 +6,7 @@
 	overflow: hidden;
 }
 
-.bidding-box-button {
+button.bidding-box-button {
 	width: 100%;
 	padding: 0.1em;
 	background: transparent;

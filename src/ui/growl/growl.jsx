@@ -3,6 +3,7 @@
 import React from 'react';
 
 import {NotificationStore, NotificationActions} from "../../stores/notification-store";
+import './growl.css';
 
 /**
  * Component for displaying notifications from the

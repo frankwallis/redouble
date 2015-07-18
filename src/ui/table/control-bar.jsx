@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {GameActions} from '../../stores/game-store';
+import './control-bar.css';
 
 export class ControlBar extends React.Component {
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import {CardComponent} from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
+import './trick.css';
 
 export class TrickComponent extends React.Component {
 

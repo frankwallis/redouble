@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import './about.css';
 
 /**
  * Top-Level view for the about page

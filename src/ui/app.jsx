@@ -13,7 +13,9 @@ import {GrowlContainer} from './growl/growl.jsx';
 import 'normalize.css';
 import 'purecss';
 import 'font-awesome/css/font-awesome.css';
+
 import './app.css';
+import './navbar/navbar.css';
 
 export class App extends React.Component {
 	constructor(props) {

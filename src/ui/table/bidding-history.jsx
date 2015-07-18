@@ -3,7 +3,8 @@
 import React from 'react';
 
 import {BidComponent} from '../components/bid.jsx';
-import {Seat} from "../../model/core/seat";
+import {Seat} from '../../model/core/seat';
+import './bidding-history.css';
 
 export class BiddingHistory extends React.Component {
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {BidType, Bid} from '../../model/core/bid';
+import './bid.css';
 
 export class BidComponent extends React.Component {
 

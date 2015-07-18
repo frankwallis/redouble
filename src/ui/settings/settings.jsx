@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import {PlayerStore, PlayerActions} from "../../stores/player-store";
-import {Seat} from "../../model/core/seat";
+import {PlayerStore, PlayerActions} from '../../stores/player-store';
+import {Seat} from '../../model/core/seat';
+import './settings.css';
 
 /**
  * Top-Level view for the game settings

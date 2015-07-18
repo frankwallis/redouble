@@ -1,11 +1,10 @@
-
 .fill-parent {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 }
 
-.bidding-container {
+table.bidding-container {
 	background: #fafafa;
 	border-radius: .5em;
 	border: .3em solid #3B3738;

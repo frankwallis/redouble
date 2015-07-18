@@ -1,7 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import {Card} from "../../model/core/card";
+import {Card} from '../../model/core/card';
+import './card.css';
 
 export class CardComponent extends React.Component {
 

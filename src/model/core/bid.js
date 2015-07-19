@@ -12,7 +12,12 @@ export const BidSuit = {
 	}
 };
 
-export const BidType = { "NoBid": 1, "Call": 2, "Double": 3, "Redouble": 4 };
+export const BidType = {
+	NoBid: 1,
+	Call: 2,
+	Double: 3,
+	Redouble: 4
+};
 
 /*
 	interface Bid {

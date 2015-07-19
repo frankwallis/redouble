@@ -6,11 +6,11 @@ export const Seat = {
 	South: 3,
 	West: 4,
 
-	all: function() {
+	all() {
 		return [Seat.North, Seat.East, Seat.South, Seat.West];
 	},
 
-	name: function(seat) {
+	name(seat) {
 		switch(seat) {
 			case Seat.North:
 				return "north";
@@ -25,12 +25,12 @@ export const Seat = {
 		}
 	},
 
-	rotate: function(seat, count) {
+	rotate(seat, count) {
 		count = count || 0;
 		return ((seat + count - Seat.North) % 4) + Seat.North;
 	},
 
-	isPartner: function(seat1, seat2) {
+	isPartner(seat1, seat2) {
 		return (Seat.rotate(seat1, 2) === seat2);
 	}
 };

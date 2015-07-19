@@ -1,3 +1,3 @@
 module.exports = require('./webpack-config-builder')({
-	devtool: 'eval',
+	devtool: 'cheap-module-eval-source-map',
 });

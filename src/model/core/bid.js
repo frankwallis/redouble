@@ -1,6 +1,17 @@
 /* @flow */
 
-export const BidSuit = { "Clubs": 1, "Diamonds": 2, "Hearts": 3, "Spades": 4, "NoTrumps": 5 };
+export const BidSuit = {
+	Clubs: 1,
+	Diamonds: 2,
+	Hearts: 3,
+	Spades: 4,
+	NoTrumps: 5,
+
+	all() {
+		return [1, 2, 3, 4, 5];
+	}
+};
+
 export const BidType = { "NoBid": 1, "Call": 2, "Double": 3, "Redouble": 4 };
 
 /*

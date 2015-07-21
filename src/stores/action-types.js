@@ -1,0 +1,6 @@
+export const GAME_PUSH_STATE = "GAME_PUSH_STATE";
+
+export const PLAYER_UPDATE = "PLAYER_UPDATE";
+
+export const NOTIFY_CREATE = "NOTIFY_CREATE";
+export const NOTIFY_DISMISS = "NOTIFY_DISMISS";

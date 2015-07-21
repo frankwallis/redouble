@@ -9,11 +9,13 @@ module.exports = function(options) {
 		files: [
 			// This shim adds .bind to PhantomJS
 			'./phantomjs-shim.js',
-			'../src/**/__tests__/*.js',
+			'../src/ui/**/__tests__/*.js',
+			'../src/model/**/__tests__/*.js',
 		],
 
 		preprocessors: {
-			'../src/**/__tests__/*.js': ['webpack'],
+			'../src/ui/**/__tests__/*.js': ['webpack'],
+			'../src/model/**/__tests__/*.js': ['webpack'],
 		},
 
 		webpackMiddleware: {

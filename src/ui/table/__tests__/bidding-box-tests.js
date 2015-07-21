@@ -9,7 +9,7 @@ describe('Bidding Box', () => {
 
 	it('displays the right number of buttons', () => {
 		let game = new Game().dealBoard();
-		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
+		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={() => {}}/>);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
 		expect(buttons.length).toEqual(38);
@@ -21,11 +21,13 @@ describe('Bidding Box', () => {
 
 	it('makes a bid when a button is clicked', () => {
 		let game = new Game().dealBoard();
-		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game}/>);
+		let makeBidSpy = jasmine.createSpy();
+		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={makeBidSpy}/>);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
+		expect(makeBidSpy.calls.count()).toEqual(0);
 		TestUtils.Simulate.click(buttons[0]);
-		expect(GameActions.makeBid.mock.calls.length).toEqual(1);
+		expect(makeBidSpy.calls.count()).toEqual(1);
 	});
 
 });

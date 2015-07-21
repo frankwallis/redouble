@@ -12,7 +12,8 @@ describe('Hand Component', () => {
 
 	it('displays cards which are available', () => {
 		let game = new Game().dealBoard();
-		let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={() => {}}/>;
+		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
 		expect(buttons.length).toEqual(13);
@@ -20,7 +21,8 @@ describe('Hand Component', () => {
 
 	it('hides cards which have been played', () => {
 		let board = new Game().dealBoard(Seat.North).currentBoard;
-		let hand = TestUtils.renderIntoDocument(<HandComponent board={board} seat={Seat.East}/>);
+		let component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>
+		let hand = TestUtils.renderIntoDocument(component);
 
 		let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
 		expect(cards.length).toEqual(13);
@@ -33,7 +35,8 @@ describe('Hand Component', () => {
 
 		expect(board.nextPlayer).toEqual(Seat.East);
 		board = board.playCard(board.hands[Seat.East][0]);
-		hand = TestUtils.renderIntoDocument(<HandComponent board={board} seat={Seat.East}/>);
+		component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>
+		hand = TestUtils.renderIntoDocument(component);
 
 		cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
 		expect(cards.length).toEqual(12);
@@ -41,7 +44,8 @@ describe('Hand Component', () => {
 
 	it('sorts the cards', () => {
 		let game = new Game().dealBoard();
-		let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={() => {}}/>;
+		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
 		expect(buttons.length).toEqual(13);
@@ -58,12 +62,14 @@ describe('Hand Component', () => {
 
 	it('plays a card when a button is clicked', () => {
 		let game = new Game().dealBoard();
-		let hand = TestUtils.renderIntoDocument(<HandComponent board={game.currentBoard} seat={Seat.North}/>);
+		let playCardSpy = jasmine.createSpy('Play Card Spy');
+		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={playCardSpy}/>;
+		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
 		expect(buttons.length).toEqual(13);
-		expect(GameActions.playCard.mock.calls.length).toBe(0);
+		expect(playCardSpy.calls.count()).toBe(0);
 		TestUtils.Simulate.click(buttons[0]);
-		expect(GameActions.playCard.mock.calls.length).toBe(1);
+		expect(playCardSpy.calls.count()).toBe(1);
 	});
 });

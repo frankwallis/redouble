@@ -1,38 +1,41 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
-import {NotificationStore, NotificationActions} from "../../stores/notification-store";
+import {connect} from 'redux/react';
+import {dismissNotification} from "../../stores/notification-actions";
+
 import './growl.css';
 
 /**
  * Component for displaying notifications from the
  * NotificationStore as growls
  */
-export class GrowlContainer extends React.Component {
+@connect(state => {
+	return {
+		notifications: state.notificationStore
+	};
+})
+export class GrowlContainer extends Component {
 
 	constructor(props) {
 		super(props);
 	}
 
-	componentDidMount() {
-		this.unsubscribe = NotificationStore.listen(() => {
-			this.forceUpdate();
-		});
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
-	}
+	static propTypes = {
+		dispatch: PropTypes.func.isRequired,
+		notifications: PropTypes.array.isRequired
+  	};
 
 	handleResponse(id, response) {
-		NotificationActions.dismiss({id: id, response: response});
+		let action = dismissNotification(id, response);
+		this.props.dispatch(action);
 	}
 
 	render() {
 		console.log('rendering growls');
 
-		let growls = NotificationStore.notifications.map((notification) => {
+		let growls = this.props.notifications.map((notification) => {
 			let buttons = notification.buttons.map((button) => {
 				return <a onClick={() => this.handleResponse(notification.id, button)}>{button}</a>;
 			});

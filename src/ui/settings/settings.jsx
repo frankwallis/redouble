@@ -1,38 +1,39 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'redux/react';
 
-import {PlayerStore, PlayerActions} from '../../stores/player-store';
+import {updatePlayer} from '../../stores/player-actions';
 import {Seat} from '../../model/core/seat';
 import './settings.css';
 
 /**
  * Top-Level view for the game settings
  */
-export class SettingsView extends React.Component {
+@connect(state => {
+	return {
+		players: state.playerStore
+	};
+})
+export class SettingsView extends Component {
 
 	constructor(props) {
 		super(props);
-		this.players = PlayerStore.players;
 	}
 
-	componentDidMount() {
-		this.unsubscribePlayers = PlayerStore.listen((players) => {
-			this.players = players;
-			this.forceUpdate();
-		});
-	}
-
-	componentWillUnmount() {
-		this.unsubscribePlayers();
-	}
+	static propTypes = {
+		dispatch: PropTypes.func.isRequired,
+		players: PropTypes.object.isRequired
+  	};
 
 	handleChangeName(seat, event) {
-		PlayerActions.updatePlayer(seat, {name: event.target.value});
+		let action = updatePlayer(seat, {name: event.target.value});
+		this.props.dispatch(action);
 	}
 
 	handleChangeHuman(seat, event) {
-		PlayerActions.updatePlayer(seat, {ishuman: !event.target.checked});
+		let action = updatePlayer(seat, {ishuman: !event.target.checked});
+		this.props.dispatch(action);
 	}
 
 	render() {
@@ -47,7 +48,7 @@ export class SettingsView extends React.Component {
 									htmlFor={"name-input-" + Seat.name(seat)}>Name</label>
 						<input className="settings-input-name"
 									type="text" id={"name-input-" + Seat.name(seat)}
-									defaultValue={this.players[seat].name}
+									defaultValue={this.props.players[seat].name}
 									onChange={(event) => this.handleChangeName(seat, event)}></input>
 					</div>
 					<div className="settings-field">
@@ -55,7 +56,7 @@ export class SettingsView extends React.Component {
 									htmlFor={"human-input-" + Seat.name(seat)}>Automatic</label>
 						<input className="settings-input-human"
 									type="checkbox" id={"human-input-" + Seat.name(seat)}
-									defaultChecked={!this.players[seat].ishuman}
+									defaultChecked={!this.props.players[seat].ishuman}
 									onChange={(event) => this.handleChangeHuman(seat, event)}></input>
 					</div>
 				</li>

@@ -1,10 +1,12 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
-import {PlayerStore} from "../../stores/player-store";
-import {GameStore} from "../../stores/game-store";
+import {connect} from 'redux/react';
+import {bindActionCreators} from 'redux';
+
 import {Seat} from "../../model/core/seat";
+import {Game} from "../../model/game/game-state";
 
 import {ControlBar} from "./control-bar.jsx";
 import {HandComponent} from "./hand.jsx";
@@ -12,67 +14,54 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
+import {playCard, makeBid} from "../../stores/game-actions";
+
 import './table.css';
 
 /**
  * Top-Level View for displaying the current game from the GameStore
  */
-export class Table extends React.Component {
+@connect(state => {
+	return {
+		game: new Game(state.gameStore),
+		players: state.playerStore
+	};
+})
+export class Table extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.players = PlayerStore.players;
-		this.game = GameStore.currentState().game;
-		this.actions = GameStore.currentState().actions;
 	}
 
-	componentDidMount() {
-		this.unsubscribePlayers = PlayerStore.listen((players) => {
-			this.players = players;
-			this.forceUpdate();
-		}, (players) => {
-			this.players = players;
-		});
-
-		this.unsubscribeGame = GameStore.listen((state) => {
-			this.game = state.game;
-			this.actions = state.actions;
-			this.forceUpdate();
-		}, (state) => {
-			this.game = state.game;
-			this.actions = state.actions;
-		});
-	}
-
-	componentWillUnmount() {
-		this.unsubscribePlayers();
-		this.unsubscribeGame();
-	}
+	static propTypes = {
+		game: PropTypes.object.isRequired,
+		players: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+  	};
 
 	render() {
-		console.log('rendering table');
-
-		let controlBar = <ControlBar actions={this.actions}/>;
+		let controlBar = <div/>;//<ControlBar actions={this.actions}/>;
 
 		let players = Seat.all().map((seat) => {
 			return (
 				<section className={"table-edge-" + Seat.name(seat)} key={seat}>
-					<header className="table-player-name">{this.players[seat].name}</header>
+					<header className="table-player-name">{this.props.players[seat].name}</header>
 					<div className={"table-hand-" + Seat.name(seat)}>
-						<HandComponent seat={seat} board={this.game.currentBoard}/>
+						<HandComponent seat={seat} board={this.props.game.currentBoard}
+							{...bindActionCreators({playCard}, this.props.dispatch)} />
 					</div>
 				</section>
 			);
 		});
 
-		let board = this.game.currentBoard.biddingHasEnded ?
-			<TrickComponent board={this.game.currentBoard}/> :
-			<BiddingHistory board={this.game.currentBoard}/>;
+		let board = this.props.game.currentBoard.biddingHasEnded ?
+			<TrickComponent board={this.props.game.currentBoard}/> :
+			<BiddingHistory board={this.props.game.currentBoard}/>;
 
-		let biddingBox = this.game.currentBoard.biddingHasEnded ?
+		let biddingBox = this.props.game.currentBoard.biddingHasEnded ?
 			undefined :
-			<BiddingBox className="table-bidding-box" game={this.game}/>;
+			<BiddingBox className="table-bidding-box" game={this.props.game}
+				{...bindActionCreators({makeBid}, this.props.dispatch)} />;
 
 		return (
 			<div className="bridge-table">

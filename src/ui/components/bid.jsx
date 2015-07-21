@@ -10,6 +10,10 @@ export class BidComponent extends React.Component {
 		super(props);
 	}
 
+	static propTypes = {
+		bid: React.PropTypes.object.isRequired
+	};
+
 	static key(bid) {
 		switch(bid.type) {
 			case BidType.NoBid:
@@ -45,8 +49,3 @@ export class BidComponent extends React.Component {
 		}
 	}
 }
-
-BidComponent.propTypes = {
-	bid: React.PropTypes.object.isRequired
-};
-

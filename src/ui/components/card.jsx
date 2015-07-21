@@ -10,6 +10,10 @@ export class CardComponent extends React.Component {
 		super(props);
 	}
 
+	static propTypes = {
+		card: React.PropTypes.object
+	};
+
 	static key(card) {
 		return Card.suitName(card.suit) + Card.pipName(card.pip);
 	}
@@ -35,8 +39,3 @@ export class CardComponent extends React.Component {
 		);
 	}
 }
-
-CardComponent.propTypes = {
-	card: React.PropTypes.object
-};
-

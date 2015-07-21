@@ -1,16 +1,21 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+
 import {BidComponent} from '../components/bid.jsx';
 import {Bid, BidSuit, BidType} from '../../model/core/bid';
-import {GameActions} from '../../stores/game-store';
+
 import './bidding-box.css';
 
-export class BiddingBox extends React.Component {
+export class BiddingBox extends Component {
 
 	constructor(props) {
 		super(props);
 	}
+
+	static propTypes = {
+		makeBid: PropTypes.func.isRequired
+  	};
 
 	bidButton(bid) {
 		let bidClassName = "bidding-box-button pure-button";
@@ -21,15 +26,10 @@ export class BiddingBox extends React.Component {
 		return (
 			<button className={bidClassName}
 						key={Bid.stringify(bid)}
-						onClick={() => this.makeBid(bid)}>
+						onClick={() => this.props.makeBid(bid)}>
 				<BidComponent bid={bid}/>
 			</button>
 		);
-	}
-
-	makeBid(bid) {
-		console.log('in makeBid');
-		GameActions.makeBid(bid);
 	}
 
 	render() {

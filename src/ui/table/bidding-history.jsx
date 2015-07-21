@@ -1,16 +1,20 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import {BidComponent} from '../components/bid.jsx';
 import {Seat} from '../../model/core/seat';
 import './bidding-history.css';
 
-export class BiddingHistory extends React.Component {
+export class BiddingHistory extends Component {
 
 	constructor(props) {
 		super(props);
 	}
+
+	static propTypes = {
+		board: PropTypes.object.isRequired
+  	};
 
 	render() {
 		let headings = [];

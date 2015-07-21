@@ -6,7 +6,7 @@ import {validateBid, validateCard} from '../validators';
 
 describe('Validators', () => {
 	describe('validateBid', () => {
-		it.only('checks the range', () => {
+		it('checks the range', () => {
 			let game = new Game()
 				.dealBoard();
 
@@ -85,7 +85,7 @@ describe('Validators', () => {
 
 	describe('validateCard', () => {
 		let game = undefined;
-		
+
 		beforeEach(() => {
 			game = new Game()
 				.dealBoard(Seat.South)
@@ -94,23 +94,23 @@ describe('Validators', () => {
 				.makeBid(Bid.create("no bid"))
 				.makeBid(Bid.create("no bid"));
 		});
-		
+
 		it('checks the card is from the right hand', () => {
 			expect(validateCard(game.currentBoard.hands[Seat.West][0], game.currentBoard)).toBeUndefined();
 			expect(validateCard(game.currentBoard.hands[Seat.East][0], game.currentBoard)).toBeDefined();
-						
+
 			game = game.playCard(game.currentBoard.hands[Seat.West][0]);
-			
+
 			/* play from wrong hand but correct suit */
 			let nextCard = game.currentBoard.hands[Seat.East].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
-			
+
 			if (!nextCard)
 				nextCard = game.currentBoard.hands[Seat.South].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
-				
+
 			expect(validateCard(nextCard, game.currentBoard)).toBeDefined();
-			
+
 			/* play from right hand and correct suit */
-			nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];         
+			nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
 
 			if (nextCard) {
 				expect(validateCard(nextCard, game.currentBoard)).toBeUndefined();
@@ -126,24 +126,24 @@ describe('Validators', () => {
 			if ((trick.length > 0) && (trick.length < 4)) {
 				let lead = trick[0].card;
 				let followers = available.filter((card) => (card.suit == lead.suit));
-			
+
 				if (followers.length > 0)
 					return followers[0];
 			}
-			
+
 			if (orAny)
 				return available[0];
 			else
 				return undefined;
 		}
-		
+
 		it('checks the card has not already been played', () => {
 			/* play a trick */
 			let trick = {};
 
 			trick[Seat.West] = followSuit(game.currentBoard, true);
 			game = game.playCard(trick[Seat.West]);
-			
+
 			trick[Seat.North] = followSuit(game.currentBoard, true);
 			game = game.playCard(trick[Seat.North]);
 
@@ -152,29 +152,29 @@ describe('Validators', () => {
 
 			trick[Seat.South] = followSuit(game.currentBoard, true);
 			game = game.playCard(trick[Seat.South]);
-			
+
 			/* have the winner play the same card */
 			expect(validateCard(trick[game.currentBoard.nextPlayer], game.currentBoard)).toBeDefined();
-			
+
 			/* have the winner play a different card */
 			expect(validateCard(followSuit(game.currentBoard, true), game.currentBoard)).toBeUndefined();
 			expect(validateCard(trick[game.currentBoard.nextPlayer], game.currentBoard)).toBeDefined();
 		});
-		
+
 		it('checks the card is following the suit lead', () => {
 			/* lead a card */
 			let lead = game.currentBoard.hands[Seat.West][0];
-			
+
 			/* try and play wrong suit */
 			let nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit != lead.suit)[0];
 			expect(validateCard(nextCard, game.currentBoard)).toBeDefined();
 		});
-		
+
 		it('allows another suit when player is void', () => {
 			/* just play a board */
 			while(!game.currentBoard.playHasEnded) {
 				let nextCard = followSuit(game.currentBoard);
-				
+
 				if (!nextCard)
 					nextCard = game.currentBoard.hands[game.currentBoard.nextPlayer].filter((card) => !game.currentBoard.hasBeenPlayed(card))[0];
 

@@ -15,6 +15,10 @@ export class Game {
 		this.gameState = gameState || { boards: [] };
 	}
 
+	getState() {
+		return this.gameState;
+	}
+
 	get boards() {
 		return this.gameState.boards;
 	}

@@ -59,6 +59,16 @@ let routes = (
 	</Route>
 );
 
+import {createRedux} from 'redux';
+import {Provider} from 'redux/react';
+import stores from '../stores/index';
+
+const redux = createRedux(stores);
+
 Router.run(routes, Router.HistoryLocation, function (Handler) {
-	React.render(<Handler/>, document.body);
+	React.render(
+		<Provider redux={redux}>
+        {() => <Handler/>}
+      </Provider>,
+      document.body);
 });

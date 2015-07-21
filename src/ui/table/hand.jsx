@@ -1,16 +1,22 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+
 import {CardComponent} from '../components/card.jsx';
-import {GameActions} from '../../stores/game-store';
 import {Card} from '../../model/core/card';
 import './hand.css';
 
-export class HandComponent extends React.Component {
+export class HandComponent extends Component {
 
 	constructor(props) {
 		super(props);
 	}
+
+	static propTypes = {
+		playCard: PropTypes.func.isRequired,
+		board: PropTypes.object.isRequired,
+		seat:  PropTypes.number.isRequired
+  	};
 
 	getAvailableCards() {
 		return this.props.board.hands[this.props.seat]
@@ -18,16 +24,12 @@ export class HandComponent extends React.Component {
 			.sort((c1, c2) => Card.compare(c1, c2, this.props.board.trumpSuit));
 	}
 
-	playCard(card) {
-		GameActions.playCard(card);
-	}
-
 	render() {
 		let cards = this.getAvailableCards().map((card) => {
 			return (
 				<li className="hand-card" key={CardComponent.key(card)}>
 					<button className="hand-card-button"
-								onClick={() => this.playCard(card)}>
+								onClick={() => this.props.playCard(card)}>
 						<CardComponent card={card}/>
 					</button>
 				</li>

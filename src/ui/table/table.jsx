@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 
 import {Seat} from "../../model/core/seat";
 import {Game} from "../../model/game/game-state";
+import {GameHistory} from "../../model/game/game-history";
 
 import {ControlBar} from "./control-bar.jsx";
 import {HandComponent} from "./hand.jsx";
@@ -14,7 +15,10 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
-import {playCard, makeBid, newGame} from "../../stores/game-actions";
+import {
+	playCard, makeBid, newGame,
+	back, forward, jumpBack, pause, resume
+} from "../../stores/game-actions";
 
 import './table.css';
 
@@ -23,7 +27,7 @@ import './table.css';
  */
 @connect(state => {
 	return {
-		game: new Game(state.gameStore.game),
+		game: state.gameStore,
 		players: state.playerStore
 	};
 })
@@ -44,27 +48,34 @@ export class Table extends Component {
   	}
 
 	render() {
-		let controlBar = <div/>;//<ControlBar actions={this.actions}/>;
+		let history = new GameHistory(this.props.game.history);
+		let game = new Game(history.currentGameState());
+
+		let controlBar = (
+			<ControlBar {...bindActionCreators({back, forward, jumpBack, pause, resume}, this.props.dispatch)}
+				canBack={history.canBack()} canForward={history.canForward()} canJumpBack={history.canJumpBack()}
+				canPause={this.props.game.autoPlay} canResume={!this.props.game.autoPlay} />
+		);
 
 		let players = Seat.all().map((seat) => {
 			return (
 				<section className={"table-edge-" + Seat.name(seat)} key={seat}>
 					<header className="table-player-name">{this.props.players[seat].name}</header>
 					<div className={"table-hand-" + Seat.name(seat)}>
-						<HandComponent seat={seat} board={this.props.game.currentBoard}
+						<HandComponent seat={seat} board={game.currentBoard}
 							{...bindActionCreators({playCard}, this.props.dispatch)} />
 					</div>
 				</section>
 			);
 		});
 
-		let board = this.props.game.currentBoard.biddingHasEnded ?
-			<TrickComponent board={this.props.game.currentBoard}/> :
-			<BiddingHistory board={this.props.game.currentBoard}/>;
+		let board = game.currentBoard.biddingHasEnded ?
+			<TrickComponent board={game.currentBoard}/> :
+			<BiddingHistory board={game.currentBoard}/>;
 
-		let biddingBox = this.props.game.currentBoard.biddingHasEnded ?
+		let biddingBox = game.currentBoard.biddingHasEnded ?
 			undefined :
-			<BiddingBox className="table-bidding-box" game={this.props.game}
+			<BiddingBox className="table-bidding-box" game={game}
 				{...bindActionCreators({makeBid}, this.props.dispatch)} />;
 
 		return (

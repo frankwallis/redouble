@@ -1,14 +1,26 @@
 /* @flow */
 
-import React from 'react';
-import {GameActions} from '../../stores/game-store';
+import React, {Component, PropTypes} from 'react';
 import './control-bar.css';
 
-export class ControlBar extends React.Component {
+export class ControlBar extends Component {
 
 	constructor(props) {
 		super(props);
 	}
+
+	static propTypes = {
+		back: PropTypes.func.isRequired,
+		forward: PropTypes.func.isRequired,
+		jumpBack: PropTypes.func.isRequired,
+		pause: PropTypes.func.isRequired,
+		resume: PropTypes.func.isRequired,
+		canBack: PropTypes.bool.isRequired,
+		canForward: PropTypes.bool.isRequired,
+		canJumpBack: PropTypes.bool.isRequired,
+		canPause: PropTypes.bool.isRequired,
+		canResume: PropTypes.bool.isRequired
+	};
 
 	barButton(action, className, enabled) {
 		className = "control-bar-button " + className;
@@ -27,11 +39,11 @@ export class ControlBar extends React.Component {
 	render() {
 		console.log('rendering control-bar');
 		let buttons = [
-			this.barButton(GameActions.jumpBack, "btn-jump-back", this.props.actions.canJumpBack),
-			this.barButton(GameActions.back, "btn-back", this.props.actions.canBack),
-			this.barButton(GameActions.resume, "btn-resume", this.props.actions.canResume),
-			this.barButton(GameActions.pause, "btn-pause", this.props.actions.canPause),
-			this.barButton(GameActions.forward, "btn-forward", this.props.actions.canForward)
+			this.barButton(this.props.jumpBack, "btn-jump-back", this.props.canJumpBack),
+			this.barButton(this.props.back, "btn-back", this.props.canBack),
+			this.barButton(this.props.resume, "btn-resume", this.props.canResume),
+			this.barButton(this.props.pause, "btn-pause", this.props.canPause),
+			this.barButton(this.props.forward, "btn-forward", this.props.canForward)
 		];
 
 		let buttonItems = buttons.map((button, idx) => <li className="control-bar-item" key={idx}>{button}</li>);
@@ -43,7 +55,3 @@ export class ControlBar extends React.Component {
 		);
 	}
 }
-
-ControlBar.propTypes = {
-	actions: React.PropTypes.object.isRequired
-};

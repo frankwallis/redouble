@@ -1,11 +1,17 @@
 
 import {Game} from "../model/game/game-state";
+import {GameHistory} from "../model/game/game-history";
+
 import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 import {validateBid, validateCard} from "../model/game/validators";
 import {notifyError} from "./notification-actions";
-import {GAME_PUSH_STATE} from "./action-types";
+
+import {
+	GAME_PUSH_STATE, GAME_BACK, GAME_FORWARD, GAME_JUMP_BACK,
+	GAME_PAUSE, GAME_RESUME
+} from "./action-types";
 
 let cardplayStrategy = new CardplayStrategy();
 let biddingStrategy = new BiddingStrategy();
@@ -22,13 +28,14 @@ export function newGame() {
 export function playCard(card) {
 	return (dispatch, getState) => {
 		let gameStore = getState().gameStore;
-		let game = new Game(gameStore.game);
+		let history = new GameHistory(gameStore.history);
+		let game = new Game(history.currentGameState());
 		let err = validateCard(card, game.currentBoard);
 
 		if (!err) {
 			let newgame = game.playCard(card);
 			dispatch(pushState(newgame.getState()));
-			scheduleAutoPlay(gameStore.sequence + 1, dispatch, getState);
+			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
 		}
 		else {
 			dispatch(notifyError({
@@ -42,13 +49,14 @@ export function playCard(card) {
 export function makeBid(bid) {
 	return (dispatch, getState) => {
 		let gameStore = getState().gameStore;
-		let game = new Game(gameStore.game);
+		let history = new GameHistory(gameStore.history);
+		let game = new Game(history.currentGameState());
 		let err = validateBid(bid, game.currentBoard);
 
 		if (!err) {
 			let newgame = game.makeBid(bid);
 			dispatch(pushState(newgame.getState()));
-			scheduleAutoPlay(gameStore.sequence + 1, dispatch, getState);
+			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
 		}
 		else {
 			dispatch(notifyError({
@@ -61,11 +69,13 @@ export function makeBid(bid) {
 
 function scheduleAutoPlay(forSequence, dispatch, getState) {
 	setTimeout(() => {
-		let players = getState().playerStore;
 		let sequence = getState().gameStore.sequence;
-		let game = new Game(getState().gameStore.game);
 
 		if (sequence === forSequence) {
+			let players = getState().playerStore;
+			let history = new GameHistory(getState().gameStore.history);
+			let game = new Game(history.currentGameState());
+
 			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
 				if (game.currentBoard.biddingHasEnded) {
 					dispatch(playCard(cardplayStrategy.getCard(game)));
@@ -80,7 +90,29 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 	}, 2000);
 }
 
-export function pushState(state) {
-	let type = GAME_PUSH_STATE;
-	return { type, state };
+function pushState(state) {
+	return { type: GAME_PUSH_STATE, state };
+}
+
+export function back() {
+	return { type: GAME_BACK };
+}
+
+export function forward(state) {
+	return { type: GAME_FORWARD };
+}
+
+export function jumpBack(state) {
+	return { type: GAME_JUMP_BACK };
+}
+
+export function pause() {
+	return { type: GAME_PAUSE };
+}
+
+export function resume() {
+	return (dispatch, getState) => {
+		dispatch({ type: GAME_RESUME });
+		scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
+	};
 }

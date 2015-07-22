@@ -7,7 +7,7 @@ import {Board} from "./board-state";
 
 /**
  * Helper class for analysing game-state.
- * This class is designed to be immutable from the outside
+ * Immutable
  */
 export class Game {
 

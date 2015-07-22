@@ -40,13 +40,19 @@ export function notify(opts) {
 	notification.source = opts.source;
 	notification.type = opts.type;
 	notification.title = opts.title;
-	notification.timeout = opts.timeout || 20000;
+	notification.timeout = opts.timeout || 5000;
 	notification.message = opts.message;
 	notification.buttons = opts.buttons || [];
 	notification.defaultButton = opts.defaultButton;
 
-	let type = NOTIFY_CREATE;
-	return { type, notification };
+	return (dispatch) => {
+		dispatch({ type: NOTIFY_CREATE, notification });
+
+		if (notification.timeout) {
+			setTimeout(() => dispatch(dismissNotification(notification.id)),
+				notification.timeout);
+		}
+	}
 }
 
 export function dismissNotification(id) {

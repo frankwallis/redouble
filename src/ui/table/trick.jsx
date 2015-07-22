@@ -1,6 +1,7 @@
 /* @flow */
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+
 import {CardComponent} from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
 import './trick.css';
@@ -10,6 +11,10 @@ export class TrickComponent extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
+	static propTypes = {
+		board: PropTypes.object.isRequired
+  	};
 
 	getCard(seat: Seat) {
 		let card;

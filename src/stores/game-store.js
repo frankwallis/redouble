@@ -1,12 +1,18 @@
 import {GAME_PUSH_STATE} from "./action-types";
 import {Game} from "../model/game/game-state";
 
-let initialState = new Game().newBoard().getState();
+let initialState = {
+	game: new Game().newBoard().getState(),
+	sequence: 0
+}
 
 export default function gameStore(state = initialState, action) {
 	switch (action.type) {
 		case GAME_PUSH_STATE:
-			return action.state;
+			return {
+				game: action.state,
+				sequence: state.sequence + 1
+			};
 		default:
 			return state;
 	}

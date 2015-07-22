@@ -6,12 +6,8 @@ export class CardplayStrategy {
 
 	constructor() {}
 
-	getCard() {
-		let game = new Game(this._gameState);
-		return Promise.resolve(game.currentBoard.legalCards[0]);
-	}
-
-	updateGameState(gameState) {
-		this._gameState = gameState;
+	getCard(gameState) {
+		let game = new Game(gameState);
+		return game.currentBoard.legalCards[0];
 	}
 }

@@ -14,7 +14,7 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
-import {playCard, makeBid} from "../../stores/game-actions";
+import {playCard, makeBid, newGame} from "../../stores/game-actions";
 
 import './table.css';
 
@@ -23,7 +23,7 @@ import './table.css';
  */
 @connect(state => {
 	return {
-		game: new Game(state.gameStore),
+		game: new Game(state.gameStore.game),
 		players: state.playerStore
 	};
 })
@@ -38,6 +38,10 @@ export class Table extends Component {
 		players: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired
   	};
+
+  	componentWillMount() {
+  		this.props.dispatch(newGame());
+  	}
 
 	render() {
 		let controlBar = <div/>;//<ControlBar actions={this.actions}/>;

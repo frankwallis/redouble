@@ -16,7 +16,7 @@ export class Board {
 		this.boardState = boardState;
 	}
 
-	// TODO - create -> hydrate
+	// TODO - create -> hydrate?
 	static create(dealer, hands, bids, cards) {
 		dealer = dealer || Seat.North;
 
@@ -239,13 +239,8 @@ export class Board {
 
 	/**
 	 * Called in response to a player playing a card.
-	 * If the bid is valid returns the new state-helper,
-	 * otherwise an exception is thrown
 	 */
 	makeBid(bid: Bid): Board {
-		let err = validateBid(bid, this);
-		if (err) throw err;
-
 		let newstate = this.clone();
 		newstate.boardState.bids = newstate.boardState.bids.concat(bid);
 		return newstate;
@@ -253,13 +248,8 @@ export class Board {
 
 	/**
 	 * Called in response to a player making a bid.
-	 * If the card is valid returns the new state-helper,
-	 * otherwise an exception is thrown
 	 */
 	playCard(card: Card): Board {
-		let err = validateCard(card, this);
-		if (err) throw err;
-
 		let newstate = this.clone();
 		newstate.boardState.cards = newstate.boardState.cards.concat({"seat": this.nextPlayer, "card": card });
 		return newstate;

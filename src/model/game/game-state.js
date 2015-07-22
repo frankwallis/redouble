@@ -42,7 +42,7 @@ export class Game {
 	 */
 	newBoard(dealer, handlist, bids, cards): Game {
 		let board = Board.create(dealer, handlist, bids, cards);
-		let boards = this.boards.slice(0).concat(board);
+		let boards = this.boards.concat(board);
 		return new Game({boards});
 	}
 

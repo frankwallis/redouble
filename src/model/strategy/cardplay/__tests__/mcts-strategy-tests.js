@@ -1,8 +1,7 @@
 import {CardplayStrategy} from '../mcts-strategy';
 import {Game} from '../../../game/game-state';
 import {Board} from '../../../game/board-state';
-import {Bid, BidType, BidSuit} from '../../../core/bid';
-import {Card, Pip, Suit} from '../../../core/card';
+import {Bid} from '../../../core/bid';
 import {Deck} from '../../../core/deck';
 import {Seat} from '../../../core/seat';
 
@@ -35,7 +34,7 @@ describe('Cardplay Strategy', () => {
 			let strategy = new CardplayStrategy();
 			strategy.updateGameState(game.gameState);
 			strategy.visit(20);
-			let card = strategy.getCard();
+			strategy.getCard();
 
 			var node = strategy.getRootNode(new Board(game.currentBoard));
 			expect(node.children.length).toEqual(13);
@@ -80,10 +79,11 @@ describe('Cardplay Strategy', () => {
 		it('Bond beats Drax', () => {
 			let game = new Game().newBoard(
 				Seat.West,
-				Deck.rig(Seat.West, ["QD", "8D", "7D", "6D", "5D", "4D", "3D", "2D", "AC", "QC", "TC", "8C", "4C"],
-										  ["6S", "5S", "4S", "3S", "2S", "TH", "9H", "8H", "7H", "2H", "JD", "TD", "9D"],
-										  ["TS", "9S", "8S", "7S", "6H", "5H", "4H", "3H", "7C", "6C", "5C", "3C", "2C"],
-										  ["AS", "KS", "QS", "JS", "AH", "KH", "QH", "JH", "AD", "KD", "KC", "JC", "9C"]),
+				Deck.rig(Seat.West,
+					["QD", "8D", "7D", "6D", "5D", "4D", "3D", "2D", "AC", "QC", "TC", "8C", "4C"],
+					["6S", "5S", "4S", "3S", "2S", "TH", "9H", "8H", "7H", "2H", "JD", "TD", "9D"],
+					["TS", "9S", "8S", "7S", "6H", "5H", "4H", "3H", "7C", "6C", "5C", "3C", "2C"],
+					["AS", "KS", "QS", "JS", "AH", "KH", "QH", "JH", "AD", "KD", "KC", "JC", "9C"]),
 				Bid.createAll("7C", "no bid", "no bid", "double", "redouble", "no bid", "no bid", "no bid")
 			);
 

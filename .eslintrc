@@ -14,10 +14,14 @@
 		"no-underscore-dangle": 0,
 		"no-console": 0,
 		"space-unary-ops": 0,
-		"curly": 0
+		"curly": 0,
+		"no-use-before-define": 0,
+		"react/jsx-uses-react": 1
 	},
 	"globals": {
 		"expect": true,
+		"jasmine": true,
+		"global": true
 	},
 	"plugins": [
 		"react"

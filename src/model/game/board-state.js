@@ -4,7 +4,6 @@ import {Deck} from "../core/deck";
 import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card} from "../core/card";
-import {validateBid, validateCard} from "./validators";
 
 /**
  * Helper class for analysing board-state.

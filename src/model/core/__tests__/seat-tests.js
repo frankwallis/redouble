@@ -2,7 +2,7 @@ import {Seat} from '../seat';
 
 describe("Seat", () => {
 
-	 describe("rotate", () => {
+	describe("rotate", () => {
 		it("rotates through all the seats", () => {
 			let seat = Seat.South;
 			seat = Seat.rotate(seat, 1);
@@ -20,15 +20,15 @@ describe("Seat", () => {
 			seat = Seat.rotate(seat, 4001);
 			expect(seat).toBe(Seat.West);
 		});
-	 });
+	});
 
-	 describe("isPartner", () => {
+	describe("isPartner", () => {
 		it("knows the partnerships", () => {
-		  expect(Seat.isPartner(Seat.West, Seat.East)).toBeTruthy();
-		  expect(Seat.isPartner(Seat.North, Seat.South)).toBeTruthy();
-		  expect(Seat.isPartner(Seat.West, Seat.South)).toBeFalsy();
-		  expect(Seat.isPartner(Seat.North, Seat.West)).toBeFalsy();
+			expect(Seat.isPartner(Seat.West, Seat.East)).toBeTruthy();
+			expect(Seat.isPartner(Seat.North, Seat.South)).toBeTruthy();
+			expect(Seat.isPartner(Seat.West, Seat.South)).toBeFalsy();
+			expect(Seat.isPartner(Seat.North, Seat.West)).toBeFalsy();
 		});
-	 });
+	});
 
 });

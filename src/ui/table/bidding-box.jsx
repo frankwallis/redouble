@@ -15,7 +15,7 @@ export class BiddingBox extends Component {
 
 	static propTypes = {
 		makeBid: PropTypes.func.isRequired
-  	};
+	};
 
 	bidButton(bid) {
 		let bidClassName = "bidding-box-button pure-button";
@@ -52,12 +52,12 @@ export class BiddingBox extends Component {
 
 		/* and wrap each row with a div */
 		rows = rows.map((row, idx) => {
-         return (
-            <div key={"row" + idx} className="bidding-box-row">
-               {row}
-            </div>
-         );
-      });
+			return (
+				<div key={"row" + idx} className="bidding-box-row">
+					{row}
+				</div>
+			);
+		});
 
 		return (
 			<div className="bidding-box-container">

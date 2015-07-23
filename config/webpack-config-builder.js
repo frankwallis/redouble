@@ -8,7 +8,7 @@ function extractForProduction(loaders) {
 }
 
 module.exports = function(options) {
-	options.lint = false;//fs.existsSync(__dirname + '/../.eslintrc') && (options.lint !== false);
+	options.lint = fs.existsSync(__dirname + '/../.eslintrc') && (options.lint !== false);
 
 	var localIdentName = options.production ? '[hash:base64]' : '[path]-[local]-[hash:base64:5]';
 	var cssLoaders = 'style!css?localIdentName=' + localIdentName + '!autoprefixer?browsers=last 2 versions';

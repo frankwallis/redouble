@@ -25,7 +25,7 @@ export class GrowlContainer extends Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired,
 		notifications: PropTypes.array.isRequired
-  	};
+	};
 
 	handleResponse(id, response) {
 		let action = dismissNotification(id, response);

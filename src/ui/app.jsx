@@ -1,8 +1,14 @@
 /* @flow */
 
 import React from 'react';
-import Router from 'react-router';
-const { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
+import ReactDOM from 'react-dom';
+
+import {createRedux} from 'redux';
+import {Provider} from 'redux/react';
+import stores from '../stores/index';
+
+import {Router, Route, Link} from 'react-router';
+import {history} from 'react-router/lib/BrowserHistory';
 
 import {Table} from './table/table.jsx';
 import {AboutView} from './about/about.jsx';
@@ -24,23 +30,24 @@ export class App extends React.Component {
 
 	render() {
 		console.log('rendering app');
-		let routelinks = ["table", "settings", "about"].map((route) => {
-			return (
-				<li key={route}>
-					<Link to={route}>{route}</Link>
-				</li>
-			);
-		});
 
 		return (
 			<div className="app-container">
 				<nav role="navigation" className="app-navbar nav-main">
 					<ul className="nav-site">
-						{routelinks}
+						<li key="table">
+							<Link to="/">Table</Link>
+						</li>
+						<li key="settings">
+							<Link to="/settings">Settings</Link>
+						</li>
+						<li key="about">
+							<Link to="/about">About</Link>
+						</li>
 					</ul>
 				</nav>
 				<div className="app-content">
-					<RouteHandler/>
+					{this.props.children}
 				</div>
 				<div className="app-growl">
 					<GrowlContainer/>
@@ -50,25 +57,20 @@ export class App extends React.Component {
 	}
 }
 
-let routes = (
-	<Route handler={App} path="/tower/">
-		<DefaultRoute name="table" handler={Table} />
-		<Route name="about" handler={AboutView} />
-		<Route name="settings" handler={SettingsView} />
-		<Redirect from="/" to="/tower/" />
-	</Route>
+let router = (
+	<Router history={history}>
+		<Route component={App}>
+			<Route path="/" name="table" component={Table} />
+			<Route path="/settings" name="settings" component={SettingsView} />
+			<Route path="/about" name="about" component={AboutView} />
+		</Route>
+	</Router>
 );
-
-import {createRedux} from 'redux';
-import {Provider} from 'redux/react';
-import stores from '../stores/index';
 
 const redux = createRedux(stores);
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-	React.render(
-		<Provider redux={redux}>
-        {() => <Handler/>}
-      </Provider>,
-      document.body);
-});
+ReactDOM.render(
+	<Provider redux={redux}>
+		{() => router}
+	</Provider>,
+	document.getElementById('main'));

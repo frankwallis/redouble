@@ -6,7 +6,7 @@ import {CardComponent} from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
 import './trick.css';
 
-export class TrickComponent extends React.Component {
+export class TrickComponent extends Component {
 
 	constructor(props) {
 		super(props);
@@ -14,7 +14,7 @@ export class TrickComponent extends React.Component {
 
 	static propTypes = {
 		board: PropTypes.object.isRequired
-  	};
+	};
 
 	getCard(seat: Seat) {
 		let card;

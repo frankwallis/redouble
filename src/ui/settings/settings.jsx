@@ -24,7 +24,7 @@ export class SettingsView extends Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired,
 		players: PropTypes.object.isRequired
-  	};
+	};
 
 	handleChangeName(seat, event) {
 		let action = updatePlayer(seat, {name: event.target.value});

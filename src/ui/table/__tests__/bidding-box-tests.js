@@ -1,6 +1,5 @@
 import {BiddingBox} from "../bidding-box.jsx";
 import {Game} from "../../../model/game/game-state";
-import {GameActions} from "../../../stores/game-store";
 
 import React from "react/addons";
 const TestUtils = React.addons.TestUtils;

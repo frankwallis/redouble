@@ -56,8 +56,7 @@ describe("Bid", () => {
 		});
 	});
 
-	
-	describe("createAll", () => {   
+	describe("createAll", () => {
 		it("creates lists of bids correctly", () => {
 			let bids = Bid.createAll("1C", "double", "1S");
 			expect(bids.length).toBe(3);

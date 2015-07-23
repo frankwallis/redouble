@@ -1,5 +1,5 @@
 import {BidComponent} from "../bid.jsx";
-import {Bid, BidType, BidSuit} from "../../../model/core/bid";
+import {BidType, BidSuit} from "../../../model/core/bid";
 
 import React from "react/addons";
 const TestUtils = React.addons.TestUtils;

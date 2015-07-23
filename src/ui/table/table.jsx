@@ -41,11 +41,11 @@ export class Table extends Component {
 		game: PropTypes.object.isRequired,
 		players: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired
-  	};
+	};
 
-  	componentWillMount() {
-  		this.props.dispatch(newGame());
-  	}
+	componentWillMount() {
+		this.props.dispatch(newGame());
+	}
 
 	render() {
 		let history = new GameHistory(this.props.game.history);

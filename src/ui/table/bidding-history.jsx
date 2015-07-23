@@ -14,7 +14,7 @@ export class BiddingHistory extends Component {
 
 	static propTypes = {
 		board: PropTypes.object.isRequired
-  	};
+	};
 
 	render() {
 		let headings = [];

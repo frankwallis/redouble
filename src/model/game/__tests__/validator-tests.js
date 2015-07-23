@@ -1,6 +1,5 @@
 import {Game} from '../game-state';
-import {Bid, BidType, BidSuit} from '../../core/bid';
-import {Card, Pip, Suit} from '../../core/card';
+import {Bid} from '../../core/bid';
 import {Seat} from '../../core/seat';
 import {validateBid, validateCard} from '../validators';
 
@@ -84,7 +83,7 @@ describe('Validators', () => {
 	});
 
 	describe('validateCard', () => {
-		let game = undefined;
+		let game;
 
 		beforeEach(() => {
 			game = new Game()
@@ -102,15 +101,15 @@ describe('Validators', () => {
 			game = game.playCard(game.currentBoard.hands[Seat.West][0]);
 
 			/* play from wrong hand but correct suit */
-			let nextCard = game.currentBoard.hands[Seat.East].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
+			let nextCard = game.currentBoard.hands[Seat.East].filter((card) => card.suit === game.currentBoard.hands[Seat.West][0].suit)[0];
 
 			if (!nextCard)
-				nextCard = game.currentBoard.hands[Seat.South].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
+				nextCard = game.currentBoard.hands[Seat.South].filter((card) => card.suit === game.currentBoard.hands[Seat.West][0].suit)[0];
 
 			expect(validateCard(nextCard, game.currentBoard)).toBeDefined();
 
 			/* play from right hand and correct suit */
-			nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit == game.currentBoard.hands[Seat.West][0].suit)[0];
+			nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit === game.currentBoard.hands[Seat.West][0].suit)[0];
 
 			if (nextCard) {
 				expect(validateCard(nextCard, game.currentBoard)).toBeUndefined();
@@ -125,7 +124,7 @@ describe('Validators', () => {
 
 			if ((trick.length > 0) && (trick.length < 4)) {
 				let lead = trick[0].card;
-				let followers = available.filter((card) => (card.suit == lead.suit));
+				let followers = available.filter((card) => (card.suit === lead.suit));
 
 				if (followers.length > 0)
 					return followers[0];
@@ -166,7 +165,7 @@ describe('Validators', () => {
 			let lead = game.currentBoard.hands[Seat.West][0];
 
 			/* try and play wrong suit */
-			let nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit != lead.suit)[0];
+			let nextCard = game.currentBoard.hands[Seat.North].filter((card) => card.suit !== lead.suit)[0];
 			expect(validateCard(nextCard, game.currentBoard)).toBeDefined();
 		});
 
@@ -176,7 +175,8 @@ describe('Validators', () => {
 				let nextCard = followSuit(game.currentBoard);
 
 				if (!nextCard)
-					nextCard = game.currentBoard.hands[game.currentBoard.nextPlayer].filter((card) => !game.currentBoard.hasBeenPlayed(card))[0];
+					nextCard = game.currentBoard.hands[game.currentBoard.nextPlayer]
+						.filter((card) => !game.currentBoard.hasBeenPlayed(card))[0]; //eslint-disable-line no-loop-func
 
 				expect(validateCard(nextCard, game.currentBoard)).toBeUndefined();
 				game = game.playCard(nextCard);

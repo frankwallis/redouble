@@ -13,9 +13,9 @@ describe("Deck", () => {
 	it("should deal 4 hands of 13 cards", () => {
 		let hands = deck.deal(Seat.North);
 
-		Seat.all().forEach((seat) => {
-			expect(hands[Seat.North].length).toBe(13);   
-		})
+		Seat.all().forEach(() => {
+			expect(hands[Seat.North].length).toBe(13);
+		});
 	});
 
 	it("should shuffle the cards", () => {
@@ -26,7 +26,7 @@ describe("Deck", () => {
 		let different = false;
 
 		for (let i = 0; i < newHands[Seat.North].length; i++) {
-			if (newHands[Seat.North][i] != origHands[Seat.North][i])
+			if (newHands[Seat.North][i] !== origHands[Seat.North][i])
 				different = true;
 		}
 

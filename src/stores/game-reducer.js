@@ -13,9 +13,9 @@ let initialState = {
 	history,
 	sequence: 0,
 	autoPlay: true
-};
+}
 
-export default function gameStore(state = initialState, action) {
+export default function gameReducer(state = initialState, action) {
 	switch (action.type) {
 		case GAME_PUSH_STATE:
 			return {
@@ -55,7 +55,7 @@ export default function gameStore(state = initialState, action) {
 				...state,
 				sequence: state.sequence + 1,
 				autoPlay: true
-			};
+			}
 		default:
 			return state;
 	}

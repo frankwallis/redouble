@@ -15,8 +15,8 @@ export class HandComponent extends Component {
 	static propTypes = {
 		playCard: PropTypes.func.isRequired,
 		board: PropTypes.object.isRequired,
-		seat:  PropTypes.number.isRequired
-  	};
+		seat: PropTypes.number.isRequired
+	};
 
 	getAvailableCards() {
 		return this.props.board.hands[this.props.seat]

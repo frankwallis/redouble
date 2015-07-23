@@ -17,9 +17,9 @@ describe('Board State Helper', () => {
 
 		it('handles parameters', () => {
 			let board = Board.create(
-				Seat.West, 
-				Deck.rig(Seat.West, ["2S"], ["2H"], ["2D"], ["2C"]), 
-				Bid.createAll("no bid", "no bid"), 
+				Seat.West,
+				Deck.rig(Seat.West, ["2S"], ["2H"], ["2D"], ["2C"]),
+				Bid.createAll("no bid", "no bid"),
 				Card.createAll("2S", "2H", "2D")
 			);
 			expect(board.dealer).toEqual(Seat.West);
@@ -181,7 +181,7 @@ describe('Board State Helper', () => {
 			);
 
 			for(let idx = 0; idx < 3; idx ++) {
-				Seat.all().forEach(seat => {
+				Seat.all().forEach(seat => { //eslint-disable-line no-loop-func
 					expect(board.playHasEnded).toBeFalsy();
 					board = board.playCard(board.hands[seat][idx]);
 				});
@@ -201,7 +201,7 @@ describe('Board State Helper', () => {
 				.makeBid(Bid.create("2H"))
 				.makeBid(Bid.create("no bid"))
 				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid(Bid.create("no bid"));
 
 			expect(board.declarer).toEqual(Seat.North);
 		});
@@ -220,7 +220,7 @@ describe('Board State Helper', () => {
 				.makeBid(Bid.create("no bid"))
 				.makeBid(Bid.create("no bid"));
 			expect(board.declarerTricks).toEqual(0);
-			
+
 			board = board
 				.playCard(Card.create("2C"))
 				.playCard(Card.create("3C"))
@@ -275,9 +275,9 @@ describe('Board State Helper', () => {
 
 			board.legalCards.forEach((card) => {
 				expect(card.suit).toEqual(lead.suit);
-			})
+			});
 
-			expect(board.hands[Seat.East].reduce((count, card) => card.suit == lead.suit ? count + 1 : count, 0)).toBe(board.legalCards.length);
+			expect(board.hands[Seat.East].reduce((count, card) => card.suit === lead.suit ? count + 1 : count, 0)).toBe(board.legalCards.length);
 		});
 
 		it('returns all available cards when void', () => {

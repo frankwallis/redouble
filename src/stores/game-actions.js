@@ -98,11 +98,11 @@ export function back() {
 	return { type: GAME_BACK };
 }
 
-export function forward(state) {
+export function forward() {
 	return { type: GAME_FORWARD };
 }
 
-export function jumpBack(state) {
+export function jumpBack() {
 	return { type: GAME_JUMP_BACK };
 }
 

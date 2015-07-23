@@ -1,7 +1,6 @@
 import {Game} from '../game-state';
-import {Bid, BidType, BidSuit} from '../../core/bid';
+import {Bid, BidType} from '../../core/bid';
 import {Card, Pip, Suit} from '../../core/card';
-import {Seat} from '../../core/seat';
 
 describe('Game State Helper', () => {
 	describe('currentBoard', () => {
@@ -28,7 +27,7 @@ describe('Game State Helper', () => {
 			let game = new Game()
 				.newBoard()
 				.playCard(Card.create("2H"));
-			
+
 			expect(game.currentBoard.cards.length).toEqual(1);
 			expect(game.currentBoard.cards[0].card.pip).toEqual(Pip.Two);
 			expect(game.currentBoard.cards[0].card.suit).toEqual(Suit.Hearts);
@@ -40,7 +39,7 @@ describe('Game State Helper', () => {
 			let game = new Game()
 				.newBoard()
 				.makeBid(Bid.create("no bid"));
-			
+
 			expect(game.currentBoard.bids.length).toEqual(1);
 			expect(game.currentBoard.bids[0].type).toEqual(BidType.NoBid);
 		});

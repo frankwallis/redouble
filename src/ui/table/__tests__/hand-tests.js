@@ -1,4 +1,3 @@
-import {GameActions} from "../../../stores/game-store";
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";
 import {Game} from "../../../model/game/game-state";
@@ -21,21 +20,21 @@ describe('Hand Component', () => {
 
 	it('hides cards which have been played', () => {
 		let board = new Game().dealBoard(Seat.North).currentBoard;
-		let component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>
+		let component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>;
 		let hand = TestUtils.renderIntoDocument(component);
 
 		let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
 		expect(cards.length).toEqual(13);
 
 		board = board
-		  .makeBid(Bid.create("1H"))
-		  .makeBid(Bid.create("no bid"))
-		  .makeBid(Bid.create("no bid"))
-		  .makeBid(Bid.create("no bid"));
+			.makeBid(Bid.create("1H"))
+			.makeBid(Bid.create("no bid"))
+			.makeBid(Bid.create("no bid"))
+			.makeBid(Bid.create("no bid"));
 
 		expect(board.nextPlayer).toEqual(Seat.East);
 		board = board.playCard(board.hands[Seat.East][0]);
-		component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>
+		component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>;
 		hand = TestUtils.renderIntoDocument(component);
 
 		cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
@@ -52,12 +51,12 @@ describe('Hand Component', () => {
 
 		let suits = {};
 		buttons.reduce((prev, current) => {
-			if (!prev || (prev.suit != current.suit)) {
+			if (!prev || (prev.suit !== current.suit)) {
 				expect(suits[current.suit]).toBeUndefined();
 				suits[current.suit] = true;
 			}
 			return current;
-		})
+		});
 	});
 
 	it('plays a card when a button is clicked', () => {

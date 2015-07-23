@@ -1,15 +1,17 @@
 {
   "name": "tower",
   "version": "0.1.0",
-  "description": "contract bridge",
+  "description": "contract bridge game",
   "main": "src/ui/app.jsx",
   "dependencies": {
     "font-awesome": "^4.3.0",
     "normalize.css": "^3.0.3",
     "operative": "^0.4.4",
     "purecss": "^0.6.0",
-    "react": "^0.13.0",
-    "react-router": "^0.13.2",
+    "react": "0.14.0-beta1",
+    "react-dom": "0.14.0-beta1",
+    "react-pure-render": "^1.0.2",
+    "react-router": "1.0.0-beta3",
     "redux": "^0.12.0"
   },
   "devDependencies": {

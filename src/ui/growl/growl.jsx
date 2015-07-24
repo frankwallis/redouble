@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {connect} from 'redux/react';
+import {connect} from 'react-redux';
 import {dismissNotification} from "../../stores/notification-actions";
 
 import './growl.css';

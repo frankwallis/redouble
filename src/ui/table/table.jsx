@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {connect} from 'redux/react';
+import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {Seat} from "../../model/core/seat";
@@ -17,7 +17,7 @@ import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
 import {
-	playCard, makeBid, newGame,
+	playCard, makeBid,
 	back, forward, jumpBack, pause, resume
 } from "../../stores/game-actions";
 
@@ -45,7 +45,7 @@ export class Table extends PureComponent {
 	};
 
 	componentWillMount() {
-		this.props.dispatch(newGame());
+		this.props.dispatch(resume());
 	}
 
 	render() {

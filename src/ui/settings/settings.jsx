@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'redux/react';
+import {connect} from 'react-redux';
 
 import {updatePlayer} from '../../stores/player-actions';
 import {Seat} from '../../model/core/seat';
@@ -27,12 +27,14 @@ export class SettingsView extends Component {
 	};
 
 	handleChangeName(seat, event) {
-		let action = updatePlayer(seat, {name: event.target.value});
+		let target = event.target || event.currentTarget; // issue in react 0.14 beta
+		let action = updatePlayer(seat, {name: target.value});
 		this.props.dispatch(action);
 	}
 
 	handleChangeHuman(seat, event) {
-		let action = updatePlayer(seat, {ishuman: !event.target.checked});
+		let target = event.target || event.currentTarget; // issue in react 0.14 beta
+		let action = updatePlayer(seat, {ishuman: !target.checked});
 		this.props.dispatch(action);
 	}
 

@@ -13,7 +13,7 @@ let initialState = {
 	history,
 	sequence: 0,
 	autoPlay: true
-}
+};
 
 export default function gameReducer(state = initialState, action) {
 	switch (action.type) {
@@ -55,7 +55,7 @@ export default function gameReducer(state = initialState, action) {
 				...state,
 				sequence: state.sequence + 1,
 				autoPlay: true
-			}
+			};
 		default:
 			return state;
 	}

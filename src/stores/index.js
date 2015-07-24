@@ -1,5 +1,9 @@
-import gameStore from "./game-store";
-import playerStore from "./player-store";
-import notificationStore from "./notification-store";
+import gameReducer from "./game-reducer";
+import playerReducer from "./player-reducer";
+import notificationReducer from "./notification-reducer";
 
-export default { gameStore, notificationStore, playerStore };
+export default {
+	gameStore: gameReducer,
+	notificationStore: notificationReducer,
+	playerStore: playerReducer
+};

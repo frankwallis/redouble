@@ -3,9 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {createRedux} from 'redux';
-import {Provider} from 'redux/react';
-import stores from '../stores/index';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import reducers from '../stores/index';
 
 import {Router, Route, Link} from 'react-router';
 import {history} from 'react-router/lib/BrowserHistory';
@@ -67,10 +68,12 @@ let router = (
 	</Router>
 );
 
-const redux = createRedux(stores);
+const reducer = combineReducers(reducers);
+const finalCreateStore = applyMiddleware(thunk)(createStore);
+const store = finalCreateStore(reducer);
 
 ReactDOM.render(
-	<Provider redux={redux}>
+	<Provider store={store}>
 		{() => router}
 	</Provider>,
 	document.getElementById('main'));

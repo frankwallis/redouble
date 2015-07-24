@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
+import {PureComponent} from 'react-pure-render';
 
 import {connect} from 'redux/react';
 import {bindActionCreators} from 'redux';
@@ -31,7 +32,7 @@ import './table.css';
 		players: state.playerStore
 	};
 })
-export class Table extends Component {
+export class Table extends PureComponent {
 
 	constructor(props) {
 		super(props);

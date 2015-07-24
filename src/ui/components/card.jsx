@@ -1,10 +1,11 @@
 /* @flow */
 
 import React from 'react';
+import {PureComponent} from 'react-pure-render';
 import {Card} from '../../model/core/card';
 import './card.css';
 
-export class CardComponent extends React.Component {
+export class CardComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);

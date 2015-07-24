@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
+import {PureComponent} from 'react-pure-render';
 
 import {connect} from 'redux/react';
 import {dismissNotification} from "../../stores/notification-actions";
@@ -16,7 +17,7 @@ import './growl.css';
 		notifications: state.notificationStore
 	};
 })
-export class GrowlContainer extends Component {
+export class GrowlContainer extends PureComponent {
 
 	constructor(props) {
 		super(props);

@@ -1,10 +1,11 @@
 /* @flow */
 
 import React from 'react';
+import {PureComponent} from 'react-pure-render';
 import {BidType, Bid} from '../../model/core/bid';
 import './bid.css';
 
-export class BidComponent extends React.Component {
+export class BidComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);

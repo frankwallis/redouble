@@ -1,12 +1,13 @@
 /* @flow */
 
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
+import {PureComponent} from 'react-pure-render';
 
 import {CardComponent} from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
 import './trick.css';
 
-export class TrickComponent extends Component {
+export class TrickComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);

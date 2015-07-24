@@ -1,13 +1,14 @@
 /* @flow */
 
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
+import {PureComponent} from 'react-pure-render';
 
 import {BidComponent} from '../components/bid.jsx';
 import {Bid, BidSuit, BidType} from '../../model/core/bid';
 
 import './bidding-box.css';
 
-export class BiddingBox extends Component {
+export class BiddingBox extends PureComponent {
 
 	constructor(props) {
 		super(props);

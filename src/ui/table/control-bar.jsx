@@ -1,9 +1,11 @@
 /* @flow */
 
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
+import {PureComponent} from 'react-pure-render';
+
 import './control-bar.css';
 
-export class ControlBar extends Component {
+export class ControlBar extends PureComponent {
 
 	constructor(props) {
 		super(props);

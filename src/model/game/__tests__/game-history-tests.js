@@ -57,6 +57,8 @@ describe('Game History', () => {
 		it('moves forward to previously created state', () => {
 			gameHistory = gameHistory.push(1);
 			gameHistory = gameHistory.push(2);
+			gameHistory = gameHistory.push(3);
+			gameHistory = gameHistory.back();
 			gameHistory = gameHistory.back();
 			expect(gameHistory.currentGameState()).toEqual(1);
 			gameHistory = gameHistory.forward();

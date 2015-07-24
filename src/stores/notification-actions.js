@@ -15,8 +15,8 @@ export function notify(opts) {
 	notification.source = opts.source;
 	notification.type = opts.type;
 	notification.title = opts.title;
-	notification.timeout = opts.timeout || 5000;
 	notification.message = opts.message;
+	notification.timeout = opts.timeout || 5000;
 	notification.buttons = opts.buttons || [];
 	notification.defaultButton = opts.defaultButton;
 

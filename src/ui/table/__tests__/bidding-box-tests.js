@@ -1,5 +1,5 @@
 import {BiddingBox} from "../bidding-box.jsx";
-import {Game} from "../../../model/game/game-state";
+import {GameBuilder} from "../../../model/game/game-builder";
 
 import React from "react/addons";
 const TestUtils = React.addons.TestUtils;
@@ -7,7 +7,7 @@ const TestUtils = React.addons.TestUtils;
 describe('Bidding Box', () => {
 
 	it('displays the right number of buttons', () => {
-		let game = new Game().dealBoard();
+		let game = GameBuilder.create().dealBoard().build();
 		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={() => {}}/>);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
@@ -19,7 +19,7 @@ describe('Bidding Box', () => {
 	});
 
 	it('makes a bid when a button is clicked', () => {
-		let game = new Game().dealBoard();
+		let game = GameBuilder.create().dealBoard().build();
 		let makeBidSpy = jasmine.createSpy();
 		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={makeBidSpy}/>);
 

@@ -7,9 +7,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {Seat} from "../../model/core/seat";
-import {Game} from "../../model/game/game-state";
-import {GameHistory} from "../../model/game/game-history";
-
 import {ControlBar} from "./control-bar.jsx";
 import {HandComponent} from "./hand.jsx";
 import {BiddingBox} from "./bidding-box.jsx";
@@ -28,7 +25,8 @@ import './table.css';
  */
 @connect(state => {
 	return {
-		game: state.gameStore,
+		history: state.gameStore.history,
+		autoPlay: state.gameStore.autoPlay,
 		players: state.playerStore
 	};
 })
@@ -39,7 +37,8 @@ export class Table extends PureComponent {
 	}
 
 	static propTypes = {
-		game: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired,
+		autoPlay: PropTypes.boolean.isRequired,
 		players: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired
 	};
@@ -49,13 +48,13 @@ export class Table extends PureComponent {
 	}
 
 	render() {
-		let history = new GameHistory(this.props.game.history);
-		let game = new Game(history.currentGameState());
+		let history = this.props.history;
+		let game = this.props.history.current();
 
 		let controlBar = (
 			<ControlBar {...bindActionCreators({back, forward, jumpBack, pause, resume}, this.props.dispatch)}
 				canBack={history.canBack()} canForward={history.canForward()} canJumpBack={history.canJumpBack()}
-				canPause={this.props.game.autoPlay} canResume={!this.props.game.autoPlay} />
+				canPause={this.props.autoPlay} canResume={!this.props.autoPlay} />
 		);
 
 		let players = Seat.all().map((seat) => {

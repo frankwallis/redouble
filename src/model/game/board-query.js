@@ -1,34 +1,16 @@
 /* @flow */
 
-import {Deck} from "../core/deck";
 import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card} from "../core/card";
 
 /**
  * Helper class for analysing board-state.
- * This class is designed to be immutable from the outside
  */
-export class Board {
+export class BoardQuery {
 
 	constructor(boardState) {
 		this.boardState = boardState;
-	}
-
-	// TODO - create -> hydrate?
-	static create(dealer, hands, bids, cards) {
-		dealer = dealer || Seat.North;
-
-		if (!hands) {
-			let deck = new Deck();
-			deck.shuffle();
-			hands = deck.deal(dealer);
-		}
-
-		bids = bids || [];
-		cards = cards || [];
-
-		return new Board({dealer, hands, bids, cards});
 	}
 
 	get hands() { return this.boardState.hands; }
@@ -220,37 +202,5 @@ export class Board {
 		}
 
 		return available;
-	}
-
-	/**
-	 * Creates an identical copy of itself
-	 */
-	clone(): Board {
-		// optimisation: minimise the number of objects created
-		let newstate = {
-			hands: this.boardState.hands,
-			dealer: this.boardState.dealer,
-			bids: this.boardState.bids,
-			cards: this.boardState.cards
-		};
-		return new Board(newstate);
-	}
-
-	/**
-	 * Called in response to a player playing a card.
-	 */
-	makeBid(bid: Bid): Board {
-		let newstate = this.clone();
-		newstate.boardState.bids = newstate.boardState.bids.concat(bid);
-		return newstate;
-	}
-
-	/**
-	 * Called in response to a player making a bid.
-	 */
-	playCard(card: Card): Board {
-		let newstate = this.clone();
-		newstate.boardState.cards = newstate.boardState.cards.concat({"seat": this.nextPlayer, "card": card });
-		return newstate;
 	}
 }

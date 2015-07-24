@@ -1,6 +1,6 @@
 import {CardComponent} from "../../components/card.jsx";
 import {HandComponent} from "../hand.jsx";
-import {Game} from "../../../model/game/game-state";
+import {BoardBuilder} from "../../../model/game/board-builder";
 import {Seat} from "../../../model/core/seat";
 import {Bid} from "../../../model/core/bid";
 
@@ -10,8 +10,8 @@ const TestUtils = React.addons.TestUtils;
 describe('Hand Component', () => {
 
 	it('displays cards which are available', () => {
-		let game = new Game().dealBoard();
-		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={() => {}}/>;
+		let board = BoardBuilder.create().toQuery();
+		let component = <HandComponent board={board} seat={Seat.North} playCard={() => {}}/>;
 		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
@@ -19,21 +19,23 @@ describe('Hand Component', () => {
 	});
 
 	it('hides cards which have been played', () => {
-		let board = new Game().dealBoard(Seat.North).currentBoard;
+		let boardBuilder = BoardBuilder.create(Seat.North);
+		let board = boardBuilder.toQuery();
 		let component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>;
 		let hand = TestUtils.renderIntoDocument(component);
 
 		let cards = TestUtils.scryRenderedComponentsWithType(hand, CardComponent);
 		expect(cards.length).toEqual(13);
 
-		board = board
+		boardBuilder = boardBuilder
 			.makeBid(Bid.create("1H"))
 			.makeBid(Bid.create("no bid"))
 			.makeBid(Bid.create("no bid"))
 			.makeBid(Bid.create("no bid"));
 
+		board = boardBuilder.toQuery();
 		expect(board.nextPlayer).toEqual(Seat.East);
-		board = board.playCard(board.hands[Seat.East][0]);
+		board = boardBuilder.playCard(board.hands[Seat.East][0]).toQuery();
 		component = <HandComponent board={board} seat={Seat.East} playCard={() => {}}/>;
 		hand = TestUtils.renderIntoDocument(component);
 
@@ -42,8 +44,8 @@ describe('Hand Component', () => {
 	});
 
 	it('sorts the cards', () => {
-		let game = new Game().dealBoard();
-		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={() => {}}/>;
+		let board = BoardBuilder.create(Seat.North).toQuery();
+		let component = <HandComponent board={board} seat={Seat.North} playCard={() => {}}/>;
 		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
@@ -60,9 +62,9 @@ describe('Hand Component', () => {
 	});
 
 	it('plays a card when a button is clicked', () => {
-		let game = new Game().dealBoard();
+		let board = BoardBuilder.create(Seat.North).toQuery();
 		let playCardSpy = jasmine.createSpy('Play Card Spy');
-		let component = <HandComponent board={game.currentBoard} seat={Seat.North} playCard={playCardSpy}/>;
+		let component = <HandComponent board={board} seat={Seat.North} playCard={playCardSpy}/>;
 		let hand = TestUtils.renderIntoDocument(component);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');

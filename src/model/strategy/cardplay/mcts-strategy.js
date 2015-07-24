@@ -1,7 +1,7 @@
 /* @flow */
 
 import {Node} from "./mcts-node";
-import {Board} from "../../game/board-state";
+import {GameQuery} from "../../game/game-query";
 
 export class CardplayStrategy {
 
@@ -12,8 +12,7 @@ export class CardplayStrategy {
 	}
 
 	updateGameState(gameState) {
-		let currentBoardState = gameState.boards[gameState.boards.length - 1].boardState;
-		let board = Board.create(currentBoardState.dealer, currentBoardState.hands, currentBoardState.bids, currentBoardState.cards);
+		let board = new GameQuery(gameState).currentBoard;
 
 		if (board.biddingHasEnded) {
 			this.rootNode = this.getRootNode(board);

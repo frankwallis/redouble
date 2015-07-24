@@ -1,6 +1,6 @@
 import {Card} from "../../core/card";
 import {Seat} from "../../core/seat";
-
+import {BoardBuilder} from "../../game/board-builder";
 //var count = 0;
 
 export class Node {
@@ -67,7 +67,8 @@ export class Node {
 	ensureChildren() {
 		if (this.children === null) {
 			let availableCards = this.getAvailableCards();
-			this.children = availableCards.map((card) => new Node(this, this.board.playCard(card), card, this.depth + 1));
+			let boardBuilder = new BoardBuilder(this.board.boardState);
+			this.children = availableCards.map((card) => new Node(this, boardBuilder.playCard(card).toQuery(), card, this.depth + 1));
 			//console.log('length: ' + JSON.stringify(this.children.length));
 		}
 	}

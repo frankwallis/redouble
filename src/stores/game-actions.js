@@ -1,6 +1,5 @@
 
-import {Game} from "../model/game/game-state";
-import {GameHistory} from "../model/game/game-history";
+import {GameBuilder} from "../model/game/game-builder";
 
 import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
@@ -18,23 +17,21 @@ let biddingStrategy = new BiddingStrategy();
 
 export function newGame() {
 	return (dispatch, getState) => {
-		let gameStore = getState().gameStore;
-		let newgame = new Game().newBoard();
-		dispatch(pushState(newgame.getState()));
-		scheduleAutoPlay(gameStore.sequence + 1, dispatch, getState);
+		let newgame = GameBuilder.create().newBoard().build();
+		dispatch(pushState(newgame));
+		scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
 	};
 }
 
 export function playCard(card) {
 	return (dispatch, getState) => {
-		let gameStore = getState().gameStore;
-		let history = new GameHistory(gameStore.history);
-		let game = new Game(history.currentGameState());
+		let game = getState().gameStore.history.current();
 		let err = validateCard(card, game.currentBoard);
 
 		if (!err) {
-			let newgame = game.playCard(card);
-			dispatch(pushState(newgame.getState()));
+			let gameBuilder = new GameBuilder(game.gameState);
+			let newstate = gameBuilder.playCard(card).build();
+			dispatch(pushState(newstate));
 			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
 		}
 		else {
@@ -48,14 +45,13 @@ export function playCard(card) {
 
 export function makeBid(bid) {
 	return (dispatch, getState) => {
-		let gameStore = getState().gameStore;
-		let history = new GameHistory(gameStore.history);
-		let game = new Game(history.currentGameState());
+		let game = getState().gameStore.history.current();
 		let err = validateBid(bid, game.currentBoard);
 
 		if (!err) {
-			let newgame = game.makeBid(bid);
-			dispatch(pushState(newgame.getState()));
+			let gameBuilder = new GameBuilder(game.gameState);
+			let newstate = gameBuilder.makeBid(bid).build();
+			dispatch(pushState(newstate));
 			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
 		}
 		else {
@@ -73,8 +69,7 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 
 		if (sequence === forSequence) {
 			let players = getState().playerStore;
-			let history = new GameHistory(getState().gameStore.history);
-			let game = new Game(history.currentGameState());
+			let game = getState().gameStore.history.current();
 
 			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
 				if (game.currentBoard.biddingHasEnded) {

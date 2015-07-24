@@ -1,13 +1,14 @@
-import {Game} from "../model/game/game-state";
-import {GameHistory} from "../model/game/game-history";
+import {GameQuery} from "../model/game/game-query";
+import {GameBuilder} from "../model/game/game-builder";
+import {StateHistory} from "./state-history";
 
 import {
 	GAME_PUSH_STATE, GAME_BACK, GAME_FORWARD, GAME_JUMP_BACK,
 	GAME_PAUSE, GAME_RESUME
 } from "./action-types";
 
-let game = new Game().newBoard();
-let history = new GameHistory().push(game.getState());
+let game = GameBuilder.create().newBoard().toQuery();
+let history = new StateHistory().push(game);
 
 let initialState = {
 	history,
@@ -20,7 +21,7 @@ export default function gameReducer(state = initialState, action) {
 		case GAME_PUSH_STATE:
 			return {
 				...state,
-				history: state.history.push(action.state),
+				history: state.history.push(new GameQuery(action.state)),
 				sequence: state.sequence + 1
 			};
 		case GAME_BACK:
@@ -38,9 +39,14 @@ export default function gameReducer(state = initialState, action) {
 				autoPlay: false
 			};
 		case GAME_JUMP_BACK:
+			let jumpComparer = (game1, game2) => {
+				return ((game1.currentBoard.biddingHasEnded !== game2.currentBoard.biddingHasEnded) ||
+					(game1.currentBoard.playHasEnded !== game2.currentBoard.playHasEnded));
+			};
+
 			return {
 				...state,
-				history: state.history.jumpBack(),
+				history: state.history.jumpBack(jumpComparer),
 				sequence: state.sequence + 1,
 				autoPlay: false
 			};

@@ -1,6 +1,6 @@
 import {BidComponent} from "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";
-import {Board} from "../../../model/game/board-state";
+import {BoardBuilder} from "../../../model/game/board-builder";
 import {Bid} from "../../../model/core/bid";
 
 import React from "react/addons";
@@ -9,7 +9,7 @@ const TestUtils = React.addons.TestUtils;
 describe('Bidding History', () => {
 
 	it('displays the right headings', () => {
-		let board = Board.create();
+		let board = BoardBuilder.create().toQuery();
 		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
 		let headings = TestUtils.scryRenderedDOMComponentsWithTag(biddingHistory, 'th');
 
@@ -18,8 +18,10 @@ describe('Bidding History', () => {
 	});
 
 	it('displays all the bids', () => {
-		let board = Board.create()
-			.makeBid(Bid.create("no bid"));
+		let board = BoardBuilder
+			.create()
+			.makeBid(Bid.create("no bid"))
+			.toQuery();
 
 		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
 		let bids = TestUtils.scryRenderedComponentsWithType(biddingHistory, BidComponent);

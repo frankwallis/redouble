@@ -1,14 +1,14 @@
 /* @flow */
 
 import {BidSuit, BidType} from "../../core/bid";
-import {Game} from "../../game/game-state";
+import {GameQuery} from "../../game/game-query";
 
 export class BiddingStrategy {
 
 	constructor() {}
 
 	getBid(gameState) {
-		let game = new Game(gameState);
+		let game = new GameQuery(gameState);
 
 		if (!game.currentBoard.lastCall) {
 			return {type: BidType.NoBid};

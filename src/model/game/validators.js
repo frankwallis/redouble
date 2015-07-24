@@ -2,12 +2,12 @@
 import {Seat} from "../core/seat";
 import {Bid, BidType} from "../core/bid";
 import {Card} from "../core/card";
-import {Board} from "./board-state";
+import {BoardQuery} from "./board-query";
 
 /**
  * Tests if the bid is a valid one in board state and returns an error if not
  */
-export function validateBid(bid, board: Board) {
+export function validateBid(bid, board: BoardQuery) {
 	if (board.biddingHasEnded)
 		return new Error("The bidding has already ended");
 
@@ -51,7 +51,7 @@ export function validateBid(bid, board: Board) {
 /**
  * Tests if the card is a valid one given the current board state and returns an error if not
  */
-export function validateCard(playedCard, board: Board) {
+export function validateCard(playedCard, board: BoardQuery) {
 	if (!board.biddingHasEnded)
 		return new Error("The bidding has not ended yet");
 

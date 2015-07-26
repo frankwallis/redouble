@@ -43,6 +43,7 @@
     "karma-webpack": "^1.6.0",
     "react-hot-loader": "^1.2.3",
     "rimraf": "^2.4.1",
+    "s3": "^4.4.0",
     "style-loader": "^0.12.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.9.0",
@@ -55,7 +56,8 @@
     "test:ci": "./node_modules/karma/bin/karma start config/karma.ci.conf.js --single-run",
     "start": "./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --progress --colors --inline --content-base ./build",
     "build": "./node_modules/.bin/webpack --config config/webpack.production.js",
-    "publish": "npm run build && node ./node_modules/.bin/gh-pages -d dist && npm run clean",
+    "deploy": "npm run build && node ./node_modules/.bin/gh-pages -d dist && npm run clean",
+    "deploy:aws": "npm run build && node ./config/aws-deploy.js && npm run clean",
     "clean": "./node_modules/rimraf/bin.js ./dist"
   },
   "repository": {

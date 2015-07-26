@@ -1,30 +1,21 @@
 /* @flow */
 
 import {Seat} from "../model/core/seat";
-import {PLAYER_UPDATE} from "./action-types";
+import {APP_REHYDRATE, PLAYER_UPDATE} from "./action-types";
 
-const STORAGE_KEY = 'players';
+function getDefaultState() {
+	return Seat.all().reduce((result, seat) => {
+		result[seat] = {
+			seat: seat,
+			name: Seat.name(seat),
+			ishuman: (seat === Seat.South)
+		};
 
-function loadInitialState() {
-	let playersStr = window.localStorage ? window.localStorage.getItem(STORAGE_KEY) : undefined;
-
-	if (playersStr) {
-		return JSON.parse(playersStr);
-	}
-	else {
-		return Seat.all().reduce((result, seat) => {
-			result[seat] = {
-				seat: seat,
-				name: Seat.name(seat),
-				ishuman: (seat === Seat.South)
-			};
-
-			return result;
-		}, {});
-	}
+		return result;
+	}, {});
 }
 
-let initialState = loadInitialState();
+let initialState = getDefaultState();
 
 export default function playerReducer(state = initialState, action) {
 	switch (action.type) {
@@ -34,9 +25,17 @@ export default function playerReducer(state = initialState, action) {
 			Object.keys(action.delta).forEach((key) => {
 				newstate[action.seat][key] = action.delta[key];
 			});
-			// TODO
-			//localStorage.setItem(STORAGE_KEY, JSON.stringify(this.players));
 			return newstate;
+
+		case APP_REHYDRATE:
+			if (action.reducer === 'playerStore') {
+				return {
+					...state,
+					...action.data
+				};
+			}
+			return state;
+
 		default:
 			return state;
 	}

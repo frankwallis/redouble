@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {createStore, applyMiddleware, combineReducers} from 'redux';
+import persistStore from 'redux-persist-store';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from '../stores/index';
@@ -27,10 +28,19 @@ import './navbar/navbar.css';
 export class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {rehydrated: false};
+	}
+
+	componentWillMount() {
+		persistStore(store, {blacklist: ["gameStore"]}, () => {
+			this.setState({rehydrated: true});
+		});
 	}
 
 	render() {
 		console.log('rendering app');
+
+		let content = this.state.rehydrated ? this.props.children : <div/>;
 
 		return (
 			<div className="app-container">
@@ -48,7 +58,7 @@ export class App extends React.Component {
 					</ul>
 				</nav>
 				<div className="app-content">
-					{this.props.children}
+					{content}
 				</div>
 				<div className="app-growl">
 					<GrowlContainer/>

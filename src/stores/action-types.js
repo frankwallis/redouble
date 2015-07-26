@@ -1,3 +1,5 @@
+export const APP_REHYDRATE = "REHYDRATE";
+
 export const GAME_PUSH_STATE = "GAME_PUSH_STATE";
 export const GAME_BACK = "GAME_BACK";
 export const GAME_FORWARD = "GAME_FORWARD";

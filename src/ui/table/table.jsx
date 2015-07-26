@@ -38,7 +38,7 @@ export class Table extends PureComponent {
 
 	static propTypes = {
 		history: PropTypes.object.isRequired,
-		autoPlay: PropTypes.boolean.isRequired,
+		autoPlay: PropTypes.bool.isRequired,
 		players: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired
 	};

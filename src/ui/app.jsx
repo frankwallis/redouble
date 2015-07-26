@@ -40,7 +40,7 @@ export class App extends React.Component {
 	render() {
 		console.log('rendering app');
 
-		let content = this.state.rehydrated ? this.props.children : <div/>;
+		let content = this.state.rehydrated ? this.props.children : <div className="app-spinner"/>;
 
 		return (
 			<div className="app-container">

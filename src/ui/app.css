@@ -26,3 +26,19 @@ ol {
 	top: 2.75em;
 	left: 0;
 }
+
+.app-spinner {
+  width: 3em;
+  height: 3em;
+  background-color: rgb(159, 45, 52);
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@keyframes sk-rotateplane {
+  0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg) }
+  50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) }
+  100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg) }
+}

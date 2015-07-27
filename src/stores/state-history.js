@@ -16,7 +16,7 @@ export class StateHistory {
 		}
 	}
 
-	getState() {
+	build() {
 		return {
 			states: this.states,
 			currentIdx: this.currentIdx

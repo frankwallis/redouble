@@ -7,30 +7,32 @@ import * as actionTypes from '../action-types';
 
 describe('Game Reducer', () => {
 	let state;
+	let history;
 	let initialState;
+	let initialHistory;
 
 	beforeEach(() => {
-		let history = new StateHistory();
+		initialHistory = new StateHistory();
 		let gameBuilder = GameBuilder.create();
-		let game = gameBuilder.newBoard().toQuery();
-		history = history.push(game);
-		game = gameBuilder.makeBid(Bid.create("1H")).toQuery();
-		history = history.push(game);
-		game = gameBuilder.makeBid(Bid.create("no bid")).toQuery();
-		history = history.push(game);
-		game = gameBuilder.makeBid(Bid.create("no bid")).toQuery();
-		history = history.push(game);
-		game = gameBuilder.makeBid(Bid.create("no bid")).toQuery();
-		history = history.push(game);
-		game = gameBuilder.playCard(Card.create("2H")).toQuery();
-		history = history.push(game);
+		let game = gameBuilder.newBoard();
+		initialHistory = initialHistory.push(game.build());
+		game = gameBuilder.makeBid(Bid.create("1H"));
+		initialHistory = initialHistory.push(game.build());
+		game = gameBuilder.makeBid(Bid.create("no bid"));
+		initialHistory = initialHistory.push(game.build());
+		game = gameBuilder.makeBid(Bid.create("no bid"));
+		initialHistory = initialHistory.push(game.build());
+		game = gameBuilder.makeBid(Bid.create("no bid"));
+		initialHistory = initialHistory.push(game.build());
+		game = gameBuilder.playCard(Card.create("2H"));
+		initialHistory = initialHistory.push(game.build());
 
-		history = history
+		initialHistory = initialHistory
 			.back()
 			.back();
 
 		initialState = {
-			history: history,
+			history: initialHistory.build(),
 			autoPlay: true,
 			sequence: 1
 		};
@@ -40,13 +42,15 @@ describe('Game Reducer', () => {
 		beforeEach(() => {
 			state = gameReducer(initialState, {
 				type: actionTypes.GAME_PUSH_STATE,
-				state: GameBuilder.create().newBoard().toQuery()
+				state: GameBuilder.create().newBoard().build()
 			});
+			history = new StateHistory(state.history);
 		});
 
+
 		it('adds the new state to history', () => {
-			expect(state.history.current()).not.toEqual(initialState.history.current());
-			expect(state.history.back().current()).toEqual(initialState.history.current());
+			expect(history.current()).not.toEqual(initialHistory.current());
+			expect(history.back().current()).toEqual(initialHistory.current());
 		});
 
 		it('increments the sequence', () => {
@@ -59,10 +63,12 @@ describe('Game Reducer', () => {
 			state = gameReducer(initialState, {
 				type: actionTypes.GAME_BACK
 			});
+
+			history = new StateHistory(state.history);
 		});
 
 		it('moves to previous state in history', () => {
-			expect(state.history.current()).toEqual(initialState.history.back().current());
+			expect(history.current()).toEqual(initialHistory.back().current());
 		});
 
 		it('increments the sequence', () => {
@@ -79,10 +85,12 @@ describe('Game Reducer', () => {
 			state = gameReducer(initialState, {
 				type: actionTypes.GAME_FORWARD
 			});
+
+			history = new StateHistory(state.history);
 		});
 
 		it('moves to next state in history', () => {
-			expect(state.history.current()).toEqual(initialState.history.forward().current());
+			expect(history.current()).toEqual(initialHistory.forward().current());
 		});
 
 		it('increments the sequence', () => {

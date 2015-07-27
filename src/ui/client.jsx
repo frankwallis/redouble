@@ -14,9 +14,11 @@ import 'normalize.css';
 import 'purecss';
 import 'font-awesome/css/font-awesome.css';
 
+console.log("Received state " + JSON.stringify(global.__ISOMORPHIC_STATE__));
+
 const reducer = combineReducers(reducers);
 const finalCreateStore = applyMiddleware(thunk)(createStore);
-const store = finalCreateStore(reducer);
+const store = finalCreateStore(reducer, global.__ISOMORPHIC_STATE__);
 
 let router = (
 	<Router history={history}>

@@ -1,5 +1,7 @@
 
 import {GameBuilder} from "../model/game/game-builder";
+import {GameQuery} from "../model/game/game-query";
+import {StateHistory} from "./state-history";
 
 import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
@@ -25,11 +27,11 @@ export function newGame() {
 
 export function playCard(card) {
 	return (dispatch, getState) => {
-		let game = getState().gameStore.history.current();
-		let err = validateCard(card, game.currentBoard);
+		let history = new StateHistory(getState().gameStore.history);
+		let gameBuilder = new GameBuilder(history.current());
+		let err = validateCard(card, gameBuilder.toQuery().currentBoard);
 
 		if (!err) {
-			let gameBuilder = new GameBuilder(game.gameState);
 			let newstate = gameBuilder.playCard(card).build();
 			dispatch(pushState(newstate));
 			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
@@ -45,11 +47,11 @@ export function playCard(card) {
 
 export function makeBid(bid) {
 	return (dispatch, getState) => {
-		let game = getState().gameStore.history.current();
-		let err = validateBid(bid, game.currentBoard);
+		let history = new StateHistory(getState().gameStore.history);
+		let gameBuilder = new GameBuilder(history.current());
+		let err = validateBid(bid, gameBuilder.toQuery().currentBoard);
 
 		if (!err) {
-			let gameBuilder = new GameBuilder(game.gameState);
 			let newstate = gameBuilder.makeBid(bid).build();
 			dispatch(pushState(newstate));
 			scheduleAutoPlay(getState().gameStore.sequence, dispatch, getState);
@@ -69,7 +71,8 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 
 		if (sequence === forSequence) {
 			let players = getState().playerStore;
-			let game = getState().gameStore.history.current();
+			let history = new StateHistory(getState().gameStore.history);
+			let game = new GameQuery(history.current());
 
 			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
 				if (game.currentBoard.biddingHasEnded) {

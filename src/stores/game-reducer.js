@@ -7,8 +7,8 @@ import {
 	GAME_PAUSE, GAME_RESUME
 } from "./action-types";
 
-let game = GameBuilder.create().newBoard().toQuery();
-let history = new StateHistory().push(game);
+let gameState = GameBuilder.create().newBoard().build();
+let history = new StateHistory().push(gameState).build();
 
 let initialState = {
 	history,
@@ -21,32 +21,35 @@ export default function gameReducer(state = initialState, action) {
 		case GAME_PUSH_STATE:
 			return {
 				...state,
-				history: state.history.push(new GameQuery(action.state)),
+				history: new StateHistory(state.history).push(action.state).build(),
 				sequence: state.sequence + 1
 			};
 		case GAME_BACK:
 			return {
 				...state,
-				history: state.history.back(),
+				history: new StateHistory(state.history).back().build(),
 				sequence: state.sequence + 1,
 				autoPlay: false
 			};
 		case GAME_FORWARD:
 			return {
 				...state,
-				history: state.history.forward(),
+				history: new StateHistory(state.history).forward().build(),
 				sequence: state.sequence + 1,
 				autoPlay: false
 			};
 		case GAME_JUMP_BACK:
-			let jumpComparer = (game1, game2) => {
+			const jumpComparer = (state1, state2) => {
+				let game1 = new GameQuery(state1);
+				let game2 = new GameQuery(state2);
+
 				return ((game1.currentBoard.biddingHasEnded !== game2.currentBoard.biddingHasEnded) ||
 					(game1.currentBoard.playHasEnded !== game2.currentBoard.playHasEnded));
 			};
 
 			return {
 				...state,
-				history: state.history.jumpBack(jumpComparer),
+				history: new StateHistory(state.history).jumpBack(jumpComparer).build(),
 				sequence: state.sequence + 1,
 				autoPlay: false
 			};

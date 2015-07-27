@@ -13,6 +13,9 @@ import {BiddingBox} from "./bidding-box.jsx";
 import {BiddingHistory} from "./bidding-history.jsx";
 import {TrickComponent} from "./trick.jsx";
 
+import {StateHistory} from "../../stores/state-history";
+import {GameQuery} from "../../model/game/game-query";
+
 import {
 	playCard, makeBid,
 	back, forward, jumpBack, pause, resume
@@ -50,8 +53,8 @@ export class Table extends PureComponent {
 	}
 
 	render() {
-		let history = this.props.history;
-		let game = this.props.history.current();
+		let history = new StateHistory(this.props.history);
+		let game = new GameQuery(history.current());
 
 		let controlBar = (
 			<ControlBar {...bindActionCreators({back, forward, jumpBack, pause, resume}, this.props.dispatch)}

@@ -21,7 +21,7 @@ class Deferred {
 	}
 }
 
-function generateMarkup(path, query) {
+function generateMarkupAndState(path, query) {
 	const result = new Deferred();
 
 	/* initialise redux */
@@ -45,10 +45,12 @@ function generateMarkup(path, query) {
 			</Provider>
 		);
 
-		result.resolve(markup);
+		// TODO - how to handle pending async actions?
+		let state = store.getState();
+		result.resolve({markup, state});
 	});
 
 	return result.promise;
 }
 
-export default generateMarkup;
+export default generateMarkupAndState;

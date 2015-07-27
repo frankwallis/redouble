@@ -15,7 +15,9 @@
 		{% } %}
 	</head>
 	<body>
-		<div id="main"/>
+		<div id="main"></div>
+
+		<!-- comment out to see server rendering -->
 		{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
 		<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
 		{% } %}

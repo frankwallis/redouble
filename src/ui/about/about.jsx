@@ -1,7 +1,10 @@
 /* @flow */
 
 import React from 'react';
-import './about.css';
+
+if (process.env.__BROWSER__) {
+	require('./about.css');
+}
 
 /**
  * Top-Level view for the about page

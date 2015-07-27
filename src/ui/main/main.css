@@ -3,17 +3,17 @@ ol {
 	margin: 0;
 }
 
-.app-container {
+.main-container {
 	font-size: calc(0.55vw + .6em);
 	/*font-size: calc(0.65vw + .5em);*/
 	/*font-size: calc(0.8vw + .4em);*/
 }
 
-.app-navbar {
+.main-navbar {
 	font-size: calc(.8vh + .7em);
 }
 
-.app-content {
+.main-content {
 	position: absolute;
 	top: 2.5em;
 	left: 0;
@@ -21,15 +21,15 @@ ol {
 	bottom: 0;
 }
 
-.app-growl {
+.main-growl {
 	position: absolute;
 	top: 2.75em;
 	left: 0;
 }
 
-.app-spinner {
-  width: 3em;
-  height: 3em;
+.main-spinner {
+  width: 5em;
+  height: 5em;
   background-color: rgb(159, 45, 52);
   margin: auto;
   position: absolute;

@@ -9,10 +9,12 @@ module.exports = function(options) {
 		files: [
 			// This shim adds .bind to PhantomJS
 			'./phantomjs-shim.js',
+			'./environment-shim.js',
 			'../src/**/__tests__/*.js'
 		],
 
 		preprocessors: {
+			'./environment-shim.js': ['webpack'],
 			'../src/**/__tests__/*.js': ['webpack']
 		},
 

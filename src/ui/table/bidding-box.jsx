@@ -6,7 +6,9 @@ import {PureComponent} from 'react-pure-render';
 import {BidComponent} from '../components/bid.jsx';
 import {Bid, BidSuit, BidType} from '../../model/core/bid';
 
-import './bidding-box.css';
+if (process.env.__BROWSER__) {
+	require('./bidding-box.css');
+}
 
 export class BiddingBox extends PureComponent {
 

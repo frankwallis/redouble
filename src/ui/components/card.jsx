@@ -3,7 +3,10 @@
 import React from 'react';
 import {PureComponent} from 'react-pure-render';
 import {Card} from '../../model/core/card';
-import './card.css';
+
+if (process.env.__BROWSER__) {
+	require('./card.css');
+}
 
 export class CardComponent extends PureComponent {
 

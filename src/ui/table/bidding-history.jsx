@@ -5,7 +5,10 @@ import {PureComponent} from 'react-pure-render';
 
 import {BidComponent} from '../components/bid.jsx';
 import {Seat} from '../../model/core/seat';
-import './bidding-history.css';
+
+if (process.env.__BROWSER__) {
+	require('./bidding-history.css');
+}
 
 export class BiddingHistory extends PureComponent {
 

@@ -5,7 +5,10 @@ import {PureComponent} from 'react-pure-render';
 
 import {CardComponent} from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
-import './trick.css';
+
+if (process.env.__BROWSER__) {
+	require('./trick.css');
+}
 
 export class TrickComponent extends PureComponent {
 

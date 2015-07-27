@@ -5,7 +5,10 @@ import {PureComponent} from 'react-pure-render';
 
 import {CardComponent} from '../components/card.jsx';
 import {Card} from '../../model/core/card';
-import './hand.css';
+
+if (process.env.__BROWSER__) {
+	require('./hand.css');
+}
 
 export class HandComponent extends PureComponent {
 

@@ -24,7 +24,7 @@ module.exports = function(options) {
 	var jsLoaders = ['babel'];
 
 	return {
-		entry: './src/ui/app.jsx',
+		entry: './src/ui/client.jsx',
 		debug: !options.production,
 		devtool: options.devtool,
 		output: {
@@ -93,7 +93,8 @@ module.exports = function(options) {
 			new webpack.DefinePlugin({
 				"process.env": {
 					"NODE_ENV": JSON.stringify("production"),
-				},
+					"__BROWSER__": true
+				}
 			}),
 			new webpack.optimize.DedupePlugin(),
 			new webpack.optimize.UglifyJsPlugin({
@@ -107,6 +108,11 @@ module.exports = function(options) {
 				production: true,
 			}),
 		] : [
+			new webpack.DefinePlugin({
+				"process.env": {
+					"__BROWSER__": true
+				}
+			}),
 			new HtmlWebpackPlugin({
 				template: './config/index-template.html',
 			}),

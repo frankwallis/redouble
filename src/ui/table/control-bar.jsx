@@ -3,7 +3,9 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import './control-bar.css';
+if (process.env.__BROWSER__) {
+	require('./control-bar.css');
+}
 
 export class ControlBar extends PureComponent {
 

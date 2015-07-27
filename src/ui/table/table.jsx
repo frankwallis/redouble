@@ -18,7 +18,9 @@ import {
 	back, forward, jumpBack, pause, resume
 } from "../../stores/game-actions";
 
-import './table.css';
+if (process.env.__BROWSER__) {
+	require('./table.css');
+}
 
 /**
  * Top-Level View for displaying the current game from the GameStore

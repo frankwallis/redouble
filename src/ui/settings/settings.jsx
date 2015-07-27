@@ -5,7 +5,10 @@ import {connect} from 'react-redux';
 
 import {updatePlayer} from '../../stores/player-actions';
 import {Seat} from '../../model/core/seat';
-import './settings.css';
+
+if (process.env.__BROWSER__) {
+	require('./settings.css');
+}
 
 /**
  * Top-Level view for the game settings

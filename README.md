@@ -1,6 +1,6 @@
 # tower #
 
-[![build status](https://img.shields.io/travis/frankwallis/tower/master.svg?style=flat-square)](https://travis-ci.org/frankwallis/tower)
+[![build status](https://secure.travis-ci.org/frankwallis/tower.png?branch=master)](https://travis-ci.org/frankwallis/tower)
 
 [contract bridge game](http://frankwallis.github.io/tower/)
 

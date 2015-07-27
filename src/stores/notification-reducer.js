@@ -12,7 +12,6 @@ export default function notificationReducer(state = initialState, action) {
 			if (notification)
 				notification.response = action.response;
 
-			console.log('filtering on ' + action.id);
 			return state.filter(notif => notif.id !== action.id);
 		default:
 			return state;

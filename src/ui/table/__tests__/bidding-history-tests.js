@@ -14,7 +14,7 @@ describe('Bidding History', () => {
 		let headings = TestUtils.scryRenderedDOMComponentsWithTag(biddingHistory, 'th');
 
 		expect(headings.length).toEqual(4);
-		expect(headings[0].getDOMNode().textContent).toBe('north');
+		expect(headings[0].textContent).toBe('north');
 	});
 
 	it('displays all the bids', () => {

@@ -11,7 +11,7 @@ describe('Bid', () => {
 		let bidComponent = TestUtils.renderIntoDocument(<BidComponent bid={bid}/>);
 		//
 		let bidtext = TestUtils.findRenderedDOMComponentWithClass(bidComponent, 'bid-container');
-		expect(bidtext.getDOMNode().textContent).toBe("3");
+		expect(bidtext.textContent).toBe("3");
 	});
 
 	it('displays no bid', () => {
@@ -19,7 +19,7 @@ describe('Bid', () => {
 		let bidComponent = TestUtils.renderIntoDocument(<BidComponent bid={bid}/>);
 		//
 		let bidtext = TestUtils.findRenderedDOMComponentWithClass(bidComponent, 'bid-container');
-		expect(bidtext.getDOMNode().textContent).toBe("No Bid");
+		expect(bidtext.textContent).toBe("No Bid");
 	});
 
 	it('displays double', () => {
@@ -27,7 +27,7 @@ describe('Bid', () => {
 		let bidComponent = TestUtils.renderIntoDocument(<BidComponent bid={bid}/>);
 		//
 		let bidtext = TestUtils.findRenderedDOMComponentWithClass(bidComponent, 'bid-container');
-		expect(bidtext.getDOMNode().textContent).toBe("Double");
+		expect(bidtext.textContent).toBe("Double");
 	});
 
 	it('errors for invalid bids', () => {

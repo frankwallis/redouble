@@ -12,7 +12,7 @@ describe('Card', () => {
 		let cardComponent = TestUtils.renderIntoDocument(<CardComponent card={card}/>);
 		//
 		let cardtext = TestUtils.findRenderedDOMComponentWithClass(cardComponent, 'card-pip');
-		expect(cardtext.getDOMNode().textContent).toBe("A");
+		expect(cardtext.textContent).toBe("A");
 	});
 
 	it('displays the pip for plain cards', () => {
@@ -20,7 +20,7 @@ describe('Card', () => {
 		let cardComponent = TestUtils.renderIntoDocument(<CardComponent card={card}/>);
 		//
 		let cardtext = TestUtils.findRenderedDOMComponentWithClass(cardComponent, 'card-pip');
-		expect(cardtext.getDOMNode().textContent).toBe("8");
+		expect(cardtext.textContent).toBe("8");
 	});
 
 	xit('displays the right number of pips', () => {
@@ -37,7 +37,7 @@ describe('Card', () => {
 		//
 		let suits = TestUtils.scryRenderedDOMComponentsWithClass(cardComponent, 'card-suit');
 		expect(suits.length).toBeGreaterThan(0);
-		expect(suits[0].getDOMNode().className).toContain("suit-spades");
+		expect(suits[0].className).toContain("suit-spades");
 	});
 
 });

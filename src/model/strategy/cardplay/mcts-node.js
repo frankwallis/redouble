@@ -1,7 +1,6 @@
 import {Card} from "../../core/card";
 import {Seat} from "../../core/seat";
 import {BoardBuilder} from "../../game/board-builder";
-//var count = 0;
 
 export class Node {
 	constructor(parent, board, card, depth) {
@@ -12,16 +11,12 @@ export class Node {
 		this.visits = 0;
 		this.children = null;
 		this.depth = depth || 0;
-
-		//console.log("node " + count);
-		//count ++;
 	}
 
 	visit() {
-		//console.log('visiting ' + JSON.stringify(this.card));
 		this.ensureChildren();
 		this.visits += 1;
-		//console.log('visit ' + this.visits);
+		//console.log('visit ' + this.visits + ' for ' + JSON.stringify(this.card));
 		if (this.children.length > 0) {
 			let nextChild = this.selectNode();
 			let declarerTricks = nextChild.visit();
@@ -40,9 +35,9 @@ export class Node {
 			return node2.getUCB1() - node1.getUCB1();
 		};
 
-//		this.children.forEach((child) => {
-//			console.log("child " + JSON.stringify(child.card) + ' = ' + child.getUCB1());
-//		})
+		//		this.children.forEach((child) => {
+		//			console.log("child " + JSON.stringify(child.card) + ' = ' + child.getUCB1());
+		//		})
 		// shuffle because sortBy is a stable sort but we want equal nodes to be chosen randomly
 		return this.children.sort(nodeSort)[0];
 	}
@@ -67,9 +62,10 @@ export class Node {
 	ensureChildren() {
 		if (this.children === null) {
 			let availableCards = this.getAvailableCards();
-			let boardBuilder = new BoardBuilder(this.board.boardState);
-			this.children = availableCards.map((card) => new Node(this, boardBuilder.playCard(card).toQuery(), card, this.depth + 1));
-			//console.log('length: ' + JSON.stringify(this.children.length));
+			this.children = availableCards.map((card) => {
+				let boardBuilder = new BoardBuilder(this.board.boardState);
+				return new Node(this, boardBuilder.playCard(card).toQuery(), card, this.depth + 1);
+			});
 		}
 	}
 

@@ -2,28 +2,31 @@ import generateMarkup from "../server.jsx";
 
 describe('generateMarkup', () => {
 
-	it('generates markup for /about', (cb) => {
+	it('generates markup for /about', (done) => {
 		return generateMarkup("/about", "")
 			.then((html) => {
 				expect(html).toContain("Welcome to Tower!");
-				cb();
-			});
+				done();
+			})
+			.catch(done.fail);
 	});
 
-	it('generates markup for /settings', (cb) => {
+	it('generates markup for /settings', (done) => {
 		return generateMarkup("/settings", "")
 			.then((html) => {
 				expect(html).toContain(`<h3 class="settings-player-header"`);
-				cb();
-			});
+				done();
+			})
+			.catch(done.fail);
 	});
 
-	it('generates markup for /', (cb) => {
+	it('generates markup for /', (done) => {
 		return generateMarkup("/", "")
 			.then((html) => {
 				expect(html).toContain(`<div class="bridge-table"`);
-				cb();
-			});
+				done();
+			})
+			.catch(done.fail);
 	});
 
 });

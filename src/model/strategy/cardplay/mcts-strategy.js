@@ -16,40 +16,14 @@ export class CardplayStrategy {
 
 		if (board.biddingHasEnded) {
 			this.rootNode = this.getRootNode(board);
-			this.start();
 		}
-		else {
-			this.stop();
-		}
-
-		console.log('updated game state');
 	}
 
 	getCard() {
+		this.visit(20);
+		//console.log("visits = " + this.rootNode.visits);
 		let card = this.rootNode.bestCard();
-		console.log("visits = " + this.rootNode.visits);
 		return Promise.resolve(card);
-	}
-
-	start() {
-		if (!this.started) {
-			this.started = true;
-			this.nextVisit();
-		}
-	}
-
-	stop() {
-		this.started = false;
-	}
-
-	nextVisit() {
-		if (this.started) {
-			// limit to 50% CPU
-			let startTime = new Date();
-			this.visit(15);
-			let endTime = new Date();
-			setTimeout(() => this.nextVisit(), endTime - startTime);
-		}
 	}
 
 	visit(rounds) {

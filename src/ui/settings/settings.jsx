@@ -42,7 +42,7 @@ export class SettingsView extends Component {
 	}
 
 	render() {
-		console.log('rendering setings');
+		console.log('rendering settings');
 
 		let players = Seat.all().map((seat) => {
 			return (

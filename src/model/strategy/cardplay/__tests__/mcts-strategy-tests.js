@@ -3,6 +3,7 @@ import {GameBuilder} from '../../../game/game-builder';
 import {Bid} from '../../../core/bid';
 import {Deck} from '../../../core/deck';
 import {Seat} from '../../../core/seat';
+import {validateCard} from '../../../game/validators';
 
 describe('Cardplay Strategy', () => {
 	describe('getCard', () => {
@@ -52,16 +53,18 @@ describe('Cardplay Strategy', () => {
 
 			return strategy.getCard()
 				.then((card) => {
+					let err = validateCard(card, gameBuilder.toQuery().currentBoard);
+					if (err) throw err;
 					gameBuilder = gameBuilder.playCard(card);
 
 					if (gameBuilder.toQuery().currentBoard.playHasEnded)
-						return gameBuilder.toQuery();
+						return gameBuilder.toQuery().currentBoard;
 					else
 						return playAll(gameBuilder, strategy);
 				});
 		}
 
-		xit('unblocks in 3 card ending', (cb) => {
+		xit('unblocks in 3 card ending', (done) => {
 			let gameBuilder = GameBuilder.create().newBoard(
 				Seat.West,
 				Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"]),
@@ -73,11 +76,12 @@ describe('Cardplay Strategy', () => {
 			return playAll(gameBuilder, strategy)
 				.then((endgame) => {
 					expect(endgame.declarerTricks).toBe(3);
-					cb();
-				});
+					done();
+				})
+				.catch(done.fail);
 		});
 
-		xit('Bond beats Drax', (cb) => {
+		xit('Bond beats Drax', (done) => {
 			let gameBuilder = GameBuilder.create().newBoard(
 				Seat.West,
 				Deck.rig(Seat.West,
@@ -93,8 +97,9 @@ describe('Cardplay Strategy', () => {
 			return playAll(gameBuilder, strategy)
 				.then((endgame) => {
 					expect(endgame.declarerTricks).toBe(13);
-					cb();
-				});
+					done();
+				})
+				.catch(done.fail);
 		});
 	});
 

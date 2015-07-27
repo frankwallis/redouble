@@ -271,7 +271,21 @@ describe('Board Query', () => {
 		});
 
 		it('returns all available cards when void', () => {
-			// TODO
+			let boardBuilder = BoardBuilder.create(
+				Seat.West,
+				Deck.rig(Seat.West, ["2S"], ["3H"], [ "4D"], ["5C"]),
+				Bid.createAll("no bid", "no bid", "1NT", "no bid", "no bid", "no bid")
+			);
+			let board = boardBuilder.toQuery();
+			expect(board.legalCards.length).toBe(1);
+			board = boardBuilder.playCard(board.legalCards[0]).toQuery();
+			expect(board.legalCards.length).toBe(1);
+			board = boardBuilder.playCard(board.legalCards[0]).toQuery();
+			expect(board.legalCards.length).toBe(1);
+			board = boardBuilder.playCard(board.legalCards[0]).toQuery();
+			expect(board.legalCards.length).toBe(1);
+			board = boardBuilder.playCard(board.legalCards[0]).toQuery();
+			expect(board.legalCards.length).toBe(0);
 		});
 	});
 

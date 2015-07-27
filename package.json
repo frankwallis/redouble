@@ -2,7 +2,7 @@
   "name": "tower",
   "version": "0.1.0",
   "description": "contract bridge game",
-  "main": "src/ui/app.jsx",
+  "main": "src/server/main.js",
   "dependencies": {
     "babel": "^5.1.10",
     "cheerio": "^0.19.0",
@@ -69,7 +69,7 @@
     "build": "./node_modules/.bin/webpack --config config/webpack.production.js",
     "deploy": "npm run build && node ./node_modules/.bin/gh-pages -d dist && npm run clean",
     "deploy:aws": "npm run build && node ./config/aws-deploy.js && npm run clean",
-    "clean": "./node_modules/rimraf/bin.js ./dist"
+    "clean": "./node_modules/.bin/rimraf ./dist"
   },
   "repository": {
     "type": "git",

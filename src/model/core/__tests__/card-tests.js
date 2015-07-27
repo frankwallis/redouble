@@ -96,9 +96,20 @@ describe("Card", () => {
 		});
 	});
 
-	describe("stringify", () => {
-		it("returns unique values", () => {
-
+	describe("suitName", () => {
+		it("returns correct values", () => {
+			expect(Card.suitName(Suit.Hearts)).toBe("hearts");
+			expect(Card.suitName(Suit.Clubs)).toBe("clubs");
 		});
 	});
+
+	describe("pipName", () => {
+		it("returns correct values", () => {
+			expect(Card.pipName(Pip.Ace)).toBe("A");
+			expect(Card.pipName(Pip.Ten)).toBe("10");
+			expect(Card.pipName(Pip.Nine)).toBe("9");
+			expect(Card.pipName(Pip.Two)).toBe("2");
+		});
+	});
+
 });

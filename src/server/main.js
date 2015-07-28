@@ -36,7 +36,7 @@ if (env === 'production') {
 // 	require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`));
 // }
 
-app.use(favicon(path.join(__dirname, '../resources/tower.jpeg')));
+app.use(favicon(path.join(__dirname, '../../resources/cards.ico')));
 
 const cacheOpts: Object = {maxAge: 86400000, gzip: false};
 

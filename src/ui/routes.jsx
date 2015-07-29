@@ -11,6 +11,7 @@ let routes = (
 		<Route path="/" name="table" component={Table} />
 		<Route path="/settings" name="settings" component={SettingsView} />
 		<Route path="/about" name="about" component={AboutView} />
+		<Route path="*" name="table" component={Table} />
 	</Route>
 );
 

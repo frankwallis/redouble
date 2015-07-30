@@ -1,9 +1,9 @@
-declare module tower {
+declare module redouble {
     interface IBiddingStrategy {
-        getBid(game: tower.IGameState);    
+        getBid(game: redouble.IGameState);
     }
-    
+
     interface ICardplayStrategy {
-        getCard(game: tower.IGameState);    
+        getCard(game: redouble.IGameState);
     }
 }

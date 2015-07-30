@@ -1,5 +1,5 @@
 {
-  "name": "tower",
+  "name": "redouble",
   "version": "0.1.0",
   "description": "contract bridge game",
   "main": "src/server/main.js",
@@ -75,8 +75,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/frankwallis/tower.git"
+    "url": "https://www.github.com/frankwallis/redouble.git"
   },
+  "private": true,
   "author": "Frank Wallis",
   "license": "MIT"
 }

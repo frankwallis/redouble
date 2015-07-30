@@ -5,7 +5,7 @@ describe('generateMarkup', () => {
 	it('generates markup for /about', (done) => {
 		return generateMarkupAndState("/about", "")
 			.then(({markup, state}) => {
-				expect(markup).toContain("Welcome to Tower!");
+				expect(markup).toContain("Welcome to Redouble!");
 				expect(state).toBeDefined();
 				done();
 			})

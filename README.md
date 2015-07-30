@@ -1,8 +1,8 @@
-# tower #
+# Redouble #
 
-[![build status](https://secure.travis-ci.org/frankwallis/tower.png?branch=master)](https://travis-ci.org/frankwallis/tower)
+[![build status](https://secure.travis-ci.org/frankwallis/redouble.png?branch=master)](https://travis-ci.org/frankwallis/redouble)
 
-[contract bridge game](http://frankwallis.github.io/tower/)
+[contract bridge game](http://frankwallis.github.io/redouble/)
 
 developed in ES6 using ReactJS, Redux, WebPack, React-Hot-Loader, Karma/Jasmine, Babel
 

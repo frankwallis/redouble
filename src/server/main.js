@@ -21,7 +21,7 @@ if (env === 'production') {
 	app.use(require('koa-compressor')());
 }
 
-app.use(favicon(path.join(__dirname, '../../resources/cards.ico')));
+app.use(favicon(path.join(__dirname, '../../resources/redouble.ico')));
 
 if (env === 'development') {
 	app.use(isomorph());

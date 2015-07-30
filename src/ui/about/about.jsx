@@ -35,9 +35,8 @@ export class AboutView extends React.Component {
 				<section>
 					<h3>Roadmap</h3>
 					<ul>
-						<li>Implement isomorphism</li>
-						<li>Deploy to AWS</li>
 						<li>Implement the playing strategies based on <a href="http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm">Information Set Monte Carlo Tree Search</a> algorithm</li>
+						<li>Add server API for playing strategies and data storage</li>
 						<li>UI Improvements (Sounds/Animations/Accessibility/Responsivity)</li>
 						<li>Add Integration Tests</li>
 						<li>React Native</li>

@@ -31,9 +31,10 @@ if (env === 'development') {
 }
 else {
 	app.use(isomorph());
-	// serve assets from dist folder
-	let serveStatic = require('koa-static');
-	app.use(serveStatic(path.join(__dirname, '../../dist')));
+	// serve cached assets from dist folder
+	const cacheOpts: Object = {maxAge: 86400000, gzip: false};
+	let staticCache = require('koa-static-cache');
+	app.use(staticCache(path.join(__dirname, '../../dist')), cacheOpts);
 }
 
 app.listen(8080);

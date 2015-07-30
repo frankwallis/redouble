@@ -11,6 +11,7 @@ export default function() {
 		if (path.basename(this.path).indexOf(".") < 0) {
 			route = this.path;
 			this.path = "/index.html";
+			console.log('here');
 		}
 
 		yield next;

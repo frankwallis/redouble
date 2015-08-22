@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 import {NotificationService} from "../../services/notification-service";
 
 /**
@@ -9,11 +9,11 @@ import {NotificationService} from "../../services/notification-service";
  */
 @Component({
    selector: 'growler',
-   injectables: [NotificationService]
+   viewBindings: [NotificationService]
 })
 @View({
    templateUrl: 'src/ui/growl/growl.html',
-   directives: [For]
+   directives: [NgFor]
 })
 
 export class GrowlContainer {

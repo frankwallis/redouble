@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 
 import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
@@ -8,11 +8,11 @@ import {GameService} from '../../services/game-service';
 
 @Component({
   selector: 'bidding-box',
-  injectables: [GameService]
+  viewBindings: [GameService]
 })
 @View({
   templateUrl: 'src/ui/table/bidding-box.html',
-  directives: [For, BidComponent]
+  directives: [NgFor, BidComponent]
 })
 export class BiddingBox {
    constructor(gameService: GameService) {

@@ -13,8 +13,8 @@
          <col span="1" style="width: '10%'"></col>
       </colgroup>
          <tbody (click)="sayHello($event)">
-            <tr *for="#level of levels" class="bidding-box-level">
-               <td *for="#thebid of level" class="bidding-box-cell" colspan="2">
+            <tr *ng-for="#level of levels" class="bidding-box-level">
+               <td *ng-for="#thebid of level" class="bidding-box-cell" colspan="2">
                   <a class="bidding-box-button pure-button"
                      (^click)="makeBid(thebid)">
                      <bid-component [bid]="thebid"/>

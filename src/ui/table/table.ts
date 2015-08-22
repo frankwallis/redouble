@@ -1,8 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {
-   Component, View,
-   For, Switch, SwitchWhen} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 
 import {PlayerService, IPlayer} from "../../services/player-service";
 import {GameService} from "../../services/game-service";
@@ -18,13 +16,13 @@ import {TrickComponent} from "./trick";
  */
 @Component({
    selector: 'table-view',
-   injectables: [GameService, PlayerService]
+   viewBindings: [GameService, PlayerService]
 })
 @View({
    templateUrl: 'src/ui/table/table.html',
    directives: [
-      For, Switch, SwitchWhen,
-      BiddingBox, HandComponent, BiddingHistory, TrickComponent,
+      NgFor,
+      BiddingBox, HandComponent, BiddingHistory, TrickComponent
    ]
 })
 

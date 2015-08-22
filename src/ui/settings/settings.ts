@@ -1,17 +1,17 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 
 import {PlayerService} from "../../services/player-service";
 import {Seat} from "../../model/core/seat";
 
 @Component({
   selector: 'settings-view',
-  injectables: [PlayerService]
+  viewBindings: [PlayerService]
 })
 @View({
   templateUrl: 'src/ui/settings/settings.html',
-  directives: [For]
+  directives: [NgFor]
 })
 export class SettingsView {
    constructor(playerService: PlayerService) {

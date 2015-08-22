@@ -2,14 +2,14 @@
    <thead>
       <tr>
          <th class="bidding-cell"
-             *for="#seat of seats">{{seatName(seat)}}</th>
+             *ng-for="#seat of seats">{{seatName(seat)}}</th>
       </tr>
    </thead>
    <tbody>
       <tr class="bidding-round"
-          *for="#round of rounds">
+          *ng-for="#round of rounds">
          <td class="bidding-cell"
-             *for="#seat of seats">
+             *ng-for="#seat of seats">
              <bid-component bind-bid="getBid(round, seat)"/>
          </td>
       </tr>

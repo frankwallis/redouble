@@ -1,6 +1,6 @@
 <div class="hand-container">
    <ol class="container">
-      <li class="hand-card" *for="#card of availableCards">
+      <li class="hand-card" *ng-for="#card of availableCards">
          <button class="hand-card-button"
                  (^click)="playCard(card)">
             <card-component bind-card="card"/>

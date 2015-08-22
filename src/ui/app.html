@@ -1,7 +1,7 @@
 <div class="app-container">
    <nav role="navigation" class="app-navbar nav-main">
       <ul class="nav-site">
-         <li *for="#route of routes">
+         <li *ng-for="#route of routes">
             <a [class.active]="state.route == route"
                href="#"
                (^click)="routeClicked($event, route)">
@@ -11,18 +11,10 @@
       </ul>
    </nav>
    <div class="app-content">
-      <settings-view *if="state.route == 'settings'" ></settings-view>
-      <table-view *if="state.route != 'settings'" ></table-view>
+      <settings-view *ng-if="state.route == 'settings'" ></settings-view>
+      <table-view *ng-if="state.route != 'settings'" ></table-view>
    </div>
 
-   <!-- <div [switch]="state.route" class="app-content">
-      <template [switch-when]="settings">
-         <settings-view></settings-view>
-      </template>
-      <template [switch-default]>
-         <table-view></table-view>
-      </template>
-   </div> -->
    <div class="app-growl">
       <growler />
    </div>

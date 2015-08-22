@@ -8,7 +8,6 @@ developed in TypeScript using Angular2, SystemJS
 
 * npm install
 * jspm install
-* jspm install --dev
 * npm start
 
 ### Issues

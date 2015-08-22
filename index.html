@@ -8,33 +8,23 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
    <meta name="fragment" content="!" />
 
-   <title>tower</title>
+   <title>redouble</title>
    <base href="/"></base>
 
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
 
-   <script src="jspm_packages/github/jmcriffey/bower-traceur-runtime@0.0.88/traceur-runtime.js"></script>
-   <script src="lib/es6-module-loader.src.js"></script>
-   <script src="lib/system.src.js"></script>
+   <script src="jspm_packages/system.src.js"></script>
    <script src="config.js"></script>
-   <script src="lib/angular2.dev.js"></script>
       
 </head>
 
 <body>
-   <tower-app>
+   <redouble-app>
       Loading...
-   </tower-app>
+   </redouble-app>
 
-   <script type="module">
-      System.config({
-         "transpiler": "typescript",
-         "typescriptOptions": {
-          "emitDecoratorMetadata": true
-         }
-      });
-      
-      System.import('./src/ui/app')
+   <script type="text/javascript">
+      System.import('app')
          .then(function(app){
             app.main();
          })
@@ -42,7 +32,7 @@
             console.error('ERROR: ', err)
          });
 
-      Promise.all(System.import('./necolas/normalize.css'),
+      Promise.all(System.import('normalize'),
                   System.import('purecss/build/pure.css!'),
                   System.import('font-awesome/css/font-awesome.css!'),
                   System.import('./src/ui/app.css!'))

@@ -1,7 +1,7 @@
 <div>
    <h1>Settings</h1>
    <ul class="settings-players">
-      <li *for="#seat of seats" class="settings-player">
+      <li *ng-for="#seat of seats" class="settings-player">
          <h3 class="settings-player-header">{{Seat.name(seat)}}</h3>
          <div class="settings-field">
             <label class="settings-label">Name</label>

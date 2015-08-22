@@ -1,14 +1,14 @@
-<div [switch]="bid.type" class="bid-container">
-   <template [switch-when]="BidType.NoBid">
+<div [ng-switch]="bid.type" class="bid-container">
+   <template [ng-switch-when]="BidType.NoBid">
       No Bid
    </template>
-   <template [switch-when]="BidType.Double">
+   <template [ng-switch-when]="BidType.Double">
       Double
    </template>
-   <template [switch-when]="BidType.Redouble">
+   <template [ng-switch-when]="BidType.Redouble">
       Redouble
    </template>
-   <template [switch-when]="BidType.Call">
+   <template [ng-switch-when]="BidType.Call">
       <span class="bid-level">{{bid.level}}</span>
       <span [class-name]='"bid-suit suit-" + Bid.suitName(bid.suit, false)'></span>
    </template>

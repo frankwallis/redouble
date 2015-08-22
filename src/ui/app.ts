@@ -1,5 +1,7 @@
 /// <reference path="../_references.d.ts" />
-import {bootstrap, Component, View, For, If, Switch, SwitchWhen, SwitchDefault} from 'angular2/angular2';
+import "reflect-metadata"
+
+import {bootstrap, Component, View, NgFor, NgIf} from 'angular2/angular2';
 import {SettingsView} from './settings/settings';
 import {TableView} from './table/table';
 import {GrowlContainer} from './growl/growl';
@@ -7,12 +9,12 @@ import {GrowlContainer} from './growl/growl';
 @View({
   templateUrl: 'src/ui/app.html',
   directives: [
-     For, If, Switch, SwitchWhen, SwitchDefault,
+     NgFor, NgIf,
      SettingsView, TableView, GrowlContainer
   ]
 })
 @Component({
-  selector: 'tower-app'
+  selector: 'redouble-app'
 })
 export class App {
    constructor() {

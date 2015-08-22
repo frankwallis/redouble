@@ -1,8 +1,8 @@
 <ol class="trick-container">
-   <li *for="#seat of Seat.all()"
+   <li *ng-for="#seat of Seat.all()"
        [class-name]='"trick-card-" + Seat.name(seat)'>
       <card-component [card]="gameService.currentState.currentTrick[seat]"
-                      *if="gameService.currentState.currentTrick[seat]"/>
+                      *ng-if="gameService.currentState.currentTrick[seat]"/>
 
    </li>
 </ol>

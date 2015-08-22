@@ -1,6 +1,6 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For, If} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 
 import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid} from '../../model/core/bid';
@@ -9,11 +9,11 @@ import {Seat, seatName} from "../../model/core/seat";
 
 @Component({
   selector: 'bidding-history',
-  injectables: [GameService]
+  viewBindings: [GameService]
 })
 @View({
   templateUrl: 'src/ui/table/bidding-history.html',
-  directives: [For, If, BidComponent]
+  directives: [NgFor, BidComponent]
 })
 export class BiddingHistory {
 

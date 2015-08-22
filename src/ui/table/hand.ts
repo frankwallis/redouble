@@ -1,30 +1,32 @@
 /// <reference path="../../_references.d.ts" />
 
-import {Component, View, For} from 'angular2/angular2';
+import {Component, Directive, View, NgFor} from 'angular2/angular2';
 
 import {CardComponent} from '../components/card';
 import {GameService} from '../../services/game-service';
 import {Card} from '../../model/core/card';
 
+import handTemplate from "./hand.html";
+
 @Component({
    selector: 'hand-component',
-   injectables: [GameService],
-   properties: {
-      seat: "seat"
-   }
+   viewBindings: [GameService],
+   properties: [ "seat" ]
 })
 @View({
-   templateUrl: 'src/ui/table/hand.html',
-   directives: [For, CardComponent]
+   template: handTemplate,
+   directives: [NgFor, CardComponent]
 })
 export class HandComponent {
 
    constructor(gameService: GameService) {
       this.gameService = gameService;
+      console.log('creating hand');
+      this.seat = 1;
    }
 
    private gameService: GameService;
-   private seat: number;
+   public seat: number;
    
    get availableCards() {
       console.log('getting available for ' + this.seat);

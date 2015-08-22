@@ -6,9 +6,7 @@ import {Suit,Pip,Card,suitName,pipName, ICard} from "../../model/core/card";
 @Component({
    selector: 'card-component',
    services: [],
-   properties: {
-      card: "card"
-   }
+   properties: [ "card" ]
 })
 @View({
    templateUrl: 'src/ui/components/card.html',

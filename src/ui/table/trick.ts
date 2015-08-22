@@ -7,6 +7,7 @@ import {Seat} from '../../model/core/seat';
 import {GameService} from "../../services/game-service";
 
 import "./trick.css";
+import trickTemplate from "./trick.html";
 
 @Component({
    selector: 'trick-component',
@@ -15,7 +16,7 @@ import "./trick.css";
    }
 })
 @View({
-   templateUrl: 'src/ui/table/trick.html',
+   template: trickTemplate,
    directives: [CardComponent, NgFor, NgIf]
 })
 export class TrickComponent {

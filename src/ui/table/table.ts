@@ -12,6 +12,7 @@ import {BiddingHistory} from "./bidding-history";
 import {TrickComponent} from "./trick";
 
 import "./table.css";
+import tableTemplate from "./table.html";
 
 /**
  * Top-Level View for displaying the current game from the GameStore
@@ -21,7 +22,7 @@ import "./table.css";
    bindings: [GameService, PlayerService]
 })
 @View({
-   templateUrl: 'src/ui/table/table.html',
+   template: tableTemplate,
    directives: [
       NgFor,
       BiddingBox, HandComponent, BiddingHistory, TrickComponent

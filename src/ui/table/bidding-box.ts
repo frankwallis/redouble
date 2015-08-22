@@ -7,12 +7,13 @@ import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
 import {GameService} from '../../services/game-service';
 
 import "./bidding-box.css";
+import biddingBoxTemplate from "./bidding-box.html";
 
 @Component({
   selector: 'bidding-box'
 })
 @View({
-  templateUrl: 'src/ui/table/bidding-box.html',
+  template: biddingBoxTemplate,
   directives: [NgFor, BidComponent]
 })
 export class BiddingBox {

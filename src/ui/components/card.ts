@@ -5,13 +5,14 @@ import {Suit, Pip, Card, suitName, pipName, ICard} from "../../model/core/card";
 
 import "./suit.css";
 import "./card.css";
+import cardTemplate from "./card.html";
 
 @Component({
    selector: 'card-component',
    properties: [ "card" ]
 })
 @View({
-   templateUrl: 'src/ui/components/card.html',
+   template: cardTemplate,
    directives: []
 })
 export class CardComponent {

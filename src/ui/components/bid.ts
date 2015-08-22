@@ -5,13 +5,14 @@ import {BidType, BidSuit, Bid, IBid} from '../../model/core/bid';
 
 import "./suit.css";
 import "./bid.css";
+import bidTemplate from "./bid.html";
 
 @Component({
    selector: 'bid-component',
    properties: [ "bid" ]
 })
 @View({
-   templateUrl: 'src/ui/components/bid.html',
+   template: bidTemplate,
    directives: [NgSwitch, NgSwitchWhen]
 })
 

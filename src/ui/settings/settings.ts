@@ -6,6 +6,7 @@ import {PlayerService} from "../../services/player-service";
 import {Seat} from "../../model/core/seat";
 
 import "./settings.css";
+import settingsTemplate from "./settings.html";
 
 @Component({
   selector: 'settings-view',

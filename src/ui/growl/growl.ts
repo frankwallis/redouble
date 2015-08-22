@@ -4,6 +4,7 @@ import {Component, View, NgFor} from 'angular2/angular2';
 import {NotificationService} from "../../services/notification-service";
 
 import "./growl.css";
+import growlTemplate from "./growl.html";
 
 /**
  * Component for displaying notifications from the
@@ -14,7 +15,7 @@ import "./growl.css";
    viewBindings: [NotificationService]
 })
 @View({
-   templateUrl: 'src/ui/growl/growl.html',
+   template: growlTemplate,
    directives: [NgFor]
 })
 

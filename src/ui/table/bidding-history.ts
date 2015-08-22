@@ -8,12 +8,13 @@ import {GameService} from '../../services/game-service';
 import {Seat, seatName} from "../../model/core/seat";
 
 import "./bidding-history.css";
+import biddingHistoryTemplate from "./bidding-history.html";
 
 @Component({
   selector: 'bidding-history'
 })
 @View({
-  templateUrl: 'src/ui/table/bidding-history.html',
+  template: biddingHistoryTemplate,
   directives: [NgFor, BidComponent]
 })
 export class BiddingHistory {

@@ -7,6 +7,7 @@ import {GameService} from '../../services/game-service';
 import {Card} from '../../model/core/card';
 
 import handTemplate from "./hand.html";
+import "./hand.css";
 
 @Component({
    selector: 'hand-component',

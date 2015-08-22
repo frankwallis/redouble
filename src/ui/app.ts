@@ -6,6 +6,14 @@ import {SettingsView} from './settings/settings';
 import {TableView} from './table/table';
 import {GrowlContainer} from './growl/growl';
 
+import 'normalize';
+import 'purecss/build/pure.css!';
+import 'font-awesome';
+
+import './components/container.css';
+import './navbar/navbar.css';
+import './app.css';
+
 @View({
   templateUrl: 'src/ui/app.html',
   directives: [

@@ -3,6 +3,9 @@
 import {Component, View, NgSwitch, NgSwitchWhen} from 'angular2/angular2';
 import {BidType, BidSuit, Bid, IBid} from '../../model/core/bid';
 
+import "./suit.css";
+import "./bid.css";
+
 @Component({
    selector: 'bid-component',
    properties: [ "bid" ]

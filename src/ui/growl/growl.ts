@@ -3,6 +3,8 @@
 import {Component, View, NgFor} from 'angular2/angular2';
 import {NotificationService} from "../../services/notification-service";
 
+import "./growl.css";
+
 /**
  * Component for displaying notifications from the
  * NotificationStore as growls

@@ -17,7 +17,7 @@ System.config({
         "*.ts": {
           "loader": "ts"
         },
-        "*.css1": {
+        "*.css": {
           "loader": "css"
         },
         "*.html": {

@@ -3,6 +3,9 @@
 import {Component, View, Switch, SwitchWhen} from 'angular2/angular2';
 import {Suit, Pip, Card, suitName, pipName, ICard} from "../../model/core/card";
 
+import "./suit.css";
+import "./card.css";
+
 @Component({
    selector: 'card-component',
    properties: [ "card" ]

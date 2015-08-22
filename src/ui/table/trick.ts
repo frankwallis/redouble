@@ -6,6 +6,8 @@ import {CardComponent} from '../components/card';
 import {Seat} from '../../model/core/seat';
 import {GameService} from "../../services/game-service";
 
+import "./trick.css";
+
 @Component({
    selector: 'trick-component',
    bind: {

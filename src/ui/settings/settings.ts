@@ -5,6 +5,8 @@ import {Component, View, NgFor} from 'angular2/angular2';
 import {PlayerService} from "../../services/player-service";
 import {Seat} from "../../model/core/seat";
 
+import "./settings.css";
+
 @Component({
   selector: 'settings-view',
   viewBindings: [PlayerService]

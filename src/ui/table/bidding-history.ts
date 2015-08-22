@@ -7,6 +7,8 @@ import {BidSuit, BidType, Bid} from '../../model/core/bid';
 import {GameService} from '../../services/game-service';
 import {Seat, seatName} from "../../model/core/seat";
 
+import "./bidding-history.css";
+
 @Component({
   selector: 'bidding-history'
 })

@@ -6,6 +6,8 @@ import {BidComponent} from '../components/bid';
 import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
 import {GameService} from '../../services/game-service';
 
+import "./bidding-box.css";
+
 @Component({
   selector: 'bidding-box'
 })

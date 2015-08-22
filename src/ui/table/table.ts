@@ -11,6 +11,8 @@ import {BiddingBox} from "./bidding-box";
 import {BiddingHistory} from "./bidding-history";
 import {TrickComponent} from "./trick";
 
+import "./table.css";
+
 /**
  * Top-Level View for displaying the current game from the GameStore
  */

@@ -31,14 +31,6 @@
          .catch(function (err){
             console.error('ERROR: ', err)
          });
-
-      Promise.all(System.import('normalize'),
-                  System.import('purecss/build/pure.css!'),
-                  System.import('font-awesome/css/font-awesome.css!'),
-                  System.import('./src/ui/app.css!'))
-         .catch(function (err){
-            console.log('ERROR: ', err)
-         });
    </script>
 </body>
 

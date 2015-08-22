@@ -7,8 +7,7 @@ import {BidSuit, BidType, Bid, IBid} from '../../model/core/bid';
 import {GameService} from '../../services/game-service';
 
 @Component({
-  selector: 'bidding-box',
-  viewBindings: [GameService]
+  selector: 'bidding-box'
 })
 @View({
   templateUrl: 'src/ui/table/bidding-box.html',

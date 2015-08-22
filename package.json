@@ -1,5 +1,5 @@
 {
-  "name": "tower",
+  "name": "redouble",
   "version": "0.1.0",
   "description": "contract bridge",
   "main": "src/index.ts",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/frankwallis/tower.git"
+    "url": "https://www.github.com/frankwallis/redouble.git"
   },
   "author": "Frank Wallis",
   "license": "MIT",

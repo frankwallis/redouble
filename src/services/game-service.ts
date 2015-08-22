@@ -3,16 +3,10 @@
 import {GameStateHelper} from "../model/game/game-state";
 import {NotificationService} from "./notification-service";
 
-var instance = null;
-
 export class GameService {
    //constructor(@Inject(NotificationService) notificationService) {
    constructor() {
-      // singleton!
-      if (!instance)
-         instance = this;
-      else
-         return instance;
+   	console.log('in game service constructor');
 
       //this.notificationService = notificationService;
       this.states = [ new GameStateHelper().newBoard() ];

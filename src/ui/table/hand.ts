@@ -10,7 +10,6 @@ import handTemplate from "./hand.html";
 
 @Component({
    selector: 'hand-component',
-   viewBindings: [GameService],
    properties: [ "seat" ]
 })
 @View({
@@ -22,7 +21,6 @@ export class HandComponent {
    constructor(gameService: GameService) {
       this.gameService = gameService;
       console.log('creating hand');
-      this.seat = 1;
    }
 
    private gameService: GameService;

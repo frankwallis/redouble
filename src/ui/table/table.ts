@@ -16,7 +16,7 @@ import {TrickComponent} from "./trick";
  */
 @Component({
    selector: 'table-view',
-   viewBindings: [GameService, PlayerService]
+   bindings: [GameService, PlayerService]
 })
 @View({
    templateUrl: 'src/ui/table/table.html',

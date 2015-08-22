@@ -8,7 +8,6 @@ import {GameService} from "../../services/game-service";
 
 @Component({
    selector: 'trick-component',
-   viewBindings: [GameService],
    bind: {
       card: "card"
    }

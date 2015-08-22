@@ -8,8 +8,7 @@ import {GameService} from '../../services/game-service';
 import {Seat, seatName} from "../../model/core/seat";
 
 @Component({
-  selector: 'bidding-history',
-  viewBindings: [GameService]
+  selector: 'bidding-history'
 })
 @View({
   templateUrl: 'src/ui/table/bidding-history.html',

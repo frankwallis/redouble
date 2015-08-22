@@ -5,7 +5,6 @@ import {BidType, BidSuit, Bid, IBid} from '../../model/core/bid';
 
 @Component({
    selector: 'bid-component',
-   services: [],
    properties: [ "bid" ]
 })
 @View({

@@ -14,6 +14,7 @@
    <link rel="shortcut icon" href="/resources/tower.jpeg" />
 
    <script src="jspm_packages/system.src.js"></script>
+   <script src="jspm_packages/system.src.js"></script>
    <script src="config.js"></script>
       
 </head>
@@ -24,7 +25,10 @@
    </redouble-app>
 
    <script type="text/javascript">
-      System.import('app')
+      System.import('zone.js')
+      	.then(function() {
+      		return System.import('app');
+      	})
          .then(function(app){
             app.main();
          })

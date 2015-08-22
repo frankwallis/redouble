@@ -1,18 +1,16 @@
 <div class="app-container">
    <nav role="navigation" class="app-navbar nav-main">
       <ul class="nav-site">
-         <li *ng-for="#route of routes">
-            <a [class.active]="state.route == route"
-               href="#"
-               (^click)="routeClicked($event, route)">
-               {{route}}
-            </a>
+         <li>
+         	<a [router-link]="['/table']" class="link" [class.active]="tableActive()">Table</a>
+         </li>
+         <li>
+         	<a [router-link]="['/settings']" class="link" [class.active]="settingsActive()">Settings</a>
          </li>
       </ul>
    </nav>
    <div class="app-content">
-      <settings-view *ng-if="state.route == 'settings'" ></settings-view>
-      <table-view *ng-if="state.route != 'settings'" ></table-view>
+   	<router-outlet></router-outlet>
    </div>
 
    <div class="app-growl">

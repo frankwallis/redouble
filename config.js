@@ -9,6 +9,7 @@ System.config({
     "npm:*": "jspm_packages/npm/*",
     "app": "src"
   },
+
   packages: {
     "app": {
       "main": "ui/app",
@@ -39,6 +40,7 @@ System.config({
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91",
     "ts": "github:frankwallis/plugin-typescript@2.0.6",
     "typescript": "npm:typescript@1.6.0-dev.20150822",
+    "zone.js": "npm:zone.js@0.5.3",
     "github:frankwallis/plugin-typescript@2.0.6": {
       "typescript": "npm:typescript@1.6.0-dev.20150822"
     },

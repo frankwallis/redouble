@@ -1,7 +1,17 @@
 /// <reference path="../_references.d.ts" />
 import "reflect-metadata"
 
-import {bootstrap, Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {
+	bootstrap, bind, 
+	Component, View
+} from 'angular2/angular2';
+
+import {
+	routerInjectables, RouteConfig, Route,
+	Location, HTML5LocationStrategy, LocationStrategy,
+	RouterOutlet, RouterLink
+} from 'angular2/router';
+
 import {SettingsView} from './settings/settings';
 import {TableView} from './table/table';
 import {GrowlContainer} from './growl/growl';
@@ -13,37 +23,32 @@ import 'font-awesome';
 import './components/container.css';
 import './navbar/navbar.css';
 import './app.css';
+import appTemplate from "./app.html";
 
 @View({
-  templateUrl: 'src/ui/app.html',
+  template: appTemplate,
   directives: [
-     NgFor, NgIf,
+     RouterOutlet, RouterLink,
      SettingsView, TableView, GrowlContainer
   ]
 })
 @Component({
   selector: 'redouble-app'
 })
+@RouteConfig([
+  new Route({path: '/', component: TableView, as: 'table'}),
+  new Route({path: '/settings', component: SettingsView, as: 'settings'})
+])
 export class App {
-   constructor() {
-      console.log("running");
-      this.state = { route: "table" };
-      this.routes = ["home", "table", "settings", "about"];
+	constructor(private location: Location) {
+		console.log("running");
    }
 
-   routeClicked ($event, newroute) {
-      console.log('in routeClicked ' + newroute);
-      $event.preventDefault();
-      this.state = { route: newroute };
-   }
-
-   private state: any;
-   private routes: Array<string>;
+   tableActive() { return this.location.path() == ''; }
+  	settingsActive() { return this.location.path() == '/settings'; }
 }
 
 export function main() {
-   // You can use the light dom of the <hello-app> tag as temporary content (for
-   // example 'Loading...') before the application is ready.
-   console.log('bootstrapping')
-   bootstrap(App);
+   console.log('bootstrapping');
+   bootstrap(App, [routerInjectables, bind(LocationStrategy).toClass(HTML5LocationStrategy)]);
 }

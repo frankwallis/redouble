@@ -1,52 +1,5 @@
-///// <reference path="../declarations/angular2.d.ts" />
+// These get resolved by SystemJS because typescriptConfig.resolveAmbientRefs = true
 
-interface List<T> extends Array<T> {
-}
-interface Type {}
+/// <reference path="angular2/bundles/typings/angular2/angular2.d.ts" />
+/// <reference path="angular2/bundles/typings/angular2/router.d.ts" />
 
-declare module "angular2/angular2" {
-  function bootstrap(appComponentType: any): void;
-  function Component({
-    selector,
-    properties,
-    hostListeners,
-    injectables,
-    lifecycle,
-    changeDetection,
-    services
-    }:{
-      selector:string,
-      properties?:Object,
-      hostListeners?:Object,
-      injectables?:List<any>,
-      services?:List<any>,
-      lifecycle?:List<any>,
-      changeDetection?:string
-    });
-
-  function View({
-      templateUrl,
-      template,
-      directives,
-      formatters,
-      source,
-      locale,
-      device
-    }: {
-      templateUrl?: string,
-      template?: string,
-      directives?: List<any>,
-      formatters?: List<Type>,
-      source?: List<any>,
-      locale?: string,
-      device?: string
-    });
-
-  function For();
-  function If();
-  function Foreach();
-  function Switch();
-  function SwitchWhen();
-  
-  function SwitchDefault();
-}

@@ -2,7 +2,10 @@ System.config({
   defaultJSExtensions: true,
   transpiler: "traceur",
   typescriptOptions: {
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeCheck": true,
+    "resolveAmbientRefs": true
   },
   paths: {
     "github:*": "jspm_packages/github/*",

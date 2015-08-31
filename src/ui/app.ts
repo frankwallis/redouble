@@ -39,7 +39,7 @@ import appTemplate from "./app.html";
   new Route({path: '/', component: TableView, as: 'table'}),
   new Route({path: '/settings', component: SettingsView, as: 'settings'})
 ])
-export class App {
+class App {
 	constructor(private location: Location) {
 		console.log("running");
    }

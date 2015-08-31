@@ -49,7 +49,7 @@
       "lib": "src"
     },
     "dependencies": {
-      "angular2": "npm:angular2@^2.0.0-alpha.35",
+      "angular2": "npm:angular2@2.0.0-alpha.35",
       "font-awesome": "npm:font-awesome@^4.3.0",
       "normalize": "github:necolas/normalize.css@^3.0.2",
       "purecss": "npm:purecss@^0.6.0",
@@ -61,8 +61,7 @@
       "text": "github:systemjs/plugin-text@^0.0.2",
       "traceur": "github:jmcriffey/bower-traceur@0.0.91",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91",
-      "ts": "github:frankwallis/plugin-typescript@^2.0.6",
-      "typescript": "npm:typescript@^1.6.0-dev.20150818"
+      "ts": "github:frankwallis/plugin-typescript@^2.0.10"
     }
   }
 }

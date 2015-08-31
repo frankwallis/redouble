@@ -13,7 +13,7 @@ import settingsTemplate from "./settings.html";
   viewBindings: [PlayerService]
 })
 @View({
-  templateUrl: 'src/ui/settings/settings.html',
+  template: settingsTemplate,
   directives: [NgFor]
 })
 export class SettingsView {

@@ -33,7 +33,7 @@ System.config({
 
   map: {
     "angular2": "npm:angular2@2.0.0-alpha.35",
-    "css": "github:systemjs/plugin-css@0.1.13",
+    "css": "github:systemjs/plugin-css@0.1.15",
     "font-awesome": "npm:font-awesome@4.4.0",
     "normalize": "github:necolas/normalize.css@3.0.3",
     "purecss": "npm:purecss@0.6.0",
@@ -41,17 +41,16 @@ System.config({
     "text": "github:systemjs/plugin-text@0.0.2",
     "traceur": "github:jmcriffey/bower-traceur@0.0.91",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91",
-    "ts": "github:frankwallis/plugin-typescript@2.0.6",
-    "typescript": "npm:typescript@1.6.0-dev.20150822",
-    "zone.js": "npm:zone.js@0.5.3",
-    "github:frankwallis/plugin-typescript@2.0.6": {
-      "typescript": "npm:typescript@1.6.0-dev.20150822"
+    "ts": "github:frankwallis/plugin-typescript@2.0.10",
+    "zone.js": "npm:zone.js@0.5.4",
+    "github:frankwallis/plugin-typescript@2.0.10": {
+      "typescript": "npm:typescript@1.7.0-dev.20150831"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.4.2"
+      "buffer": "npm:buffer@3.4.3"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -61,9 +60,6 @@ System.config({
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
-    },
-    "github:jspm/nodelibs-os@0.1.0": {
-      "os-browserify": "npm:os-browserify@0.1.2"
     },
     "github:jspm/nodelibs-path@0.1.0": {
       "path-browserify": "npm:path-browserify@0.0.0"
@@ -84,7 +80,7 @@ System.config({
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
     "github:necolas/normalize.css@3.0.3": {
-      "css": "github:systemjs/plugin-css@0.1.13"
+      "css": "github:systemjs/plugin-css@0.1.15"
     },
     "npm:angular2@2.0.0-alpha.35": {
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
@@ -94,7 +90,7 @@ System.config({
       "reflect-metadata": "npm:reflect-metadata@0.1.0",
       "rx": "npm:rx@2.5.1",
       "url": "github:jspm/nodelibs-url@0.1.0",
-      "zone.js": "npm:zone.js@0.5.3"
+      "zone.js": "npm:zone.js@0.5.4"
     },
     "npm:asn1.js@2.2.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
@@ -140,7 +136,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:buffer@3.4.2": {
+    "npm:buffer@3.4.3": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
@@ -201,7 +197,7 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:font-awesome@4.4.0": {
-      "css": "github:systemjs/plugin-css@0.1.13"
+      "css": "github:systemjs/plugin-css@0.1.15"
     },
     "npm:hash.js@1.0.3": {
       "inherits": "npm:inherits@2.0.1"
@@ -212,9 +208,6 @@ System.config({
     "npm:miller-rabin@2.0.1": {
       "bn.js": "npm:bn.js@2.2.0",
       "brorand": "npm:brorand@1.0.5"
-    },
-    "npm:os-browserify@0.1.2": {
-      "os": "github:jspm/nodelibs-os@0.1.0"
     },
     "npm:parse-asn1@3.0.1": {
       "asn1.js": "npm:asn1.js@2.2.0",
@@ -287,12 +280,8 @@ System.config({
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:typescript@1.6.0-dev.20150822": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+    "npm:typescript@1.7.0-dev.20150831": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "readline": "github:jspm/nodelibs-readline@0.1.0"
     },
@@ -309,7 +298,7 @@ System.config({
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
     },
-    "npm:zone.js@0.5.3": {
+    "npm:zone.js@0.5.4": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     }
   }

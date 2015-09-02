@@ -20,14 +20,10 @@ const reducer = combineReducers(reducers);
 const finalCreateStore = applyMiddleware(thunk)(createStore);
 const store = finalCreateStore(reducer, global.__ISOMORPHIC_STATE__);
 
-let router = (
-	<Router history={history}>
-		{routes}
-	</Router>
-);
-
 ReactDOM.render(
 	<Provider store={store}>
-		{() => router}
+		<Router history={history}>
+			{routes}
+		</Router>
 	</Provider>,
 	document.getElementById('main'));

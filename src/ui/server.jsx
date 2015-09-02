@@ -33,15 +33,11 @@ function generateMarkupAndState(path, query) {
 	const location = new Location(path, query);
 
 	Router.run(routes, location, (error, initialState) => {
-		let router = (
-			<Router {...initialState}>
-				{routes}
-			</Router>
-		);
-
 		let markup = ReactDOM.renderToString(
 			<Provider store={store}>
-				{() => router}
+				<Router {...initialState}>
+					{routes}
+				</Router>
 			</Provider>
 		);
 

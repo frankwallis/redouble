@@ -2,26 +2,15 @@
   "name": "redouble",
   "version": "0.1.0",
   "description": "contract bridge",
-  "main": "src/index.ts",
+  "main": "src/ui/app.ts",
   "dependencies": {},
   "devDependencies": {
-    "babel": "^4.6.0",
-    "connect-livereload-safe": "0.0.5",
-    "debounce": "^1.0.0",
-    "del": "^1.1.1",
-    "express": "^4.11.2",
-    "glob": "^4.3.5",
-    "gulp": "^3.8.11",
-    "gulp-util": "^3.0.2",
-    "jspm": "^0.16.0",
-    "morgan": "^1.5.1",
-    "node-notifier": "^4.1.0",
-    "open": "0.0.5",
-    "tiny-lr": "^0.1.5"
+    "jspm": "^0.16.2",
+    "live-server": "^0.8.1"
   },
   "scripts": {
-    "start": "gulp serve",
-    "test": "jest"
+    "start": "./node_modules/.bin/live-server",
+    "test": "echo 'passed!'"
   },
   "repository": {
     "type": "git",
@@ -29,21 +18,6 @@
   },
   "author": "Frank Wallis",
   "license": "MIT",
-  "jest": {
-    "collectCoverage": true,
-    "testPathIgnorePatterns": [
-      "/__tests__/[^/]*/.+"
-    ],
-    "testPathDirs": [
-      "src"
-    ],
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-tools",
-      "<rootDir>/node_modules/reflux"
-    ]
-  },
   "jspm": {
     "directories": {
       "lib": "src"

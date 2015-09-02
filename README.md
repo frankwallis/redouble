@@ -9,3 +9,8 @@ developed in TypeScript using Angular2, SystemJS
 * npm install
 * jspm install
 * npm start
+
+### TODO ###
+
+* bundling
+* tests

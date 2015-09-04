@@ -21,15 +21,19 @@ module.exports = function(options) {
 		scssLoaders = extractForProduction(scssLoaders);
 	}
 
-	var jsLoaders = ['babel'];
+	var jsLoaders = options.production  ? ['babel'] : ['react-hot', 'babel'];
 
 	return {
-		entry: './src/ui/client.jsx',
+		entry: [
+			'webpack-hot-middleware/client',
+			'./src/ui/client.jsx'
+		],
 		debug: !options.production,
-		devtool: options.devtool,
+		colors: true,
+		//devtool: options.devtool,
 		output: {
-			path: options.production ? './dist' : './build',
-			publicPath: options.production ? '' : 'http://localhost:3001/',
+			path: options.production ? './dist' : '/',
+			publicPath: options.production ? '' : '/',
 			filename: options.production ? 'app.[hash].js' : 'app.js',
 		},
 		module: {
@@ -42,14 +46,9 @@ module.exports = function(options) {
 			] : [],
 			loaders: [
 				{
-					test: /\.js$/,
+					test: /\.jsx?$/,
 					exclude: /node_modules/,
-					loaders: jsLoaders,
-				},
-				{
-					test: /\.jsx$/,
-					exclude: /node_modules/,
-					loaders: options.production ? jsLoaders : ['react-hot'].concat(jsLoaders),
+					loaders: jsLoaders
 				},
 				{
 					test: /\.css$/,
@@ -116,6 +115,9 @@ module.exports = function(options) {
 			new HtmlWebpackPlugin({
 				template: './config/index-template.html',
 			}),
+			new webpack.optimize.OccurenceOrderPlugin(),
+    		new webpack.HotModuleReplacementPlugin(),
+    		new webpack.NoErrorsPlugin()
 		],
 	};
 };

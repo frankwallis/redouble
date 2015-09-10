@@ -11,7 +11,7 @@ describe('Bidding Box', () => {
 		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={() => {}}/>);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
-		expect(buttons.length).toEqual(38);
+		expect(buttons.length).to.equal(38);
 	});
 
 	xit('disables buttons which are invalid', () => {
@@ -20,13 +20,13 @@ describe('Bidding Box', () => {
 
 	it('makes a bid when a button is clicked', () => {
 		let game = GameBuilder.create().dealBoard().build();
-		let makeBidSpy = jasmine.createSpy();
+		let makeBidSpy = sinon.spy();
 		let biddingbox = TestUtils.renderIntoDocument(<BiddingBox game={game} makeBid={makeBidSpy}/>);
 
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(biddingbox, 'button');
-		expect(makeBidSpy.calls.count()).toEqual(0);
+		expect(makeBidSpy.callCount).to.equal(0);
 		TestUtils.Simulate.click(buttons[0]);
-		expect(makeBidSpy.calls.count()).toEqual(1);
+		expect(makeBidSpy.callCount).to.equal(1);
 	});
 
 });

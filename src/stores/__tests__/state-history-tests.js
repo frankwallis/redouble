@@ -10,21 +10,21 @@ describe('State History', () => {
 	describe('push/current', () => {
 		it('adds a state', () => {
 			history = history.push(1);
-			expect(history.current()).toEqual(1);
+			expect(history.current()).to.equal(1);
 			history = history.push(2);
-			expect(history.current()).toEqual(2);
+			expect(history.current()).to.equal(2);
 		});
 
 		it('clears forward history', () => {
 			history = history.push(1);
-			expect(history.current()).toEqual(1);
+			expect(history.current()).to.equal(1);
 			history = history.push(2);
-			expect(history.current()).toEqual(2);
+			expect(history.current()).to.equal(2);
 			history = history.back();
 			history = history.push(3);
-			expect(history.current()).toEqual(3);
+			expect(history.current()).to.equal(3);
 			history = history.back();
-			expect(history.current()).toEqual(1);
+			expect(history.current()).to.equal(1);
 		});
 	});
 
@@ -33,19 +33,19 @@ describe('State History', () => {
 			history = history.push(1);
 			history = history.push(2);
 			history = history.back();
-			expect(history.current()).toEqual(1);
+			expect(history.current()).to.equal(1);
 		});
 	});
 
 	describe('canBack', () => {
 		it('only allowed when history has cached states', () => {
-			expect(history.canBack()).toBeFalsy();
+			expect(history.canBack()).to.be.false;
 			history = history.push(1);
-			expect(history.canBack()).toBeFalsy();
+			expect(history.canBack()).to.be.false;
 			history = history.push(2);
-			expect(history.canBack()).toBeTruthy();
+			expect(history.canBack()).to.be.true;
 			history = history.back();
-			expect(history.canBack()).toBeFalsy();
+			expect(history.canBack()).to.be.false;
 		});
 	});
 
@@ -56,22 +56,22 @@ describe('State History', () => {
 			history = history.push(3);
 			history = history.back();
 			history = history.back();
-			expect(history.current()).toEqual(1);
+			expect(history.current()).to.equal(1);
 			history = history.forward();
-			expect(history.current()).toEqual(2);
+			expect(history.current()).to.equal(2);
 		});
 	});
 
 	describe('canForward', () => {
 		it('only allowed when history and is not at final state', () => {
-			expect(history.canForward()).toBeFalsy();
+			expect(history.canForward()).to.be.false;
 			history = history.push(1);
 			history = history.push(2);
-			expect(history.canForward()).toBeFalsy();
+			expect(history.canForward()).to.be.false;
 			history = history.back();
-			expect(history.canForward()).toBeTruthy();
+			expect(history.canForward()).to.be.true;
 			history = history.forward();
-			expect(history.canForward()).toBeFalsy();
+			expect(history.canForward()).to.be.false;
 		});
 	});
 
@@ -88,7 +88,7 @@ describe('State History', () => {
 				.push(2);
 
 			history = history.jumpBack(comparer);
-			expect(history.current()).toBe(1);
+			expect(history.current()).to.equal(1);
 
 			history = history
 				.push(1)
@@ -96,19 +96,19 @@ describe('State History', () => {
 				.push(2);
 
 			history = history.jumpBack(comparer);
-			expect(history.current()).toBe(3);
+			expect(history.current()).to.equal(3);
 		});
 	});
 
 	describe('canJumpBack', () => {
 		it('only allowed when game has cached states', () => {
-			expect(history.canJumpBack()).toBeFalsy();
+			expect(history.canJumpBack()).to.be.false;
 			history = history.push(1);
-			expect(history.canJumpBack()).toBeFalsy();
+			expect(history.canJumpBack()).to.be.false;
 			history = history.push(2);
-			expect(history.canJumpBack()).toBeTruthy();
+			expect(history.canJumpBack()).to.be.true;
 			history = history.back();
-			expect(history.canJumpBack()).toBeFalsy();
+			expect(history.canJumpBack()).to.be.false;
 		});
 	});
 });

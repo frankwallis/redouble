@@ -5,15 +5,15 @@ describe('Game Query', () => {
 		it('returns the last board', () => {
 			let gameBuilder = GameBuilder.create();
 			let game = gameBuilder.toQuery();
-			expect(game.currentBoard).not.toBeDefined();
+			expect(game.currentBoard).to.be.undefined;
 
 			game = gameBuilder.dealBoard().toQuery();
-			expect(game.currentBoard).toBeDefined();
+			expect(game.currentBoard).to.not.be.undefined;
 
 			let lastBoard = game.currentBoard;
 			game = gameBuilder.dealBoard().toQuery();
-			expect(game.currentBoard).toBeDefined();
-			expect(game.currentBoard).not.toBe(lastBoard);
+			expect(game.currentBoard).to.not.be.undefined;
+			expect(game.currentBoard).not.to.equal(lastBoard);
 		});
 	});
 

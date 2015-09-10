@@ -12,7 +12,7 @@ describe('Card', () => {
 		let cardComponent = TestUtils.renderIntoDocument(<CardComponent card={card}/>);
 		//
 		let cardtext = TestUtils.findRenderedDOMComponentWithClass(cardComponent, 'card-pip');
-		expect(cardtext.textContent).toBe("A");
+		expect(cardtext.textContent).to.equal("A");
 	});
 
 	it('displays the pip for plain cards', () => {
@@ -20,7 +20,7 @@ describe('Card', () => {
 		let cardComponent = TestUtils.renderIntoDocument(<CardComponent card={card}/>);
 		//
 		let cardtext = TestUtils.findRenderedDOMComponentWithClass(cardComponent, 'card-pip');
-		expect(cardtext.textContent).toBe("8");
+		expect(cardtext.textContent).to.equal("8");
 	});
 
 	xit('displays the right number of pips', () => {
@@ -28,7 +28,7 @@ describe('Card', () => {
 		let bidComponent = TestUtils.renderIntoDocument(<BidComponent bid={bid}/>);
 		//
 		let bidtext = TestUtils.findRenderedDOMComponentWithClass(bidComponent, 'bid-container');
-		expect(bidtext.getDOMNode().textContent).toBe("Double");
+		expect(bidtext.getDOMNode().textContent).to.equal("Double");
 	});
 
 	it('displays the suit', () => {
@@ -36,8 +36,8 @@ describe('Card', () => {
 		let cardComponent = TestUtils.renderIntoDocument(<CardComponent card={card}/>);
 		//
 		let suits = TestUtils.scryRenderedDOMComponentsWithClass(cardComponent, 'card-suit');
-		expect(suits.length).toBeGreaterThan(0);
-		expect(suits[0].className).toContain("suit-spades");
+		expect(suits.length).to.be.least(0);
+		expect(suits[0].className).to.have.string("suit-spades");
 	});
 
 });

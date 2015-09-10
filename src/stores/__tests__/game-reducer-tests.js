@@ -49,12 +49,12 @@ describe('Game Reducer', () => {
 
 
 		it('adds the new state to history', () => {
-			expect(history.current()).not.toEqual(initialHistory.current());
-			expect(history.back().current()).toEqual(initialHistory.current());
+			expect(history.current()).not.to.equal(initialHistory.current());
+			expect(history.back().current()).to.equal(initialHistory.current());
 		});
 
 		it('increments the sequence', () => {
-			expect(state.sequence).toEqual(initialState.sequence + 1);
+			expect(state.sequence).to.equal(initialState.sequence + 1);
 		});
 	});
 
@@ -68,15 +68,15 @@ describe('Game Reducer', () => {
 		});
 
 		it('moves to previous state in history', () => {
-			expect(history.current()).toEqual(initialHistory.back().current());
+			expect(history.current()).to.equal(initialHistory.back().current());
 		});
 
 		it('increments the sequence', () => {
-			expect(state.sequence).toEqual(initialState.sequence + 1);
+			expect(state.sequence).to.equal(initialState.sequence + 1);
 		});
 
 		it('disables autoplay', () => {
-			expect(state.autoPlay).toBeFalsy();
+			expect(state.autoPlay).to.be.false;
 		});
 	});
 
@@ -90,15 +90,15 @@ describe('Game Reducer', () => {
 		});
 
 		it('moves to next state in history', () => {
-			expect(history.current()).toEqual(initialHistory.forward().current());
+			expect(history.current()).to.equal(initialHistory.forward().current());
 		});
 
 		it('increments the sequence', () => {
-			expect(state.sequence).toEqual(initialState.sequence + 1);
+			expect(state.sequence).to.equal(initialState.sequence + 1);
 		});
 
 		it('disables autoplay', () => {
-			expect(state.autoPlay).toBeFalsy();
+			expect(state.autoPlay).to.be.false;
 		});
 	});
 
@@ -110,11 +110,11 @@ describe('Game Reducer', () => {
 		});
 
 		it('increments the sequence', () => {
-			expect(state.sequence).toEqual(initialState.sequence + 1);
+			expect(state.sequence).to.equal(initialState.sequence + 1);
 		});
 
 		it('disables autoplay', () => {
-			expect(state.autoPlay).toBeFalsy();
+			expect(state.autoPlay).to.be.false;
 		});
 	});
 
@@ -130,11 +130,11 @@ describe('Game Reducer', () => {
 		});
 
 		it('increments the sequence', () => {
-			expect(state.sequence).toEqual(initialState.sequence + 1);
+			expect(state.sequence).to.equal(initialState.sequence + 1);
 		});
 
 		it('enables autoplay', () => {
-			expect(state.autoPlay).toBeTruthy();
+			expect(state.autoPlay).to.be.true;
 		});
 	});
 
@@ -156,7 +156,7 @@ describe('Game Reducer', () => {
 
 			history = history.jumpBack();
 			game = new Game(history.currentGameState());
-			expect(game.currentBoard.biddingHasEnded).toBeTruthy();
+			expect(game.currentBoard.biddingHasEnded).to.be.true;
 		});
 
 		it('moves to start of bidding when play has not started', () => {
@@ -173,7 +173,7 @@ describe('Game Reducer', () => {
 
 			history = history.jumpBack();
 			game = new Game(history.currentGameState());
-			expect(game.currentBoard.biddingHasEnded).toBeFalsy();
+			expect(game.currentBoard.biddingHasEnded).to.be.false;
 		});
 	});*/
 });

@@ -35,7 +35,7 @@ describe('Player Reducer', () => {
 				}
 			});
 
-			expect(state[Seat.North].name).toBe("mik");
+			expect(state[Seat.North].name).to.equal("mik");
 		});
 
 		it('updates ishuman', () => {
@@ -48,8 +48,8 @@ describe('Player Reducer', () => {
 				}
 			});
 
-			expect(state[Seat.North].name).toBe("mik");
-			expect(state[Seat.North].ishuman).toBe(true);
+			expect(state[Seat.North].name).to.equal("mik");
+			expect(state[Seat.North].ishuman).to.equal(true);
 		});
 	});
 });

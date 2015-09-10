@@ -6,28 +6,28 @@ describe("Seat", () => {
 		it("rotates through all the seats", () => {
 			let seat = Seat.South;
 			seat = Seat.rotate(seat, 1);
-			expect(seat).toBe(Seat.West);
+			expect(seat).to.equal(Seat.West);
 			seat = Seat.rotate(seat, 1);
-			expect(seat).toBe(Seat.North);
+			expect(seat).to.equal(Seat.North);
 			seat = Seat.rotate(seat, 1);
-			expect(seat).toBe(Seat.East);
+			expect(seat).to.equal(Seat.East);
 			seat = Seat.rotate(seat, 1);
-			expect(seat).toBe(Seat.South);
+			expect(seat).to.equal(Seat.South);
 		});
 
 		it("rotates more than 4 positions at once", () => {
 			let seat = Seat.South;
 			seat = Seat.rotate(seat, 4001);
-			expect(seat).toBe(Seat.West);
+			expect(seat).to.equal(Seat.West);
 		});
 	});
 
 	describe("isPartner", () => {
 		it("knows the partnerships", () => {
-			expect(Seat.isPartner(Seat.West, Seat.East)).toBeTruthy();
-			expect(Seat.isPartner(Seat.North, Seat.South)).toBeTruthy();
-			expect(Seat.isPartner(Seat.West, Seat.South)).toBeFalsy();
-			expect(Seat.isPartner(Seat.North, Seat.West)).toBeFalsy();
+			expect(Seat.isPartner(Seat.West, Seat.East)).to.be.true;
+			expect(Seat.isPartner(Seat.North, Seat.South)).to.be.true;
+			expect(Seat.isPartner(Seat.West, Seat.South)).to.be.false;
+			expect(Seat.isPartner(Seat.North, Seat.West)).to.be.false;
 		});
 	});
 

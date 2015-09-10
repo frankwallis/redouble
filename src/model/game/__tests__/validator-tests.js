@@ -10,8 +10,8 @@ describe('Validators', () => {
 				.create()
 				.toQuery();
 
-			expect(validateBid(Bid.create("0S"), board)).toBeDefined();
-			expect(validateBid(Bid.create("8H"), board)).toBeDefined();
+			expect(validateBid(Bid.create("0S"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("8H"), board)).to.not.be.undefined;
 		});
 
 		it('allows only valid bids over no bids', () => {
@@ -19,11 +19,11 @@ describe('Validators', () => {
 				.create()
 				.toQuery();
 
-			expect(validateBid(Bid.create("1H"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("2H"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("no bid"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("double"), board)).toBeDefined();
-			expect(validateBid(Bid.create("redouble"), board)).toBeDefined();
+			expect(validateBid(Bid.create("1H"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("2H"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("no bid"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("double"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("redouble"), board)).to.not.be.undefined;
 		});
 
 		it('allows only valid bids over calls', () => {
@@ -32,11 +32,11 @@ describe('Validators', () => {
 				.makeBid(Bid.create("1H"))
 				.toQuery();
 
-			expect(validateBid(Bid.create("1D"), board)).toBeDefined();
-			expect(validateBid(Bid.create("1H"), board)).toBeDefined();
-			expect(validateBid(Bid.create("2H"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("double"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("redouble"), board)).toBeDefined();
+			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("1H"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("2H"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("double"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("redouble"), board)).to.not.be.undefined;
 		});
 
 		it('allows only valid bids over doubles', () => {
@@ -48,11 +48,11 @@ describe('Validators', () => {
 				.makeBid(Bid.create("double"))
 				.toQuery();
 
-			expect(validateBid(Bid.create("1D"), board)).toBeDefined();
-			expect(validateBid(Bid.create("1H"), board)).toBeDefined();
-			expect(validateBid(Bid.create("2H"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("double"), board)).toBeDefined();
-			expect(validateBid(Bid.create("redouble"), board)).toBeUndefined();
+			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("1H"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("2H"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("double"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("redouble"), board)).to.be.undefined;
 		});
 
 		it('allows only valid bids over redoubles', () => {
@@ -64,11 +64,11 @@ describe('Validators', () => {
 				.toQuery();
 
 
-			expect(validateBid(Bid.create("1D"), board)).toBeDefined();
-			expect(validateBid(Bid.create("1H"), board)).toBeDefined();
-			expect(validateBid(Bid.create("2H"), board)).toBeUndefined();
-			expect(validateBid(Bid.create("double"), board)).toBeDefined();
-			expect(validateBid(Bid.create("redouble"), board)).toBeDefined();
+			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("1H"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("2H"), board)).to.be.undefined;
+			expect(validateBid(Bid.create("double"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("redouble"), board)).to.not.be.undefined;
 		});
 
 		it('disallows bids after the bidding has ended', () => {
@@ -80,12 +80,12 @@ describe('Validators', () => {
 				.makeBid(Bid.create("no bid"))
 				.toQuery();
 
-			expect(validateBid(Bid.create("1D"), board)).toBeDefined();
-			expect(validateBid(Bid.create("1H"), board)).toBeDefined();
-			expect(validateBid(Bid.create("2H"), board)).toBeDefined();
-			expect(validateBid(Bid.create("no bid"), board)).toBeDefined();
-			expect(validateBid(Bid.create("double"), board)).toBeDefined();
-			expect(validateBid(Bid.create("redouble"), board)).toBeDefined();
+			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("1H"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("2H"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("no bid"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("double"), board)).to.not.be.undefined;
+			expect(validateBid(Bid.create("redouble"), board)).to.not.be.undefined;
 		});
 	});
 
@@ -105,8 +105,8 @@ describe('Validators', () => {
 		it('checks the card is from the right hand', () => {
 			let board = boardBuilder.toQuery();
 
-			expect(validateCard(board.hands[Seat.West][0], board)).toBeUndefined();
-			expect(validateCard(board.hands[Seat.East][0], board)).toBeDefined();
+			expect(validateCard(board.hands[Seat.West][0], board)).to.be.undefined;
+			expect(validateCard(board.hands[Seat.East][0], board)).to.not.be.undefined;
 
 			board = boardBuilder.playCard(board.hands[Seat.West][0]).toQuery();
 
@@ -116,13 +116,13 @@ describe('Validators', () => {
 			if (!nextCard)
 				nextCard = board.hands[Seat.South].filter((card) => card.suit === board.hands[Seat.West][0].suit)[0];
 
-			expect(validateCard(nextCard, board)).toBeDefined();
+			expect(validateCard(nextCard, board)).to.not.be.undefined;
 
 			/* play from right hand and correct suit */
 			nextCard = board.hands[Seat.North].filter((card) => card.suit === board.hands[Seat.West][0].suit)[0];
 
 			if (nextCard) {
-				expect(validateCard(nextCard, board)).toBeUndefined();
+				expect(validateCard(nextCard, board)).to.be.undefined;
 			}
 		});
 
@@ -165,11 +165,11 @@ describe('Validators', () => {
 			board = boardBuilder.playCard(trick[Seat.South]).toQuery();
 
 			/* have the winner play the same card */
-			expect(validateCard(trick[board.nextPlayer], board)).toBeDefined();
+			expect(validateCard(trick[board.nextPlayer], board)).to.not.be.undefined;
 
 			/* have the winner play a different card */
-			expect(validateCard(followSuit(board, true), board)).toBeUndefined();
-			expect(validateCard(trick[board.nextPlayer], board)).toBeDefined();
+			expect(validateCard(followSuit(board, true), board)).to.be.undefined;
+			expect(validateCard(trick[board.nextPlayer], board)).to.not.be.undefined;
 		});
 
 		it('checks the card is following the suit lead', () => {
@@ -180,7 +180,7 @@ describe('Validators', () => {
 
 			/* try and play wrong suit */
 			let nextCard = board.hands[Seat.North].filter((card) => card.suit !== lead.suit)[0];
-			expect(validateCard(nextCard, board)).toBeDefined();
+			expect(validateCard(nextCard, board)).to.not.be.undefined;
 		});
 
 		it('allows another suit when player is void', () => {
@@ -194,7 +194,7 @@ describe('Validators', () => {
 					nextCard = board.hands[board.nextPlayer]
 						.filter((card) => !board.hasBeenPlayed(card))[0]; //eslint-disable-line no-loop-func
 
-				expect(validateCard(nextCard, board)).toBeUndefined();
+				expect(validateCard(nextCard, board)).to.be.undefined;
 				board = boardBuilder.playCard(nextCard).toQuery();
 			}
 		});

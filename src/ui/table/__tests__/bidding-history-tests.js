@@ -13,8 +13,8 @@ describe('Bidding History', () => {
 		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
 		let headings = TestUtils.scryRenderedDOMComponentsWithTag(biddingHistory, 'th');
 
-		expect(headings.length).toEqual(4);
-		expect(headings[0].textContent).toBe('north');
+		expect(headings.length).to.equal(4);
+		expect(headings[0].textContent).to.equal('north');
 	});
 
 	it('displays all the bids', () => {
@@ -25,6 +25,6 @@ describe('Bidding History', () => {
 
 		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);
 		let bids = TestUtils.scryRenderedComponentsWithType(biddingHistory, BidComponent);
-		expect(bids.length).toEqual(1);
+		expect(bids.length).to.equal(1);
   });
 });

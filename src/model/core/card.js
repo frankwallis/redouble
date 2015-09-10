@@ -4,7 +4,8 @@ export const Suit = {
 	"Clubs": 1,
 	"Diamonds": 2,
 	"Hearts": 3,
-	"Spades": 4
+	"Spades": 4,
+	"all": () => [4,3,2,1]
 };
 
 export const Pip = {
@@ -83,6 +84,7 @@ export class Card {
 			case Pip.King: return "K";
 			case Pip.Queen: return "Q";
 			case Pip.Jack: return "J";
+			case Pip.Ten: return "T";
 			default: return pip.toString();
 		}
 	}

@@ -15,9 +15,9 @@ describe('Game Builder', () => {
 				.playCard(Card.create("2H"))
 				.toQuery();
 
-			expect(game.currentBoard.cards.length).toEqual(1);
-			expect(game.currentBoard.cards[0].card.pip).toEqual(Pip.Two);
-			expect(game.currentBoard.cards[0].card.suit).toEqual(Suit.Hearts);
+			expect(game.currentBoard.cards.length).to.equal(1);
+			expect(game.currentBoard.cards[0].card.pip).to.equal(Pip.Two);
+			expect(game.currentBoard.cards[0].card.suit).to.equal(Suit.Hearts);
 		});
 	});
 
@@ -29,8 +29,8 @@ describe('Game Builder', () => {
 				.makeBid(Bid.create("no bid"))
 				.toQuery();
 
-			expect(game.currentBoard.bids.length).toEqual(1);
-			expect(game.currentBoard.bids[0].type).toEqual(BidType.NoBid);
+			expect(game.currentBoard.bids.length).to.equal(1);
+			expect(game.currentBoard.bids[0].type).to.equal(BidType.NoBid);
 		});
 	});
 

@@ -14,7 +14,7 @@ describe("Deck", () => {
 		let hands = deck.deal(Seat.North);
 
 		Seat.all().forEach(() => {
-			expect(hands[Seat.North].length).toBe(13);
+			expect(hands[Seat.North].length).to.equal(13);
 		});
 	});
 
@@ -30,13 +30,13 @@ describe("Deck", () => {
 				different = true;
 		}
 
-		expect(different).toBeTruthy();
+		expect(different).to.equal(true);
 	});
 
 	it("rigs hands correctly", () => {
 		let hands = Deck.rig(Seat.South, ["3H", "5H"], ["2S", "3S"], ["7C", "8C"], ["2D", "3D"]);
-		expect(hands[Seat.North].length).toBe(2);
-		expect(hands[Seat.North][0].pip).toBe(Pip.Two);
-		expect(hands[Seat.North][1].pip).toBe(Pip.Three);
+		expect(hands[Seat.North].length).to.equal(2);
+		expect(hands[Seat.North][0].pip).to.equal(Pip.Two);
+		expect(hands[Seat.North][1].pip).to.equal(Pip.Three);
 	});
 });

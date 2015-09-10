@@ -20,7 +20,7 @@ describe('Cardplay Strategy', () => {
 			strategy.updateGameState(gameBuilder.build());
 			strategy.visit(20);
 			let card = strategy.getCard();
-			expect(card).toBeDefined();
+			expect(card).to.not.be.undefined;
 		});
 
 		it('tries each card at least once', () => {
@@ -38,10 +38,10 @@ describe('Cardplay Strategy', () => {
 			strategy.getCard();
 
 			var node = strategy.getRootNode(gameBuilder.toQuery().currentBoard);
-			expect(node.children.length).toEqual(13);
+			expect(node.children.length).to.equal(13);
 
 			for(let i = 0; i < node.children.length; i ++)
-				expect(node.children[i].visits).toBeGreaterThan(0);
+				expect(node.children[i].visits).to.be.at.least(0);
 		});
 	});
 
@@ -75,10 +75,10 @@ describe('Cardplay Strategy', () => {
 
 			return playAll(gameBuilder, strategy)
 				.then((endgame) => {
-					expect(endgame.declarerTricks).toBe(3);
+					expect(endgame.declarerTricks).to.equal(3);
 					done();
 				})
-				.catch(done.fail);
+				.catch(done);
 		});
 
 		xit('Bond beats Drax', (done) => {
@@ -96,10 +96,10 @@ describe('Cardplay Strategy', () => {
 
 			return playAll(gameBuilder, strategy)
 				.then((endgame) => {
-					expect(endgame.declarerTricks).toBe(13);
+					expect(endgame.declarerTricks).to.equal(13);
 					done();
 				})
-				.catch(done.fail);
+				.catch(done);
 		});
 	});
 

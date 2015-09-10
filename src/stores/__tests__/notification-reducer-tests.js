@@ -26,7 +26,7 @@ describe('Notification Reducer', () => {
 		});
 
 		it('adds the new notification', () => {
-			expect(state.length).toBe(3);
+			expect(state.length).to.equal(3);
 		});
 	});
 
@@ -41,8 +41,8 @@ describe('Notification Reducer', () => {
 		});
 
 		it('removes the notification with the correct id', () => {
-			expect(state.length).toBe(initialState.length - 1);
-			expect(state[0].id).toBe(2);
+			expect(state.length).to.equal(initialState.length - 1);
+			expect(state[0].id).to.equal(2);
 		});
 	});
 });

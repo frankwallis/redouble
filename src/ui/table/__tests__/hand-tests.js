@@ -51,11 +51,11 @@ describe('Hand Component', () => {
 		let buttons = TestUtils.scryRenderedDOMComponentsWithTag(hand, 'button');
 		expect(buttons.length).to.equal(13);
 
-		let suits = {};
+		let suits = false;
 		buttons.reduce((prev, current) => {
-			if (!prev || (prev.suit !== current.suit)) {
-				console.log('here');
-				expect(suits[current.suit]).toBeUndefined();
+			if (!suits || (prev.suit !== current.suit)) {
+				suits = suits || {};
+				expect(suits[current.suit]).to.be.undefined;
 				suits[current.suit] = true;
 			}
 			return current;

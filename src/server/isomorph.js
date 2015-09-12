@@ -5,13 +5,14 @@ import rawBody from "raw-body";
 
 export default function() {
 	return function *(next) {
+		if (this.method !== 'GET') return yield next;
+
 		let route = false;
 
 		/* anything without an extension is considered a route, and redirected to index.html */
 		if (path.basename(this.path).indexOf(".") < 0) {
 			route = this.path;
 			this.path = "/index.html";
-			console.log('here');
 		}
 
 		yield next;

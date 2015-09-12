@@ -6,6 +6,7 @@ import favicon from 'koa-favicon';
 import responseTime from 'koa-response-time';
 
 import isomorph from './isomorph';
+import createApiMiddleware from './api';
 
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
@@ -48,6 +49,10 @@ if (env === 'development') {
 
   	// 3.
 	app.use(isomorph());
+
+	// 4.
+	var api = createApiMiddleware("/api/", __dirname + "/api/");
+	app.use(api);
 }
 else {
 	app.use(isomorph());

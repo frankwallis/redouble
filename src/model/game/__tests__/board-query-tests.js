@@ -289,6 +289,61 @@ describe('Board Query', () => {
 		});
 	});
 
+	describe('previousTrickWinner', () => {
+		it('returns undefined before play has started', () => {
+			let boardBuilder = BoardBuilder.create(Seat.West);
+			expect(boardBuilder.toQuery().previousTrickWinner).to.be.undefined;
+		});
+
+		it('returns undefined before a trick is completed', () => {
+			let boardBuilder = BoardBuilder.create(
+				Seat.West,
+				Deck.rig(Seat.West, ["2S"], ["3H"], [ "4D"], ["5C"]),
+				Bid.createAll("1NT", "no bid", "no bid", "no bid")
+			);
+			boardBuilder
+				.makeBid(Bid.create("1H"))
+				.makeBid(Bid.create("no bid"))
+				.makeBid(Bid.create("no bid"))
+				.makeBid(Bid.create("no bid"))
+				.playCard(Card.create("2S"));
+
+			expect(boardBuilder.toQuery().previousTrickWinner).to.be.undefined;
+		});
+
+		it('returns the trick winner in no trumps', () => {
+			let boardBuilder = BoardBuilder.create(
+				Seat.West,
+				Deck.rig(Seat.West, ["2S", "2H"], ["3S", "3H"], ["9S", "9H"], ["5S", "5H"]),
+				Bid.createAll("1NT", "no bid", "no bid", "no bid")
+			);
+			boardBuilder
+				.playCard(Card.create("2S"))
+				.playCard(Card.create("3S"))
+				.playCard(Card.create("9S"))
+				.playCard(Card.create("5S"))
+				.playCard(Card.create("9H"));
+
+			expect(boardBuilder.toQuery().previousTrickWinner).to.equal(Seat.South);
+		});
+
+		it('returns the trick winner in trumps', () => {
+			let boardBuilder = BoardBuilder.create(
+				Seat.West,
+				Deck.rig(Seat.West, ["2S", "2H"], ["3S", "3H"], ["2C", "9H"], ["5S", "5H"]),
+				Bid.createAll("1C", "no bid", "no bid", "no bid")
+			);
+			boardBuilder
+				.playCard(Card.create("2S"))
+				.playCard(Card.create("3S"))
+				.playCard(Card.create("2C"))
+				.playCard(Card.create("5H"))
+				.playCard(Card.create("9H"));
+
+			expect(boardBuilder.toQuery().previousTrickWinner).to.equal(Seat.South);
+		});
+	});
+
 	describe('nextPlayer', () => {
 		it('returns the dealer when bidding starts', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);

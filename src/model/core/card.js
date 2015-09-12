@@ -56,6 +56,12 @@ export class Card {
 		return result;
 	}
 
+	static toString(card) {
+		let shortSuitNames = [ "", "C", "D", "H", "S"];
+		let shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
+		return shortPipNames[card.pip] + shortSuitNames[card.suit];
+	}
+
 	/*
 	 * creates an array of cards or hands.
 	 * takes a variable length argument list of strings or arrays e.g. "5H", "6H" or ["5H"], ["6H"] etc

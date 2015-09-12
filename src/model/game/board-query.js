@@ -102,8 +102,9 @@ export class BoardQuery {
 		let played = this.boardState.cards.length % 4;
 		let trick = this.boardState.cards.slice(this.boardState.cards.length - played - 4, this.boardState.cards.length - played);
 
+		let leadSuit = trick[0].card.suit;
 		let winner = trick.sort((played1, played2) => {
-			return Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit);
+			return Card.compare(played1.card, played2.card, this.trumpSuit, leadSuit);
 		})[3].seat;
 
 		return winner;
@@ -117,7 +118,8 @@ export class BoardQuery {
 		let result = 0;
 
 		let sortTrick = (trick) => {
-			return trick.sort((played1, played2) => Card.compare(played1.card, played2.card, this.trumpSuit, trick[0].card.suit));
+			let leadSuit = trick[0].card.suit;
+			return trick.sort((played1, played2) => Card.compare(played1.card, played2.card, this.trumpSuit, leadSuit));
 		};
 
 		for (let i = 0; i < trickCount; i ++) {

@@ -20,7 +20,6 @@
 	},
 	"globals": {
 		"expect": true,
-		"jasmine": true,
 		"require": true,
 		"process": true,
 		"global": true

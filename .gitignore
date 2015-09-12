@@ -1,4 +1,6 @@
 *.log
+*.txt
+*.mvd
 bin/
 lib/
 deps/

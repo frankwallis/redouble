@@ -1,10 +1,10 @@
-import {GameBuilder} from '../../model/game/game-builder';
-import {validateCard} from '../../model/game/validators';
-import {Bid} from '../../model/core/bid';
-import {Card} from '../../model/core/card';
-import {Deck} from '../../model/core/deck';
-import {Seat} from '../../model/core/seat';
-import * as api from "../api";
+import {GameBuilder} from '../../../model/game/game-builder';
+import {validateCard} from '../../../model/game/validators';
+import {Bid} from '../../../model/core/bid';
+import {Card} from '../../../model/core/card';
+import {Deck} from '../../../model/core/deck';
+import {Seat} from '../../../model/core/seat';
+import * as api from "../get-card";
 
 let prev = undefined;
 

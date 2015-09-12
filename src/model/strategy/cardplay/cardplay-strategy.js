@@ -1,13 +1,13 @@
 /* @flow */
 
-import {GameQuery} from "../../game/game-query";
+import {BoardQuery} from "../../game/board-query";
 
 export class CardplayStrategy {
 
 	constructor() {}
 
-	getCard(gameState) {
-		let game = new GameQuery(gameState);
-		return game.currentBoard.legalCards[0];
+	getCard(boardState) {
+		let board = new BoardQuery(gameState);
+		return Promise.resolve(board.legalCards[0]);
 	}
 }

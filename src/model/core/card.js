@@ -5,7 +5,7 @@ export const Suit = {
 	"Diamonds": 2,
 	"Hearts": 3,
 	"Spades": 4,
-	"all": () => [4,3,2,1]
+	"all": () => [4, 3, 2, 1]
 };
 
 export const Pip = {
@@ -57,7 +57,7 @@ export class Card {
 	}
 
 	static toString(card) {
-		let shortSuitNames = [ "", "C", "D", "H", "S"];
+		let shortSuitNames = [ "", "C", "D", "H", "S" ];
 		let shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
 		return shortPipNames[card.pip] + shortSuitNames[card.suit];
 	}

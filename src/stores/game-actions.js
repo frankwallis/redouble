@@ -3,7 +3,8 @@ import {GameBuilder} from "../model/game/game-builder";
 import {GameQuery} from "../model/game/game-query";
 import {StateHistory} from "./state-history";
 
-import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
+//import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
+import {CardplayStrategy} from "../model/strategy/cardplay/dds-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 import {validateBid, validateCard} from "../model/game/validators";
@@ -76,7 +77,13 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 
 			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
 				if (game.currentBoard.biddingHasEnded) {
-					dispatch(playCard(cardplayStrategy.getCard(game)));
+					cardplayStrategy.getCard(game.currentBoard)
+						.then((card) => {
+							if (sequence === forSequence)
+								dispatch(playCard(card));
+							else
+								console.log('the game has moved on');
+						});
 				}
 				else
 					dispatch(makeBid(biddingStrategy.getBid(game)));

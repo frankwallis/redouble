@@ -5,7 +5,7 @@ import logger from 'koa-logger';
 import favicon from 'koa-favicon';
 import responseTime from 'koa-response-time';
 
-import isomorph from './isomorph';
+import {isomorph, serveIndex} from './isomorph';
 import createApiMiddleware from './api';
 
 const app = koa();
@@ -31,6 +31,10 @@ if (env === 'development') {
 	var compiler = webpack(webpackConfig);
 
   	// 1.
+	app.use(isomorph());
+  	app.use(serveIndex('/ui/'));
+
+  	// 2.
 	var hotOpts = {
    	log: console.log,
     	path: '/__webpack_hmr',
@@ -39,7 +43,7 @@ if (env === 'development') {
 	var hot = require("koa-webpack-hot-middleware")(compiler, hotOpts);
 	app.use(hot);
 
-  	// 2.
+  	// 3.
 	var midOpts = {
 		noInfo: false,
 		publicPath: webpackConfig.output.publicPath
@@ -47,15 +51,13 @@ if (env === 'development') {
 	var middleware = require("koa-webpack-dev-middleware")(compiler, midOpts);
 	app.use(middleware);
 
-  	// 3.
-	app.use(isomorph());
-
 	// 4.
 	var api = createApiMiddleware("/api/", __dirname + "/api/");
 	app.use(api);
 }
 else {
 	app.use(isomorph());
+  	app.use(serveIndex('/ui/'));
 
 	// serve cached assets from dist folder
 	const cacheOpts: Object = {maxAge: 86400000, gzip: false};

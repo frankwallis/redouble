@@ -30,7 +30,7 @@ module.exports = function(options) {
 		],
 		debug: !options.production,
 		colors: true,
-		//devtool: options.devtool,
+		devtool: options.devtool,
 		output: {
 			path: options.production ? './dist' : '/',
 			publicPath: options.production ? '' : '/',

@@ -3,6 +3,7 @@
 import React from 'react';
 //import persistStore from 'redux-persist-store';
 import {Link} from 'react-router';
+import IndexLink from 'react-router/lib/IndexLink';
 import {GrowlContainer} from '../growl/growl.jsx';
 
 if (process.env.__BROWSER__) {
@@ -32,13 +33,13 @@ export class Main extends React.Component {
 				<nav role="navigation" className="main-navbar nav-main">
 					<ul className="nav-site">
 						<li key="table">
-							<Link to="/">Table</Link>
+							<IndexLink activeClassName="active" to="/">Table</IndexLink>
 						</li>
 						<li key="settings">
-							<Link to="/settings">Settings</Link>
+							<Link activeClassName="active" to="/ui/settings">Settings</Link>
 						</li>
 						<li key="about">
-							<Link to="/about">About</Link>
+							<Link activeClassName="active" to="/ui/about">About</Link>
 						</li>
 					</ul>
 				</nav>

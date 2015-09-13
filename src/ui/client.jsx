@@ -13,7 +13,8 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 // React Router
 import {Router} from 'react-router';
-import {history} from 'react-router/lib/BrowserHistory';
+
+import {createHistory} from 'history';
 import routes from "./routes";
 
 import 'normalize.css';
@@ -28,6 +29,8 @@ const finalCreateStore = compose(applyMiddleware(thunk),
 	// Lets you write ?debug_session=<name> in address bar to persist debug sessions
 	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)))(createStore);
 const store = finalCreateStore(reducer, global.__ISOMORPHIC_STATE__);
+
+const history = createHistory();
 
 ReactDOM.render(
 	<div>

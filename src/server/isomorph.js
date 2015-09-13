@@ -1,29 +1,21 @@
 import path from "path";
 import generateMarkupAndState from "../ui/server";
 import cheerio from "cheerio";
-import rawBody from "raw-body";
+import parser from "co-body";
 
-export default function() {
+export function isomorph() {
 	return function *(next) {
 		if (this.method !== 'GET') return yield next;
-
-		let route = false;
-
-		/* anything without an extension is considered a route, and redirected to index.html */
-		if (path.basename(this.path).indexOf(".") < 0) {
-			route = this.path;
-			this.path = "/index.html";
-		}
-
+		let origPath = this.path;
 		yield next;
 
-		if (route) {
-			/* convert body to buffer if stream */
-	  		if (this.body && this.body._readableState)
-	    		this.body = yield rawBody(this.body);
+		if (this.path == "/") {
+			var bodyJson = yield parser.json(this);
+
+	    	console.log('server rendering ' + origPath);
 
 			/* generate the markup for this url */
-			let {markup, state} = yield generateMarkupAndState(route, this.query);
+			let {markup, state} = yield generateMarkupAndState(origPath, this.query);
 
 			/* inject it into index.html */
 			let $ = cheerio.load(this.body.toString());
@@ -32,5 +24,15 @@ export default function() {
 
 			this.body = $.html();
 		}
+	};
+}
+
+export function serveIndex(mount) {
+	return function *(next) {
+		if (this.method !== 'GET') return yield next;
+		if (this.path.indexOf(mount) === 0) {
+			this.path = "/";
+		}
+		yield next;
 	};
 }

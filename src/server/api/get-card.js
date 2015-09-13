@@ -14,17 +14,17 @@ export function getNextCard(boardState) {
 	let first = convertSeat(board.previousTrickWinner || board.leader);
 
 	let trick = board.currentTrick;
-	let currentTrickRank = [];
+	let currentTrickRanks = [];
 	let currentTrickSuit = [];
 
 	for (let i = 0; i < trick.length; i ++) {
-		currentTrickRank.push(trick[i].card.pip);
+		currentTrickRanks.push(trick[i].card.pip);
 		currentTrickSuit.push(convertSuit(trick[i].card.suit));
 	}
 
 	let remainCards = convertToPBN(board);
 
-	let deal = { trump, first, currentTrickRank, currentTrickSuit, remainCards };
+	let deal = { trump, first, currentTrickRanks, currentTrickSuit, remainCards };
 	let options = {
 		target: dds.TARGET_MAXIMUM,
 		solutions: dds.SOLUTION_FULL,

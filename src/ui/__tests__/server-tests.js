@@ -1,4 +1,4 @@
-import generateMarkupAndState from "../server.jsx";
+import generateMarkupAndState from "../server";
 
 describe('generateMarkup', () => {
 

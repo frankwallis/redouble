@@ -8,5 +8,7 @@ export default function createApiMiddleware(mountPoint) {
 	let rpcServer = new rpc.Server();
 
 	rpcServer.expose('getCard', strategyService.getCard);
+	rpcServer.expose('getContract', strategyService.getContract);
+
 	return route.post(mountPoint, koaJrpc(rpcServer));
 }

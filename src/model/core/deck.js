@@ -76,7 +76,7 @@ export class Deck {
 
 			let holdings = hands[i].split(".");
 
-			Suit.all.forEach((_2, j) => {
+			Suit.all().forEach((_2, j) => {
 				let suit = Suit.fromPBN(j);
 
 				let holding = holdings[j].split("").map(pipName => {

@@ -167,7 +167,7 @@ describe('Board Query', () => {
 		it('returns true after all the cards have been played', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["3S", "4S", "5S"])
+				Deck.fromPBN("N: 2...A2 7.7..7 A.A..3 456...")
 			);
 
 			for(let idx = 0; idx < 3; idx ++) {
@@ -201,7 +201,7 @@ describe('Board Query', () => {
 		it('returns the number of tricks won by declarer', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S", "AH", "2C"], ["AS", "3H", "3C"], [ "4S", "4H", "4C"], ["5S", "5H", "AC"])
+				Deck.fromPBN("N: 2...A2 7.7..7 A.A..3 456..."),
 			);
 
 			boardBuilder = boardBuilder
@@ -273,7 +273,7 @@ describe('Board Query', () => {
 		it('returns all available cards when void', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S"], ["3H"], [ "4D"], ["5C"]),
+				Deck.fromPBN("N: 2... .3.. ..4. ...5"),
 				Bid.createAll("no bid", "no bid", "1NT", "no bid", "no bid", "no bid")
 			);
 			let board = boardBuilder.toQuery();
@@ -298,7 +298,7 @@ describe('Board Query', () => {
 		it('returns undefined before a trick is completed', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S"], ["3H"], [ "4D"], ["5C"]),
+				Deck.fromPBN("N: 2... .3.. ..4. ...5"),
 				Bid.createAll("1NT", "no bid", "no bid", "no bid")
 			);
 			boardBuilder
@@ -314,7 +314,7 @@ describe('Board Query', () => {
 		it('returns the trick winner in no trumps', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S", "2H"], ["3S", "3H"], ["9S", "9H"], ["5S", "5H"]),
+				Deck.fromPBN("N: 2.2.. 3.3.. 9.9.. 5.5.."),
 				Bid.createAll("1NT", "no bid", "no bid", "no bid")
 			);
 			boardBuilder
@@ -330,7 +330,7 @@ describe('Board Query', () => {
 		it('returns the trick winner in trumps', () => {
 			let boardBuilder = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S", "2H"], ["3S", "3H"], ["2C", "9H"], ["5S", "5H"]),
+				Deck.fromPBN("N: 2.2.. 3.3.. .9..2 5.5.."),
 				Bid.createAll("1C", "no bid", "no bid", "no bid")
 			);
 			boardBuilder

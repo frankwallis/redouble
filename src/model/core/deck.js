@@ -14,9 +14,9 @@ export class Deck {
 	createCards(): Array<Card> {
 		let result = [];
 
-		for (let asuit = Suit.Clubs; asuit <= Suit.Spades; asuit++) {
-			for (let apip = Pip.Two; apip <= Pip.Ace; apip++) {
-				result.push({ suit: asuit, pip: apip });
+		for (let suit = Suit.Clubs; suit <= Suit.Spades; suit++) {
+			for (let pip = Pip.Two; pip <= Pip.Ace; pip++) {
+				result.push({ suit, pip });
 			}
 		}
 
@@ -61,23 +61,34 @@ export class Deck {
 
 	/**
 	 * rigs the returned hands
-	 * hands should be arrays of strings e.g. [ "5H", "6H" ]
+	 * pbn should be a valid pbn string
 	 */
-	static rig(dealer, hand1, hand2, hand3, hand4) {
+	static fromPBN(pbn) {
 		let result = {};
+		let parts = pbn.split(":").map(part => part.trim());
 
-		let current = Seat.rotate(dealer, 1);
-		result[current] = hand1.map((card) => Card.create(card));
+		let dealer = Seat.fromPBNString(parts[0]);
+		let hands = parts[1].split(" ").map(part => part.trim());
 
-		current = Seat.rotate(current, 1);
-		result[current] = hand2.map((card) => Card.create(card));
+		Seat.all().forEach((_1, i) => {
+			let current = Seat.rotate(dealer, i);
+			result[current] = [];
 
-		current = Seat.rotate(current, 1);
-		result[current] = hand3.map((card) => Card.create(card));
+			let holdings = hands[i].split(".");
 
-		current = Seat.rotate(current, 1);
-		result[current] = hand4.map((card) => Card.create(card));
+			Suit.all.forEach((_2, j) => {
+				let suit = Suit.fromPBN(j);
+
+				let holding = holdings[j].split("").map(pipName => {
+					let pip = Pip.fromPBNString(pipName);
+					return {pip, suit};
+				});
+
+				result[current] = result[current].concat(holding);
+			});
+		});
 
 		return result;
 	}
+
 }

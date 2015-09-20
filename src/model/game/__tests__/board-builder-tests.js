@@ -18,7 +18,7 @@ describe('Board Builder', () => {
 		it('handles parameters', () => {
 			let board = BoardBuilder.create(
 				Seat.West,
-				Deck.rig(Seat.West, ["2S"], ["2H"], ["2D"], ["2C"]),
+				Deck.fromPBN("N: 2... .2.. ..2. ...2"),
 				Bid.createAll("no bid", "no bid"),
 				Card.createAll("2S", "2H", "2D")
 			).toQuery();
@@ -53,6 +53,5 @@ describe('Board Builder', () => {
 			expect(board.bids[0].type).to.equal(BidType.NoBid);
 		});
 	});
-
 
 });

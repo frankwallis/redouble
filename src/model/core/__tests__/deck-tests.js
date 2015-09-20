@@ -1,6 +1,6 @@
 import {Deck} from '../deck';
 import {Seat} from '../seat';
-import {Pip} from '../card';
+import {Suit, Pip} from '../card';
 
 describe("Deck", () => {
 
@@ -33,10 +33,17 @@ describe("Deck", () => {
 		expect(different).to.equal(true);
 	});
 
-	it("rigs hands correctly", () => {
-		let hands = Deck.rig(Seat.South, ["3H", "5H"], ["2S", "3S"], ["7C", "8C"], ["2D", "3D"]);
+	it("converts from pbn strings", () => {
+		let hands = Deck.fromPBN("W: .35.. 23... ...78 ..2.");
 		expect(hands[Seat.North].length).to.equal(2);
 		expect(hands[Seat.North][0].pip).to.equal(Pip.Two);
+		expect(hands[Seat.North][0].suit).to.equal(Suit.Spades);
 		expect(hands[Seat.North][1].pip).to.equal(Pip.Three);
+		expect(hands[Seat.North][1].suit).to.equal(Suit.Spades);
+
+		expect(hands[Seat.South].length).to.equal(1);
+		expect(hands[Seat.South][0].pip).to.equal(Pip.Two);
+		expect(hands[Seat.South][0].suit).to.equal(Suit.Diamonds);
 	});
+
 });

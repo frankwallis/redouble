@@ -10,10 +10,10 @@ import createApiMiddleware from '../api';
 
 describe('API Integration Tests', () => {
 
-	it('getNextCard', (done) => {
+	it('getCard', (done) => {
 
 		const app = koa();
-		var api = createApiMiddleware("/api/", __dirname + "/../api/");
+		let api = createApiMiddleware("/api/", __dirname + "/../api/");
 		app.use(api);
 		app.listen(8081);
 
@@ -22,12 +22,12 @@ describe('API Integration Tests', () => {
 
 		let gameBuilder = GameBuilder.create().newBoard(
 			Seat.West,
-			Deck.rig(Seat.West, ["2S", "AC", "2C"], ["7S", "7H", "7C"], [ "AS", "AH", "3C"], ["4S", "5S", "6S"]),
+			Deck.fromPBN("N: 2...A2 7.7..7 A.A..3 456..."),
 			Bid.createAll("no bid", "no bid", "no bid", "1NT", "no bid", "no bid", "no bid")
 		);
 
 		//single call with named parameters
-		client.invoke('getNextCard', { boardState: gameBuilder.currentBoard }, function (err, raw) {
+		client.invoke('getCard', { boardState: gameBuilder.currentBoard }, function (err, raw) {
 			console.log(raw);
 			let obj = JSON.parse(raw);
 			expect(obj.result).to.deep.equal({"pip": 6, "suit": 4});

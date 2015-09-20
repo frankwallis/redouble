@@ -32,5 +32,25 @@ export const Seat = {
 
 	isPartner(seat1, seat2) {
 		return (Seat.rotate(seat1, 2) === seat2);
+	},
+
+	fromPBN(idx) {
+		return PBNSeatMap[idx];
+	},
+
+	toPBN(seat) {
+		return PBNSeatMap.indexOf(seat);
+	},
+
+	fromPBNString(pbn) {
+		return PBNSeatStringMap.indexOf(pbn);
+	},
+
+	toPBNString(seat) {
+		return PBNSeatStringMap[seat];
 	}
+
 };
+
+const PBNSeatMap = [Seat.North, Seat.East, Seat.South, Seat.West];
+const PBNSeatStringMap = ["", "N", "E", "S", "W"];

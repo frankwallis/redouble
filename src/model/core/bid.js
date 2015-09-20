@@ -7,10 +7,15 @@ export const BidSuit = {
 	Spades: 4,
 	NoTrumps: 5,
 
-	all() {
-		return [1, 2, 3, 4, 5];
-	}
+	all: () => [1, 2, 3, 4, 5],
+	fromPBN: (idx) => PBNBidSuitMap[idx],
+	toPBN: (suit) => PBNBidSuitMap.indexOf(suit),
+	fromPBNString: (pbn) => PBNBidSuitStringMap.indexOf(pbn),
+	toPBNString: (suit) => PBNBidSuitStringMap[suit]
 };
+
+const PBNBidSuitMap = [BidSuit.Spades, BidSuit.Hearts, BidSuit.Diamonds, BidSuit.Clubs, BidSuit.NoTrumps];
+const PBNBidSuitStringMap = ["", "C", "D", "H", "S", "NT"];
 
 export const BidType = {
 	NoBid: 1,
@@ -27,8 +32,8 @@ export const BidType = {
 	}
 */
 
-export class Bid {
-	static stringify(bid) {
+export const Bid = {
+	stringify(bid) {
 		switch(bid.type) {
 			case BidType.NoBid:
 				return "No Bid";
@@ -41,18 +46,18 @@ export class Bid {
 			default:
 				throw new Error("unrecognised bid");
 		}
-	}
+	},
 
-	static key(bid) {
+	key(bid) {
 		let result = [ bid.type ];
 
 		if (bid.type === BidType.Call)
 			result = result.concat([ bid.level, bid.suit ]);
 
 		return result.join('-');
-	}
+	},
 
-	static create(bid: string) {
+	create(bid: string) {
 		let shortNames = [ "", "c", "d", "h", "s", "nt"];
 		bid = bid.toLowerCase();
 
@@ -68,13 +73,13 @@ export class Bid {
 			result.suit = shortNames.indexOf(bid.slice(1));
 			return result;
 		}
-	}
+	},
 
 	/*
 	 * creates an array of bids
 	 * takes a variable length argument list of strings e.g. "1H", "double", "no bid"
 	 */
-	static createAll() {
+	createAll() {
 		var result = [];
 
 		for (let i = 0; i < arguments.length; i ++) {
@@ -82,14 +87,14 @@ export class Bid {
 		}
 
 		return result;
-	}
+	},
 
-	static suitName(suit: BidSuit, singular: boolean) {
+	suitName(suit: BidSuit, singular: boolean) {
 		let names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
 		return names[suit] + (singular ? '' : 's');
-	}
+	},
 
-	static compare(bid1, bid2) {
+	compare(bid1, bid2) {
 		if (bid1.type !== bid2.type) {
 			return bid1.type - bid2.type;
 		}
@@ -105,4 +110,4 @@ export class Bid {
 			}
 		}
 	}
-}
+};

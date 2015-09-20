@@ -4,7 +4,7 @@ import {GameQuery} from "../model/game/game-query";
 import {StateHistory} from "./state-history";
 
 //import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
-import {CardplayStrategy} from "../model/strategy/cardplay/dds-strategy";
+import {CardplayStrategy} from "../model/strategy/cardplay/proxy-strategy";
 import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
 
 import {validateBid, validateCard} from "../model/game/validators";

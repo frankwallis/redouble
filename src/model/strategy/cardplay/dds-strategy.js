@@ -6,101 +6,95 @@ import {BoardQuery} from "../../game/board-query";
 
 dds.setMaxThreads(4);
 
-export class CardplayStrategy {
+export function getCard(boardState) {
+	let board = new BoardQuery(boardState);
 
-	constructor() {}
+	let trump = BidSuit.toPBN(board.trumpSuit);
+	let first = Seat.toPBN(board.previousTrickWinner || board.leader);
 
-	getCard(boardState) {
-		let board = new BoardQuery(boardState);
+	let trick = board.currentTrick;
+	let currentTrickRank = [];
+	let currentTrickSuit = [];
 
-		let trump = BidSuit.toPBN(board.trumpSuit);
-		let first = Seat.toPBN(board.previousTrickWinner || board.leader);
-
-		let trick = board.currentTrick;
-		let currentTrickRank = [];
-		let currentTrickSuit = [];
-
-		for (let i = 0; i < trick.length; i ++) {
-			currentTrickRank.push(trick[i].card.pip);
-			currentTrickSuit.push(Suit.toPBN(trick[i].card.suit));
-		}
-
-		let remainCards = this.convertToPBN(board);
-
-		let deal = { trump, first, currentTrickRank, currentTrickSuit, remainCards };
-		let options = {
-			target: dds.TARGET_MAXIMUM,
-			solutions: dds.SOLUTION_FULL,
-			mode: dds.MODE_AUTO_SEARCH
-		};
-
-		return dds.solveBoard(deal, options)
-			.then((solutions, err) => {
-				return this.chooseCard(solutions, board);
-			});
+	for (let i = 0; i < trick.length; i ++) {
+		currentTrickRank.push(trick[i].card.pip);
+		currentTrickSuit.push(Suit.toPBN(trick[i].card.suit));
 	}
 
-	chooseCard(solutions, board) {
-		let cards = [];
+	let remainCards = convertToPBN(board);
 
-		for(let idx = 0; idx < solutions.cards; idx ++) {
-			if (solutions.score[idx] === solutions.score[0]) {
-				cards.push({
-					pip: solutions.rank[idx],
-					suit: Suit.fromPBN(solutions.suit[idx])
-				});
+	let deal = { trump, first, currentTrickRank, currentTrickSuit, remainCards };
+	let options = {
+		target: dds.TARGET_MAXIMUM,
+		solutions: dds.SOLUTION_FULL,
+		mode: dds.MODE_AUTO_SEARCH
+	};
 
-				if (solutions.equals[idx]) {
-					for (let pip = Pip.Two; pip < Pip.Ace; pip ++) {
-						if (solutions.equals[idx] & (1 << pip)) {
-							cards.push({
-								pip,
-								suit: Suit.fromPBN(solutions.suit[idx])
-							});
-						}
+	return dds.solveBoard(deal, options)
+		.then((solutions, err) => {
+			return chooseCard(solutions, board);
+		});
+}
+
+function chooseCard(solutions, board) {
+	let cards = [];
+
+	for(let idx = 0; idx < solutions.cards; idx ++) {
+		if (solutions.score[idx] === solutions.score[0]) {
+			cards.push({
+				pip: solutions.rank[idx],
+				suit: Suit.fromPBN(solutions.suit[idx])
+			});
+
+			if (solutions.equals[idx]) {
+				for (let pip = Pip.Two; pip < Pip.Ace; pip ++) {
+					if (solutions.equals[idx] & (1 << pip)) {
+						cards.push({
+							pip,
+							suit: Suit.fromPBN(solutions.suit[idx])
+						});
 					}
 				}
 			}
 		}
-
-		//console.log(JSON.stringify(solutions));
-		//console.log(JSON.stringify(cards));
-		let leadSuit = (board.currentTrick.length > 0) ? board.currentTrick[0].suit : undefined;
-
-		cards.sort((card1, card2) => {
-			if (!leadSuit)
-				return Card.compare(card2, card1, board.trumpSuit);
-			else
-				return Card.compare(card1, card2, board.trumpSuit, leadSuit);
-		});
-
-		return cards[0];
 	}
 
-	convertToPBN(board) {
-		var result = Seat.toPBNString(board.dealer) + ':';
+	//console.log(JSON.stringify(solutions));
+	//console.log(JSON.stringify(cards));
+	let leadSuit = (board.currentTrick.length > 0) ? board.currentTrick[0].suit : undefined;
 
-		let notPlayed = (card) => !board.hasBeenPlayed(card);
+	cards.sort((card1, card2) => {
+		if (!leadSuit)
+			return Card.compare(card2, card1, board.trumpSuit);
+		else
+			return Card.compare(card1, card2, board.trumpSuit, leadSuit);
+	});
 
-		for (let i = 0; i < 4; i ++) {
-			let seat = Seat.rotate(board.dealer, i);
-			let cards = board.hands[seat].filter(notPlayed);
-			result = result + this.convertCardsToPBN(cards) + " ";
-		}
+	return cards[0];
+}
 
-		return result.trim();
+function convertToPBN(board) {
+	var result = Seat.toPBNString(board.dealer) + ':';
+
+	let notPlayed = (card) => !board.hasBeenPlayed(card);
+
+	for (let i = 0; i < 4; i ++) {
+		let seat = Seat.rotate(board.dealer, i);
+		let cards = board.hands[seat].filter(notPlayed);
+		result = result + convertCardsToPBN(cards) + " ";
 	}
 
-	convertCardsToPBN(cards) {
-		return Suit.all().reduce((result, suit) => {
-			let holding = cards
-				.filter((card) => card.suit === suit)
-				.sort((card1, card2) => Card.compare(card2, card1))
-				.map((card) => Card.pipName(card.pip))
-				.join("");
+	return result.trim();
+}
 
-			return result + holding + (suit === Suit.Clubs ? "" : ".");
-		}, "");
-	}
+function convertCardsToPBN(cards) {
+	return Suit.all().reduce((result, suit) => {
+		let holding = cards
+			.filter((card) => card.suit === suit)
+			.sort((card1, card2) => Card.compare(card2, card1))
+			.map((card) => Card.pipName(card.pip))
+			.join("");
 
+		return result + holding + (suit === Suit.Clubs ? "" : ".");
+	}, "");
 }

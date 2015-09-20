@@ -3,9 +3,7 @@ import {GameBuilder} from "../model/game/game-builder";
 import {GameQuery} from "../model/game/game-query";
 import {StateHistory} from "./state-history";
 
-//import {CardplayStrategy} from "../model/strategy/cardplay/cardplay-strategy";
-import {CardplayStrategy} from "../model/strategy/cardplay/proxy-strategy";
-import {BiddingStrategy} from "../model/strategy/bidding/bidding-strategy";
+import services from "../services/api";
 
 import {validateBid, validateCard} from "../model/game/validators";
 import {notifyError} from "./notification-actions";
@@ -14,9 +12,6 @@ import {
 	GAME_PUSH_STATE, GAME_BACK, GAME_FORWARD, GAME_JUMP_BACK,
 	GAME_PAUSE, GAME_RESUME
 } from "./action-types";
-
-let cardplayStrategy = new CardplayStrategy();
-let biddingStrategy = new BiddingStrategy();
 
 export function newGame() {
 	return (dispatch, getState) => {
@@ -77,7 +72,7 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 
 			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
 				if (game.currentBoard.biddingHasEnded) {
-					cardplayStrategy.getCard(game.currentBoard)
+					services.getCard(game.currentBoard.boardState)
 						.then((card) => {
 							if (sequence === forSequence)
 								dispatch(playCard(card));
@@ -86,7 +81,13 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 						});
 				}
 				else
-					dispatch(makeBid(biddingStrategy.getBid(game)));
+					services.getBid(game.gameState)
+						.then((bid) => {
+							if (sequence === forSequence)
+								dispatch(makeBid(bid));
+							else
+								console.log('the game has moved on');
+						});
 			}
 		}
 		else {

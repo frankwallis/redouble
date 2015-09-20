@@ -4,9 +4,7 @@ import {Bid} from '../../../core/bid';
 import {Card, Pip, Suit} from '../../../core/card';
 import {Deck} from '../../../core/deck';
 import {Seat} from '../../../core/seat';
-import {CardplayStrategy} from "../dds-strategy";
-
-let strategy = new CardplayStrategy();
+import * as strategy from "../dds-strategy";
 
 let prev = undefined;
 

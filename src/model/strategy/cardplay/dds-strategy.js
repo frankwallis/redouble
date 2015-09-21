@@ -1,10 +1,10 @@
-import * as dds from "dds-node-adapter";
+import {Seat} from "../../core/seat";
 import {Suit, Card, Pip} from "../../core/card";
 import {BidSuit} from "../../core/bid";
-import {Seat} from "../../core/seat";
 import {BoardQuery} from "../../game/board-query";
 
-dds.setMaxThreads(4);
+import * as dds from "dds-node-adapter";
+dds.setMaxThreads(1);
 
 export function getCard(boardState) {
 	let board = new BoardQuery(boardState);
@@ -21,7 +21,7 @@ export function getCard(boardState) {
 		currentTrickSuit.push(Suit.toPBN(trick[i].card.suit));
 	}
 
-	let remainCards = convertToPBN(board);
+	let remainCards = board.toPBN();
 
 	let deal = { trump, first, currentTrickRank, currentTrickSuit, remainCards };
 	let options = {
@@ -71,30 +71,4 @@ function chooseCard(solutions, board) {
 	});
 
 	return cards[0];
-}
-
-function convertToPBN(board) {
-	var result = Seat.toPBNString(board.dealer) + ':';
-
-	let notPlayed = (card) => !board.hasBeenPlayed(card);
-
-	for (let i = 0; i < 4; i ++) {
-		let seat = Seat.rotate(board.dealer, i);
-		let cards = board.hands[seat].filter(notPlayed);
-		result = result + convertCardsToPBN(cards) + " ";
-	}
-
-	return result.trim();
-}
-
-function convertCardsToPBN(cards) {
-	return Suit.all().reduce((result, suit) => {
-		let holding = cards
-			.filter((card) => card.suit === suit)
-			.sort((card1, card2) => Card.compare(card2, card1))
-			.map((card) => Card.pipName(card.pip))
-			.join("");
-
-		return result + holding + (suit === Suit.Clubs ? "" : ".");
-	}, "");
 }

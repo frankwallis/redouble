@@ -106,5 +106,18 @@ export const Card = {
 			case Pip.Ten: return "T";
 			default: return pip.toString();
 		}
+	},
+
+	toPBN(cards) {
+		return Suit.all().reduce((result, suit) => {
+			let holding = cards
+				.filter(card => card.suit === suit)
+				.sort((card1, card2) => Card.compare(card2, card1))
+				.map(card => Card.pipName(card.pip))
+				.join("");
+
+			return result + holding + (suit === Suit.Clubs ? "" : ".");
+		}, "");
 	}
+
 };

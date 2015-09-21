@@ -3,6 +3,7 @@
 import {Seat} from "../core/seat";
 import {Bid, BidType, BidSuit} from "../core/bid";
 import {Card} from "../core/card";
+import {validateBid} from "./validators";
 
 /**
  * Helper class for analysing board-state.
@@ -204,5 +205,28 @@ export class BoardQuery {
 		}
 
 		return available;
+	}
+
+	/*
+	 * Returns an array of the cards which can legally be played
+	 */
+	getLegalBids() {
+		return Bid.all().filter((bid) => !validateBid(bid, this));
+	}
+
+	/*
+	 * Converts the hands to their PBN string
+	 */
+	toPBN() {
+		var result = Seat.toPBNString(this.dealer) + ':';
+
+		Seat.all().forEach((s, i) => {
+			let seat = Seat.rotate(this.dealer, i);
+			let cards = this.hands[seat]
+				.filter(card => !this.hasBeenPlayed(card));
+			result = result + Card.toPBN(cards) + " ";
+		});
+
+		return result.trim();
 	}
 }

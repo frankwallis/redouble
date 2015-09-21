@@ -58,7 +58,7 @@ export const Bid = {
 	},
 
 	create(bid: string) {
-		let shortNames = [ "", "c", "d", "h", "s", "nt"];
+		let shortNames = [ "", "c", "d", "h", "s", "n"];
 		bid = bid.toLowerCase();
 
 		if (bid === "double")
@@ -70,7 +70,7 @@ export const Bid = {
 		else {
 			let result = { type: BidType.Call };
 			result.level = parseInt(bid[0]);
-			result.suit = shortNames.indexOf(bid.slice(1));
+			result.suit = shortNames.indexOf(bid[1]);
 			return result;
 		}
 	},
@@ -85,6 +85,25 @@ export const Bid = {
 		for (let i = 0; i < arguments.length; i ++) {
 			result.push(Bid.create(arguments[i]));
 		}
+
+		return result;
+	},
+
+	/*
+	 * returns array containing all the bids
+	 */
+	all() {
+		let result = [];
+
+		[1, 2, 3, 4, 5, 6, 7].forEach(level => {
+			BidSuit.all().forEach(suit => {
+				result.push({type: BidType.Call, level, suit });
+			});
+		});
+
+		result.push({type: BidType.NoBid});
+		result.push({type: BidType.Double});
+		result.push({type: BidType.Redouble});
 
 		return result;
 	},
@@ -109,5 +128,9 @@ export const Bid = {
 				return 0;
 			}
 		}
+	},
+
+	fromPBN(pbn) {
+		return Bid.create(pbn);
 	}
 };

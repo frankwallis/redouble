@@ -289,6 +289,69 @@ describe('Board Query', () => {
 		});
 	});
 
+	describe('legalCards', () => {
+		it('returns all available bids when no bid has been made', () => {
+			let boardBuilder = BoardBuilder
+				.create(Seat.West);
+
+			let board = boardBuilder.toQuery();
+			expect(board.getLegalBids()).to.have.length.of((7 * 5) + 1);
+		});
+
+		it('only allows bids higher than the current contract', () => {
+			let boardBuilder = BoardBuilder
+				.create(Seat.West)
+				.makeBid(Bid.create("4NT"))
+				.makeBid(Bid.create("no bid"));
+
+			let board = boardBuilder.toQuery();
+			let bids = board.getLegalBids();
+
+			expect(bids).to.have.length.of((3 * 5) + 1);
+		});
+
+		it('only allows double when opponent has bid', () => {
+			let boardBuilder = BoardBuilder
+				.create(Seat.West)
+				.makeBid(Bid.create("7NT"));
+
+			let board = boardBuilder.toQuery();
+			let bids = board.getLegalBids();
+
+			expect(bids).to.have.length.of(2);
+			expect(bids[0].type).to.equal(BidType.NoBid);
+			expect(bids[1].type).to.equal(BidType.Double);
+
+			boardBuilder.makeBid(Bid.create("no bid"));
+			board = boardBuilder.toQuery();
+			bids = board.getLegalBids();
+
+			expect(bids).to.have.length.of(1);
+			expect(bids[0].type).to.equal(BidType.NoBid);
+		});
+
+		it('only allows redouble when contract is doubled', () => {
+			let boardBuilder = BoardBuilder
+				.create(Seat.West)
+				.makeBid(Bid.create("7NT"))
+				.makeBid(Bid.create("double"));
+
+			let board = boardBuilder.toQuery();
+			let bids = board.getLegalBids();
+
+			expect(bids).to.have.length.of(2);
+			expect(bids[0].type).to.equal(BidType.NoBid);
+			expect(bids[1].type).to.equal(BidType.Redouble);
+
+			boardBuilder.makeBid(Bid.create("no bid"));
+			board = boardBuilder.toQuery();
+			bids = board.getLegalBids();
+
+			expect(bids).to.have.length.of(1);
+			expect(bids[0].type).to.equal(BidType.NoBid);
+		});
+	});
+
 	describe('previousTrickWinner', () => {
 		it('returns undefined before play has started', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);

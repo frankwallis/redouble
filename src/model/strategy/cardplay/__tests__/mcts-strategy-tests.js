@@ -11,10 +11,10 @@ describe('Cardplay Strategy', () => {
 			let gameBuilder = GameBuilder
 				.create()
 				.dealBoard(Seat.West)
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			let strategy = new CardplayStrategy();
 			strategy.updateGameState(gameBuilder.build());
@@ -27,10 +27,10 @@ describe('Cardplay Strategy', () => {
 			let gameBuilder = GameBuilder
 				.create()
 				.dealBoard(Seat.West)
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			let strategy = new CardplayStrategy();
 			strategy.updateGameState(gameBuilder.build());

@@ -20,7 +20,7 @@ describe('Bidding History', () => {
 	it('displays all the bids', () => {
 		let board = BoardBuilder
 			.create()
-			.makeBid(Bid.create("no bid"))
+			.makeBid("no bid")
 			.toQuery();
 
 		let biddingHistory = TestUtils.renderIntoDocument(<BiddingHistory board={board}/>);

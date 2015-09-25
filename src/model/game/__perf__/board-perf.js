@@ -10,10 +10,10 @@ console.time("board");
 let startMem = process.memoryUsage();
 
 board = board
-   .makeBid(Bid.create("1H"))
-   .makeBid(Bid.create("no bid"))
-   .makeBid(Bid.create("no bid"))
-   .makeBid(Bid.create("no bid"));
+   .makeBid("1H")
+   .makeBid("no bid")
+   .makeBid("no bid")
+   .makeBid("no bid");
 
 while(!board.playHasEnded) {
    states.push(board); // prevent gc

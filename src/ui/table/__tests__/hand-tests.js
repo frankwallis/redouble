@@ -28,10 +28,10 @@ describe('Hand Component', () => {
 		expect(cards.length).to.equal(13);
 
 		boardBuilder = boardBuilder
-			.makeBid(Bid.create("1H"))
-			.makeBid(Bid.create("no bid"))
-			.makeBid(Bid.create("no bid"))
-			.makeBid(Bid.create("no bid"));
+			.makeBid("1H")
+			.makeBid("no bid")
+			.makeBid("no bid")
+			.makeBid("no bid");
 
 		board = boardBuilder.toQuery();
 		expect(board.nextPlayer).to.equal(Seat.East);

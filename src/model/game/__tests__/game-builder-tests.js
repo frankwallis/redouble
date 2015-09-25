@@ -26,7 +26,7 @@ describe('Game Builder', () => {
 			let game = GameBuilder
 				.create()
 				.newBoard()
-				.makeBid(Bid.create("no bid"))
+				.makeBid("no bid")
 				.toQuery();
 
 			expect(game.currentBoard.bids.length).to.equal(1);

@@ -60,6 +60,8 @@ export const Card = {
 	 * creates a card from a string e.g. "5H"
 	 */
 	create(card: string) {
+		if (typeof card !== "string") return card;
+
 		let shortSuitNames = [ "", "C", "D", "H", "S"];
 		let shortPipNames = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ];
 
@@ -79,14 +81,14 @@ export const Card = {
 	 * creates an array of cards or hands.
 	 * takes a variable length argument list of strings or arrays e.g. "5H", "6H" or ["5H"], ["6H"] etc
 	 */
-	createAll() {
+	createAll(...args) {
 		let result = [];
 
-		for (let i = 0; i < arguments.length; i ++) {
-			if (Array.isArray(arguments[i]))
-				result.push(Card.createAll.apply(Card, arguments[i]));
+		for (let i = 0; i < args.length; i ++) {
+			if (Array.isArray(args[i]))
+				result.push(Card.createAll.apply(Card, args[i]));
 			else
-				result.push(Card.create(arguments[i]));
+				result.push(Card.create(args[i]));
 		}
 
 		return result;
@@ -103,7 +105,7 @@ export const Card = {
 			case Pip.King: return "K";
 			case Pip.Queen: return "Q";
 			case Pip.Jack: return "J";
-			case Pip.Ten: return "T";
+			case Pip.Ten: return "10";
 			default: return pip.toString();
 		}
 	},
@@ -113,7 +115,7 @@ export const Card = {
 			let holding = cards
 				.filter(card => card.suit === suit)
 				.sort((card1, card2) => Card.compare(card2, card1))
-				.map(card => Card.pipName(card.pip))
+				.map(card => Pip.toPBNString(card.pip))
 				.join("");
 
 			return result + holding + (suit === Suit.Clubs ? "" : ".");

@@ -7,7 +7,7 @@ import {Deck} from "../core/deck";
 import {BoardQuery} from "./board-query";
 
 /**
- * Helper class for creating game-states
+ * Helper class for creating board-states
  * Uses builder pattern and returned state objects are immutable
  */
 export class BoardBuilder {
@@ -32,9 +32,12 @@ export class BoardBuilder {
 			deck.shuffle();
 			hands = deck.deal(dealer);
 		}
+		else if (typeof hands === "string") {
+			hands = Deck.fromPBN(hands);
+		}
 
-		bids = bids || [];
-		cards = cards || [];
+		bids = Bid.createAll(bids);
+		cards = cards || [];//Card.createAll(cards);
 
 		return new BoardBuilder({dealer, hands, bids, cards});
 	}
@@ -42,7 +45,8 @@ export class BoardBuilder {
 	/**
 	 * Mutates the state by adding a bid
 	 */
-	makeBid(bid: Bid): BoardBuilder {
+	makeBid(bid): BoardBuilder {
+		bid = Bid.create(bid);
 		let bids = this.boardState.bids.concat(bid);
 		this.boardState = {
 			...this.boardState,
@@ -54,7 +58,8 @@ export class BoardBuilder {
 	/**
 	 * Mutates the state by adding a played card
 	 */
-	playCard(card: Card): BoardBuilder {
+	playCard(card): BoardBuilder {
+		card = Card.create(card);
 		let cards = this.boardState.cards.concat({seat: this.toQuery().nextPlayer, card });
 		this.boardState = {
 			...this.boardState,

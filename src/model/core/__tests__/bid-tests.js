@@ -53,11 +53,15 @@ describe("Bid", () => {
 			bid = Bid.create("7NT");
 			expect(bid.suit).to.equal(BidSuit.NoTrumps);
 			expect(bid.level).to.equal(7);
+
+			bid = Bid.create("2N");
+			expect(bid.suit).to.equal(BidSuit.NoTrumps);
+			expect(bid.level).to.equal(2);
 		});
 	});
 
 	describe("createAll", () => {
-		it("creates lists of bids correctly", () => {
+		it("creates lists of bids correctly from argument list", () => {
 			let bids = Bid.createAll("1C", "double", "1S");
 			expect(bids.length).to.equal(3);
 			expect(bids[0].suit).to.equal(BidSuit.Clubs);
@@ -65,6 +69,16 @@ describe("Bid", () => {
 			expect(bids[2].suit).to.equal(BidSuit.Spades);
 			expect(bids[2].level).to.equal(1);
 		});
+
+		it("creates lists of bids correctly from array argument", () => {
+			let bids = Bid.createAll(["1C", "double", "1S"]);
+			expect(bids.length).to.equal(3);
+			expect(bids[0].suit).to.equal(BidSuit.Clubs);
+			expect(bids[0].level).to.equal(1);
+			expect(bids[2].suit).to.equal(BidSuit.Spades);
+			expect(bids[2].level).to.equal(1);
+		});
+
 	});
 
 });

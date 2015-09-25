@@ -46,7 +46,7 @@ describe('Board Builder', () => {
 		it('adds the bid', () => {
 			let board = BoardBuilder.create()
 				.playCard(Card.create("2H"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid("no bid")
 				.toQuery();
 
 			expect(board.bids.length).to.equal(1);

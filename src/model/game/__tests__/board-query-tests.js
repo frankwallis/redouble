@@ -12,15 +12,15 @@ describe('Board Query', () => {
 			let board = boardBuilder.toQuery();
 			expect(board.lastBid).to.be.undefined;
 
-			boardBuilder.makeBid(Bid.create("2H"));
+			boardBuilder.makeBid("2H");
 			board = boardBuilder.toQuery();
 			expect(board.lastBid).to.deep.equal({ type: BidType.Call, suit: BidSuit.Hearts, level: 2 });
 
-			boardBuilder.makeBid(Bid.create("double"));
+			boardBuilder.makeBid("double");
 			board = boardBuilder.toQuery();
 			expect(board.lastBid).to.deep.equal({ type: BidType.Double });
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			board = boardBuilder.toQuery();
 			expect(board.lastBid).to.deep.equal({ type: BidType.NoBid });
 		});
@@ -32,16 +32,16 @@ describe('Board Query', () => {
 			let board = boardBuilder.toQuery();
 			expect(board.lastCall).to.be.undefined;
 
-			board = boardBuilder.makeBid(Bid.create("no bid")).toQuery();
+			board = boardBuilder.makeBid("no bid").toQuery();
 			expect(board.lastCall).to.be.undefined;
 
-			board = boardBuilder.makeBid(Bid.create("2H")).toQuery();
+			board = boardBuilder.makeBid("2H").toQuery();
 			expect(board.lastCall).to.deep.equal({ type: BidType.Call, suit: BidSuit.Hearts, level: 2 });
 
-			board = boardBuilder.makeBid(Bid.create("double")).toQuery();
+			board = boardBuilder.makeBid("double").toQuery();
 			expect(board.lastCall).to.deep.equal({ type: BidType.Call, suit: BidSuit.Hearts, level: 2 });
 
-			board = boardBuilder.makeBid(Bid.create("3S")).toQuery();
+			board = boardBuilder.makeBid("3S").toQuery();
 			expect(board.lastCall).to.deep.equal({ type: BidType.Call, suit: BidSuit.Spades, level: 3 });
 		});
 	});
@@ -52,15 +52,15 @@ describe('Board Query', () => {
 			let board = boardBuilder.toQuery();
 			expect(board.lastAction).to.be.undefined;
 
-			boardBuilder.makeBid(Bid.create("2H"));
+			boardBuilder.makeBid("2H");
 			board = boardBuilder.toQuery();
 			expect(board.lastAction).to.deep.equal({ type: BidType.Call, suit: BidSuit.Hearts, level: 2 });
 
-			boardBuilder.makeBid(Bid.create("double"));
+			boardBuilder.makeBid("double");
 			board = boardBuilder.toQuery();
 			expect(board.lastAction).to.deep.equal({ type: BidType.Double });
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			board = boardBuilder.toQuery();
 			expect(board.lastAction).to.deep.equal({ type: BidType.Double });
 		});
@@ -78,10 +78,10 @@ describe('Board Query', () => {
 		it('returns the suit of the bid contract', () => {
 			let board = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("4H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid("4H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid")
 				.toQuery();
 
 			expect(board.trumpSuit).to.equal(BidSuit.Hearts);
@@ -90,11 +90,11 @@ describe('Board Query', () => {
 		it('returns the suit of the bid contract for doubled no-trumps', () => {
 			let board = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("4NT"))
-				.makeBid(Bid.create("double"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid("4NT")
+				.makeBid("double")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid")
 				.toQuery();
 
 			expect(board.trumpSuit).to.equal(BidSuit.NoTrumps);
@@ -106,35 +106,35 @@ describe('Board Query', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("4NT"));
+			boardBuilder.makeBid("4NT");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("double"));
+			boardBuilder.makeBid("double");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.true;
 		});
 
 		it('requires four no bids to throw in a hand', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.false;
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(boardBuilder.toQuery().biddingHasEnded).to.be.true;
 		});
 	});
@@ -185,13 +185,13 @@ describe('Board Query', () => {
 		it('returns the dealer when bidding starts', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("2H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("no bid")
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("2H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			expect(boardBuilder.toQuery().declarer).to.equal(Seat.North);
 		});
@@ -205,10 +205,10 @@ describe('Board Query', () => {
 			);
 
 			boardBuilder = boardBuilder
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 			expect(boardBuilder.toQuery().declarerTricks).to.equal(0);
 
 			boardBuilder = boardBuilder
@@ -238,10 +238,10 @@ describe('Board Query', () => {
 		it('returns all available cards for leader', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			let board = boardBuilder.toQuery();
 			expect(board.legalCards.length).to.equal(13);
@@ -254,10 +254,10 @@ describe('Board Query', () => {
 		it('returns cards of the same suit as lead', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			let lead = boardBuilder.toQuery().legalCards[0];
 			boardBuilder.playCard(lead);
@@ -301,8 +301,8 @@ describe('Board Query', () => {
 		it('only allows bids higher than the current contract', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("4NT"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("4NT")
+				.makeBid("no bid");
 
 			let board = boardBuilder.toQuery();
 			let bids = board.getLegalBids();
@@ -313,7 +313,7 @@ describe('Board Query', () => {
 		it('only allows double when opponent has bid', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("7NT"));
+				.makeBid("7NT");
 
 			let board = boardBuilder.toQuery();
 			let bids = board.getLegalBids();
@@ -322,7 +322,7 @@ describe('Board Query', () => {
 			expect(bids[0].type).to.equal(BidType.NoBid);
 			expect(bids[1].type).to.equal(BidType.Double);
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			board = boardBuilder.toQuery();
 			bids = board.getLegalBids();
 
@@ -333,8 +333,8 @@ describe('Board Query', () => {
 		it('only allows redouble when contract is doubled', () => {
 			let boardBuilder = BoardBuilder
 				.create(Seat.West)
-				.makeBid(Bid.create("7NT"))
-				.makeBid(Bid.create("double"));
+				.makeBid("7NT")
+				.makeBid("double");
 
 			let board = boardBuilder.toQuery();
 			let bids = board.getLegalBids();
@@ -343,7 +343,7 @@ describe('Board Query', () => {
 			expect(bids[0].type).to.equal(BidType.NoBid);
 			expect(bids[1].type).to.equal(BidType.Redouble);
 
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			board = boardBuilder.toQuery();
 			bids = board.getLegalBids();
 
@@ -365,10 +365,10 @@ describe('Board Query', () => {
 				Bid.createAll("1NT", "no bid", "no bid", "no bid")
 			);
 			boardBuilder
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid")
 				.playCard(Card.create("2S"));
 
 			expect(boardBuilder.toQuery().previousTrickWinner).to.be.undefined;
@@ -417,10 +417,10 @@ describe('Board Query', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.West);
 
-			boardBuilder.makeBid(Bid.create("4NT"));
+			boardBuilder.makeBid("4NT");
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.North);
 
-			boardBuilder.makeBid(Bid.create("double"));
+			boardBuilder.makeBid("double");
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.East);
 		});
 
@@ -429,10 +429,10 @@ describe('Board Query', () => {
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.West);
 
 			boardBuilder
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.North);
 		});
@@ -442,10 +442,10 @@ describe('Board Query', () => {
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.West);
 
 			boardBuilder
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 			expect(boardBuilder.toQuery().nextPlayer).to.equal(Seat.North);
 
 			boardBuilder
@@ -464,10 +464,10 @@ describe('Board Query', () => {
 			let boardBuilder = BoardBuilder.create(Seat.West);
 
 			boardBuilder
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"));
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid");
 
 			expect(boardBuilder.toQuery().nextPlayer).to.be.undefined;
 		});

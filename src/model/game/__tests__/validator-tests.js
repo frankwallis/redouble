@@ -29,7 +29,7 @@ describe('Validators', () => {
 		it('allows only valid bids over calls', () => {
 			let board = BoardBuilder
 				.create()
-				.makeBid(Bid.create("1H"))
+				.makeBid("1H")
 				.toQuery();
 
 			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
@@ -42,10 +42,10 @@ describe('Validators', () => {
 		it('allows only valid bids over doubles', () => {
 			let board = BoardBuilder
 				.create()
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("double"))
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("double")
 				.toQuery();
 
 			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;
@@ -58,9 +58,9 @@ describe('Validators', () => {
 		it('allows only valid bids over redoubles', () => {
 			let board = BoardBuilder
 				.create()
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("double"))
-				.makeBid(Bid.create("redouble"))
+				.makeBid("1H")
+				.makeBid("double")
+				.makeBid("redouble")
 				.toQuery();
 
 
@@ -74,10 +74,10 @@ describe('Validators', () => {
 		it('disallows bids after the bidding has ended', () => {
 			let board = BoardBuilder
 				.create()
-				.makeBid(Bid.create("1H"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
-				.makeBid(Bid.create("no bid"))
+				.makeBid("1H")
+				.makeBid("no bid")
+				.makeBid("no bid")
+				.makeBid("no bid")
 				.toQuery();
 
 			expect(validateBid(Bid.create("1D"), board)).to.not.be.undefined;

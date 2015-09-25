@@ -115,7 +115,7 @@ describe("Card", () => {
 	});
 
 	describe("pipName", () => {
-		xit("returns correct values", () => {
+		it("returns correct values", () => {
 			expect(Card.pipName(Pip.Ace)).to.equal("A");
 			expect(Card.pipName(Pip.Ten)).to.equal("10");
 			expect(Card.pipName(Pip.Nine)).to.equal("9");

@@ -58,6 +58,8 @@ export const Bid = {
 	},
 
 	create(bid: string) {
+		if (typeof bid !== "string") return bid;
+
 		let shortNames = [ "", "c", "d", "h", "s", "n"];
 		bid = bid.toLowerCase();
 
@@ -79,11 +81,16 @@ export const Bid = {
 	 * creates an array of bids
 	 * takes a variable length argument list of strings e.g. "1H", "double", "no bid"
 	 */
-	createAll() {
+	createAll(...args) {
 		var result = [];
 
-		for (let i = 0; i < arguments.length; i ++) {
-			result.push(Bid.create(arguments[i]));
+		for (let i = 0; i < args.length; i ++) {
+			if (args[i]) {
+				if (Array.isArray(args[i]))
+					result = result.concat(Bid.createAll.apply(Bid, args[i]));
+				else
+					result.push(Bid.create(args[i]));
+			}
 		}
 
 		return result;
@@ -97,7 +104,7 @@ export const Bid = {
 
 		[1, 2, 3, 4, 5, 6, 7].forEach(level => {
 			BidSuit.all().forEach(suit => {
-				result.push({type: BidType.Call, level, suit });
+				result.push({ type: BidType.Call, level, suit });
 			});
 		});
 
@@ -109,7 +116,7 @@ export const Bid = {
 	},
 
 	suitName(suit: BidSuit, singular: boolean) {
-		let names = [ "", "club", "diamond", "heart", "spade", "no-trump"];
+		let names = [ "", "club", "diamond", "heart", "spade", "no-trump" ];
 		return names[suit] + (singular ? '' : 's');
 	},
 

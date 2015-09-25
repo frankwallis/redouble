@@ -18,15 +18,15 @@ describe('Bidding Queries', () => {
 
 		it('is true if that side has not opened the bidding yet', () => {
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.true;
-			boardBuilder.makeBid(Bid.create("no bid"));
+			boardBuilder.makeBid("no bid");
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.true;
-			boardBuilder.makeBid(Bid.create("1H"));
+			boardBuilder.makeBid("1H");
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.true;
-			boardBuilder.makeBid(Bid.create("1S"));
+			boardBuilder.makeBid("1S");
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.false;
-			boardBuilder.makeBid(Bid.create("1NT"));
+			boardBuilder.makeBid("1NT");
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.false;
-			boardBuilder.makeBid(Bid.create("2C"));
+			boardBuilder.makeBid("2C");
 			expect(queries.isOpener(boardBuilder.toQuery())).to.be.false;
 		});
 	});

@@ -5,7 +5,6 @@ import {BoardQuery} from "../../game/board-query";
 
 import * as queries from "./bidding-queries";
 import * as dds from "dds-node-adapter";
-dds.setMaxThreads(1);
 
 // TODO - should allow contracts which score better than the current one.
 export function filter(bid, board, vulnerability, context) {

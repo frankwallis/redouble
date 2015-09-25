@@ -5,24 +5,24 @@ import {Seat} from "../../core/seat";
 export function isOpener(board) {
 	return !board.bids.some((bid, idx) => {
 		let bidder = Seat.rotate(board.dealer, idx);
-		return (bid.type == BidType.Call) && ((bidder === board.nextPlayer) || Seat.isPartner(bidder, board.nextPlayer));
+		return (bid.type === BidType.Call) && ((bidder === board.nextPlayer) || Seat.isPartner(bidder, board.nextPlayer));
 	});
 }
 
 export function isResponder(board) {
 	let result = false;
-	let pos = bids.length -2;
+	let pos = board.bids.length -2;
 
 	if (pos >= 0)
-		result = (board.bids[pos].type == BidType.Call);
-
-	pos -= 2;
-	if (pos >= 0)
-		result = result && (board.bids[pos].type != BidType.Call);
+		result = (board.bids[pos].type === BidType.Call);
 
 	pos -= 2;
-	if (pos >= 0)
-		result = false;
+	while(pos >= 0) {
+		result = result && (board.bids[pos].type !== BidType.Call);
+		pos -= 2;
+	}
+
+	return result;
 }
 
 export function isSlamBid(bid) {
@@ -41,7 +41,16 @@ export function isGameBid(bid) {
 }
 
 export function isPreemptiveBid(bid, board) {
-	return (bid.level >= 3);
+	if (bid.type !== BidType.Call) return false;
+	let lastCall = board.lastCall;
+
+	if (!lastCall) {
+		return (bid.level >= 3);
+	}
+	else {
+		let minBid = { type: BidType.Call, level: lastCall.level +2, suit: lastCall.suit };
+		return (Bid.compare(bid, minBid) > 0);
+	}
 }
 
 export function isStrongBid(bid) {
@@ -49,27 +58,38 @@ export function isStrongBid(bid) {
 }
 
 export function isNoTrumpBid(bid) {
-	return (bid.suit === BidSuit.NoTrumps);
+	return (bid.type === BidType.Call) && (bid.suit === BidSuit.NoTrumps);
 }
 
 export function isJumpBid(bid, board) {
+	if (bid.type !== BidType.Call) return false;
 	let lastCall = board.lastCall;
 
 	if (!lastCall) {
-		return (bid.level >= 2)
+		return (bid.level >= 2);
 	}
 	else {
 		let minBid = { type: BidType.Call, level: lastCall.level +1, suit: lastCall.suit };
-		return (Bid.compare(bid, minBid) > 0)
+		return (Bid.compare(bid, minBid) > 0);
+	}
+}
+
+export function isSimpleBid(bid, board) {
+	if (bid.type !== BidType.Call) return false;
+
+	let lastCall = board.lastCall;
+
+	if (!lastCall) {
+		return (bid.level <= 1);
+	}
+	else {
+		let maxBid = { type: BidType.Call, level: lastCall.level +1, suit: lastCall.suit };
+		return (Bid.compare(bid, maxBid) <= 0);
 	}
 }
 
 export function isOvercall(bid, board) {
 	return isOpener(board) && board.lastCall && !isJumpBid(bid, board);
-}
-
-export function isSimpleBid(bid, board) {
-	return isOpener(board) && (bid.level === 1);
 }
 
 export function suitMap(cards) {

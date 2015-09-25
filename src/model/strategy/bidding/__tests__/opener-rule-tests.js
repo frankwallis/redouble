@@ -1,7 +1,7 @@
 import {Deck} from '../../../core/deck';
 import {Seat} from '../../../core/seat';
 import {BoardBuilder} from '../../../game/board-builder';
-import {Bid, BidSuit, BidType} from '../../../core/bid';
+import {BidSuit, BidType} from '../../../core/bid';
 import * as openerRule from "../opener-rule";
 
 describe('Opener Rule', () => {
@@ -11,7 +11,7 @@ describe('Opener Rule', () => {
 				Seat.North,
 				Deck.fromPBN("N: AKQ63.A97.72.T92 J52.KJT2.J.AQ743 84.865.QT85.KJ86 T97.Q43.AK9643.5")
 			);
-			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type == BidType.Call);
+			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type === BidType.Call);
 			let board = boardBuilder.toQuery();
 			let context = {};
 			let bids = allBids.filter(bid => openerRule.filter(bid, board, 0, context));
@@ -26,7 +26,7 @@ describe('Opener Rule', () => {
 				Seat.North,
 				Deck.fromPBN("N: KQ63.A72.764.T92 J52.JT9.J2.AQ743 84.865.QT85.KJ86 AT97.KQ43.AK93.5")
 			);
-			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type == BidType.Call);
+			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type === BidType.Call);
 			let board = boardBuilder.toQuery();
 			let context = {};
 			let bids = allBids.filter(bid => openerRule.filter(bid, board, 0, context));
@@ -38,7 +38,7 @@ describe('Opener Rule', () => {
 				Seat.North,
 				Deck.fromPBN("N: AKQT963..764.T92 J52.JT9.J2.AQ743 84.865.QT85.KJ86 7.AKQ7432.AK93.5")
 			);
-			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type == BidType.Call);
+			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type === BidType.Call);
 			let board = boardBuilder.toQuery();
 			let context = {};
 			let bids = allBids.filter(bid => openerRule.filter(bid, board, 0, context));
@@ -53,7 +53,7 @@ describe('Opener Rule', () => {
 				Seat.North,
 				Deck.fromPBN("N: KQ63.A72.AK7.AT9 J52.JT9.J2.Q7432 84.865.QT85.KJ86 AT97.KQ43.9643.5")
 			);
-			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type == BidType.Call);
+			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type === BidType.Call);
 			let board = boardBuilder.toQuery();
 			let context = {};
 			let bids = allBids.filter(bid => openerRule.filter(bid, board, 0, context));
@@ -68,7 +68,7 @@ describe('Opener Rule', () => {
 				Seat.North,
 				Deck.fromPBN("N: KQ6.A72.K64.AT92 J532.JT9.J2.Q743 84.865.QT85.KJ86 AT97.KQ43.A973.5")
 			);
-			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type == BidType.Call);
+			let allBids = boardBuilder.toQuery().getLegalBids().filter(bid => bid.type === BidType.Call);
 			let board = boardBuilder.toQuery();
 			let context = {};
 			let bids = allBids.filter(bid => openerRule.filter(bid, board, 0, context));

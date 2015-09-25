@@ -61,6 +61,7 @@ export function makeBid(bid) {
 	};
 }
 
+// TODO - make this into middleware?
 function scheduleAutoPlay(forSequence, dispatch, getState) {
 	setTimeout(() => {
 		let sequence = getState().gameStore.sequence;

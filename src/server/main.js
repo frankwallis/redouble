@@ -30,20 +30,20 @@ if (env === 'development') {
 	var webpack = require('webpack');
 	var compiler = webpack(webpackConfig);
 
-  	// 1.
+	// 1.
 	app.use(isomorph());
-  	app.use(serveIndex('/ui/'));
+	app.use(serveIndex('/ui/'));
 
-  	// 2.
+	// 2.
 	var hotOpts = {
-   	log: console.log,
-    	path: '/__webpack_hmr',
-    	heartbeat: 10 * 1000
-  	};
+		log: console.log,
+		path: '/__webpack_hmr',
+		heartbeat: 10 * 1000
+	};
 	var hot = require("koa-webpack-hot-middleware")(compiler, hotOpts);
 	app.use(hot);
 
-  	// 3.
+	// 3.
 	var midOpts = {
 		noInfo: false,
 		publicPath: webpackConfig.output.publicPath
@@ -57,7 +57,7 @@ if (env === 'development') {
 }
 else {
 	app.use(isomorph());
-  	app.use(serveIndex('/ui/'));
+	app.use(serveIndex('/ui/'));
 
 	// serve cached assets from dist folder
 	const cacheOpts: Object = {maxAge: 86400000, gzip: false};

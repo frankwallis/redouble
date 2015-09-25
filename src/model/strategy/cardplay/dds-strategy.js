@@ -4,7 +4,6 @@ import {BidSuit} from "../../core/bid";
 import {BoardQuery} from "../../game/board-query";
 
 import * as dds from "dds-node-adapter";
-dds.setMaxThreads(1);
 
 export function getCard(boardState) {
 	let board = new BoardQuery(boardState);
@@ -59,16 +58,27 @@ function chooseCard(solutions, board) {
 		}
 	}
 
-	//console.log(JSON.stringify(solutions));
-	//console.log(JSON.stringify(cards));
-	let leadSuit = (board.currentTrick.length > 0) ? board.currentTrick[0].suit : undefined;
+	let leadSuit = (board.currentTrick.length > 0) ? board.currentTrick[0].card.suit : undefined;
 
 	cards.sort((card1, card2) => {
-		if (!leadSuit)
-			return Card.compare(card2, card1, board.trumpSuit);
-		else
-			return Card.compare(card1, card2, board.trumpSuit, leadSuit);
+		return Card.compare(card1, card2, board.trumpSuit, leadSuit);
 	});
+
+	let lowestCard = cards[0];
+	let highestCard = cards[cards.length -1];
+
+	let newTrick = board.currentTrick.map(played => played.card).concat([highestCard]);
+	newTrick.sort((card1, card2) => {
+		return Card.compare(card1, card2, board.trumpSuit, leadSuit);
+	});
+
+
+	if (Card.compare(newTrick[newTrick.length -1], highestCard) < 0)
+		return lowestCard;
+	else if (board.currentTrick.length < 2)
+		return lowestCard;
+	else
+		return highestCard;
 
 	return cards[0];
 }

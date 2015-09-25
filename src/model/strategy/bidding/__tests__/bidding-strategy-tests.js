@@ -17,4 +17,5 @@ describe('Bidding Strategy', () => {
 				expect(bid.suit).to.equal(BidSuit.Spades);
 			});
 	});
+
 });

@@ -1,6 +1,4 @@
 import {Board} from '../board-state';
-//import {Board} from '../board-state-mutable';
-import {Bid, BidType, BidSuit} from '../../core/bid';
 
 let board = Board.create();
 let states = [];

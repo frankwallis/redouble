@@ -7,12 +7,14 @@ import co from "co";
 import coArray from "co-array";
 
 import * as openerRule from "./opener-rule";
+import * as responderRule from "./opener-rule";
 import * as parContractRule from "./par-contract-rule";
 
 export var getBid = co.wrap(generateBid);
 
 let rules = [
 	openerRule,
+	responderRule,
 	parContractRule
 ];
 

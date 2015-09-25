@@ -36,7 +36,7 @@ function noTrumpFilter(bid, board, vulnerability, context) {
 		return (pointCount >= 20) && (pointCount <= 22);
 	}
 	else if(queries.isSimpleBid(bid, board)) {
-		return  (pointCount >= 15) && (pointCount <= 18);
+		return (pointCount >= 15) && (pointCount <= 18);
 	}
 	else {
 		throw new Error("unhandled bid category " + JSON.stringify(bid));

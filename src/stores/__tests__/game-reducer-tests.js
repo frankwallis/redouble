@@ -1,5 +1,3 @@
-import {Bid} from '../../model/core/bid';
-import {Card} from '../../model/core/card';
 import {GameBuilder} from '../../model/game/game-builder';
 import {StateHistory} from '../state-history';
 import gameReducer from '../game-reducer';

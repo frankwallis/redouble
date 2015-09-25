@@ -16,13 +16,16 @@
 		"space-unary-ops": 0,
 		"curly": 0,
 		"no-use-before-define": 0,
+		"no-unused-expressions": 0,
 		"react/jsx-uses-react": 1
 	},
 	"globals": {
 		"expect": true,
 		"require": true,
 		"process": true,
-		"global": true
+		"global": true,
+		"sinon": true,
+		"__dirname": true
 	},
 	"plugins": [
 		"react"

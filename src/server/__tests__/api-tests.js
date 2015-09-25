@@ -10,16 +10,24 @@ import createApiMiddleware from '../api';
 
 describe('API Integration Tests', () => {
 
-	it('getCard', (done) => {
+	let client, server;
 
-		const app = koa();
+	before(() => {
+		let app = koa();
 		let api = createApiMiddleware("/api/", __dirname + "/../api/");
+
 		app.use(api);
-		app.listen(8081);
+		server = app.listen(8081);
 
 		let http = new rpc.httpTransport({port: 8081, hostname: 'localhost', path: '/api/'});
-		let client = new rpc.Client(http);
+		client = new rpc.Client(http);
+	});
 
+	after(() => {
+		server.close();
+	});
+
+	it('getCard', (done) => {
 		let gameBuilder = GameBuilder.create().newBoard(
 			Seat.West,
 			Deck.fromPBN("N: 2...A2 7.7..7 A.A..3 456..."),
@@ -28,10 +36,24 @@ describe('API Integration Tests', () => {
 
 		//single call with named parameters
 		client.invoke('getCard', { boardState: gameBuilder.currentBoard }, function (err, raw) {
-			console.log(raw);
 			let obj = JSON.parse(raw);
-			expect(obj.result).to.deep.equal({"pip": 6, "suit": 4});
+			expect(obj.result).to.deep.equal({"pip": 4, "suit": 4});
 			done();
 		});
 	});
+
+	it('getBid', (done) => {
+		let gameBuilder = GameBuilder.create().newBoard(
+			Seat.North,
+			Deck.fromPBN("N: AKQ63.A97.72.T92 J52.KJT2.J.AQ743 84.865.QT85.KJ86 T97.Q43.AK9643.5")
+		);
+
+		// single call with positional parameter
+		client.invoke('getBid', [ gameBuilder.build() ], function (err, raw) {
+			let obj = JSON.parse(raw);
+			expect(obj.result).to.deep.equal({"type": 2, "level": 1, "suit": 4});
+			done();
+		});
+	});
+
 });

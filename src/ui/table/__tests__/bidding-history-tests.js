@@ -1,7 +1,6 @@
 import {BidComponent} from "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";
 import {BoardBuilder} from "../../../model/game/board-builder";
-import {Bid} from "../../../model/core/bid";
 
 import React from "react/addons";
 const TestUtils = React.addons.TestUtils;

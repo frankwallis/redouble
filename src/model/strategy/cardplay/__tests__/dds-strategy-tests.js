@@ -28,19 +28,12 @@ describe('strategy', () => {
 			Seat.North,
 			Deck.fromPBN("N: KQ63.A72.764.T92 J52.JT9.J2.AQ743 84.865.QT85.KJ86 AT97.KQ43.AK93.5"),
 			Bid.createAll("no bid", "no bid", "1H", "2S", "no bid", "no bid", "no bid")
-		);
+		).playCard(Card.create("KS"));
 
 		return strategy.getCard(gameBuilder.currentBoard)
 			.then(card => {
 				expect(card.suit).to.equal(Suit.Spades);
-				expect(card.pip).to.equal(Pip.King);
-
-				gameBuilder.playCard(card);
-				return strategy.getCard(gameBuilder.currentBoard);
-			})
-			.then(card => {
-				expect(card.suit).to.equal(Suit.Spades);
-				expect(card.pip).to.equal(Pip.Five);
+				expect(card.pip).to.equal(Pip.Two);
 			});
 	});
 

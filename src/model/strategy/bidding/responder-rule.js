@@ -4,65 +4,93 @@ import {Seat} from "../../core/seat";
 
 import * as queries from "./bidding-queries";
 
-export function filter(candidates, board, vulnerability) {
-	if (queries.isResponder(board)) {
-		candidates = filterByLength(candidates, board, vulnerability);
-		candidates = filterByPoints(candidates, board, vulnerability);
-	}
-
-	return candidates;
+export function filter(bid, board, vulnerability, context) {
+	if (!queries.isResponder(board))
+		return true;
+	else if (bid.suit === BidSuit.NoTrumps)
+		return noTrumpFilter(bid, board, vulnerability, context);
+	else
+		return suitFilterByLength(bid, board, vulnerability, context) && suitFilterByStrength(bid, board, vulnerability, context);
 }
 
-function filterByLength(candidates, board, vulnerability) {
-	let hand = queries.suitMap(board.hands[board.nextPlayer]);
+function noTrumpFilter(bid, board, vulnerability, context) {
+	context.hand = context.hand || queries.suitMap(board.hands[board.nextPlayer]);
+	context.pointCount = context.pointCount || queries.getPointCount(context.hand);
+
+	let pointCount = context.pointCount;
+	let hand = context.hand;
+
+	if(!queries.isFlat(hand))
+		return false;
+
+	if (queries.isSlamBid(bid)) {
+		return false; // TODO
+	}
+	else if(queries.isGameBid(bid)) {
+		return false; // TODO
+	}
+	else if(queries.isPreemptiveBid(bid, board)) {
+		return false;
+	}
+	else if(queries.isJumpBid(bid, board)) {
+		return (pointCount >= 10) && (pointCount <= 12);
+	}
+	else if(queries.isSimpleBid(bid, board)) {
+		return (pointCount >= 6) && (pointCount <= 9);
+	}
+	else {
+		throw new Error("unhandled bid category " + JSON.stringify(bid));
+	}
+}
+
+function suitFilterByLength(bid, board, vulnerability, context) {
+	context.hand = context.hand || queries.suitMap(board.hands[board.nextPlayer]);
+	let hand = context.hand;
+
+	let openingSuit = board.bids[board.bids.length -2].suit;
 	let longest = Suit.all().reduce((long, suit) => {
 		if (hand[suit].length > long)
 			long = hand[suit].length;
 		return long;
 	}, -1);
 
-	return candidates
-		.filter(bid => {
-			if (bid.suit === BidSuit.NoTrumps)
-				return true;
-			else if (bid.suit === openingSuit)
-				return (hand[bid.suit].length >= 3);
-			else
-				return (hand[bid.suit].length >= longest);
-		});
+	if (bid.suit === openingSuit)
+		return (hand[bid.suit].length >= 3);
+	else
+		return (hand[bid.suit].length >= longest);
 }
 
-function filterByPoints(candidates, board, vulnerability) {
-	let hand = queries.suitMap(board.hands[board.nextPlayer]);
-	let pointCount = queries.getPointCount(hand);
-	let openingSuit = board.bids[board.bids.length -2];
+function suitFilterByStrength(bid, board, vulnerability, context) {
+	context.hand = context.hand || queries.suitMap(board.hands[board.nextPlayer]);
+	context.pointCount = context.pointCount || queries.getPointCount(context.hand);
+	let openingSuit = board.bids[board.bids.length -2].suit;
+	let pointCount = context.pointCount;
+	let hand = context.hand;
 
-	return candidates
-		.filter(bid => {
-			if (queries.isSlamBid(bid)) {
-				return false; // TODO
-			}
-			else if(queries.isGameBid(bid)) {
-				return false; // TODO
-			}
-			else if(queries.isPreemptiveBid(bid, board)) {
-				return false;
-			}
-			else if(queries.isJumpBid(bid, board)) {
-				if (bid.suit === openingSuit)
-					return (hand[bid.suit].length >= 4) && (pointCount > 10);
-				else
-					return (hand[bid.suit].length >= 5) && (pointCount > 13);
-			}
-			else if(queries.isSimpleBid(bid, board)) {
-				if(queries.isNoTrumpBid(bid))
-					return queries.isFlat(hand) && (pointCount >= 15) && (pointCount <= 18);
-				else
-					return (hand[bid.suit].length >= 4) && (pointCount > 12) && (pointCount <= 19);
-			}
-			else {
-				return true;
-				//throw new Error("unhandled bid category " + JSON.stringify(bid));
-			}
-		});
+	if (queries.isSlamBid(bid)) {
+		return false; // TODO
+	}
+	else if(queries.isGameBid(bid)) {
+		return false; // TODO
+	}
+	else if(queries.isPreemptiveBid(bid, board)) {
+		return false;
+	}
+	else if(queries.isJumpBid(bid, board)) {
+		if (bid.suit === openingSuit) {
+			return (hand[bid.suit].length >= 4) && (pointCount > 10);
+		}
+		else {
+			return (hand[bid.suit].length >= 5) && (pointCount > 13);
+		}
+	}
+	else if(queries.isSimpleBid(bid, board)) {
+		if (bid.suit === openingSuit)
+			return (hand[bid.suit].length >= 3) && (pointCount <= 11);
+		else
+			return (hand[bid.suit].length >= 4) && (pointCount > 12) && (pointCount <= 19);
+	}
+	else {
+		throw new Error("unhandled bid category " + JSON.stringify(bid));
+	}
 }

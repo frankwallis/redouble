@@ -80,6 +80,9 @@
     "type": "git",
     "url": "https://www.github.com/frankwallis/redouble.git"
   },
+  "engines" : {
+    "node" : ">= 4.1"
+  },
   "private": true,
   "author": "Frank Wallis",
   "license": "MIT"

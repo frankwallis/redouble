@@ -42,6 +42,7 @@
     "babel-core": "^5.7.4",
     "babel-eslint": "^3.1.23",
     "babel-loader": "^5.0.0",
+    "babel-plugin-react-transform": "^1.1.1",
     "chai": "^3.2.0",
     "css-loader": "^0.19.0",
     "eslint": "^0.24.1",
@@ -56,7 +57,7 @@
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
     "mocha": "^2.3.2",
-    "react-hot-loader": "^2.0.0-alpha-4",
+    "react-transform-hmr": "^1.0.1",
     "redux-devtools": "^2.1.0",
     "rimraf": "^2.4.1",
     "s3": "^4.4.0",
@@ -80,8 +81,8 @@
     "type": "git",
     "url": "https://www.github.com/frankwallis/redouble.git"
   },
-  "engines" : {
-    "node" : ">= 4.1"
+  "engines": {
+    "node": ">= 4.1"
   },
   "private": true,
   "author": "Frank Wallis",

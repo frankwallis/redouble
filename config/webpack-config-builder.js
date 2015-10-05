@@ -21,8 +21,6 @@ module.exports = function(options) {
 		scssLoaders = extractForProduction(scssLoaders);
 	}
 
-	var jsLoaders = options.production  ? ['babel'] : ['react-hot', 'babel'];
-
 	return {
 		entry: [
 			'webpack-hot-middleware/client',
@@ -48,7 +46,20 @@ module.exports = function(options) {
 				{
 					test: /\.jsx?$/,
 					exclude: /node_modules/,
-					loaders: jsLoaders
+					loader: 'babel',
+      			query: options.production ? {} : {
+        				stage: 0,
+        				plugins: ['react-transform'],
+        				extra: {
+							"react-transform": {
+								"transforms": [{
+									"transform":  "react-transform-hmr",
+									"imports": ["react"],
+									"locals":  ["module"]
+								}]
+							}
+						}
+      			}
 				},
 				{
 					test: /\.css$/,

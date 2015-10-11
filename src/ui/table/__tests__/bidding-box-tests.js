@@ -1,8 +1,8 @@
+import React from "react";
+import TestUtils from "react-addons-test-utils";
+
 import {BiddingBox} from "../bidding-box.jsx";
 import {GameBuilder} from "../../../model/game/game-builder";
-
-import React from "react/addons";
-const TestUtils = React.addons.TestUtils;
 
 describe('Bidding Box', () => {
 

@@ -1,9 +1,9 @@
+import React from "react";
+import TestUtils from "react-addons-test-utils";
+
 import {BidComponent} from "../../components/bid.jsx";
 import {BiddingHistory} from "../bidding-history.jsx";
 import {BoardBuilder} from "../../../model/game/board-builder";
-
-import React from "react/addons";
-const TestUtils = React.addons.TestUtils;
 
 describe('Bidding History', () => {
 

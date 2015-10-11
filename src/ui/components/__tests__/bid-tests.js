@@ -1,8 +1,8 @@
+import React from "react";
+import TestUtils from "react-addons-test-utils";
+
 import {BidComponent} from "../bid.jsx";
 import {BidType, BidSuit} from "../../../model/core/bid";
-
-import React from "react/addons";
-const TestUtils = React.addons.TestUtils;
 
 describe('Bid', () => {
 

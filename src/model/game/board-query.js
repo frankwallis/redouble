@@ -158,12 +158,18 @@ export class BoardQuery {
 			throw new Error("the bidding has not ended yet");
 
 		if (this.lastCall) {
-			for (let i = 0; i < this.boardState.bids.length - 1; i ++)
+			for (let i = 0; i < this.boardState.bids.length - 1; i ++) {
 				if (this.boardState.bids[i].suit === this.lastCall.suit)
 					return Seat.rotate(this.boardState.dealer, i);
 			}
-			throw new Error("declarer not found");
 		}
+
+		throw new Error("declarer not found");
+	}
+
+	get dummy(): Seat {
+		return Seat.rotate(this.declarer, 2);
+	}
 
 	/**
 	 * Returns the seat of the lead card

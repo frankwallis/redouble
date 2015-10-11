@@ -70,10 +70,12 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 			let players = getState().playerStore;
 			let history = new StateHistory(getState().gameStore.history);
 			let game = new GameQuery(history.current());
+			let nextPlayer = game.currentBoard.nextPlayer;
 
-			if (game.currentBoard.nextPlayer) {
+			if (nextPlayer) {
 				if (game.currentBoard.biddingHasEnded) {
-					if (!players[game.currentBoard.nextPlayer].ishuman) {
+					if (!(players[nextPlayer].ishuman ||
+					     ((nextPlayer === game.currentBoard.dummy) && players[game.currentBoard.declarer].ishuman))) {
 						services.getCard(game.currentBoard.boardState)
 							.then((card) => {
 								if (sequence === forSequence)

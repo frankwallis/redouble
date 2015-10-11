@@ -71,24 +71,29 @@ function scheduleAutoPlay(forSequence, dispatch, getState) {
 			let history = new StateHistory(getState().gameStore.history);
 			let game = new GameQuery(history.current());
 
-			if (game.currentBoard.nextPlayer && !players[game.currentBoard.nextPlayer].ishuman) {
+			if (game.currentBoard.nextPlayer) {
 				if (game.currentBoard.biddingHasEnded) {
-					services.getCard(game.currentBoard.boardState)
-						.then((card) => {
-							if (sequence === forSequence)
-								dispatch(playCard(card));
-							else
-								console.log('the game has moved on');
-						});
+					if (!players[game.currentBoard.nextPlayer].ishuman) {
+						services.getCard(game.currentBoard.boardState)
+							.then((card) => {
+								if (sequence === forSequence)
+									dispatch(playCard(card));
+								else
+									console.log('the game has moved on');
+							});
+					}
 				}
-				else
-					services.getBid(game.gameState)
-						.then((bid) => {
-							if (sequence === forSequence)
-								dispatch(makeBid(bid));
-							else
-								console.log('the game has moved on');
-						});
+				else {
+					if (!players[game.currentBoard.nextPlayer].ishuman) {
+						services.getBid(game.gameState)
+							.then((bid) => {
+								if (sequence === forSequence)
+									dispatch(makeBid(bid));
+								else
+									console.log('the game has moved on');
+							});
+					}
+				}
 			}
 		}
 		else {

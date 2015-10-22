@@ -30,8 +30,8 @@ export function isomorph() {
 export function serveIndex(mount) {
 	return function *(next) {
 		if (this.method !== 'GET') return yield next;
-		if (this.path.indexOf(mount) === 0) {
-			this.path = "/";
+		if ((this.path.indexOf(mount) === 0) || (this.path === "/") || (this.path === "")) {
+			this.path = "/index.html";
 		}
 		yield next;
 	};

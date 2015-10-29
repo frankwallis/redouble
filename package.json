@@ -4,7 +4,7 @@
   "description": "contract bridge game",
   "main": "src/server/main.js",
   "dependencies": {
-    "babel": "^5.1.10",
+    "babel": "^6.0.0",
     "cheerio": "^0.19.0",
     "co": "^4.6.0",
     "co-array": "0.0.3",

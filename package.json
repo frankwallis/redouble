@@ -28,7 +28,7 @@
     "koa-static-cache": "^3.1.2",
     "normalize.css": "^3.0.3",
     "purecss": "^0.6.0",
-    "react": "0.14.1",
+    "react": "0.14.2",
     "react-dom": "0.14.0",
     "react-pure-render": "^1.0.2",
     "react-redux": "^3.0.0",

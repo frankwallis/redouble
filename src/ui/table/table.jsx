@@ -7,11 +7,11 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {Seat} from "../../model/core/seat";
-import {ControlBar} from "./control-bar.jsx";
-import {HandComponent} from "./hand.jsx";
-import {BiddingBox} from "./bidding-box.jsx";
-import {BiddingHistory} from "./bidding-history.jsx";
-import {TrickComponent} from "./trick.jsx";
+import ControlBar from "./control-bar.jsx";
+import HandComponent from "./hand.jsx";
+import BiddingBox from "./bidding-box.jsx";
+import BiddingHistory from "./bidding-history.jsx";
+import TrickComponent from "./trick.jsx";
 
 import {StateHistory} from "../../stores/state-history";
 import {GameQuery} from "../../model/game/game-query";
@@ -28,13 +28,6 @@ if (process.env.__BROWSER__) {
 /**
  * Top-Level View for displaying the current game from the GameStore
  */
-@connect(state => {
-	return {
-		history: state.gameStore.history,
-		autoPlay: state.gameStore.autoPlay,
-		players: state.playerStore
-	};
-})
 class Table extends PureComponent {
 
 	constructor(props) {
@@ -102,4 +95,8 @@ class Table extends PureComponent {
 	}
 }
 
-export default Table;
+export default connect(state => ({
+	history: state.gameStore.history,
+	autoPlay: state.gameStore.autoPlay,
+	players: state.playerStore
+}))(Table);

@@ -13,11 +13,6 @@ if (process.env.__BROWSER__) {
 /**
  * Top-Level view for the game settings
  */
-@connect(state => {
-	return {
-		players: state.playerStore
-	};
-})
 class SettingsView extends Component {
 
 	constructor(props) {
@@ -78,4 +73,4 @@ class SettingsView extends Component {
 	}
 }
 
-export default SettingsView;
+export default connect(state => ({players: state.playerStore}))(SettingsView);

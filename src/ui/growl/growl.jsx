@@ -14,11 +14,6 @@ if (process.env.__BROWSER__) {
  * Component for displaying notifications from the
  * NotificationStore as growls
  */
-@connect(state => {
-	return {
-		notifications: state.notificationStore
-	};
-})
 class GrowlContainer extends PureComponent {
 
 	constructor(props) {
@@ -37,6 +32,8 @@ class GrowlContainer extends PureComponent {
 
 	render() {
 		console.log('rendering growls');
+
+		console.log(JSON.stringify(this.props));
 
 		let growls = this.props.notifications.map((notification) => {
 			let buttons = notification.buttons.map((button) => {
@@ -62,4 +59,4 @@ class GrowlContainer extends PureComponent {
 	}
 }
 
-export default GrowlContainer;
+export default connect(state => ({notifications: state.notificationStore}))(GrowlContainer);

@@ -47,18 +47,33 @@ module.exports = function(options) {
 					test: /\.jsx?$/,
 					exclude: /node_modules/,
 					loader: 'babel',
-      			query: options.production ? {} : {
-        				stage: 0,
-        				plugins: ['react-transform'],
-        				extra: {
-							"react-transform": {
-								"transforms": [{
-									"transform":  "react-transform-hmr",
-									"imports": ["react"],
-									"locals":  ["module"]
-								}]
-							}
-						}
+      			query: (options.production != 42) ? {
+						"presets": [
+							"stage-1",
+							"es2015",
+							"react",
+						],
+						"plugins": [
+							"transform-regenerator",
+							"transform-class-properties"
+						]
+      			} : {
+						"presets": [
+							"stage-1",
+							"es2015",
+							"react",
+						],
+						"plugins": [
+							[ "transform-regenerator" ],
+							[ "transform-class-properties" ],
+							[ "react-transform", {
+	              			transforms: [{
+			                  transform: "react-transform-hmr",
+			                  imports: ["react"],
+			                  locals: ["module"],
+			               }]
+	              		}]
+            		]
       			}
 				},
 				{

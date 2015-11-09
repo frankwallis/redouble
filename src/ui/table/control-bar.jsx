@@ -7,7 +7,7 @@ if (process.env.__BROWSER__) {
 	require('./control-bar.css');
 }
 
-export class ControlBar extends PureComponent {
+class ControlBar extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -59,3 +59,5 @@ export class ControlBar extends PureComponent {
 		);
 	}
 }
+
+export default ControlBar;

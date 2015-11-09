@@ -3,14 +3,14 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {CardComponent} from '../components/card.jsx';
+import CardComponent from '../components/card.jsx';
 import {Seat} from '../../model/core/seat';
 
 if (process.env.__BROWSER__) {
 	require('./trick.css');
 }
 
-export class TrickComponent extends PureComponent {
+class TrickComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -47,3 +47,5 @@ export class TrickComponent extends PureComponent {
 		);
 	}
 }
+
+export default TrickComponent;

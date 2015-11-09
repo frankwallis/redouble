@@ -9,7 +9,7 @@ if (process.env.__BROWSER__) {
 /**
  * Top-Level view for the about page
  */
-export class AboutView extends React.Component {
+class AboutView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -51,3 +51,5 @@ export class AboutView extends React.Component {
 		);
 	}
 }
+
+export default AboutView;

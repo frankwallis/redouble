@@ -1,7 +1,7 @@
 import React from "react";
 import TestUtils from "react-addons-test-utils";
 
-import {BiddingBox} from "../bidding-box.jsx";
+import BiddingBox from "../bidding-box.jsx";
 import {GameBuilder} from "../../../model/game/game-builder";
 
 describe('Bidding Box', () => {

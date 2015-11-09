@@ -1,7 +1,7 @@
 import React from "react";
 import TestUtils from "react-addons-test-utils";
 
-import {CardComponent} from "../card.jsx";
+import CardComponent from "../card.jsx";
 import {Pip, Suit} from "../../../model/core/card";
 import {BidType} from "../../../model/core/bid";
 

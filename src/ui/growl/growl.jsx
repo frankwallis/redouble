@@ -19,7 +19,7 @@ if (process.env.__BROWSER__) {
 		notifications: state.notificationStore
 	};
 })
-export class GrowlContainer extends PureComponent {
+class GrowlContainer extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -61,3 +61,5 @@ export class GrowlContainer extends PureComponent {
 		);
 	}
 }
+
+export default GrowlContainer;

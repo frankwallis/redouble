@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import {Main} from './main/main.jsx';
-import {Table} from './table/table.jsx';
-import {AboutView} from './about/about.jsx';
-import {SettingsView} from './settings/settings.jsx';
+import Main from './main/main.jsx';
+import Table from './table/table.jsx';
+import AboutView from './about/about.jsx';
+import SettingsView from './settings/settings.jsx';
 
 let routes = (
 	<Route path="/" component={Main}>

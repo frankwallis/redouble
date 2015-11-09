@@ -8,7 +8,7 @@ if (process.env.__BROWSER__) {
 	require('./card.css');
 }
 
-export class CardComponent extends PureComponent {
+class CardComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -43,3 +43,5 @@ export class CardComponent extends PureComponent {
 		);
 	}
 }
+
+export default CardComponent;

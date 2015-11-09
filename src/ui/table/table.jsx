@@ -35,7 +35,7 @@ if (process.env.__BROWSER__) {
 		players: state.playerStore
 	};
 })
-export class Table extends PureComponent {
+class Table extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -101,3 +101,5 @@ export class Table extends PureComponent {
 		);
 	}
 }
+
+export default Table;

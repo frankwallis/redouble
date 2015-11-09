@@ -8,7 +8,7 @@ if (process.env.__BROWSER__) {
 	require('./bid.css');
 }
 
-export class BidComponent extends PureComponent {
+class BidComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -53,3 +53,5 @@ export class BidComponent extends PureComponent {
 		}
 	}
 }
+
+export default BidComponent;

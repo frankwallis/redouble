@@ -3,14 +3,14 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {CardComponent} from '../components/card.jsx';
+import CardComponent from '../components/card.jsx';
 import {Card} from '../../model/core/card';
 
 if (process.env.__BROWSER__) {
 	require('./hand.css');
 }
 
-export class HandComponent extends PureComponent {
+class HandComponent extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -43,3 +43,5 @@ export class HandComponent extends PureComponent {
 		return (<div className="hand-container"><ol className="container">{cards}</ol></div>);
 	}
 }
+
+export default HandComponent;

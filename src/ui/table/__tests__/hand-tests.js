@@ -1,8 +1,8 @@
 import React from "react";
 import TestUtils from "react-addons-test-utils";
 
-import {CardComponent} from "../../components/card.jsx";
-import {HandComponent} from "../hand.jsx";
+import CardComponent from "../../components/card.jsx";
+import HandComponent from "../hand.jsx";
 import {BoardBuilder} from "../../../model/game/board-builder";
 import {Seat} from "../../../model/core/seat";
 

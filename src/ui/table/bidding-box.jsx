@@ -3,14 +3,14 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {BidComponent} from '../components/bid.jsx';
+import BidComponent from '../components/bid.jsx';
 import {Bid, BidSuit, BidType} from '../../model/core/bid';
 
 if (process.env.__BROWSER__) {
 	require('./bidding-box.css');
 }
 
-export class BiddingBox extends PureComponent {
+class BiddingBox extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -69,3 +69,5 @@ export class BiddingBox extends PureComponent {
 		);
 	}
 }
+
+export default BiddingBox;

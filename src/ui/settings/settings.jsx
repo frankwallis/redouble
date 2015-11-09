@@ -18,7 +18,7 @@ if (process.env.__BROWSER__) {
 		players: state.playerStore
 	};
 })
-export class SettingsView extends Component {
+class SettingsView extends Component {
 
 	constructor(props) {
 		super(props);
@@ -77,3 +77,5 @@ export class SettingsView extends Component {
 		);
 	}
 }
+
+export default SettingsView;

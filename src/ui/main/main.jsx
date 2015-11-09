@@ -4,14 +4,14 @@ import React from 'react';
 //import persistStore from 'redux-persist-store';
 import {Link} from 'react-router';
 import IndexLink from 'react-router/lib/IndexLink';
-import {GrowlContainer} from '../growl/growl.jsx';
+import GrowlContainer from '../growl/growl.jsx';
 
 if (process.env.__BROWSER__) {
 	require('./main.css');
 	require('./navbar.css');
 }
 
-export class Main extends React.Component {
+class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {rehydrated: !false};
@@ -54,3 +54,4 @@ export class Main extends React.Component {
 	}
 }
 
+export default Main;

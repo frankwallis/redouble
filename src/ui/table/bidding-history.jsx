@@ -3,14 +3,14 @@
 import React, {PropTypes} from 'react';
 import {PureComponent} from 'react-pure-render';
 
-import {BidComponent} from '../components/bid.jsx';
+import BidComponent from '../components/bid.jsx';
 import {Seat} from '../../model/core/seat';
 
 if (process.env.__BROWSER__) {
 	require('./bidding-history.css');
 }
 
-export class BiddingHistory extends PureComponent {
+class BiddingHistory extends PureComponent {
 
 	constructor(props) {
 		super(props);
@@ -68,3 +68,5 @@ export class BiddingHistory extends PureComponent {
 		);
 	}
 }
+
+export default BiddingHistory;

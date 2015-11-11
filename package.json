@@ -71,7 +71,7 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.9.0",
-    "webpack-hot-middleware": "^2.1.0"
+    "webpack-hot-middleware": "^2.5.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js'",

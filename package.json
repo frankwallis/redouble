@@ -61,7 +61,7 @@
     "jsdom": "^7.0.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
-    "mocha": "^2.3.2",
+    "mocha": "^2.3.4",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-hmr": "^1.0.1",
     "redux-devtools": "^2.1.0",

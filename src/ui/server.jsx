@@ -1,8 +1,9 @@
+import React from 'react';
 import ReactDOM from 'react-dom/server';
 
 import {createStore} from "./create-store";
-import {createApp} from "./create-app";
 import {createMemoryHistory} from 'history';
+import App from "./app";
 
 global.process.env.__BROWSER__ = false;
 
@@ -15,8 +16,7 @@ function generateMarkupAndState(path, query) {
 	history.pushState({ id: 1 }, path);
 
 	console.log('path is ' + path);
-	let app = createApp(store, history);
-	let markup = ReactDOM.renderToString(app);
+	let markup = ReactDOM.renderToString(<App store={store} history={history} />);
 
 	// TODO - how to handle pending async actions?
 	let state = store.getState();

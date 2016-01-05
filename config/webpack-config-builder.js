@@ -47,7 +47,7 @@ module.exports = function(options) {
 					test: /\.jsx?$/,
 					exclude: /node_modules/,
 					loader: 'babel',
-      			query: (options.production != 42) ? {
+      			query: options.production ? {
 						"presets": [
 							"stage-1",
 							"es2015",

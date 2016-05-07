@@ -10,9 +10,9 @@ import * as openerRule from "./opener-rule";
 import * as responderRule from "./opener-rule";
 import * as parContractRule from "./par-contract-rule";
 
-export var getBid = co.wrap(generateBid);
+export const getBid = co.wrap(generateBid);
 
-let rules = [
+const rules = [
 	openerRule,
 	responderRule,
 	parContractRule

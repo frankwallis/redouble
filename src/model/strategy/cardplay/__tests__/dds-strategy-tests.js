@@ -64,4 +64,16 @@ describe('strategy', () => {
 			});
 	});
 
+	it('Solves the Pot Boiler', () => {
+		let gameBuilder = GameBuilder.create().newBoard(
+			Seat.West,
+			Deck.fromPBN("W:KJT86.5432..KQJT AQ7.AKQJ.QJT987. 95432..65432.432 .T9876.AK.A98765"),
+			Bid.createAll("no bid", "no bid", "no bid", "7H", "no bid", "no bid", "no bid")
+		).playCard(Card.create("KC"));
+
+		return playAll(gameBuilder)
+			.then((endgame) => {
+				expect(endgame.declarerTricks).to.equal(13);
+			});
+	});
 });

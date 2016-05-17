@@ -5,7 +5,7 @@
   "main": "src/server/main.js",
   "dependencies": {
     "babel-cli": "^6.3.17",
-    "babel-core": "^6.3.17",
+    "babel-core": "^6.9.0",
     "babel-plugin-transform-class-properties": "^6.3.13",
     "babel-plugin-transform-regenerator": "^6.3.18",
     "babel-polyfill": "^6.3.14",

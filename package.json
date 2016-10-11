@@ -63,7 +63,7 @@
     "jsdom": "^7.2.1",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
-    "mocha": "^2.3.2",
+    "mocha": "^3.1.2",
     "react-addons-test-utils": "^0.14.0",
     "react-dnd-test-backend": "^1.0.0",
     "react-transform-hmr": "^1.0.1",

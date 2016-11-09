@@ -20,7 +20,7 @@
     "font-awesome": "^4.3.0",
     "history": "^1.16.0",
     "jrpc2": "^1.0.0",
-    "jrpc2-ajax": "^0.2.0",
+    "jrpc2-ajax": "^0.2.1",
     "jrpc2-proxy": "^0.2.1",
     "koa": "^1.0.0",
     "koa-compressor": "^1.0.3",

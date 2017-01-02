@@ -67,7 +67,7 @@
     "react-addons-test-utils": "^0.14.0",
     "react-dnd-test-backend": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
-    "rimraf": "^2.4.4",
+    "rimraf": "^2.5.0",
     "s3": "^4.4.0",
     "sinon": "^1.16.1",
     "style-loader": "^0.13.0",

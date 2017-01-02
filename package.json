@@ -64,7 +64,7 @@
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
     "mocha": "^2.3.2",
-    "react-addons-test-utils": "^0.14.0",
+    "react-addons-test-utils": "^15.3.2",
     "react-dnd-test-backend": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "rimraf": "^2.4.4",

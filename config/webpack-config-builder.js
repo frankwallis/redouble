@@ -23,15 +23,15 @@ module.exports = function(options) {
 
 	return {
 		entry: [
-			'webpack-hot-middleware/client',
-			'./src/ui/client.js'
+			//'webpack-hot-middleware/client',
+			'./lib/js/src/index.js'
 		],
 		debug: !options.production,
 		colors: true,
 		devtool: options.devtool,
 		output: {
-			path: options.production ? './dist' : '/',
-			publicPath: options.production ? '' : '/',
+			path: options.production ? './dist' : './dist',
+			publicPath: options.production ? './dist' : '',
 			filename: options.production ? 'app.[hash].js' : 'app.js',
 		},
 		module: {
@@ -44,7 +44,7 @@ module.exports = function(options) {
 			] : [],
 			loaders: [
 				{
-					test: /\.jsx?$/,
+					test: /\.jsxxxxx?$/,
 					exclude: /node_modules/,
 					loader: 'babel',
       			query: options.production ? {

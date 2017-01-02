@@ -15,3 +15,6 @@ dist/
 build/
 jspm_packages/
 .settings/
+/lib/
+finalOutput/*.js
+.merlin

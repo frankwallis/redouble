@@ -4,7 +4,7 @@
   "description": "contract bridge game",
   "main": "src/server/main.js",
   "dependencies": {
-    "babel-cli": "^6.3.17",
+    "babel-cli": "^6.8.0",
     "babel-core": "^6.3.17",
     "babel-plugin-transform-class-properties": "^6.3.13",
     "babel-plugin-transform-regenerator": "^6.3.18",

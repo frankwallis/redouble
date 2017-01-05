@@ -1,10 +1,5 @@
-/* TODO find out why this does not work */
-let nrequire : Js.undefined Node.node_require = [%bs.node require];
-let b = nrequire "./main.css";
-
-[%%bs.raw{|
-  require("./main.css");
-|}];
+external require : string => unit = "require" [@@bs.val];
+require ("./main.css");
 
 module Main = {
   include ReactRe.Component.Stateful;

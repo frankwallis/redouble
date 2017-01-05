@@ -1,0 +1,44 @@
+ol {
+	padding-left: 0;
+	margin: 0;
+}
+
+.main-container {
+	font-size: calc(0.55vw + .6em);
+	/*font-size: calc(0.65vw + .5em);*/
+	/*font-size: calc(0.8vw + .4em);*/
+}
+
+.main-navbar {
+	font-size: calc(.8vh + .7em);
+}
+
+.main-content {
+	position: absolute;
+	top: 2.5em;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.main-growl {
+	position: absolute;
+	top: 3.75em;
+	right: 1em;
+}
+
+.main-spinner {
+  width: 5em;
+  height: 5em;
+  background-color: rgb(159, 45, 52);
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@keyframes sk-rotateplane {
+  0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg) }
+  50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) }
+  100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg) }
+}

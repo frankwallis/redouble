@@ -24,7 +24,7 @@ module.exports = function(options) {
 	return {
 		entry: [
 			//'webpack-hot-middleware/client',
-			'./lib/js/src/index.js'
+			'./lib/js/src/ui/client.js'
 		],
 		debug: !options.production,
 		colors: true,

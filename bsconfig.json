@@ -19,6 +19,13 @@
       },
     },
     {
+      "dir": "src/ui/app",
+      "public": "all",
+      "files": {
+        "slow-re": "[A-Za-z]+\\.re",
+      },
+    },
+    {
       "dir": "src/example",
       "public": "all",
       "files": {
@@ -27,10 +34,10 @@
     },
     {
       "dir": "src/rehydrate",
-		"public": "all",
-		"files": {
-		  "slow-re": "[A-Za-z]+\\.re"
-		}
+		  "public": "all",
+		  "files": {
+		    "slow-re": "[A-Za-z]+\\.re"
+		  }
     },
   ],
 }

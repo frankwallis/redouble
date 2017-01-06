@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -31,7 +32,7 @@ module.exports = function(options) {
 		devtool: options.devtool,
 		output: {
 			path: options.production ? './dist' : './dist',
-			publicPath: options.production ? './dist' : '',
+			publicPath: options.production ? '' : '',
 			filename: options.production ? 'app.[hash].js' : 'app.js',
 		},
 		module: {
@@ -111,6 +112,7 @@ module.exports = function(options) {
 			],
 		},
 		resolve: {
+      root: path.resolve(__dirname, '../src'),
 			extensions: ['', '.js', '.jsx', '.sass', '.scss', '.css'],
 		},
 		plugins: options.production ? [

@@ -1,5 +1,5 @@
 external require : string => unit = "require" [@@bs.val];
-require ("./growl.css");
+require ("ui/app/growl.css");
 
 type notification = { id: string, severity: string, title: string, message: string };
 
@@ -10,8 +10,8 @@ module Growl = {
     handleResponse: notification => unit
   };
   let name = "Growl";
-  let render {state, props, updater} => {
-    let handleClick = fun notif => fun event => props.handleResponse(notif);
+  let render {props} => {
+    let handleClick = fun notif event => props.handleResponse(notif);
 
     let renderItem = fun notif =>
       <li className=("growl-item growl-" ^ notif.severity)

@@ -1,6 +1,6 @@
 external require : string => unit = "require" [@@bs.val];
-require ("./main.css");
-require ("./navbar.css");
+require ("ui/app/main.css");
+require ("ui/app/navbar.css");
 
 module Main = {
   include ReactRe.Component.Stateful;

@@ -24,7 +24,7 @@ module Main = {
 		    </ul>
 		  </nav>
 		  <div className="main-content">
-		    (ReactRe.stringToElement ("Content"))
+        <Table />
 		  </div>
 		  <div className="main-growl">
         <Growl notifications=[] handleResponse=(fun _ => ()) />

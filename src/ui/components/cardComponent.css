@@ -1,0 +1,50 @@
+@import "./suit.css";
+
+.card-container {
+	position: relative;
+	width: 5em;
+	height: 7em;
+	border-radius: 0.35em;
+	background: #fafafa;
+	color: #080808;
+}
+
+.card-container.empty-container {
+	background: transparent;
+}
+
+.card-suit {
+	font-size: 1.1em;
+	line-height: 1.05em;
+	height: 1.05em;
+	text-align: center;
+}
+
+.card-pip-small {
+	font-size: 1em;
+	line-height: 1.05em;
+	text-align: center;
+	height: 1.05em;
+}
+
+.card-pip {
+	min-width: 60%;
+	text-align: center;
+	font-size: 2em;
+	line-height: 3.5em; /* = card-container.height / card-pip.font-size */
+}
+
+.card-edge-left {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 0.4em;
+}
+
+.card-edge-right {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin: 0.4em;
+	transform: rotate(180deg);
+}

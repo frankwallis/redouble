@@ -3,7 +3,7 @@
   comma. If this screws with your editor highlighting, please tell us by filing
   an issue! */
 {
-  "name" : "rehydrate",
+  "name" : "redouble",
   "version": "0.0.0",
   "ppx-flags": ["reason/reactjs_jsx_ppx.native"],
   "bsc-flags": ["-w -40 -bs-sort-imports", "-bin-annot"],
@@ -13,38 +13,31 @@
   "sources": [
     {
       "dir": "src/model",
-      "public": "all",
-      "files": {
-        "slow-re": "[A-Za-z]+\\.re",
-      },
+      "public": "all"
     },
     {
       "dir": "src/ui",
-      "public": "all",
-      "files": {
-        "slow-re": "[A-Za-z]+\\.re",
-      },
+      "public": "all"
     },
     {
       "dir": "src/ui/app",
-      "public": "all",
-      "files": {
-        "slow-re": "[A-Za-z]+\\.re",
-      },
+      "public": "all"
+    },
+    {
+      "dir": "src/ui/components",
+      "public": "all"
+    },
+    {
+      "dir": "src/ui/table",
+      "public": "all"
     },
     {
       "dir": "src/example",
-      "public": "all",
-      "files": {
-        "slow-re": "[A-Za-z]+\\.re",
-      },
+      "public": "all"
     },
     {
       "dir": "src/rehydrate",
-		  "public": "all",
-		  "files": {
-		    "slow-re": "[A-Za-z]+\\.re"
-		  }
+		  "public": "all"
     },
   ],
 }

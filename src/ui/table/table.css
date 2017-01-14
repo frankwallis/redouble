@@ -1,0 +1,100 @@
+
+.bridge-table {
+	background: #00261C;
+	opacity: .95;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.table-edge-north {
+	position: absolute;
+	left: 50%;
+	height: 25%;
+	transform: translateX(-50%);
+	top: 1em;
+}
+
+.table-edge-south {
+	position: absolute;
+	left: 50%;
+	height: 25%;
+	transform: translateX(-50%);
+	bottom: 1em;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.table-edge-west {
+	position: absolute;
+	top: 50%;
+	width: 33%;
+	transform: translateY(-50%);
+	left: 1em;
+}
+
+.table-edge-east {
+	position: absolute;
+	top: 50%;
+	width: 33%;
+	transform: translateY(-50%);
+	right: 1em;
+}
+
+.table-edge-east > div {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.table-edge-east > .table-player-name {
+	text-align: right;
+}
+
+.table-board {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25%;
+	height: 40%;
+}
+
+.table-hand-north, .table-hand-south {
+
+}
+
+.table-player-name {
+	color: #fafafa;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.table-hand-east {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.table-controls {
+	left: 1em;
+	top: .5em;
+	position: absolute;
+}
+
+.table-bidding-box {
+	right: 1em;
+	bottom: 1em;
+	position: absolute;
+}
+
+.game-menu {
+
+}
+
+.game-icon {
+	color: #fafafa;
+}
+
+/*****************/

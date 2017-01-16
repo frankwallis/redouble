@@ -33,5 +33,4 @@ module Main = {
 };
 
 include ReactRe.CreateComponent Main;
-
 let createElement ::children => wrapProps () ::children;

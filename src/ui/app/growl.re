@@ -29,5 +29,4 @@ module Growl = {
 };
 
 include ReactRe.CreateComponent Growl;
-
 let createElement ::notifications ::handleResponse => wrapProps {notifications, handleResponse};

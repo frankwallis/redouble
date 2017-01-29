@@ -18,7 +18,9 @@ button.bidding-box-button {
 	background: transparent;
 }
 
-button.bidding-box-button-special {
+button.bidding-box-button.bid-nobid,
+button.bidding-box-button.bid-double,
+button.bidding-box-button.bid-redouble {
 	width: 5em;
 }
 

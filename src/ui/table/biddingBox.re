@@ -26,8 +26,7 @@ module BiddingBox = {
       BidSuit.all |> List.map (fun suit => Bid.Call level suit);
     });
 
-    /*let bidRows = callRows @ [ Double, Redouble, NoBid ];*/
-    let bidRows = callRows;
+    let bidRows = callRows @ [[ Double, Redouble, NoBid ]];
 
     /* convert them into buttons */
     let buttonRows = bidRows |>

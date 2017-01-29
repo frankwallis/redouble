@@ -20,7 +20,7 @@
 	color: #000;
 }
 
-.suit-no-trumps:after {
+.suit-notrumps:after {
 	content: "NT";
 	color: #000;
 }

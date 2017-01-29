@@ -6,10 +6,10 @@
   "name" : "redouble",
   "version": "0.0.0",
   "ppx-flags": ["reason/reactjs_jsx_ppx.native"],
-  "bsc-flags": ["-w -40 -bs-sort-imports", "-bin-annot"],
+  "bsc-flags": ["-w", "-40", "-bs-sort-imports", "-bin-annot"],
   "refmt": "reason/refmt_impl.native",
   "generate-merlin": true,
-  "bs-dependencies": ["reason-js"],
+  "bs-dependencies": ["reason-js", "rehydrate"],
   "sources": [
     {
       "dir": "src/model",
@@ -30,14 +30,6 @@
     {
       "dir": "src/ui/table",
       "public": "all"
-    },
-    {
-      "dir": "src/example",
-      "public": "all"
-    },
-    {
-      "dir": "src/rehydrate",
-		  "public": "all"
     },
   ],
 }

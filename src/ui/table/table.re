@@ -7,9 +7,13 @@ module Table = {
   include ReactRe.Component.Stateful;
   let name = "Table";
   type props = unit;
+
   type state = {hands: SeatMap.t (list Card.t)};
   let getInitialState props => {hands: Card.deal Seat.North};
+
   let playCard (card) => ();
+  let makeBid (bid) => ();
+
   let render {props, state} => {
 		let players = Seat.all |> List.map (fun seat => {
       <section className=("table-edge-" ^ (Seat.name seat)) key=(Seat.name seat)>
@@ -29,6 +33,7 @@ module Table = {
       <div className="table-board">
       </div>
       <div className="table-bidding-box">
+        <BiddingBox makeBid />
       </div>
     </div>;
   };

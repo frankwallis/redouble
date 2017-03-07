@@ -9,6 +9,10 @@
   "bs-dependencies": ["reason-js", "rehydrate"],
   "sources": [
     {
+      "dir": "src",
+      "public": "all"
+    },
+    {
       "dir": "src/model",
       "public": "all"
     },
@@ -26,6 +30,10 @@
     },
     {
       "dir": "src/ui/table",
+      "public": "all"
+    },
+    {
+      "dir": "src/stores",
       "public": "all"
     }
   ]

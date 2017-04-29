@@ -50,7 +50,7 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.0.0",
     "babel-loader": "^6.1.0",
-    "bs-platform": "https://github.com/bloomberg/bucklescript.git",
+    "bs-platform": "^1.7.3",
     "chai": "^3.2.0",
     "css-loader": "^0.23.0",
     "dependency-env": "^0.1.1",
@@ -69,7 +69,7 @@
     "react-transform-hmr": "^1.0.1",
     "reason": "^1.9.0",
     "reason-js": "^0.0.16",
-    "rehydate": "https://github.com/reasonml/rehydrate.git",
+    "reason-react": "^0.1.2",
     "rimraf": "^2.4.4",
     "s3": "^4.4.0",
     "sinon": "^1.16.1",

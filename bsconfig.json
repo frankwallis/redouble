@@ -3,13 +3,22 @@
   comma. If this screws with your editor highlighting, please tell us by filing
   an issue! */
 {
-  "name" : "redouble",
+  "name": "redouble",
   "version": "0.0.0",
-  "reason" : { "react-jsx" : true },
-  "bs-dependencies": ["reason-js", "rehydrate"],
+  "reason": {
+    "react-jsx": true
+  },
+  "bs-dependencies": [
+    "reason-js",
+    "reason-react"
+  ],
   "sources": [
     {
       "dir": "src",
+      "public": "all"
+    },
+    {
+      "dir": "src/dux",
       "public": "all"
     },
     {

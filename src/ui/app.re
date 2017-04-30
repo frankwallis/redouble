@@ -14,10 +14,9 @@ module App = {
   include ReactRe.Component;
   let name = "App";
   type props = unit;
-  let render _ => <Main />;
+  let render _ => <Main dispatch=Program.PStore.dispatch theState=(Program.PStore.getState ()) />;
 };
 
 include ReactRe.CreateComponent App;
 
 let createElement ::children => wrapProps () ::children;
-/*module  = MakeStore NotificationReducer;*/

@@ -1,6 +1,6 @@
 type notification = {id: string, severity: string, title: string, message: string};
 
-module NotificationReducer: Reducer.Reducer = {
+module NotificationReducer = {
   type state = list notification;
   type action =
     | Create notification

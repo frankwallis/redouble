@@ -1,7 +1,8 @@
 module BidSuit = {
-  type t = Clubs | Diamonds | Hearts | Spades | NoTrumps;
+  type t = | Clubs | Diamonds | Hearts | Spades | NoTrumps; /* [@@deriving variants];*/
   let all = [NoTrumps, Spades, Hearts, Diamonds, Clubs];
-  let name = fun
+  let name =
+    fun
     | NoTrumps => "notrumps"
     | Spades => "spades"
     | Hearts => "hearts"
@@ -10,8 +11,13 @@ module BidSuit = {
 };
 
 module Bid = {
-  type t = NoBid | Double | Redouble | Call int BidSuit.t;
-  let name = fun
+  type t =
+    | NoBid
+    | Double
+    | Redouble
+    | Call int BidSuit.t;
+  let name =
+    fun
     | NoBid => "nobid"
     | Double => "double"
     | Redouble => "redouble"

@@ -8,4 +8,4 @@ require "font-awesome/css/font-awesome.css";
 
 Js.log "Do you see this message? If you do, then things should work!";
 
-ReactDOMRe.renderToElementWithId <Main /> "main";
+ReactDOMRe.renderToElementWithId <App /> "main";

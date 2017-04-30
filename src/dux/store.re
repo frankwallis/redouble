@@ -5,7 +5,9 @@ module type Store = {
   let dispatch: action => action;
 };
 
-module MakeStore (RootReducer: Reducer.Reducer) :(Store with type state = RootReducer.state) => {
+module MakeStore
+       (RootReducer: Reducer.Reducer)
+       :(Store with type state = RootReducer.state and type action = RootReducer.action) => {
   type action = RootReducer.action;
   type state = RootReducer.state;
   type stateHolder = {mutable content: state};

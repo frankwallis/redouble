@@ -1,5 +1,3 @@
 include Store;
 
-include NotificationReducer;
-
-module PStore = MakeStore NotificationReducer;
+module PStore = MakeStore RootReducer.RootReducer;

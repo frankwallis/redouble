@@ -1,14 +1,19 @@
-type notification = {id: string, severity: string, title: string, message: string};
+type notification = {id: int, severity: string, title: string, message: string};
 
 module NotificationReducer = {
   type state = list notification;
   type action =
-    | Create notification
-    | Dismiss string;
+    | Create string string string
+    | Dismiss int;
   let getInitialState () => [];
+  let counter = ref 0;
+  let nextId () => {
+    incr counter;
+    !counter
+  };
   let updater state action =>
     switch action {
-    | Create notification => [notification, ...state]
+    | Create severity title message => [{id: nextId (), severity, title, message}, ...state]
     | Dismiss id => List.filter (fun not => not.id == id) state
     };
 };

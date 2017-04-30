@@ -6,7 +6,7 @@ include NotificationReducer;
 
 module Growl = {
   include ReactRe.Component;
-  type props = {notifications: list notification, handleResponse: string => unit};
+  type props = {notifications: list notification, handleResponse: int => unit};
   let name = "Growl";
   let render {props} => {
     let handleClick notif _ => props.handleResponse notif;
@@ -14,7 +14,7 @@ module Growl = {
       <li
         className=("growl-item growl-" ^ notif.severity)
         onClick=(handleClick notif.id)
-        key=notif.id>
+        key=(string_of_int notif.id)>
         <h3 className="growl-title"> (ReactRe.stringToElement notif.title) </h3>
         <p className="growl-message"> (ReactRe.stringToElement notif.message) </p>
         <div className="growl-buttons" />

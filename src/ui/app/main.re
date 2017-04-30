@@ -6,13 +6,10 @@ require "ui/app/navbar.css";
 
 module Main = {
   include ReactRe.Component.Stateful;
-  type props = {
-    theState: Program.PStore.state,
-    dispatch: Program.PStore.action => Program.PStore.action
-  };
+  type props = {theState: Program.PStore.state, dispatch: Program.PStore.action => unit};
   type state = {clicks: int};
   let name = "Main";
-  let getInitialState props => {clicks: 0};
+  let getInitialState _ => {clicks: 0};
   let render {props} =>
     <div className="main-container">
       <nav role="navigation" className="main-navbar nav-main">
@@ -29,12 +26,19 @@ module Main = {
         <Growl
           notifications=props.theState.notifications
           handleResponse=(
-                           fun id => {
-                             props.dispatch (NotificationReducer.NotificationReducer.Dismiss id);
-                             ()
-                           }
+                           fun id =>
+                             props.dispatch (NotificationReducer.NotificationReducer.Dismiss id)
                          )
         />
+        <button
+          onClick=(
+                    fun _ =>
+                      props.dispatch (
+                        NotificationReducer.NotificationReducer.Create "info" "hello" "hello there"
+                      )
+                  )>
+          (ReactRe.stringToElement "Add Notification")
+        </button>
       </div>
     </div>;
 };

@@ -14,6 +14,6 @@ module NotificationReducer = {
   let updater state action =>
     switch action {
     | Create severity title message => [{id: nextId (), severity, title, message}, ...state]
-    | Dismiss id => List.filter (fun not => not.id == id) state
+    | Dismiss id => List.filter (fun not => not.id != id) state
     };
 };

@@ -5,7 +5,7 @@ import logger from 'koa-logger';
 import favicon from 'koa-favicon';
 import responseTime from 'koa-response-time';
 
-import {isomorph, serveIndex} from './isomorph';
+import { isomorph, serveIndex } from './isomorph';
 import createApiMiddleware from './api';
 
 const app = koa();
@@ -59,8 +59,12 @@ else {
 	app.use(isomorph());
 	app.use(serveIndex('/ui/'));
 
+	// api
+	var api = createApiMiddleware("/api/", __dirname + "/api/");
+	app.use(api);
+
 	// serve cached assets from dist folder
-	const cacheOpts: Object = {maxAge: 86400000, gzip: false};
+	const cacheOpts = { maxAge: 86400000, gzip: false };
 	let staticCache = require('koa-static-cache');
 	app.use(staticCache(path.join(__dirname, '../../dist')), cacheOpts);
 }

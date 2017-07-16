@@ -7,7 +7,7 @@ function extractForProduction(loaders) {
 	return ExtractTextPlugin.extract('style', loaders.substr(loaders.indexOf('!')));
 }
 
-module.exports = function(options) {
+module.exports = function (options) {
 	options.lint = fs.existsSync(__dirname + '/../.eslintrc') && (options.lint !== false);
 
 	var localIdentName = options.production ? '[hash:base64]' : '[path]-[local]-[hash:base64:5]';
@@ -22,10 +22,13 @@ module.exports = function(options) {
 	}
 
 	return {
-		entry: [
-			'webpack-hot-middleware/client',
-			'./src/ui/client.js'
-		],
+		entry: options.production ?
+			[
+				'./src/ui/client.js'
+			] : [
+				'webpack-hot-middleware/client',
+				'./src/ui/client.js'
+			],
 		debug: !options.production,
 		colors: true,
 		devtool: options.devtool,
@@ -47,7 +50,7 @@ module.exports = function(options) {
 					test: /\.jsx?$/,
 					exclude: /node_modules/,
 					loader: 'babel',
-      			query: options.production ? {
+					query: options.production ? {
 						"presets": [
 							"stage-1",
 							"es2015",
@@ -57,24 +60,24 @@ module.exports = function(options) {
 							"transform-regenerator",
 							"transform-class-properties"
 						]
-      			} : {
-						"presets": [
-							"stage-1",
-							"es2015",
-							"react",
-						],
-						"plugins": [
-							[ "transform-regenerator" ],
-							[ "transform-class-properties" ],
-							[ "react-transform", {
-	              			transforms: [{
-			                  transform: "react-transform-hmr",
-			                  imports: ["react"],
-			                  locals: ["module"],
-			               }]
-	              		}]
-            		]
-      			}
+					} : {
+							"presets": [
+								"stage-1",
+								"es2015",
+								"react",
+							],
+							"plugins": [
+								["transform-regenerator"],
+								["transform-class-properties"],
+								["react-transform", {
+									transforms: [{
+										transform: "react-transform-hmr",
+										imports: ["react"],
+										locals: ["module"],
+									}]
+								}]
+							]
+						}
 				},
 				{
 					test: /\.css$/,
@@ -133,17 +136,17 @@ module.exports = function(options) {
 				production: true,
 			}),
 		] : [
-			new webpack.DefinePlugin({
-				"process.env": {
-					"__BROWSER__": true
-				}
-			}),
-			new HtmlWebpackPlugin({
-				template: './config/index-template.html',
-			}),
-			new webpack.optimize.OccurenceOrderPlugin(),
-    		new webpack.HotModuleReplacementPlugin(),
-    		new webpack.NoErrorsPlugin()
-		],
+				new webpack.DefinePlugin({
+					"process.env": {
+						"__BROWSER__": true
+					}
+				}),
+				new HtmlWebpackPlugin({
+					template: './config/index-template.html',
+				}),
+				new webpack.optimize.OccurenceOrderPlugin(),
+				new webpack.HotModuleReplacementPlugin(),
+				new webpack.NoErrorsPlugin()
+			],
 	};
 };

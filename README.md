@@ -2,7 +2,7 @@
 
 [![build status](https://secure.travis-ci.org/frankwallis/redouble.png?branch=master)](https://travis-ci.org/frankwallis/redouble)
 
-[contract bridge game](http://frankwallis.github.io/redouble/)
+[contract bridge game](http://redouble.io)
 
 developed in ES6 using ReactJS, Redux, WebPack, React-Hot-Loader, Mocha/Chai/JsDom, Babel, Koa
 

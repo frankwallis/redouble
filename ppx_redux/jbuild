@@ -1,0 +1,8 @@
+(library
+ ((name ppx_redux)
+  (public_name ppx_redux)
+  (kind ppx_deriver)
+  (libraries (compiler-libs.common ppx_core ppx_tools ppx_type_conv ppx_deriving))
+  (preprocess (pps (ppx_metaquot ppx_driver.runner)))))
+
+(jbuild_version 1)

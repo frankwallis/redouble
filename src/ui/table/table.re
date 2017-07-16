@@ -28,7 +28,7 @@ module Table = {
       );
     <div className="bridge-table">
       <div className="table-controls" />
-      <div className="table-players"> (ReactRe.arrayToElement (Array.of_list players)) </div>
+      <div className="table-players"> (ReactRe.listToElement players) </div>
       <div className="table-board" />
       <div className="table-bidding-box"> <BiddingBox makeBid /> </div>
     </div>

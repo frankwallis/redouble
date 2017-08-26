@@ -5,7 +5,7 @@ describe('generateMarkup', () => {
 	it('generates markup for /ui/about', () => {
 		return generateMarkupAndState("/ui/about", "")
 			.then(({markup, state}) => {
-				expect(markup).to.have.string("Welcome to Redouble!");
+				expect(markup).to.have.string(">About Redouble</h3>");
 				expect(state).to.be.defined;
 			});
 	});

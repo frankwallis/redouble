@@ -6,3 +6,8 @@
 	text-transform: uppercase;
 	color: rgb(159, 45, 52);
 }
+
+.company-details {
+	font-size: .8rem;
+	margin-top: 4em;
+}

@@ -17,9 +17,6 @@ let make _children => {
   reducer: fun action state => {
     ReasonReact.Update(NotificationReducer.reducer action state)
   },
-  didMount: fun self => {
-    ReasonReact.NoUpdate
-  },
   render: fun self => {
     <Main dispatch=(self.reduce(fun action => action)) notifications=self.state />;
   }

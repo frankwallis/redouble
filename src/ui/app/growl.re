@@ -1,6 +1,5 @@
 external require : string => unit = "require" [@@bs.val];
-
-require "ui/app/growl.css";
+require "./growl.css";
 
 include NotificationReducer;
 

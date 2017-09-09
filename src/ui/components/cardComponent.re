@@ -2,7 +2,7 @@ include Card;
 
 external require : string => unit = "require" [@@bs.val];
 
-require "ui/components/cardComponent.css";
+require "./cardComponent.css";
 
 let component = ReasonReact.statelessComponent "CardComponent";
 

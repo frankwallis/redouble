@@ -1,12 +1,9 @@
-
 include Card;
 include Seat;
 
 external require : string => unit = "require" [@@bs.val];
-
-require "ui/app/main.css";
-
-require "ui/app/navbar.css";
+require "./main.css";
+require "./navbar.css";
 
 let component = ReasonReact.statelessComponent "MainComponent";
 

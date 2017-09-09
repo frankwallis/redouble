@@ -11,6 +11,13 @@
   "bs-dependencies": [
     "reason-react"
   ],
+  "bs-dev-dependencies": [
+    "bs-enzyme",
+    "bs-jest"
+  ],
+  "bsc-flags": [
+    "-bs-super-errors"
+  ],
   "sources": [
     {
       "dir": "src",
@@ -35,6 +42,10 @@
     {
       "dir": "src/ui/components",
       "public": "all"
+    },
+    {
+      "dir": "src/ui/components/__tests__",
+      "type": "dev"
     },
     {
       "dir": "src/ui/table",

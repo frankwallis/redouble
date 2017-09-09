@@ -1,7 +1,7 @@
 include Bid;
 
 external require : string => unit = "require" [@@bs.val];
-require ("ui/table/biddingBox.css");
+require ("./biddingBox.css");
 
 let component = ReasonReact.statelessComponent "BiddingBox";
 

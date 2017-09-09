@@ -1,7 +1,6 @@
 include Card;
 
 external require : string => unit = "require" [@@bs.val];
-
 require "ui/table/hand.css";
 
 let component = ReasonReact.statelessComponent "HandComponent";

@@ -1,7 +1,6 @@
 include Card;
 
 external require : string => unit = "require" [@@bs.val];
-
 require "ui/table/table.css";
 
 let component = ReasonReact.statelessComponent "TableComponent";
@@ -9,8 +8,8 @@ let component = ReasonReact.statelessComponent "TableComponent";
 let make ::hands _children => {
   ...component,
   render: fun _self => {
-    let playCard card => ();
-    let makeBid bid => ();
+    let playCard _card => ();
+    let makeBid _bid => ();
     let players =
       Seat.all |>
       List.map (

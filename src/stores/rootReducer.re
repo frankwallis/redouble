@@ -1,11 +1,11 @@
 module RootReducer = {
   type state = {notifications: NotificationReducer.NotificationReducer.state};
   type action = NotificationReducer.NotificationReducer.action;
-  let getInitialState () => {
-    notifications: NotificationReducer.NotificationReducer.getInitialState ()
+  let initialState () => {
+    notifications: NotificationReducer.NotificationReducer.initialState ()
   };
-  let updater state action => {
-    notifications: NotificationReducer.NotificationReducer.updater state.notifications action
+  let reducer action state => {
+    notifications: NotificationReducer.NotificationReducer.reducer action state.notifications
   };
 };
 

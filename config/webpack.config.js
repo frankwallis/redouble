@@ -9,22 +9,37 @@ module.exports = function(env = {}) {
 
 	return {
 		entry: [
-			//'webpack-hot-middleware/client',
-			'./lib/js/src/ui/client.js'
+      //'webpack-hot-middleware/client',
+      //'lib/js/src/ui/client'
+      //'src/ui/client.re'
+      'ui/client.re'
 		],
-		devtool: 'source-map',
+    devtool: 'source-map',
+    context: path.resolve(__dirname, '../'),
 		output: {
 			path: env.development ? path.resolve(__dirname, '../dist') : path.resolve(__dirname, '../dist'),
 			publicPath: env.development ? '' : '',
 			filename: env.development ? 'app.js' : 'app.[hash].js'
 		},
 		resolve: {
-      modules: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')],
-			extensions: ['.js', '.jsx', '.css'],
+      modules: [
+        path.resolve(__dirname, '../src'),
+        path.resolve(__dirname, '../node_modules')
+      ],
+			extensions: ['.re', '.ml', '.js', '.jsx', '.css'],
 		},
 		module: {
 			rules: [
-				{
+        {
+          test: /\.(re|rei|ml)$/,
+          use: {
+            loader: 'bs-loader',
+            options: {
+              cwd: path.resolve(__dirname, '../')
+            }
+          }
+        },
+        {
 					test: /\.jsxxxxx?$/,
           exclude: /node_modules/,
           use: {

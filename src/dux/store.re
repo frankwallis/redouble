@@ -12,11 +12,11 @@ module MakeStore
   type action = RootReducer.action;
   type state = RootReducer.state;
   type stateHolder = {mutable content: state, mutable subscribers: list (unit => unit)};
-  let currentState = {content: RootReducer.getInitialState (), subscribers: []};
+  let currentState = {content: RootReducer.initialState (), subscribers: []};
   let getState () => currentState.content;
   let subscribe subscriber => currentState.subscribers = [subscriber, ...currentState.subscribers];
   let dispatch next => {
-    currentState.content = RootReducer.updater currentState.content next;
+    currentState.content = RootReducer.reducer next currentState.content;
     List.iter (fun subscriber => subscriber ()) currentState.subscribers
   };
 };

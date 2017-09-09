@@ -4,27 +4,23 @@ require "ui/app/growl.css";
 
 include NotificationReducer;
 
-module Growl = {
-  include ReactRe.Component;
-  type props = {notifications: list notification, handleResponse: int => unit};
-  let name = "Growl";
-  let render {props} => {
-    let handleClick notif _ => props.handleResponse notif;
+let component = ReasonReact.statelessComponent "BiddingBox";
+
+let make ::notifications ::handleResponse _children => {
+  ...component,
+  render: fun _self => {
+    let handleClick notif _ => handleResponse notif;
     let renderItem notif =>
       <li
         className=("growl-item growl-" ^ notif.severity)
         onClick=(handleClick notif.id)
         key=(string_of_int notif.id)>
-        <h3 className="growl-title"> (ReactRe.stringToElement notif.title) </h3>
-        <p className="growl-message"> (ReactRe.stringToElement notif.message) </p>
+        <h3 className="growl-title"> (ReasonReact.stringToElement notif.title) </h3>
+        <p className="growl-message"> (ReasonReact.stringToElement notif.message) </p>
         <div className="growl-buttons" />
       </li>;
     <ol className="growl-list">
-      (ReactRe.listToElement (List.map renderItem props.notifications))
+      (ReasonReact.arrayToElement (Array.of_list (List.map renderItem notifications)))
     </ol>
-  };
+  }
 };
-
-include ReactRe.CreateComponent Growl;
-
-let createElement ::notifications ::handleResponse => wrapProps {notifications, handleResponse};

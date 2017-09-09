@@ -4,26 +4,22 @@ external require : string => unit = "require" [@@bs.val];
 
 require "ui/components/cardComponent.css";
 
-module CardComponent = {
-  include ReactRe.Component;
-  let name = "CardComponent";
-  type props = Card.t;
-  let render {props} => {
-    let (pip, suit) = props;
+let component = ReasonReact.statelessComponent "CardComponent";
+
+let make ::card _children => {
+  ...component,
+  render: fun _self => {
+    let (pip, suit) = card;
     <div className="card-container">
       <div className="card-edge-left">
-        <div className="card-pip-small"> (ReactRe.stringToElement (Pip.name pip)) </div>
+        <div className="card-pip-small"> (ReasonReact.stringToElement (Pip.name pip)) </div>
         <div className=("card-suit suit-" ^ Suit.name suit) />
       </div>
-      <div className="card-pip"> (ReactRe.stringToElement (Pip.name pip)) </div>
+      <div className="card-pip"> (ReasonReact.stringToElement (Pip.name pip)) </div>
       <div className="card-edge-right">
-        <div className="card-pip-small"> (ReactRe.stringToElement (Pip.name pip)) </div>
+        <div className="card-pip-small"> (ReasonReact.stringToElement (Pip.name pip)) </div>
         <div className=("card-suit suit-" ^ Suit.name suit) />
       </div>
     </div>
-  };
-};
-
-include ReactRe.CreateComponent CardComponent;
-
-let createElement ::card => wrapProps card;
+  }
+}

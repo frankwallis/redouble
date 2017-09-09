@@ -5,13 +5,13 @@ module NotificationReducer = {
   type action =
     | Create string string string
     | Dismiss int;
-  let getInitialState () => [];
+  let initialState () => [];
   let counter = ref 0;
   let nextId () => {
     incr counter;
     !counter
   };
-  let updater state action =>
+  let reducer action state =>
     switch action {
     | Create severity title message => [{id: nextId (), severity, title, message}, ...state]
     | Dismiss id => List.filter (fun not => not.id != id) state

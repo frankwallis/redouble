@@ -1,6 +1,6 @@
 module type Reducer = {
   type state;
   type action;
-  let getInitialState: unit => state;
-  let updater: state => action => state;
+  let initialState: unit => state;
+  let reducer: action => state => state;
 };

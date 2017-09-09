@@ -6,10 +6,9 @@
   "name": "redouble",
   "version": "0.0.0",
   "reason": {
-    "react-jsx": true
+    "react-jsx": 2
   },
   "bs-dependencies": [
-    "reason-js",
     "reason-react"
   ],
   "sources": [

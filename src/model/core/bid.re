@@ -15,20 +15,18 @@ module BidSuit = {
     | Clubs => "C";
 };
 
-module Bid = {
-  type t =
-    | NoBid
-    | Double
-    | Redouble
-    | Call int BidSuit.t;
-  let name = fun
-    | NoBid => "nobid"
-    | Double => "double"
-    | Redouble => "redouble"
-    | Call level suit => string_of_int level ^ BidSuit.name suit;
-  let describe = fun
-    | NoBid => "No Bid"
-    | Double => "Double"
-    | Redouble => "Redouble"
-    | Call level suit => string_of_int level ^ BidSuit.describe suit;
-};
+type t =
+  | NoBid
+  | Double
+  | Redouble
+  | Call int BidSuit.t;
+let name = fun
+  | NoBid => "nobid"
+  | Double => "double"
+  | Redouble => "redouble"
+  | Call level suit => string_of_int level ^ BidSuit.name suit;
+let describe = fun
+  | NoBid => "No Bid"
+  | Double => "Double"
+  | Redouble => "Redouble"
+  | Call level suit => string_of_int level ^ BidSuit.describe suit;

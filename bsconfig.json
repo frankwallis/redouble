@@ -28,7 +28,11 @@
       "public": "all"
     },
     {
-      "dir": "src/model",
+      "dir": "src/model/core",
+      "public": "all"
+    },
+    {
+      "dir": "src/model/game",
       "public": "all"
     },
     {

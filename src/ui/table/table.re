@@ -1,5 +1,3 @@
-include Card;
-
 external require : string => unit = "require" [@@bs.val];
 require "ui/table/table.css";
 
@@ -19,7 +17,7 @@ let make ::hands _children => {
               (ReasonReact.stringToElement (Seat.name seat))
             </header>
             <div className=("table-hand-" ^ Seat.name seat)>
-              <Hand cards=(SeatMap.find seat hands) playCard />
+              <Hand cards=(Card.SeatMap.find seat hands) playCard />
             </div>
           </section>
       );

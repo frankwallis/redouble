@@ -1,7 +1,4 @@
-include Bid;
-
 external require : string => unit = "require" [@@bs.val];
-
 require "./bidComponent.css";
 
 let component = ReasonReact.statelessComponent "BidComponent";
@@ -13,7 +10,7 @@ let make ::bid _children => {
     | Bid.Call level suit =>
       <div className="bid-container">
         <span className="bid-level"> (ReasonReact.stringToElement (string_of_int level)) </span>
-        <span className=("bid-suit suit-" ^ BidSuit.name suit) />
+        <span className=("bid-suit suit-" ^ Bid.BidSuit.name suit) />
       </div>
     | _ => <div className="bid-container"> (ReasonReact.stringToElement (Bid.describe bid)) </div>
     };

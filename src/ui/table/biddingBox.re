@@ -1,5 +1,3 @@
-include Bid;
-
 external require : string => unit = "require" [@@bs.val];
 require ("./biddingBox.css");
 
@@ -21,7 +19,7 @@ let make ::makeBid _children => {
     render: fun _self => {
       /* buid a 2d array containing all the bids in their rows */
       let callRows = [1, 2, 3, 4, 5, 6, 7] |> List.map (fun level => {
-        BidSuit.all |> List.map (fun suit => Bid.Call level suit);
+        Bid.BidSuit.all |> List.map (fun suit => Bid.Call level suit);
       });
 
       let bidRows = callRows @ [[ Double, Redouble, NoBid ]];

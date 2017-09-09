@@ -1,6 +1,3 @@
-include Card;
-include Seat;
-
 external require : string => unit = "require" [@@bs.val];
 require "./main.css";
 require "./navbar.css";

@@ -49,14 +49,14 @@
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.0.0",
-    "babel-loader": "^6.1.0",
+    "babel-loader": "^7.1.2",
     "bs-platform": "^1.7.3",
     "chai": "^3.2.0",
-    "css-loader": "^0.23.0",
+    "css-loader": "^0.28.7",
     "dependency-env": "^0.1.1",
-    "extract-text-webpack-plugin": "^1.0.0",
-    "file-loader": "^0.8.1",
-    "html-webpack-plugin": "^1.1.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
     "istanbul": "^0.4.0",
     "jsdom": "^7.2.1",
     "koa-webpack-dev-middleware": "^1.0.1",
@@ -73,11 +73,11 @@
     "rimraf": "^2.4.4",
     "s3": "^4.4.0",
     "sinon": "^1.16.1",
-    "style-loader": "^0.13.0",
+    "style-loader": "^0.18.2",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.9",
+    "webpack": "^3.5.6",
     "webpack-hot-middleware": "^2.6.0",
-    "webpack-sources": "^0.1.0"
+    "webpack-sources": "^1.0.1"
   },
   "scripts": {
     "postinstall": "eval $(dependencyEnv) && nopam",
@@ -87,8 +87,8 @@
     "test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover ./node_modules/mocha/bin/_mocha -- --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js' --timeout 10000",
     "test:watch": "./node_modules/.bin/mocha -w --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js'",
     "start": "./node_modules/.bin/babel-node ./src/server/main.js",
-    "build": "./node_modules/.bin/webpack --config config/webpack.production.js",
-    "build:dev": "webpack --config config/webpack.config.js",
+    "build": "webpack --config config/webpack.config.js",
+    "build:dev": "webpack --config config/webpack.config.js --env.development",
     "deploy": "npm run build && node ./config/aws-deploy.js && npm run clean"
   },
   "repository": {

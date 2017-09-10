@@ -32,6 +32,10 @@
       "public": "all"
     },
     {
+      "dir": "src/model/core/__tests__",
+      "type": "dev"
+    },
+    {
       "dir": "src/model/game",
       "public": "all"
     },

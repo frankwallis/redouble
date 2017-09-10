@@ -12,7 +12,7 @@ let make ::bid _children => {
         <span className="bid-level"> (ReasonReact.stringToElement (string_of_int level)) </span>
         <span className=("bid-suit suit-" ^ Bid.BidSuit.name suit) />
       </div>
-    | _ => <div className="bid-container"> (ReasonReact.stringToElement (Bid.describe bid)) </div>
+    | _ => <div className="bid-container"> (ReasonReact.stringToElement (Bid.description bid)) </div>
     };
   }
 }

@@ -1,7 +1,13 @@
 module Suit = {
-  type t = Clubs | Diamonds | Hearts | Spades;
+  type t =
+    | Clubs
+    | Diamonds
+    | Hearts
+    | Spades
+  [@@deriving ord];
   let all = [Spades, Hearts, Diamonds, Clubs];
-  let name = fun
+  let name =
+    fun
     | Spades => "spades"
     | Hearts => "hearts"
     | Diamonds => "diamonds"
@@ -9,9 +15,24 @@ module Suit = {
 };
 
 module Pip = {
-  type t = Ace | King | Queen | Jack | Ten | Nine | Eight | Seven | Six | Five | Four | Three | Two;
+  type t =
+    | Two
+    | Three
+    | Four
+    | Five
+    | Six
+    | Seven
+    | Eight
+    | Nine
+    | Ten
+    | Jack
+    | Queen
+    | King
+    | Ace
+  [@@deriving ord];
   let all = [Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two];
-  let name = fun
+  let name =
+    fun
     | Ace => "A"
     | King => "K"
     | Queen => "Q"
@@ -31,34 +52,32 @@ module SeatMap = Map.Make Seat;
 
 type t = (Pip.t, Suit.t);
 
-let deck = {
-  Suit.all |> List.fold_left (fun result suit => {
-    Pip.all |> List.fold_left (fun result2 pip => {
-      [(pip, suit), ...result2];
-    }) result;
-  }) [];
-};
+let deck =
+  Suit.all |>
+  List.fold_left
+    (
+      fun result suit =>
+        Pip.all |> List.fold_left (fun result2 pip => [(pip, suit), ...result2]) result
+    )
+    [];
 
-let shuffle cards => {
-  cards |>
-    List.map (fun card => (Random.bits (), card)) |>
-    List.sort (fun (rand1, _) (rand2, _) => (rand1 - rand2)) |>
-    List.map (fun (_, card) => card)
-};
+let shuffle cards =>
+  cards |> List.map (fun card => (Random.bits (), card)) |>
+  List.sort (fun (rand1, _) (rand2, _) => rand1 - rand2) |>
+  List.map (fun (_, card) => card);
 
 let deal dealer => {
-  let pushCard card seat hands => {
+  let pushCard card seat hands =>
     switch (SeatMap.find seat hands) {
-      | hand => hands |> SeatMap.add seat [card, ...hand]
-      | exception Not_found => hands |> SeatMap.add seat [card]
+    | hand => hands |> SeatMap.add seat [card, ...hand]
+    | exception Not_found => hands |> SeatMap.add seat [card]
     };
-  };
   let rec dealNext cards seat hands =>
     switch cards {
-      | [] => hands
-      | [hd, ...tl] => dealNext tl (Seat.rotate seat) (pushCard hd seat hands)
+    | [] => hands
+    | [hd, ...tl] => dealNext tl (Seat.rotate seat) (pushCard hd seat hands)
     };
-  dealNext (shuffle deck) dealer SeatMap.empty;
+  dealNext (shuffle deck) dealer SeatMap.empty
 };
 
-let name (pip, suit) => Pip.name(pip) ^ Suit.name(suit);
+let name (pip, suit) => Pip.name pip ^ Suit.name suit;

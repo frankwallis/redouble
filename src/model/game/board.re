@@ -1,35 +1,59 @@
-type t = {
-  dealer: Seat.t,
-  hands: Card.SeatMap.t (list Card.t),
-  bids: list Bid.t,
-  cards: list Card.t
-};
+include BiddingQuery;
 
 let create dealer => {
   let hands = Card.deal dealer;
-  { dealer, hands, bids: [], cards: [] }
+  {dealer, hands, bids: [], cards: []}
 };
+
+let validateBid bid board bidder =>
+  if (biddingHasEnded board) {
+    Some "The bidding has already ended"
+  } else {
+    switch bid {
+    | Bid.NoBid => None
+    | Bid.Double =>
+      switch (lastAction board) {
+      | Some { seat: lastCaller, bid: (Bid.Call level suit)} =>
+        Seat.isPartner lastCaller bidder ?
+          Some "You cannot double your partner!" : None
+      | _ => Some "Invalid double"
+      }
+    | Bid.Redouble =>
+      switch (lastAction board) {
+      | Some { seat: lastDoubler, bid: Bid.Double } =>
+        Seat.isPartner lastDoubler bidder ?
+          Some "You cannot redouble your partner's double!" : None
+      | _ => Some "Invalid redouble"
+      }
+    | Bid.Call level suit =>
+      if (level < 1 || level > 7) {
+        Some "Invalid bid"
+      } else {
+        switch (lastCall board) {
+        | Some { seat: _, bid: lastBid } => {
+            switch (lastBid) {
+            | (Call _ _) => ((Bid.compare bid lastBid) < 0) ? Some ("Bid must be higher than " ^ (Bid.description lastBid)) : None
+            | _ => None
+            }
+          }
+        | _ => None
+        }
+      }
+    }
+  };
 
 exception ValidationError string;
 
-let validateBid bid board => {
-  None;
-};
+let makeBid bid board =>
+  switch (validateBid bid board (nextBidder board)) {
+  | None => {...board, bids: [bid, ...board.bids] }
+  | Some err => raise (ValidationError err)
+  };
 
-let makeBid bid board => {
-  switch (validateBid bid board) {
-  | None => ({ ...board, bids: [bid, ...board.bids] })
-  | Some err => raise (ValidationError err);
-  }
-};
+let validateCard card board => None;
 
-let validateCard card board => {
-  None;
-};
-
-let playCard card board => {
+let playCard card board =>
   switch (validateCard card board) {
-    | None => ({ ...board, cards: (List.append board.cards [ card ]) })
-    | Some err => raise (ValidationError err);
-    }
-};
+  | None => {...board, cards: List.append board.cards [card] }
+  | Some err => raise (ValidationError err)
+  };

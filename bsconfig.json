@@ -36,6 +36,10 @@
       "public": "all"
     },
     {
+      "dir": "src/model/game/__tests__",
+      "type": "dev"
+    },
+    {
       "dir": "src/ui",
       "public": "all"
     },

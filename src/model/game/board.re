@@ -18,7 +18,7 @@ let validateBid bid board => {
 
 let makeBid bid board => {
   switch (validateBid bid board) {
-  | None => ({ ...board, bids: (List.append board.bids [ bid ]) })
+  | None => ({ ...board, bids: [bid, ...board.bids] })
   | Some err => raise (ValidationError err);
   }
 };

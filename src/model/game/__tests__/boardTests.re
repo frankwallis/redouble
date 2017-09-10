@@ -21,14 +21,14 @@ describe "Board" (fun () => {
   describe "makeBid" (fun () => {
     open Bid;
 
-    test "appends the bid" (fun () => {
+    test "prepends the bid" (fun () => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts)
         |> Board.makeBid (Call 2 BidSuit.Spades);
 
       expect (List.length board.bids) |> toEqual 2;
-      expect (List.nth board.bids 0) |> toEqual (Call 1 BidSuit.Hearts);
-      expect (List.nth board.bids 1) |> toEqual (Call 2 BidSuit.Spades);
+      expect (List.nth board.bids 0) |> toEqual (Call 2 BidSuit.Spades);
+      expect (List.nth board.bids 1) |> toEqual (Call 1 BidSuit.Hearts);
     });
   });
 });

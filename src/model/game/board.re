@@ -5,10 +5,12 @@ let create dealer => {
   {dealer, hands, bids: [], cards: []}
 };
 
-let validateBid bid board bidder =>
+let validateBid bid board =>
   if (biddingHasEnded board) {
     Some "The bidding has already ended"
   } else {
+    let bidder = (nextBidder board);
+
     switch bid {
     | Bid.NoBid => None
     | Bid.Double =>
@@ -45,7 +47,7 @@ let validateBid bid board bidder =>
 exception ValidationError string;
 
 let makeBid bid board =>
-  switch (validateBid bid board (nextBidder board)) {
+  switch (validateBid bid board) {
   | None => {...board, bids: [bid, ...board.bids] }
   | Some err => raise (ValidationError err)
   };

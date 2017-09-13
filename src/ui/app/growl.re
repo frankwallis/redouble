@@ -1,7 +1,7 @@
+open NotificationReducer;
+
 external require : string => unit = "require" [@@bs.val];
 require "./growl.css";
-
-include NotificationReducer;
 
 let component = ReasonReact.statelessComponent "BiddingBox";
 

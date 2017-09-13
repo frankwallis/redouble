@@ -1,20 +1,26 @@
-module RootReducer = {
-  type state = {notifications: NotificationReducer.NotificationReducer.state};
-  type action = NotificationReducer.NotificationReducer.action;
-  let initialState () => {
-    notifications: NotificationReducer.NotificationReducer.initialState ()
-  };
-  let reducer action state => {
-    notifications: NotificationReducer.NotificationReducer.reducer action state.notifications
-  };
+type state = {
+  notifications: NotificationReducer.state,
+  game: GameReducer.state
+};
+type action = [ NotificationReducer.action | GameReducer.action ];
+let initialState () => {
+  notifications: NotificationReducer.initialState (),
+  game: GameReducer.initialState (),
+};
+let reducer action state => {
+  switch action {
+    | #GameReducer.action as gameAction => {...state, game: GameReducer.reducer gameAction state.game }
+    | #NotificationReducer.action as notificationAction => {...state, notifications: NotificationReducer.reducer notificationAction state.notifications }
+    | _ => state
+  }
 };
 
-module type AllReducers2 = module type of NotificationReducer.NotificationReducer;
+/*module type AllReducers2 = module type of NotificationReducer;*/
 
 module AllReducers = {
   /*let notifications = NotificationReducer.NotificationReducer;*/
   /*include NotificationReducer.NotificationReducer;*/
-  let a: (module AllReducers2) = (module NotificationReducer.NotificationReducer);
+  /* let a: (module AllReducers2) = (module NotificationReducer);*/
   /*let b: (module NotificationReducer.NotificationReducer) = (module NotificationReducer.NotificationReducer);*/
 };
 /*module CombinedReducer = CombineReducer()*/

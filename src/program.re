@@ -1,3 +1,3 @@
 include Store;
 
-module PStore = MakeStore RootReducer.RootReducer;
+/*module PStore = MakeStore RootReducer.RootReducer;*/

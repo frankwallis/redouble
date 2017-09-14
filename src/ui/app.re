@@ -1,4 +1,4 @@
-/*open RootReducer;*/
+open RootReducer;
 
 external require : string => unit = "require" [@@bs.val];
 

@@ -1,5 +1,3 @@
-/*open NotificationReducer;*/
-
 external require : string => unit = "require" [@@bs.val];
 require "./main.css";
 require "./navbar.css";
@@ -25,14 +23,14 @@ let make ::notifications ::dispatch _children => {
           notifications=notifications
           handleResponse=(
                            fun id =>
-                             dispatch (`Dismiss id)
+                             dispatch (GameReducer.Back)
                          )
         />
         <button
           onClick=(
                     fun _ =>
                       dispatch (
-                        `Notify ("info", "hello", "hello there")
+                        NotificationReducer.Notify ("info", "hello", "hello there")
                       )
                   )>
           (ReasonReact.stringToElement "Add Notification")

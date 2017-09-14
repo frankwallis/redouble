@@ -2,16 +2,15 @@ type state = {
   notifications: NotificationReducer.state,
   game: GameReducer.state
 };
-type action = [ NotificationReducer.action | GameReducer.action ];
+type action = NotificationAction of NotificationReducer.action | GameAction of GameReducer.action;
 let initialState () => {
   notifications: NotificationReducer.initialState (),
-  game: GameReducer.initialState (),
+  game: GameReducer.initialState ()
 };
 let reducer action state => {
   switch action {
-    | #GameReducer.action as gameAction => {...state, game: GameReducer.reducer gameAction state.game }
-    | #NotificationReducer.action as notificationAction => {...state, notifications: NotificationReducer.reducer notificationAction state.notifications }
-    | _ => state
+    | GameAction gameAction => {...state, game: GameReducer.reducer gameAction state.game }
+    | NotificationAction notificationAction => {...state, notifications: NotificationReducer.reducer notificationAction state.notifications }
   }
 };
 

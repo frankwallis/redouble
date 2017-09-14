@@ -8,7 +8,7 @@ let nextId () => {
   incr counter;
   !counter
 };
-let reducer action state =>
+let reducer state action =>
   switch action {
   | Notify (severity, title, message) => [{id: nextId (), severity, title, message}, ...state]
   | Dismiss id => List.filter (fun not => not.id != id) state

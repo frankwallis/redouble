@@ -5,10 +5,10 @@ require "./growl.css";
 
 let component = ReasonReact.statelessComponent "BiddingBox";
 
-let make ::notifications ::handleResponse _children => {
+let make ::notifications ::dispatch _children => {
   ...component,
   render: fun _self => {
-    let handleClick notif _ => handleResponse notif;
+    let handleClick id _ => dispatch (Store.NotificationAction (NotificationReducer.Dismiss id));
     let renderItem notif =>
       <li
         className=("growl-item growl-" ^ notif.severity)

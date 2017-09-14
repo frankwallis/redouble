@@ -43,6 +43,8 @@
     "react-pure-render": "^1.0.2",
     "react-redux": "^5.0.6",
     "react-router": "^1.0.2",
+    "reason-react": "^0.2.4",
+    "reductive": "frankwallis/reductive",
     "redux": "^3.0.5",
     "redux-persist": "^4.9.1",
     "redux-thunk": "^2.2.0"
@@ -68,7 +70,6 @@
     "react-addons-test-utils": "^15.6.0",
     "react-dnd-test-backend": "^2.5.1",
     "react-transform-hmr": "^1.0.1",
-    "reason-react": "^0.2.4",
     "rimraf": "^2.4.4",
     "s3": "^4.4.0",
     "sinon": "^3.2.1",

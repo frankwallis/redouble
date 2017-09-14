@@ -6,4 +6,8 @@ require "font-awesome/css/font-awesome.css";
 
 Js.log "Do you see this message? If you do, then things should work!";
 
-ReactDOMRe.renderToElementWithId <App /> "main";
+module ThunkedStoreProvider = {
+  let make = Reductive.Provider.createMake Store.store;
+};
+
+ReactDOMRe.renderToElementWithId <ThunkedStoreProvider component=App.make /> "main";

@@ -27,7 +27,7 @@ let validateBid bid board =>
           Some "You cannot redouble your partner's double!" : None
       | _ => Some "Invalid redouble"
       }
-    | Bid.Call level suit =>
+    | Bid.Call level _suit =>
       if (level < 1 || level > 7) {
         Some "Invalid bid"
       } else {
@@ -52,7 +52,7 @@ let makeBid bid board =>
   | Some err => raise (ValidationError err)
   };
 
-let validateCard card board => None;
+let validateCard _card _board => None;
 
 let playCard card board =>
   switch (validateCard card board) {

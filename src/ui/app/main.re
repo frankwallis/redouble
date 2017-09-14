@@ -21,16 +21,13 @@ let make ::notifications ::dispatch _children => {
       <div className="main-growl">
         <Growl
           notifications=notifications
-          handleResponse=(
-                           fun id =>
-                             dispatch (GameReducer.Back)
-                         )
+          dispatch=dispatch
         />
         <button
           onClick=(
                     fun _ =>
                       dispatch (
-                        NotificationReducer.Notify ("info", "hello", "hello there")
+                        Store.NotificationAction (NotificationReducer.Notify ("info", "hello", "hello there"))
                       )
                   )>
           (ReasonReact.stringToElement "Add Notification")

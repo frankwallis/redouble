@@ -21,7 +21,7 @@ let make ::board _children => {
 
   let rec renderRows bids rowIdx =>
     switch bids {
-    | [] => []
+    | [] => [renderRow [] rowIdx]
     | [bid1, bid2, bid3, bid4, ...restBids] => [renderRow [bid1, bid2, bid3, bid4] rowIdx, ...(renderRows restBids (rowIdx+1))]
     | _ => [renderRow bids rowIdx]
     };

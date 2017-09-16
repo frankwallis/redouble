@@ -13,17 +13,22 @@ table.bidding-container {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	/*overflow: hidden;*/
-	padding: .3em .8em !important;
+  padding: .3em .8em !important;
+  min-height: 10em;
 }
 
-tbody.bidding-cell {
+tbody .bidding-cell {
 	padding: 0 !important;
+}
+
+.bidding-round:not(:last-child) {
+  height: 1.6em;
 }
 
 .bidding-cell {
 	margin: 0;
 	min-width: 4em;
 	width: 25%;
-	text-align: center;
+  text-align: center;
+  vertical-align: top;
 }

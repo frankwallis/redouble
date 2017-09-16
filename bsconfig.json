@@ -61,6 +61,10 @@
       "public": "all"
     },
     {
+      "dir": "src/ui/table/__tests__",
+      "type": "dev"
+    },
+    {
       "dir": "src/stores",
       "public": "all"
     },

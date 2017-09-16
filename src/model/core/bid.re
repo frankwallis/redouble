@@ -22,7 +22,7 @@ module BidSuit = {
       check [NoTrumps, Spades, Hearts, Diamonds, Clubs] suit1 suit2
     };
   /* ENDTODO */
-  let all = [NoTrumps, Spades, Hearts, Diamonds, Clubs];
+  let all = [Clubs, Diamonds, Hearts, Spades, NoTrumps];
   let name =
     fun
     | NoTrumps => "notrumps"

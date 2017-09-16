@@ -24,7 +24,7 @@ export class BoardBuilder {
 	 * Creates a new board with the passed in state,
 	 * defaults all parameters where necessary
 	 */
-	static create(dealer, hands, bids, cards): BoardBuilder {
+	static create(dealer, hands, bids, cards) {
 		dealer = dealer || Seat.North;
 
 		if (!hands) {
@@ -45,7 +45,7 @@ export class BoardBuilder {
 	/**
 	 * Mutates the state by adding a bid
 	 */
-	makeBid(bid): BoardBuilder {
+	makeBid(bid) {
 		bid = Bid.create(bid);
 		let bids = this.boardState.bids.concat(bid);
 		this.boardState = {
@@ -58,7 +58,7 @@ export class BoardBuilder {
 	/**
 	 * Mutates the state by adding a played card
 	 */
-	playCard(card): BoardBuilder {
+	playCard(card) {
 		card = Card.create(card);
 		let cards = this.boardState.cards.concat({seat: this.toQuery().nextPlayer, card });
 		this.boardState = {
@@ -71,7 +71,7 @@ export class BoardBuilder {
 	/**
 	 * Returns a query object for the current state
 	 */
-	toQuery(): BoardQuery {
+	toQuery() {
 		return new BoardQuery(this.boardState);
 	}
 }

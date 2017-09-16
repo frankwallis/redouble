@@ -29,7 +29,7 @@ const PBNPipStringMap = [ "", "", "2", "3", "4", "5", "6", "7", "8", "9", "T", "
 
 export const Card = {
 
-	compare(card1, card2, trumpSuit, leadSuit): number {
+	compare(card1, card2, trumpSuit, leadSuit) {
 		if (card1.suit === card2.suit) {
 			return card1.pip - card2.pip;
 		}
@@ -52,14 +52,14 @@ export const Card = {
 		}
 	},
 
-	equals(card1, card2): boolean {
+	equals(card1, card2) {
 		return !Card.compare(card1, card2);
 	},
 
 	/*
 	 * creates a card from a string e.g. "5H"
 	 */
-	create(card: string) {
+	create(card) {
 		if (typeof card !== "string") return card;
 
 		let shortSuitNames = [ "", "C", "D", "H", "S"];
@@ -94,7 +94,7 @@ export const Card = {
 		return result;
 	},
 
-	suitName(suit: Suit) {
+	suitName(suit) {
 		const suitNames = [ "", "clubs", "diamonds", "hearts", "spades"];
 		return suitNames[suit];
 	},

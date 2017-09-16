@@ -3,7 +3,7 @@ open NotificationReducer;
 external require : string => unit = "require" [@@bs.val];
 require "./growl.css";
 
-let component = ReasonReact.statelessComponent "BiddingBox";
+let component = ReasonReact.statelessComponent "Growl";
 
 let make ::notifications ::dismiss _children => {
   ...component,

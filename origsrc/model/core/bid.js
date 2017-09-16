@@ -57,7 +57,7 @@ export const Bid = {
 		return result.join('-');
 	},
 
-	create(bid: string) {
+	create(bid) {
 		if (typeof bid !== "string") return bid;
 
 		let shortNames = [ "", "c", "d", "h", "s", "n"];
@@ -115,7 +115,7 @@ export const Bid = {
 		return result;
 	},
 
-	suitName(suit: BidSuit, singular: boolean) {
+	suitName(suit, singular) {
 		let names = [ "", "club", "diamond", "heart", "spade", "no-trump" ];
 		return names[suit] + (singular ? '' : 's');
 	},

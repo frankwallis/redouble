@@ -1,7 +1,7 @@
 external require : string => unit = "require" [@@bs.val];
 require "ui/table/hand.css";
 
-let component = ReasonReact.statelessComponent "HandComponent";
+let component = ReasonReact.statelessComponent "Hand";
 
 let make ::cards ::playCard _children => {
   ...component,

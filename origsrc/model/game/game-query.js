@@ -22,7 +22,7 @@ export class GameQuery {
 	/**
 	 * Returns the current board
 	 */
-	get currentBoard(): BoardQuery {
+	get currentBoard() {
 		return this._currentBoard;
 	}
 }

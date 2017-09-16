@@ -3,7 +3,7 @@ open Board;
 external require : string => unit = "require" [@@bs.val];
 require "ui/table/table.css";
 
-let component = ReasonReact.statelessComponent "TableComponent";
+let component = ReasonReact.statelessComponent "Table";
 
 let make ::board ::makeBid _children => {
   ...component,

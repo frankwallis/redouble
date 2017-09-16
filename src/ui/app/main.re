@@ -2,7 +2,7 @@ external require : string => unit = "require" [@@bs.val];
 require "./main.css";
 require "./navbar.css";
 
-let component = ReasonReact.statelessComponent "MainComponent";
+let component = ReasonReact.statelessComponent "Main";
 
 let make ::notifications ::dismiss ::board ::makeBid _children => {
   ...component,

@@ -34,14 +34,14 @@ export class GameBuilder {
 	/**
 	 * Starts a new board
 	 */
-	dealBoard(dealer: Seat): GameBuilder {
+	dealBoard(dealer) {
 		return this.newBoard(dealer);
 	}
 
 	/**
 	 * Adds a new board with the passed in state
 	 */
-	newBoard(dealer, handlist, bids, cards): GameBuilder {
+	newBoard(dealer, handlist, bids, cards) {
 		let board = BoardBuilder.create(dealer, handlist, bids, cards).build();
 		let boards = this.gameState.boards.concat(board);
 		this.gameState = { boards };
@@ -53,7 +53,7 @@ export class GameBuilder {
 	 * If the bid is valid returns the new game,
 	 * otherwise an exception is thrown
 	 */
-	makeBid(bid: Bid): GameBuilder {
+	makeBid(bid) {
 		let boardBuilder = new BoardBuilder(this.currentBoard);
 		boardBuilder.makeBid(bid);
 		let boards = this.gameState.boards.slice(0, this.gameState.boards.length - 1).concat(boardBuilder.build());
@@ -66,7 +66,7 @@ export class GameBuilder {
 	 * If the card is valid returns the new game,
 	 * otherwise an exception is thrown
 	 */
-	playCard(card: Card): GameBuilder {
+	playCard(card) {
 		let boardBuilder = new BoardBuilder(this.currentBoard);
 		boardBuilder.playCard(card);
 		let boards = this.gameState.boards.slice(0, this.gameState.boards.length - 1).concat(boardBuilder.build());
@@ -77,7 +77,7 @@ export class GameBuilder {
 	/**
 	 * Returns a GameQuery object for the current state
 	 */
-	toQuery(): GameQuery {
+	toQuery() {
 		return new GameQuery(this.gameState);
 	}
 

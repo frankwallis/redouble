@@ -39,41 +39,6 @@ module.exports = function(env = {}) {
             }
           }
         },
-        {
-					test: /\.jsxxxxx?$/,
-          exclude: /node_modules/,
-          use: {
-					  loader: 'babel-loader',
-      			query: env.production ? {
-						"presets": [
-							"stage-1",
-							"es2015",
-							"react",
-						],
-						"plugins": [
-							"transform-regenerator",
-							"transform-class-properties"
-						]
-      			} : {
-						"presets": [
-							"stage-1",
-							"es2015",
-							"react",
-						],
-						"plugins": [
-							[ "transform-regenerator" ],
-							[ "transform-class-properties" ],
-							[ "react-transform", {
-	              			transforms: [{
-			                  transform: "react-transform-hmr",
-			                  imports: ["react"],
-			                  locals: ["module"],
-			               }]
-	              		}]
-            		]
-            }
-          }
-				},
 				{
 					test: /\.css$/,
 					use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?resolve-url&localIdentName=' + localIdentName }),

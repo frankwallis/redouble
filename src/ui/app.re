@@ -4,7 +4,7 @@ require "normalize.css";
 require "purecss";
 require "font-awesome/css/font-awesome.css";
 
-let component = ReasonReact.statelessComponent "AppComponent";
+let component = ReasonReact.statelessComponent "App";
 
 let make state::(state: Store.appState) ::dispatch _children => {
   let notifications = state.notifications.items;

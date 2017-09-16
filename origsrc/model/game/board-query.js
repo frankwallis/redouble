@@ -22,14 +22,14 @@ export class BoardQuery {
 	/**
 	 * Returns the last bid to be made of any type
 	 */
-	get lastBid(): Bid {
+	get lastBid() {
 		return this.boardState.bids[this.boardState.bids.length - 1];
 	}
 
 	/**
 	 * Returns the last bid to be made of type Bid.Call
 	 */
-	get lastCall(): Bid {
+	get lastCall() {
 		return this.boardState.bids
 			.reduce((lastCall, current) => {
 				if (current.type === BidType.Call)
@@ -42,7 +42,7 @@ export class BoardQuery {
 	/**
 	 * Returns the player who made the lastCall
 	 */
-	get lastCaller(): Seat {
+	get lastCaller() {
 		let call = this.lastCall;
 		if (call) return Seat.rotate(this.boardState.dealer, this.boardState.bids.indexOf(call));
 	}
@@ -50,7 +50,7 @@ export class BoardQuery {
 	/**
 	 * Returns the last bid to be made which was not a no-bid
 	 */
-	get lastAction(): Bid {
+	get lastAction() {
 		return this.boardState.bids
 			.reduce((lastAction, current) => {
 				if (current.type !== BidType.NoBid)
@@ -63,7 +63,7 @@ export class BoardQuery {
 	/**
 	 * Returns the seat whic made the lastAction
 	 */
-	get lastActor(): Seat {
+	get lastActor() {
 		let act = this.lastAction;
 		if (act) return Seat.rotate(this.boardState.dealer, this.boardState.bids.indexOf(act));
 	}
@@ -72,7 +72,7 @@ export class BoardQuery {
 	 * Returns the suit of the bid contract or undefined if the bidding has not ended
 	 * or no suit has been bid yet
 	 */
-	get trumpSuit(): BidSuit {
+	get trumpSuit() {
 		if (this.biddingHasEnded && this.lastCall)
 			return this.lastCall.suit;
 	}
@@ -80,7 +80,7 @@ export class BoardQuery {
 	/**
 	 * Returns true when no more bids can be made
 	 */
-	get biddingHasEnded(): boolean {
+	get biddingHasEnded() {
 		return (this.bids.length >= 4) && !this.bids.slice(-3).some(bid => bid.type !== BidType.NoBid);
 	}
 
@@ -89,7 +89,7 @@ export class BoardQuery {
 	 * played to the trick, starting with the lead card. If no cards have been played
 	 * yet it returns an empty array.
 	 */
-	get currentTrick(): Array<Card> {
+	get currentTrick() {
 		let played = this.boardState.cards.length % 4;
 		played = played || 4;
 		return this.boardState.cards.slice(played * -1);
@@ -98,7 +98,7 @@ export class BoardQuery {
 	/*
 	 * Returns the winner of the previous trick
 	 */
-	get previousTrickWinner(): Seat {
+	get previousTrickWinner() {
 		if (this.boardState.cards.length < 4) return undefined;
 		let played = this.boardState.cards.length % 4;
 		let trick = this.boardState.cards.slice(this.boardState.cards.length - played - 4, this.boardState.cards.length - played);
@@ -114,7 +114,7 @@ export class BoardQuery {
 	/*
 	 * Returns the number of tricks declarer has won
 	 */
-	get declarerTricks(): number {
+	get declarerTricks() {
 		let trickCount = Math.floor(this.boardState.cards.length / 4);
 		let result = 0;
 
@@ -138,7 +138,7 @@ export class BoardQuery {
 	/**
 	 * Returns true when no more cards can be played
 	 */
-	get playHasEnded(): boolean {
+	get playHasEnded() {
 		return (this.boardState.cards.length === Seat.all().reduce((total, seat) => total + this.hands[seat].length, 0));
 	}
 
@@ -153,7 +153,7 @@ export class BoardQuery {
 	/**
 	 * Returns the seat of the lead card
 	 */
-	get declarer(): Seat {
+	get declarer() {
 		if (!this.biddingHasEnded)
 			throw new Error("the bidding has not ended yet");
 
@@ -167,14 +167,14 @@ export class BoardQuery {
 		throw new Error("declarer not found");
 	}
 
-	get dummy(): Seat {
+	get dummy() {
 		return Seat.rotate(this.declarer, 2);
 	}
 
 	/**
 	 * Returns the seat of the lead card
 	 */
-	get leader(): Seat {
+	get leader() {
 		if (this.boardState.cards.length < 4)
 			return Seat.rotate(this.declarer, 1);
 		else
@@ -184,7 +184,7 @@ export class BoardQuery {
 	/**
 	 * Returns the seat of the player who's turn it is to play
 	 */
-	get nextPlayer(): Seat {
+	get nextPlayer() {
 		if (!this.biddingHasEnded)
 			return Seat.rotate(this.boardState.dealer, this.boardState.bids.length);
 		else if (!this.lastCall)

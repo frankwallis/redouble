@@ -7,7 +7,7 @@ import {BoardQuery} from "./board-query";
 /**
  * Tests if the bid is a valid one in board state and returns an error if not
  */
-export function validateBid(bid, board: BoardQuery) {
+export function validateBid(bid, board) {
 	if (board.biddingHasEnded)
 		return new Error("The bidding has already ended");
 
@@ -51,7 +51,7 @@ export function validateBid(bid, board: BoardQuery) {
 /**
  * Tests if the card is a valid one given the current board state and returns an error if not
  */
-export function validateCard(playedCard, board: BoardQuery) {
+export function validateCard(playedCard, board) {
 	if (!board.biddingHasEnded)
 		return new Error("The bidding has not ended yet");
 

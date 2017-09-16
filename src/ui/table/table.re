@@ -1,13 +1,14 @@
+open Board;
+
 external require : string => unit = "require" [@@bs.val];
 require "ui/table/table.css";
 
 let component = ReasonReact.statelessComponent "TableComponent";
 
-let make ::hands _children => {
+let make ::board ::makeBid _children => {
   ...component,
   render: fun _self => {
     let playCard _card => ();
-    let makeBid _bid => ();
     let players =
       Seat.all |>
       List.map (
@@ -17,7 +18,7 @@ let make ::hands _children => {
               (ReasonReact.stringToElement (Seat.name seat))
             </header>
             <div className=("table-hand-" ^ Seat.name seat)>
-              <Hand cards=(Card.SeatMap.find seat hands) playCard />
+              <Hand cards=(Card.SeatMap.find seat board.hands) playCard />
             </div>
           </section>
       );

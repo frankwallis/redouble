@@ -4,7 +4,7 @@ require "./navbar.css";
 
 let component = ReasonReact.statelessComponent "MainComponent";
 
-let make ::notifications ::dispatch _children => {
+let make ::notifications ::dismiss ::board ::makeBid _children => {
   ...component,
   render: fun _self => {
     <div className="main-container">
@@ -17,22 +17,16 @@ let make ::notifications ::dispatch _children => {
           <li key="about"> <a href="/ui/about"> (ReasonReact.stringToElement "About") </a> </li>
         </ul>
       </nav>
-      <div className="main-content"> <Table hands=(Card.deal Seat.North) /> </div>
+      <div className="main-content">
+        <Table
+          board=board
+          makeBid=makeBid />
+      </div>
       <div className="main-growl">
         <Growl
           notifications=notifications
-          dispatch=dispatch
-        />
-        <button
-          onClick=(
-                    fun _ =>
-                      dispatch (
-                        Store.NotificationAction (NotificationReducer.Notify ("info", "hello", "hello there"))
-                      )
-                  )>
-          (ReasonReact.stringToElement "Add Notification")
-        </button>
+          dismiss=dismiss />
       </div>
-    </div>;
+    </div>
   }
 };

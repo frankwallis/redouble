@@ -34,7 +34,7 @@ let validateBid bid board =>
         switch (lastCall board) {
         | Some { seat: _, bid: lastBid } => {
             switch (lastBid) {
-            | (Call _ _) => ((Bid.compare bid lastBid) < 0) ? Some ("Bid must be higher than " ^ (Bid.description lastBid)) : None
+            | (Call _ _) => ((Bid.compare bid lastBid) <= 0) ? Some ("Bid must be higher than " ^ (Bid.description lastBid)) : None
             | _ => None
             }
           }

@@ -73,7 +73,8 @@ module.exports = function(env = {}) {
       }),
       new ExtractTextPlugin({ filename: "app.[hash].css", allChunks: true }),
 			new HtmlWebpackPlugin({
-				template: './config/index-template.html',
+        template: './config/index-template.ejs',
+        development: true
 			}),
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.NamedModulesPlugin(),
@@ -93,8 +94,7 @@ module.exports = function(env = {}) {
 			}),
 			new ExtractTextPlugin({ filename: "app.[hash].css", allChunks: true }),
 			new HtmlWebpackPlugin({
-				template: './config/index-template.html',
-				production: true,
+				template: './config/index-template.ejs'
 			}),
 		]
 	};

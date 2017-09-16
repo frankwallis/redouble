@@ -9,17 +9,8 @@
 		<meta name="fragment" content="!" />
 
 		<title>Redouble</title>
-
-		{% if (o.htmlWebpackPlugin.options.production) { %}
-		<link rel="stylesheet" href="app.{%=o.webpack.hash%}.css" media="all">
-		{% } %}
 	</head>
 	<body>
 		<div id="main"></div>
-
-		<!-- comment out to see server rendering -->
-		{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
-		<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
-		{% } %}
 	</body>
 </html>

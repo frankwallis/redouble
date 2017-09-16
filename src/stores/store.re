@@ -8,8 +8,8 @@ type ReduxThunk.thunk _ +=
   | NotificationAction NotificationReducer.action;
 
 let appInitialState = {
-  notifications: NotificationReducer.initialState (),
-  game: GameReducer.initialState ()
+  notifications: NotificationReducer.initialState,
+  game: GameReducer.initialState
 };
 let appReducer state action => {
   switch action {

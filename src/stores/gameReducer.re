@@ -11,7 +11,7 @@ type action =
   | Forward
   | Pause
   | Resume;
-let initialState () => {
+let initialState = {
   history: [Board.create Seat.South],
   position: 0,
   autoPlay: false,

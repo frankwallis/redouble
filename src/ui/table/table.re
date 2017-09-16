@@ -25,7 +25,9 @@ let make ::board ::makeBid _children => {
     <div className="bridge-table">
       <div className="table-controls" />
       <div className="table-players"> (ReasonReact.arrayToElement (Array.of_list players)) </div>
-      <div className="table-board" />
+      <div className="table-board">
+        <BiddingHistory board=board />
+      </div>
       <div className="table-bidding-box"> <BiddingBox makeBid /> </div>
     </div>
   }

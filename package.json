@@ -88,6 +88,7 @@
     "start": "./node_modules/.bin/babel-node ./src/server/main.js",
     "build": "webpack --config config/webpack.config.js",
     "build:dev": "webpack --config config/webpack.config.js --env.development",
+    "build:watch": "webpack --config config/webpack.config.js --env.development --watch",
     "deploy": "npm run build && node ./config/aws-deploy.js && npm run clean"
   },
   "repository": {

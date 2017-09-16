@@ -18,14 +18,10 @@ let make ::notifications ::dismiss ::board ::makeBid _children => {
         </ul>
       </nav>
       <div className="main-content">
-        <Table
-          board=board
-          makeBid=makeBid />
+        <Table board makeBid />
       </div>
       <div className="main-growl">
-        <Growl
-          notifications=notifications
-          dismiss=dismiss />
+        <Growl notifications dismiss />
       </div>
     </div>
   }

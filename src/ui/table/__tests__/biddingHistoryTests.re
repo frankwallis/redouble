@@ -6,7 +6,7 @@ describe "BiddingHistory" (fun () => {
 
   test "displays the headings" (fun () => {
     let board = Board.create Seat.East;
-    let wrapper = Enzyme.shallow <BiddingHistory board=board />;
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let length = wrapper
       |> Enzyme.find "thead tr th"
@@ -16,7 +16,7 @@ describe "BiddingHistory" (fun () => {
 
   test "displays the dealer on the left hand side" (fun () => {
     let board = Board.create Seat.East;
-    let wrapper = Enzyme.shallow <BiddingHistory board=board />;
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let text = wrapper
       |> Enzyme.find "thead tr th"
@@ -30,7 +30,7 @@ describe "BiddingHistory" (fun () => {
       |> Board.makeBid (Call 1 BidSuit.Clubs)
       |> Board.makeBid (Call 2 BidSuit.Diamonds);
 
-    let wrapper = Enzyme.shallow <BiddingHistory board=board />;
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let cellLength = wrapper
       |> Enzyme.find "tbody tr td"
@@ -45,7 +45,7 @@ describe "BiddingHistory" (fun () => {
 
   test "displays an empty row when there are no bids" (fun () => {
     let board = Board.create Seat.East;
-    let wrapper = Enzyme.shallow <BiddingHistory board=board />;
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let length = wrapper
       |> Enzyme.find "tbody tr td"
@@ -60,7 +60,7 @@ describe "BiddingHistory" (fun () => {
       |> Board.makeBid (Call 1 BidSuit.Hearts)
       |> Board.makeBid (Call 2 BidSuit.Spades);
 
-    let wrapper = Enzyme.shallow <BiddingHistory board=board />;
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let length = wrapper
       |> Enzyme.find "tbody tr"

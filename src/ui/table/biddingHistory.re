@@ -12,7 +12,7 @@ let make ::board _children => {
 
   let renderRow bids rowIdx => {
     let cells = bids
-      |> List.mapi (fun idx bid => <td key=(string_of_int idx) className="bidding-cell"> <BidComponent bid=bid/> </td>);
+      |> List.mapi (fun idx bid => <td key=(string_of_int idx) className="bidding-cell"> <BidComponent bid /> </td>);
     let emptyCells = (range (List.length bids) 4)
       |> List.mapi (fun _ idx => <td key=(string_of_int idx) className="bidding-cell"> </td>);
 

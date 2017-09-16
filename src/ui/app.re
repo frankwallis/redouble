@@ -1,9 +1,3 @@
-external require : string => unit = "require" [@@bs.val];
-
-require "normalize.css";
-require "purecss";
-require "font-awesome/css/font-awesome.css";
-
 let component = ReasonReact.statelessComponent "App";
 
 let make state::(state: Store.appState) ::dispatch _children => {
@@ -14,7 +8,7 @@ let make state::(state: Store.appState) ::dispatch _children => {
   {
     ...component,
     render: fun _self => {
-      <Main dismiss=dismiss notifications=notifications board=board makeBid=makeBid />
+      <Main notifications dismiss board makeBid />
     }
   }
 };

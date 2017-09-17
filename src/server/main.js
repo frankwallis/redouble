@@ -46,7 +46,10 @@ if (env === 'development') {
 	// 3.
 	const midOpts = {
 		noInfo: false,
-		publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
+    stats: {
+      colors: true
+    }
 	};
 	const middleware = require("koa-webpack-dev-middleware")(compiler, midOpts);
 	app.use(middleware);

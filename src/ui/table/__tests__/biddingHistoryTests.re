@@ -25,7 +25,7 @@ describe "BiddingHistory" (fun () => {
     expect (text) |> toBe "east";
   });
 
-  test "displays the bids" (fun () => {
+  test "displays the bidding cells for all seats" (fun () => {
     let board = Board.create Seat.East
       |> Board.makeBid (Call 1 BidSuit.Clubs)
       |> Board.makeBid (Call 2 BidSuit.Diamonds);
@@ -36,6 +36,14 @@ describe "BiddingHistory" (fun () => {
       |> Enzyme.find "tbody tr td"
       |> Enzyme.length;
     expect (cellLength) |> toBe 4;
+  });
+
+  test "displays the bids" (fun () => {
+    let board = Board.create Seat.East
+      |> Board.makeBid (Call 1 BidSuit.Clubs)
+      |> Board.makeBid (Call 2 BidSuit.Diamonds);
+
+    let wrapper = Enzyme.shallow <BiddingHistory board />;
 
     let bidLength = wrapper
       |> Enzyme.find "tbody tr BidComponent"

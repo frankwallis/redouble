@@ -6,94 +6,145 @@ describe "BiddingQuery" (fun () => {
   open Bid;
 
   describe "lastBid" (fun () => {
-    test "returns the last bid of any type" (fun () => {
+    test "returns None whe no-one has bid" (fun () => {
       let board = Board.create Seat.West;
       expect (lastBid board) |> toEqual None;
+    });
 
-      let board1 = board |> Board.makeBid (Call 2 BidSuit.Hearts);
-      expect (lastBid board1) |> toEqual (Some { seat: Seat.West, bid: (Call 2 BidSuit.Hearts) });
+    test "returns Call" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid (Call 2 BidSuit.Hearts);
+      expect (lastBid board) |> toEqual (Some { seat: Seat.West, bid: (Call 2 BidSuit.Hearts) });
+    });
 
-      let board2 = board1 |> Board.makeBid Double;
-      expect (lastBid board2) |> toEqual (Some { seat: Seat.North, bid: Double });
+    test "returns Double" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double;
+      expect (lastBid board) |> toEqual (Some { seat: Seat.North, bid: Double });
+    });
 
-      let board3 = board2 |> Board.makeBid NoBid;
-      expect (lastBid board3) |> toEqual (Some { seat: Seat.East, bid: NoBid });
+    test "returns Redouble" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double
+        |> Board.makeBid NoBid;
+      expect (lastBid board) |> toEqual (Some { seat: Seat.East, bid: NoBid });
     });
   });
 
   describe "lastCall" (fun () => {
-    test "returns the last bid of a suit" (fun () => {
+    test "returns None when no-one has bid" (fun () => {
       let board = Board.create Seat.West;
       expect (lastCall board) |> toEqual None;
+    });
 
-      let board1 = board |> Board.makeBid NoBid;
-      expect (lastCall board1) |> toEqual None;
+    test "returns None after a NoBid" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid;
+      expect (lastCall board) |> toEqual None;
+    });
 
-      let board2 = board1 |> Board.makeBid (Call 2 BidSuit.Hearts);
-      expect (lastCall board2) |> toEqual (Some { seat: Seat.North, bid: (Call 2 BidSuit.Hearts) });
+    test "returns Call" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts);
+      expect (lastCall board) |> toEqual (Some { seat: Seat.North, bid: (Call 2 BidSuit.Hearts) });
+    });
 
-      let board3 = board2 |> Board.makeBid Double;
-      expect (lastCall board3) |> toEqual (Some { seat: Seat.East, bid: (Call 2 BidSuit.Hearts) });
+    test "returns Call after a Double" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double;
+      expect (lastCall board) |> toEqual (Some { seat: Seat.North, bid: (Call 2 BidSuit.Hearts) });
+    });
 
-      let board4 = board3 |> Board.makeBid (Call 3 BidSuit.Spades);
-      expect (lastCall board4) |> toEqual (Some { seat: Seat.South, bid: (Call 3 BidSuit.Spades) });
+    test "returns last Call which was made" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double
+        |> Board.makeBid (Call 3 BidSuit.Spades);
+      expect (lastCall board) |> toEqual (Some { seat: Seat.South, bid: (Call 3 BidSuit.Spades) });
     });
   });
 
   describe "lastAction" (fun () => {
-    test "returns the last bid which was not a NoBid" (fun () => {
+    test "returns None before the bidding starts" (fun () => {
       let board = Board.create Seat.West;
       expect (lastAction board) |> toEqual None;
+    });
 
-      let board1 = board |> Board.makeBid NoBid;
-      expect (lastAction board1) |> toEqual None;
+    test "returns None after a NoBid" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid;
+      expect (lastAction board) |> toEqual None;
+    });
 
-      let board2 = board1 |> Board.makeBid (Call 2 BidSuit.Hearts);
-      expect (lastAction board2) |> toEqual (Some { seat: Seat.North, bid: (Call 2 BidSuit.Hearts) });
+    test "returns Call" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts);
+      expect (lastAction board) |> toEqual (Some { seat: Seat.North, bid: (Call 2 BidSuit.Hearts) });
+    });
 
-      let board3 = board2 |> Board.makeBid(Double);
-      expect (lastAction board3) |> toEqual (Some { seat: Seat.East, bid: Double });
+    test "returns Double" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double;
+      expect (lastAction board) |> toEqual (Some { seat: Seat.East, bid: Double });
+    });
 
-      let board4 = board3 |> Board.makeBid (Call 3 BidSuit.Spades);
-      expect (lastAction board4) |> toEqual (Some { seat: Seat.South, bid: (Call 3 BidSuit.Spades) });
+    test "returns Call after a Double" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid Double
+        |> Board.makeBid (Call 3 BidSuit.Spades);
+      expect (lastAction board) |> toEqual (Some { seat: Seat.South, bid: (Call 3 BidSuit.Spades) });
     });
   });
 
   describe "biddingHasEnded" (fun () => {
-    test "requires 3 no-bids when there has been a call" (fun () => {
+    test "returns false when there has been no bidding" (fun () => {
       let board = Board.create Seat.West;
       expect (biddingHasEnded board) |> toEqual false;
-
-      let board1 = board
-        |> Board.makeBid (Call 2 BidSuit.Hearts)
-        |> Board.makeBid NoBid
-        |> Board.makeBid NoBid;
-      expect (biddingHasEnded board1) |> toEqual false;
-
-      let board2 = board
-        |> Board.makeBid (Call 2 BidSuit.Hearts)
-        |> Board.makeBid NoBid
-        |> Board.makeBid NoBid
-        |> Board.makeBid NoBid;
-      expect (biddingHasEnded board2) |> toEqual true;
     });
 
-    test "requires 4 no-bids to throw in a hand" (fun () => {
-      let board = Board.create Seat.West;
+    test "returns false when there have only been 2 NoBids after a Call" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
+        |> Board.makeBid NoBid
+        |> Board.makeBid NoBid;
       expect (biddingHasEnded board) |> toEqual false;
+    });
 
-      let board1 = board
+    test "returns true when there have been 3 NoBids after a Call" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid (Call 2 BidSuit.Hearts)
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
-      expect (biddingHasEnded board1) |> toEqual false;
+      expect (biddingHasEnded board) |> toEqual true;
+    });
 
-      let board2 = board
+    test "returns false when there have been 3 NoBids initially" (fun () => {
+      let board = Board.create Seat.West
+        |> Board.makeBid NoBid
+        |> Board.makeBid NoBid
+        |> Board.makeBid NoBid;
+      expect (biddingHasEnded board) |> toEqual false;
+    });
+
+    test "returns true when there are four NoBids on the first round" (fun () => {
+      let board = Board.create Seat.West
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
-      expect (biddingHasEnded board2) |> toEqual true;
+      expect (biddingHasEnded board) |> toEqual true;
     });
   });
 

@@ -54,5 +54,20 @@ let name =
   | South => "south"
   | West => "west";
 
+let toPBN =
+  fun
+  | North => "N"
+  | East => "E"
+  | South => "S"
+  | West => "W";
+
+let fromPBN pbn => switch pbn {
+  | "N" => North
+  | "E" => East
+  | "S" => South
+  | "W" => West
+  | _ => raise (Invalid_argument ("Invalid PBN Seat [" ^ pbn ^ "]"))
+};
+
 let isPartner seat1 seat2 => rotateN seat1 2 === seat2;
 let isSameSide seat1 seat2 => (seat1 === seat2) || (isPartner seat1 seat2)

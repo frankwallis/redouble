@@ -3,8 +3,7 @@ module Suit = {
     | Clubs
     | Diamonds
     | Hearts
-    | Spades
-  [@@deriving ord];
+    | Spades;
   let all = [Spades, Hearts, Diamonds, Clubs];
   let name =
     fun
@@ -28,8 +27,7 @@ module Pip = {
     | Jack
     | Queen
     | King
-    | Ace
-  [@@deriving ord];
+    | Ace;
   let all = [Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two];
   let name =
     fun
@@ -46,6 +44,23 @@ module Pip = {
     | Four => "4"
     | Three => "3"
     | Two => "2";
+
+  let fromPBN pbn => switch pbn {
+  | "A" => Ace
+  | "K" => King
+  | "Q" => Queen
+  | "J" => Jack
+  | "T" => Ten
+  | "9" => Nine
+  | "8" => Eight
+  | "7" => Seven
+  | "6" => Six
+  | "5" => Five
+  | "4" => Four
+  | "3" => Three
+  | "2" => Two
+  | _ => raise (Invalid_argument ("Invalid PBN Pip [" ^ pbn ^ "]"))
+  }
 };
 
 module SeatMap = Map.Make Seat;
@@ -81,3 +96,12 @@ let deal dealer => {
 };
 
 let name (pip, suit) => Pip.name pip ^ Suit.name suit;
+
+let handFromPBN pbn => {
+  let holdings = List.combine Suit.all (Utils.split_on_char '.' pbn);
+  holdings |> List.fold_left (fun result (suit, holding) => {
+    result @ (Utils.to_list holding |> List.map (fun pip => {
+      (Pip.fromPBN pip, suit)
+    }))
+  }) [];
+}

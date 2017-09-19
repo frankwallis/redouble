@@ -71,6 +71,10 @@
     {
       "dir": "src/actions",
       "public": "all"
+    },
+    {
+      "dir": "src/utils",
+      "public": "all"
     }
   ]
 }

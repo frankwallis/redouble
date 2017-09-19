@@ -1,4 +1,6 @@
+include BoardType;
 include BiddingQuery;
+include BoardPBN;
 
 let create dealer => {
   let hands = Card.deal dealer;

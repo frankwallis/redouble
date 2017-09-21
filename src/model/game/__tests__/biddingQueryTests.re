@@ -1,8 +1,8 @@
 open Jest;
 open Expect;
-open Board;
 
 describe "BiddingQuery" (fun () => {
+  open BiddingQuery;
   open Bid;
 
   describe "lastBid" (fun () => {

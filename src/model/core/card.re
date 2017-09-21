@@ -11,6 +11,17 @@ module Suit = {
     | Hearts => "hearts"
     | Diamonds => "diamonds"
     | Clubs => "clubs";
+
+  /* TODO - deriving ord */
+  let value =
+    fun
+    | Spades => 1
+    | Hearts => 2
+    | Clubs => 3
+    | Diamonds => 4;
+
+  let compare a b => value a - value b;
+  /* END TODO */
 };
 
 module Pip = {
@@ -64,17 +75,14 @@ module Pip = {
 };
 
 module SeatMap = Map.Make Seat;
+module SuitMap = Map.Make Suit;
 
 type t = (Pip.t, Suit.t);
 
 let deck =
-  Suit.all |>
-  List.fold_left
-    (
-      fun result suit =>
-        Pip.all |> List.fold_left (fun result2 pip => [(pip, suit), ...result2]) result
-    )
-    [];
+  Suit.all |> List.fold_left (fun result suit => {
+    Pip.all |> List.fold_left (fun result2 pip => [(pip, suit), ...result2]) result
+  }) [];
 
 let shuffle cards =>
   cards |> List.map (fun card => (Random.bits (), card)) |>

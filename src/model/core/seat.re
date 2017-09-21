@@ -23,9 +23,11 @@ let seat_to_enum =
 
 let max_seat = 3;
 
-exception UnexpectedError string;
+let compare a b => seat_to_enum a - seat_to_enum b;
 
 /* ENDTODO */
+exception UnexpectedError string;
+
 let rotateN seat n => {
   let modulus = max_seat + 1;
   let adjustedN = (n mod modulus) + modulus;
@@ -37,15 +39,6 @@ let rotateN seat n => {
 let rotate seat => rotateN seat 1;
 
 let all = [North, East, South, West];
-
-let value =
-  fun
-  | North => 1
-  | East => 2
-  | South => 3
-  | West => 4;
-
-let compare a b => value a - value b;
 
 let name =
   fun

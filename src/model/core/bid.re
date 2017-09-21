@@ -59,8 +59,6 @@ let description =
   | Redouble => "Redouble"
   | Call level suit => string_of_int level ^ BidSuit.description suit;
 
-exception InvalidArgument string;
-
 let compare bid1 bid2 =>
   switch (bid1, bid2) {
   | (Call level1 suit1, Call level2 suit2) =>
@@ -69,5 +67,5 @@ let compare bid1 bid2 =>
     } else {
       level1 - level2
     }
-  | _ => raise (InvalidArgument "Cannot compare bids which are not of type Call")
+  | _ => raise (Invalid_argument "Cannot compare bids which are not of type Call")
   };

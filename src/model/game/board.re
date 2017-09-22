@@ -17,7 +17,7 @@ let validateBid bid board =>
     | Bid.NoBid => None
     | Bid.Double =>
       switch (lastAction board) {
-      | Some { seat: lastCaller, bid: (Bid.Call level suit)} =>
+      | Some { seat: lastCaller, bid: (Bid.Call _ _)} =>
         Seat.isPartner lastCaller bidder ?
           Some "You cannot double your partner!" : None
       | _ => Some "Invalid double"

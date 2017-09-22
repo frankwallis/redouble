@@ -26,53 +26,65 @@ describe "Board" (fun () => {
         |> Board.makeBid (Call 1 BidSuit.Hearts)
         |> Board.makeBid (Call 2 BidSuit.Spades);
 
-      expect (List.length board.bids) |> toEqual 2;
-      expect (List.nth board.bids 0) |> toEqual (Call 2 BidSuit.Spades);
-      expect (List.nth board.bids 1) |> toEqual (Call 1 BidSuit.Hearts);
+      expect (board.bids) |> toEqual [(Call 2 BidSuit.Spades), (Call 1 BidSuit.Hearts)]
     });
   });
 
   describe "validateBid" (fun () => {
     open Bid;
 
-    test "checks the range" (fun () => {
+    testAll "rejects bids outside range" [(Call 0 BidSuit.Hearts), (Call 8 BidSuit.Hearts)] (fun bid => {
       let board = Board.create Seat.East;
-      expect (Board.validateBid (Call 0 BidSuit.Hearts) board) |> toEqual (Some "Invalid bid");
-      expect (Board.validateBid (Call 8 BidSuit.Hearts) board) |> toEqual (Some "Invalid bid");
+      expect (Board.validateBid bid board) |> toEqual (Some "Invalid bid");
     });
 
-    test "allows only valid bids over no bids" (fun () => {
+    testAll "allows valid bids over no bids" [(Call 1 BidSuit.Hearts), (Call 2 BidSuit.Hearts), NoBid] (fun bid => {
       let board = Board.create Seat.East;
-      expect (Board.validateBid (Call 1 BidSuit.Hearts) board) |> toEqual None;
-      expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual None;
-      expect (Board.validateBid NoBid board) |> toEqual None;
-      expect (Board.validateBid Double board) |> toEqual (Some "Invalid double");
-      expect (Board.validateBid Redouble board) |> toEqual (Some "Invalid redouble");
+      expect (Board.validateBid bid board) |> toEqual None;
     });
 
-    test "allows only valid bids over calls" (fun () => {
+    testAll "rejects double & redouble over no bid"
+      [(Double, "Invalid double"), (Redouble, "Invalid redouble")] (fun (bid, message) => {
+      let board = Board.create Seat.East;
+      expect (Board.validateBid bid board) |> toEqual (Some message);
+    });
+
+    testAll "allows valid bids over calls"
+      [(Call 2 BidSuit.Hearts), Double, NoBid] (fun bid => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts);
-
-      expect (Board.validateBid (Call 1 BidSuit.Diamonds) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 1 BidSuit.Hearts) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual None;
-      expect (Board.validateBid Double board) |> toEqual None;
-      expect (Board.validateBid Redouble board) |> toEqual (Some "Invalid redouble");
+      expect (Board.validateBid bid board) |> toEqual None;
     });
 
-    test "allows only valid bids over doubles" (fun () => {
+    testAll "rejects invalid bids over calls" [
+      ((Call 1 BidSuit.Diamonds), "Bid must be higher than 1H"),
+      ((Call 1 BidSuit.Hearts), "Bid must be higher than 1H"),
+      (Redouble, "Invalid redouble")
+    ] (fun (bid, message) => {
+      let board = Board.create Seat.East
+      |> Board.makeBid (Call 1 BidSuit.Hearts);
+      expect (Board.validateBid bid board) |> toEqual (Some message);
+    });
+
+    testAll "allows valid bids over double"
+      [(Call 2 BidSuit.Hearts), Redouble, NoBid] (fun bid => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts)
         |> Board.makeBid Double;
-
-      expect (Board.validateBid (Call 1 BidSuit.Diamonds) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 1 BidSuit.Hearts) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual None;
-      expect (Board.validateBid Double board) |> toEqual (Some "Invalid double");
-      expect (Board.validateBid Redouble board) |> toEqual None;
+      expect (Board.validateBid bid board) |> toEqual None;
     });
 
+    testAll "rejects invalid bids over doubles" [
+      ((Call 1 BidSuit.Diamonds), "Bid must be higher than 1H"),
+      ((Call 1 BidSuit.Hearts), "Bid must be higher than 1H"),
+      (Double, "Invalid double")
+      ] (fun (bid, message) => {
+      let board = Board.create Seat.East
+        |> Board.makeBid (Call 1 BidSuit.Hearts)
+        |> Board.makeBid Double;
+      expect (Board.validateBid bid board) |> toEqual (Some message);
+    });
+/* TODO
     test "allows only valid bids over redoubles" (fun () => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts)
@@ -98,6 +110,6 @@ describe "Board" (fun () => {
       expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual (Some "The bidding has already ended");
       expect (Board.validateBid Double board) |> toEqual (Some "The bidding has already ended");
       expect (Board.validateBid Redouble board) |> toEqual (Some "The bidding has already ended");
-    });
+    });*/
   });
 });

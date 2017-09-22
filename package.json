@@ -30,12 +30,12 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "reason-react": "^0.2.4",
-    "reductive": "frankwallis/reductive"
+    "reductive": "reasonml-community/reductive"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.0.0",
     "bs-enzyme": "^0.2.0",
-    "bs-jest": "^0.1.0",
+    "bs-jest": "reasonml-community/bs-jest#testAll",
     "bs-loader": "^1.7.1",
     "bs-platform": "^1.9.2",
     "css-loader": "^0.28.7",

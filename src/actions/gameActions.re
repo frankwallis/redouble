@@ -49,7 +49,10 @@ and autoPlay forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Store.app
       Js.Promise.(
         ignore (
           getBid board
-            |> then_ (fun bid => Reductive.Store.dispatch store (ReduxThunk.Thunk (makeBid bid forSequenceNo)) |> resolve)
+            |> then_ (fun bid => {
+              Js.log bid;
+              Reductive.Store.dispatch store (ReduxThunk.Thunk (makeBid bid forSequenceNo)) |> resolve;
+            })
         )
       );
     }

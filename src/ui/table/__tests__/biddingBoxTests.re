@@ -12,13 +12,15 @@ describe "BiddingBox" (fun () => {
     expect (length) |> toBe 38;
   });
 
-  /*test "makes a bid when a button is clicked" (fun () => {
-    let wrapper = Enzyme.shallow <BiddingBox makeBid=(fun _ => {}) />;
+  /* test "makes a bid when a button is clicked" (fun () => {
+    let makeBidSpy = MockJs.fn ();
+    let wrapper = Enzyme.shallow <BiddingBox makeBid=(makeBidSpy) />;
 
-    let text = wrapper
-      |> Enzyme.find "thead tr th"
-      |> Enzyme.first
-      |> Enzyme.text;
-    expect (text) |> toBe "east";
+    let button = wrapper
+      |> Enzyme.find "button"
+      |> Enzyme.first;
+
+    Enzyme.simulate(button, "click");
+    expect (makeBidSpy.mock.calls.length) |> toBe 1;
   });*/
 });

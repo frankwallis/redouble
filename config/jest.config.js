@@ -7,7 +7,7 @@ module.exports = {
 
   ],
   "testMatch": [
-    "<rootDir>/src/**/*Tests.{re,js}"
+    "<rootDir>/src/**/*Tests.{re}"
   ],
   "moduleFileExtensions": [
     "re",

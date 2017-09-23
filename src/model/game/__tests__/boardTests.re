@@ -11,10 +11,8 @@ describe "Board" (fun () => {
 
     test "deals the hands" (fun () => {
       let board = Board.create Seat.East;
-      expect (Card.SeatMap.find Seat.North board.hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.East board.hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.South board.hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.West board.hands |> List.length) |> toEqual 13;
+      let hands = (Card.SeatMap.bindings board.hands) |> List.map (fun (_seat, hand) => hand);
+      expect (List.map (fun hand => List.length hand) hands) |> toEqual [13, 13, 13, 13];
     });
   });
 
@@ -62,7 +60,7 @@ describe "Board" (fun () => {
       (Redouble, "Invalid redouble")
     ] (fun (bid, message) => {
       let board = Board.create Seat.East
-      |> Board.makeBid (Call 1 BidSuit.Hearts);
+        |> Board.makeBid (Call 1 BidSuit.Hearts);
       expect (Board.validateBid bid board) |> toEqual (Some message);
     });
 
@@ -84,32 +82,38 @@ describe "Board" (fun () => {
         |> Board.makeBid Double;
       expect (Board.validateBid bid board) |> toEqual (Some message);
     });
-/* TODO
-    test "allows only valid bids over redoubles" (fun () => {
-      let board = Board.create Seat.East
-        |> Board.makeBid (Call 1 BidSuit.Hearts)
-        |> Board.makeBid Double
-        |> Board.makeBid Redouble;
 
-      expect (Board.validateBid (Call 1 BidSuit.Diamonds) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 1 BidSuit.Hearts) board) |> toEqual (Some "Bid must be higher than 1 heart");
-      expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual None;
-      expect (Board.validateBid Double board) |> toEqual (Some "Invalid double");
-      expect (Board.validateBid Redouble board) |> toEqual (Some "Invalid redouble");
+    testAll "allows valid bids over redoubles"
+      [ (Call 2 BidSuit.Hearts) ] (fun bid => {
+        let board = Board.create Seat.East
+          |> Board.makeBid (Call 1 BidSuit.Hearts)
+          |> Board.makeBid Double
+          |> Board.makeBid Redouble;
+
+        expect (Board.validateBid bid board) |> toEqual None;
     });
 
-    test "disallows bids after the bidding has ended" (fun () => {
+    testAll "rejects invalid bids over redoubles" [
+      ((Call 1 BidSuit.Diamonds), "Bid must be higher than 1H"),
+      ((Call 1 BidSuit.Hearts), "Bid must be higher than 1H"),
+      (Double, "Invalid double"),
+      (Redouble, "Invalid redouble")
+      ] (fun (bid, message) => {
+        let board = Board.create Seat.East
+          |> Board.makeBid (Call 1 BidSuit.Hearts)
+          |> Board.makeBid Double
+          |> Board.makeBid Redouble;
+        expect (Board.validateBid bid board) |> toEqual (Some message);
+    });
+
+    testAll "disallows bids after the bidding has ended"
+      [(Call 1 BidSuit.Diamonds), (Call 1 BidSuit.Hearts), (Call 2 BidSuit.Hearts), Double, Redouble, NoBid] (fun bid => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts)
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
-
-      expect (Board.validateBid (Call 1 BidSuit.Diamonds) board) |> toEqual (Some "The bidding has already ended");
-      expect (Board.validateBid (Call 1 BidSuit.Hearts) board) |> toEqual (Some "The bidding has already ended");
-      expect (Board.validateBid (Call 2 BidSuit.Hearts) board) |> toEqual (Some "The bidding has already ended");
-      expect (Board.validateBid Double board) |> toEqual (Some "The bidding has already ended");
-      expect (Board.validateBid Redouble board) |> toEqual (Some "The bidding has already ended");
-    });*/
+      expect (Board.validateBid bid board) |> toEqual (Some "The bidding has already ended");
+    });
   });
 });

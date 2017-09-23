@@ -1,5 +1,4 @@
 open Bid;
-open BoardType;
 
 let isSlamBid bid => {
   switch bid {

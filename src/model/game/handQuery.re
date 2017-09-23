@@ -40,7 +40,7 @@ let getDistributionPoints holding => {
 let getPointCount hand => {
   let holdings = getHoldings hand;
 
-  (SuitMap.bindings holdings) |> List.fold_left (fun result (suit, holding) => {
+  (SuitMap.bindings holdings) |> List.fold_left (fun result (_suit, holding) => {
     result + (getHighCardPoints holding) + (getDistributionPoints holding)
   }) 0;
 };

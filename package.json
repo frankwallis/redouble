@@ -55,16 +55,17 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "scripts": {
-    "compile": "bsb -make-world -w",
     "clean": "bsb -clean-world && rimraf ./dist",
-    "test": "jest --config ./config/jest.config.js",
-    "test:coverage": "jest --config ./config/jest.config.js --collectCoverage",
-    "test:watch": "jest --config ./config/jest.config.js --watchAll",
-    "start": "node --require reify ./src/server/main.js",
     "build": "webpack --config config/webpack.config.js",
     "build:dev": "webpack --config config/webpack.config.js --env.development",
     "build:watch": "webpack --config config/webpack.config.js --env.development --watch",
-    "deploy": "npm run build && node ./config/aws-deploy.js && npm run clean"
+    "compile": "bsb -make-world",
+    "compile:watch": "bsb -make-world -w",
+    "deploy": "npm run build && node ./config/aws-deploy.js && npm run clean",
+    "start": "node --require reify ./src/server/main.js",
+    "test": "jest --config ./config/jest.config.js",
+    "test:watch": "jest --config ./config/jest.config.js --watchAll",
+    "test:coverage": "jest --config ./config/jest.config.js --collectCoverage"
   },
   "repository": {
     "type": "git",

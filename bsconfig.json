@@ -41,6 +41,10 @@
       "type": "dev"
     },
     {
+      "dir": "src/model/strategy",
+      "public": "all"
+    },
+    {
       "dir": "src/ui",
       "public": "all"
     },

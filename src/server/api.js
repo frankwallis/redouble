@@ -1,7 +1,6 @@
 import rpc from "jrpc2";
 import koaJrpc from "koa-jrpc2";
 import route from "koa-route";
-
 import api from "../services/api";
 
 export default function createApiMiddleware(mountPoint) {

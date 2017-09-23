@@ -19,10 +19,8 @@ describe "Card" (fun () => {
   describe "deal" (fun () => {
     test "assigns 13 cards to each seat" (fun () => {
       let hands = Card.deal Seat.North;
-      expect (Card.SeatMap.find Seat.North hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.East hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.South hands |> List.length) |> toEqual 13;
-      expect (Card.SeatMap.find Seat.West hands |> List.length) |> toEqual 13;
+      let handList = (Card.SeatMap.bindings hands) |> List.map (fun (_seat, hand) => hand);
+      expect (List.map (fun hand => List.length hand) handList) |> toEqual [13, 13, 13, 13];
     });
   });
 });

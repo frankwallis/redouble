@@ -5,20 +5,18 @@ module Suit = {
     | Hearts
     | Spades;
   let all = [Spades, Hearts, Diamonds, Clubs];
-  let name =
-    fun
+  let name = fun
     | Spades => "spades"
     | Hearts => "hearts"
     | Diamonds => "diamonds"
     | Clubs => "clubs";
 
   /* TODO - deriving ord */
-  let value =
-    fun
-    | Spades => 1
-    | Hearts => 2
-    | Clubs => 3
-    | Diamonds => 4;
+  let value = fun
+    | Clubs => 1
+    | Diamonds => 2
+    | Hearts => 3
+    | Spades => 4;
 
   let compare a b => value a - value b;
   /* END TODO */
@@ -40,8 +38,7 @@ module Pip = {
     | King
     | Ace;
   let all = [Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two];
-  let name =
-    fun
+  let name = fun
     | Ace => "A"
     | King => "K"
     | Queen => "Q"
@@ -71,7 +68,26 @@ module Pip = {
   | "3" => Three
   | "2" => Two
   | _ => raise (Invalid_argument ("Invalid PBN Pip [" ^ pbn ^ "]"))
-  }
+  };
+
+  /* TODO - deriving ord */
+  let value = fun
+  | Ace => 14
+  | King => 13
+  | Queen => 12
+  | Jack => 11
+  | Ten => 10
+  | Nine => 9
+  | Eight => 8
+  | Seven => 7
+  | Six => 6
+  | Five => 5
+  | Four => 4
+  | Three => 3
+  | Two => 2;
+
+  let compare a b => value a - value b;
+  /* END TODO */
 };
 
 module SeatMap = Map.Make Seat;
@@ -112,4 +128,11 @@ let handFromPBN pbn => {
       (Pip.fromPBN pip, suit)
     }))
   }) [];
-}
+};
+
+let compare (pip1, suit1) (pip2, suit2) => {
+  switch (Pip.compare pip1 pip2) {
+  | 0 => Suit.compare suit1 suit2
+  | value => value
+  }
+};

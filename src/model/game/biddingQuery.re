@@ -79,7 +79,7 @@ let declarer board =>
     None
   };
 
-let trumpSuit board =>
+let contractSuit board =>
   if (biddingHasEnded board) {
     /* TODO: replace with? (lastCall bids) |> Option.map (fun call => call.suit) */
     switch (lastCall board) {
@@ -89,3 +89,4 @@ let trumpSuit board =>
   } else {
     None
   };
+

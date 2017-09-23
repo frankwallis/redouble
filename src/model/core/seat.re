@@ -24,8 +24,8 @@ let seat_to_enum =
 let max_seat = 3;
 
 let compare a b => seat_to_enum a - seat_to_enum b;
-
 /* ENDTODO */
+
 exception UnexpectedError string;
 
 let rotateN seat n => {

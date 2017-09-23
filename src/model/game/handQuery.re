@@ -1,5 +1,14 @@
 open Card;
 
+let holder card hands => {
+  let holders = SeatMap.bindings (SeatMap.filter (fun _key hand => List.mem card hand) hands);
+  switch holders {
+  | [(seat, _)] => seat
+  | [] => raise Not_found
+  | _ => raise (Invalid_argument "card was present in more than one hand!")
+  }
+};
+
 let getHoldings hand => {
   let emptyHoldings = Suit.all |> List.fold_left (fun result suit => {
     SuitMap.add suit [] result

@@ -49,6 +49,10 @@
       "public": "all"
     },
     {
+      "dir": "src/model/strategy/cardplay",
+      "public": "all"
+    },
+    {
       "dir": "src/ui",
       "public": "all"
     },

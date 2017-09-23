@@ -106,7 +106,7 @@ describe "Board" (fun () => {
         expect (Board.validateBid bid board) |> toEqual (Some message);
     });
 
-    testAll "disallows bids after the bidding has ended"
+    testAll "rejects bids after the bidding has ended"
       [(Call 1 BidSuit.Diamonds), (Call 1 BidSuit.Hearts), (Call 2 BidSuit.Hearts), Double, Redouble, NoBid] (fun bid => {
       let board = Board.create Seat.East
         |> Board.makeBid (Call 1 BidSuit.Hearts)

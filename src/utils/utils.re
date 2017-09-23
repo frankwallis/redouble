@@ -9,3 +9,27 @@ let rec to_list str => switch str {
 | "" => []
 | _ => [(String.sub str 0 1), ...(to_list (String.sub str 1 ((String.length str) -1)))]
 };
+
+let rec take n xs => switch n {
+| 0 => []
+| _ =>
+  switch xs {
+  | [] => []
+  | [hd, ...tl] => [hd, ...(take (n-1) tl)]
+  }
+};
+
+let rec drop n xs => switch n {
+| 0 => xs
+| _ => switch xs {
+  | [] => []
+  | [_hd, ...tl] => drop (n-1) tl
+  }
+};
+
+let optionMap fmap opt => {
+  switch opt {
+  | Some value => Some (fmap value)
+  | None => None
+  }
+};

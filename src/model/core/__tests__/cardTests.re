@@ -1,5 +1,6 @@
 open Jest;
 open Expect;
+open Card;
 
 describe "Card" (fun () => {
   describe "deck" (fun () => {
@@ -19,8 +20,22 @@ describe "Card" (fun () => {
   describe "deal" (fun () => {
     test "assigns 13 cards to each seat" (fun () => {
       let hands = Card.deal Seat.North;
-      let handList = (Card.SeatMap.bindings hands) |> List.map (fun (_seat, hand) => hand);
+      let handList = (SeatMap.bindings hands) |> List.map (fun (_seat, hand) => hand);
       expect (List.map (fun hand => List.length hand) handList) |> toEqual [13, 13, 13, 13];
+    });
+  });
+
+  describe "compare" (fun () => {
+    test "recognises equality" (fun () => {
+      expect (Card.compare (Pip.Eight, Suit.Spades) (Pip.Eight, Suit.Spades)) |> toEqual 0;
+    });
+
+    test "obeys order of precedence of pips" (fun () => {
+      expect (Card.compare (Pip.Ace, Suit.Spades) (Pip.King, Suit.Spades)) |> toBeGreaterThan 0;
+    });
+
+    test "obeys order of precedence of suits" (fun () => {
+      expect (Card.compare (Pip.Ace, Suit.Spades) (Pip.Ace, Suit.Hearts)) |> toBeGreaterThan 0;
     });
   });
 });

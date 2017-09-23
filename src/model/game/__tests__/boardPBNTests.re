@@ -5,7 +5,7 @@ describe "Board" (fun () => {
 
   describe "fromPBN" (fun () => {
     test "sets the dealer" (fun () => {
-      let board = Board.fromPBN "W: .35.. 23... ...78 ..2.";
+      let board = Board.fromPBN "W: .35.. 23... ...78 ..23.";
       expect (board.dealer) |> toEqual Seat.West;
     });
 

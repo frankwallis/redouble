@@ -148,14 +148,14 @@ describe "BiddingQuery" (fun () => {
     });
   });
 
-  describe "trumpSuit" (fun () => {
+  describe "contractSuit" (fun () => {
     test "returns None when bidding has not ended" (fun () => {
       let board = Board.create Seat.West
         |> Board.makeBid (Call 2 BidSuit.Hearts)
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
 
-      expect (trumpSuit board) |> toEqual None;
+      expect (contractSuit board) |> toEqual None;
     });
 
     test "returns None when hand thrown in" (fun () => {
@@ -165,7 +165,7 @@ describe "BiddingQuery" (fun () => {
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
 
-      expect (trumpSuit board) |> toEqual None;
+      expect (contractSuit board) |> toEqual None;
     });
 
     test "returns the suit of the bid contract" (fun () => {
@@ -176,7 +176,7 @@ describe "BiddingQuery" (fun () => {
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
 
-      expect (trumpSuit board) |> toEqual (Some BidSuit.Diamonds);
+      expect (contractSuit board) |> toEqual (Some BidSuit.Diamonds);
     });
 
     test "returns the suit of the bid contract for doubled NoTrump" (fun () => {
@@ -187,7 +187,7 @@ describe "BiddingQuery" (fun () => {
         |> Board.makeBid NoBid
         |> Board.makeBid NoBid;
 
-      expect (trumpSuit board) |> toEqual (Some BidSuit.NoTrumps);
+      expect (contractSuit board) |> toEqual (Some BidSuit.NoTrumps);
     });
   });
 

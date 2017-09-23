@@ -1,6 +1,7 @@
 include BoardType;
-include BiddingQuery;
 include BoardPBN;
+include BiddingQuery;
+include CardplayQuery;
 
 let create dealer => {
   let hands = Card.deal dealer;
@@ -54,10 +55,16 @@ let makeBid bid board =>
   | Some err => raise (ValidationError err)
   };
 
+let makeBids bids board =>
+  bids |> List.fold_left (fun result bid => makeBid bid result) board;
+
 let validateCard _card _board => None;
 
 let playCard card board =>
   switch (validateCard card board) {
-  | None => {...board, cards: List.append board.cards [card] }
+  | None => {...board, cards: [card, ...board.cards] }
   | Some err => raise (ValidationError err)
   };
+
+let playTrick cards board =>
+  cards |> List.fold_left (fun result card => playCard card result) board;

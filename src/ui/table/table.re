@@ -5,10 +5,9 @@ require "ui/table/table.css";
 
 let component = ReasonReact.statelessComponent "Table";
 
-let make ::board ::makeBid _children => {
+let make ::board ::makeBid ::playCard _children => {
   ...component,
   render: fun _self => {
-    let playCard _card => ();
     let players =
       Seat.all |>
       List.map (

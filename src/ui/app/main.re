@@ -4,7 +4,7 @@ require "./navbar.css";
 
 let component = ReasonReact.statelessComponent "Main";
 
-let make ::notifications ::dismiss ::board ::makeBid _children => {
+let make ::notifications ::dismiss ::board ::makeBid ::playCard _children => {
   ...component,
   render: fun _self => {
     <div className="main-container">
@@ -18,7 +18,7 @@ let make ::notifications ::dismiss ::board ::makeBid _children => {
         </ul>
       </nav>
       <div className="main-content">
-        <Table board makeBid />
+        <Table board makeBid playCard />
       </div>
       <div className="main-growl">
         <Growl notifications dismiss />

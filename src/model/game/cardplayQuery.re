@@ -39,14 +39,18 @@ let winningCard trick trumpSuit => {
 
   switch (getCompeting trick trumpSuit) {
   | [] => raise Not_found
-  | competing => List.hd (List.sort Card.compare competing)
+  | competing => List.hd (List.rev (List.sort Card.compare competing))
   }
 };
 
 let previousTrickWinner board => {
   (previousTrick board)
-    |> Utils.optionMap (fun trick => winningCard trick (trumpSuit board))
-    |> Utils.optionMap (fun card => HandQuery.holder card board.hands)
+    |> Utils.optionMap (fun trick =>
+      winningCard trick (trumpSuit board)
+    )
+    |> Utils.optionMap (fun card =>
+      HandQuery.holder card board.hands
+    )
 };
 
 let leader board => {
@@ -59,6 +63,9 @@ let leader board => {
     }
   }
 };
+
+let playHasEnded board =>
+  (List.length board.cards == 52);
 
 let declarerTricks _board =>
   0;

@@ -1,16 +1,16 @@
-type options = {
+type options = [%bs.obj: {.
   target: int,
   solutions: int,
   mode: int
-};
+}];
 
-type deal = {
+type deal = [%bs.obj: {.
   trump: int,
   first: int,
-  currentTrickRank: list int,
-  currentTrickSuit: list int,
-  remainCards: list int
-};
+  currentTrickRank: array int,
+  currentTrickSuit: array int,
+  remainCards: string
+}];
 
 external solveBoard : deal => options => (Js.Promise.t (list string)) = "solveBoard" [@@bs.module "dds-node-adapter"];
 

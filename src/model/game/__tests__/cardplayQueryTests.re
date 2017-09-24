@@ -125,11 +125,11 @@ describe "CardplayQuery" (fun () => {
     });
 
     test "returns the previous trick winner after the first trick has been completed" (fun () => {
-      let board = Board.create Seat.West
+      let board = Board.fromPBN "W: AK76.QJ5.T94.832 832.AK76.QJ5.T94 T94.832.AK76.QJ5 QJ5.T94.832.AK76"
       |> Board.makeBids [(Call 1 BidSuit.Spades), NoBid, NoBid, NoBid]
       |> Board.playTrick [(Pip.Four, Suit.Clubs), (Pip.Queen, Suit.Clubs), (Pip.Five, Suit.Spades), (Pip.Two, Suit.Clubs)]
-      |> Board.playCard (Pip.Four, Suit.Clubs)
-      |> Board.playCard (Pip.Queen, Suit.Clubs);
+      |> Board.playCard (Pip.Four, Suit.Hearts)
+      |> Board.playCard (Pip.Queen, Suit.Hearts);
       expect (leader board) |> toEqual (Some Seat.South);
     });
   });

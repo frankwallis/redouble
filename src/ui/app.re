@@ -5,10 +5,11 @@ let make state::(state: Store.appState) ::dispatch _children => {
   let board = List.nth state.game.history state.game.position;
   let dismiss id => dispatch (Store.NotificationAction (NotificationReducer.Dismiss id));
   let makeBid bid => dispatch (ReduxThunk.Thunk (GameActions.makeBid bid state.game.sequenceNo));
+  let playCard card => dispatch (ReduxThunk.Thunk (GameActions.playCard card state.game.sequenceNo));
   {
     ...component,
     render: fun _self => {
-      <Main notifications dismiss board makeBid />
+      <Main notifications dismiss board makeBid playCard />
     }
   }
 };

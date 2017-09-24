@@ -36,17 +36,18 @@ let getCard board => {
   };
 
   let (currentPips, currentSuits) = List.split (Board.currentTrick board);
-  let currentTrickRank = currentPips |> List.map (fun pip => ddsRank pip);
-  let currentTrickSuit = currentSuits |> List.map (fun suit => ddsSuit suit);
+  let currentTrickRank = Array.of_list (currentPips |> List.map (fun pip => ddsRank pip));
+  let currentTrickSuit = Array.of_list (currentSuits |> List.map (fun suit => ddsSuit suit));
 
-  let remainCards = [];
+  /* TODO */
+  let remainCards = "W: AK76.QJ5.T94.832 832.AK76.QJ5.T94 T94.832.AK76.QJ5 QJ5.T94.832.AK76";
 
-	let deal: Dds.deal = { trump, first, currentTrickRank, currentTrickSuit, remainCards };
-	let options: Dds.options = {
+	let deal = [%bs.obj { trump, first, currentTrickRank, currentTrickSuit, remainCards }];
+	let options = [%bs.obj {
 		target: Dds.target_maximum,
 		solutions: Dds.solution_full,
 		mode: Dds.mode_auto_search
-	};
+	}];
 
   Js.Promise.(
     Dds.solveBoard deal options

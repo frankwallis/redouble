@@ -1,8 +1,7 @@
 open Bid;
 open BoardType;
 
-let getBid board => {
+let getBid _board => {
   Js.log "Bidding";
-  Js.log board.dealer;
   Js.Promise.resolve NoBid;
 }

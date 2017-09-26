@@ -38,4 +38,18 @@ describe "Board" (fun () => {
       ];
     });
   });
+
+  describe "toPBN" (fun () => {
+    test "sets the dealer" (fun () => {
+      let board = Board.create Seat.North;
+      let pbn = BoardPBN.toPBN board;
+      expect (String.get pbn 0) |> toEqual 'N';
+    });
+
+    test "sets the cards for full hand" (fun () => {
+      let pbn = "W: AKQJT98765432... .AKQJT98765432.. ..AKQJT98765432. ...AKQJT98765432";
+      let board = BoardPBN.fromPBN pbn;
+      expect (BoardPBN.toPBN board) |> toEqual pbn;
+    });
+  });
 });

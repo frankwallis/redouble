@@ -40,7 +40,7 @@ let getCard board => {
   let currentTrickSuit = Array.of_list (currentSuits |> List.map (fun suit => ddsSuit suit));
 
   /* TODO */
-  let remainCards = "W: AK76.QJ5.T94.832 832.AK76.QJ5.T94 T94.832.AK76.QJ5 QJ5.T94.832.AK76";
+  let remainCards = Board.toPBN board;
 
 	let deal = [%bs.obj { trump, first, currentTrickRank, currentTrickSuit, remainCards }];
 	let options = [%bs.obj {

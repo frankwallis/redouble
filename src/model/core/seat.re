@@ -6,16 +6,14 @@ type t =
 
 /*[@@deriving enum];*/
 /* TODO - find out how to use @@deriving enum */
-let seat_of_enum =
-  fun
+let seat_of_enum = fun
   | 0 => Some North
   | 1 => Some East
   | 2 => Some South
   | 3 => Some West
   | _ => None;
 
-let seat_to_enum =
-  fun
+let seat_to_enum = fun
   | North => 0
   | East => 1
   | South => 2
@@ -40,15 +38,13 @@ let rotate seat => rotateN seat 1;
 
 let all = [North, East, South, West];
 
-let name =
-  fun
+let name = fun
   | North => "north"
   | East => "east"
   | South => "south"
   | West => "west";
 
-let toPBN =
-  fun
+let toPBN = fun
   | North => "N"
   | East => "E"
   | South => "S"

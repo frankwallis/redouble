@@ -23,6 +23,16 @@ describe "Card" (fun () => {
       let handList = (SeatMap.bindings hands) |> List.map (fun (_seat, hand) => hand);
       expect (List.map (fun hand => List.length hand) handList) |> toEqual [13, 13, 13, 13];
     });
+
+   test "sorts the cards in each hand in descending order" (fun () => {
+      let rec is_sorted = fun
+      | [] => true
+      | [_hd] => true
+      | [hd, h2, ...tl] => ((Card.compare hd h2) > 0) && (is_sorted [h2, ...tl]);
+
+      let hands = Card.deal Seat.North;
+      expect (hands |> SeatMap.for_all (fun _seat hand => is_sorted hand)) |> toEqual true;
+    });
   });
 
   describe "compare" (fun () => {

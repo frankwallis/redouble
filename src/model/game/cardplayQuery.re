@@ -64,6 +64,12 @@ let leader board => {
   }
 };
 
+let remainingHands board => {
+  board.hands |> SeatMap.map (fun hand =>
+    List.filter (fun card => not (List.mem card board.cards)) hand
+  )
+};
+
 let playHasEnded board =>
   (List.length board.cards == 52);
 

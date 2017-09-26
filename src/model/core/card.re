@@ -53,23 +53,6 @@ module Pip = {
     | Three => "3"
     | Two => "2";
 
-  let fromPBN pbn => switch pbn {
-  | "A" => Ace
-  | "K" => King
-  | "Q" => Queen
-  | "J" => Jack
-  | "T" => Ten
-  | "9" => Nine
-  | "8" => Eight
-  | "7" => Seven
-  | "6" => Six
-  | "5" => Five
-  | "4" => Four
-  | "3" => Three
-  | "2" => Two
-  | _ => raise (Invalid_argument ("Invalid PBN Pip [" ^ pbn ^ "]"))
-  };
-
   /* TODO - deriving ord */
   let value = fun
   | Ace => 14
@@ -88,6 +71,31 @@ module Pip = {
 
   let compare a b => value a - value b;
   /* END TODO */
+
+  let fromPBN pbn => switch pbn {
+    | "A" => Ace
+    | "K" => King
+    | "Q" => Queen
+    | "J" => Jack
+    | "T" => Ten
+    | "9" => Nine
+    | "8" => Eight
+    | "7" => Seven
+    | "6" => Six
+    | "5" => Five
+    | "4" => Four
+    | "3" => Three
+    | "2" => Two
+    | _ => raise (Invalid_argument ("Invalid PBN Pip [" ^ pbn ^ "]"))
+    };
+
+  let toPBN = fun
+    | Ace => "A"
+    | King => "K"
+    | Queen => "Q"
+    | Jack => "J"
+    | Ten => "T"
+    | pip => string_of_int (value pip);
 };
 
 module SeatMap = Map.Make Seat;
@@ -95,15 +103,24 @@ module SuitMap = Map.Make Suit;
 
 type t = (Pip.t, Suit.t);
 
+let name (pip, suit) => Pip.name pip ^ Suit.name suit;
+
+let compare (pip1, suit1) (pip2, suit2) => {
+  switch (Suit.compare suit1 suit2) {
+  | 0 => Pip.compare pip1 pip2
+  | value => value
+  }
+};
+
 let deck =
   Suit.all |> List.fold_left (fun result suit => {
     Pip.all |> List.fold_left (fun result2 pip => [(pip, suit), ...result2]) result
   }) [];
 
-let shuffle cards =>
-  cards |> List.map (fun card => (Random.bits (), card)) |>
-  List.sort (fun (rand1, _) (rand2, _) => rand1 - rand2) |>
-  List.map (fun (_, card) => card);
+let shuffle cards => cards
+    |> List.map (fun card => (Random.bits (), card))
+    |> List.sort (fun (rand1, _) (rand2, _) => rand1 - rand2)
+    |> List.map (fun (_, card) => card);
 
 let deal dealer => {
   let pushCard card seat hands =>
@@ -116,23 +133,7 @@ let deal dealer => {
     | [] => hands
     | [hd, ...tl] => dealNext tl (Seat.rotate seat) (pushCard hd seat hands)
     };
+
   dealNext (shuffle deck) dealer SeatMap.empty
-};
-
-let name (pip, suit) => Pip.name pip ^ Suit.name suit;
-
-let handFromPBN pbn => {
-  let holdings = List.combine Suit.all (Utils.split_on_char '.' pbn);
-  holdings |> List.fold_left (fun result (suit, holding) => {
-    result @ (Utils.to_list holding |> List.map (fun pip => {
-      (Pip.fromPBN pip, suit)
-    }))
-  }) [];
-};
-
-let compare (pip1, suit1) (pip2, suit2) => {
-  switch (Pip.compare pip1 pip2) {
-  | 0 => Suit.compare suit1 suit2
-  | value => value
-  }
+    |> SeatMap.map (fun cards => cards |> List.sort compare |> List.rev);
 };

@@ -29,7 +29,7 @@ let fromPBN pbn => {
   switch parts {
   | [pbn_dealer, pbn_deck] => {
       let dealer = Seat.fromPBN pbn_dealer;
-      let pbn_hands = Utils.split_on_char ' ' pbn_deck;
+      let pbn_hands = Utils.split_on_char ' ' (String.trim pbn_deck);
 
       switch pbn_hands {
       | [_, _, _, _] => {

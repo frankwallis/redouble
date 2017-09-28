@@ -1,10 +1,12 @@
-external require : string => unit = "require" [@@bs.val];
-require "./main.css";
-require "./navbar.css";
+NodeUtils.require "./main.css";
+NodeUtils.require "./navbar.css";
 
 let component = ReasonReact.statelessComponent "Main";
 
-let make ::notifications ::dismiss ::board ::makeBid ::playCard _children => {
+let make
+  ::notifications ::dismiss ::board ::makeBid ::playCard
+  ::pause ::canPause ::resume ::canResume ::back ::canBack ::forward ::canForward ::jumpBack ::canJumpBack
+  _children => {
   ...component,
   render: fun _self => {
     <div className="main-container">
@@ -18,7 +20,7 @@ let make ::notifications ::dismiss ::board ::makeBid ::playCard _children => {
         </ul>
       </nav>
       <div className="main-content">
-        <Table board makeBid playCard />
+        <Table board makeBid playCard pause canPause resume canResume back canBack forward canForward jumpBack canJumpBack />
       </div>
       <div className="main-growl">
         <Growl notifications dismiss />

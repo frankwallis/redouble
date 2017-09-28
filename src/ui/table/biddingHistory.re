@@ -1,7 +1,6 @@
 open Board;
 
-external require : string => unit = "require" [@@bs.val];
-require ("./biddingHistory.css");
+NodeUtils.require "./biddingHistory.css";
 
 let component = ReasonReact.statelessComponent "BiddingHistory";
 

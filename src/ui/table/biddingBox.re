@@ -1,5 +1,4 @@
-external require : string => unit = "require" [@@bs.val];
-require ("./biddingBox.css");
+NodeUtils.require "./biddingBox.css";
 
 let component = ReasonReact.statelessComponent "BiddingBox";
 

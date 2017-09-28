@@ -62,7 +62,8 @@
     "compile": "bsb -make-world",
     "compile:watch": "bsb -make-world -w",
     "deploy": "npm run build && node ./config/aws-deploy.js && npm run clean",
-    "start": "node --require reify ./src/server/main.js",
+    "serve": "node --require reify ./src/server/main.js",
+    "start": "npm run compile && npm run serve",
     "test": "jest --config ./config/jest.config.js",
     "test:watch": "jest --config ./config/jest.config.js --watchAll",
     "test:coverage": "jest --config ./config/jest.config.js --collectCoverage"

@@ -1,17 +1,17 @@
 open Board;
 
-external require : string => unit = "require" [@@bs.val];
-require "ui/table/table.css";
+NodeUtils.require "ui/table/table.css";
 
 let component = ReasonReact.statelessComponent "Table";
 
-let make ::board ::makeBid ::playCard _children => {
+let make
+  ::board ::makeBid ::playCard
+  ::pause ::canPause ::resume ::canResume ::back ::canBack ::forward ::canForward ::jumpBack ::canJumpBack
+  _children => {
   ...component,
   render: fun _self => {
-    let players =
-      Seat.all |>
-      List.map (
-        fun seat =>
+    let players = Seat.all
+      |> List.map (fun seat =>
           <section className=("table-edge-" ^ Seat.name seat) key=(Seat.name seat)>
             <header className="table-player-name">
               (ReasonReact.stringToElement (Seat.name seat))
@@ -20,14 +20,20 @@ let make ::board ::makeBid ::playCard _children => {
               <Hand cards=(Card.SeatMap.find seat board.hands) playCard />
             </div>
           </section>
-      );
+        );
     <div className="bridge-table">
-      <div className="table-controls" />
-      <div className="table-players"> (ReasonReact.arrayToElement (Array.of_list players)) </div>
+      <div className="table-controls">
+        <ControlBar pause canPause resume canResume back canBack forward canForward jumpBack canJumpBack />
+      </div>
+      <div className="table-players">
+        (ReasonReact.arrayToElement (Array.of_list players))
+      </div>
       <div className="table-board">
         <BiddingHistory board />
       </div>
-      <div className="table-bidding-box"> <BiddingBox makeBid /> </div>
+      <div className="table-bidding-box">
+        <BiddingBox makeBid />
+      </div>
     </div>
   }
 };

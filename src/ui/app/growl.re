@@ -1,7 +1,6 @@
 open NotificationReducer;
 
-external require : string => unit = "require" [@@bs.val];
-require "./growl.css";
+NodeUtils.require "./growl.css";
 
 let component = ReasonReact.statelessComponent "Growl";
 

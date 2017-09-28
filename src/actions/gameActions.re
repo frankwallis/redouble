@@ -61,6 +61,19 @@ and scheduleAutoPlay store => {
   }
 }
 
+and resume (store: Reductive.Store.t (ReduxThunk.thunk Store.appState) Store.appState) => {
+  Reductive.Store.dispatch store (Store.GameAction GameReducer.Resume);
+
+  let state = Reductive.Store.getState store;
+  let forSequenceNo = state.game.sequenceNo;
+
+  ignore (
+    Js.Global.setTimeout (fun () => {
+      Reductive.Store.dispatch store (ReduxThunk.Thunk (autoPlay forSequenceNo))
+    }) 2000
+  )
+}
+
 and autoPlay forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Store.appState) Store.appState) => {
   let state = Reductive.Store.getState store;
 

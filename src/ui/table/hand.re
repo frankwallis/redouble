@@ -1,5 +1,4 @@
-external require : string => unit = "require" [@@bs.val];
-require "ui/table/hand.css";
+NodeUtils.require "ui/table/hand.css";
 
 let component = ReasonReact.statelessComponent "Hand";
 

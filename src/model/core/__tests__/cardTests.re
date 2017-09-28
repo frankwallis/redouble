@@ -24,7 +24,7 @@ describe "Card" (fun () => {
       expect (List.map (fun hand => List.length hand) handList) |> toEqual [13, 13, 13, 13];
     });
 
-   test "sorts the cards in each hand in descending order" (fun () => {
+    test "sorts the cards in each hand in descending order" (fun () => {
       let rec is_sorted = fun
       | [] => true
       | [_hd] => true

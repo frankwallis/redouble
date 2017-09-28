@@ -38,6 +38,7 @@ module Pip = {
     | King
     | Ace;
   let all = [Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two];
+  let values = [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
   let name = fun
     | Ace => "A"
     | King => "K"
@@ -54,22 +55,13 @@ module Pip = {
     | Two => "2";
 
   /* TODO - deriving ord */
-  let value = fun
-  | Ace => 14
-  | King => 13
-  | Queen => 12
-  | Jack => 11
-  | Ten => 10
-  | Nine => 9
-  | Eight => 8
-  | Seven => 7
-  | Six => 6
-  | Five => 5
-  | Four => 4
-  | Three => 3
-  | Two => 2;
+  let toValue pip =>
+    List.assoc pip (List.combine all values);
 
-  let compare a b => value a - value b;
+  let fromValue value =>
+    List.assoc value (List.combine values all);
+
+  let compare a b => toValue a - toValue b;
   /* END TODO */
 
   let fromPBN pbn => switch pbn {
@@ -95,7 +87,7 @@ module Pip = {
     | Queen => "Q"
     | Jack => "J"
     | Ten => "T"
-    | pip => string_of_int (value pip);
+    | pip => string_of_int (toValue pip);
 };
 
 module SeatMap = Map.Make Seat;

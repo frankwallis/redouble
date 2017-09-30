@@ -1,7 +1,7 @@
 open Jest;
 open Expect;
 
-describe "Board" (fun () => {
+describe "Boardupdate" (fun () => {
 
   describe "create" (fun () => {
     test "sets the dealer" (fun () => {

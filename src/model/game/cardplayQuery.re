@@ -65,13 +65,18 @@ let leader board => {
 };
 
 let remainingHands board => {
-  board.hands |> SeatMap.map (fun hand =>
+  SeatMap.map (fun hand =>
     List.filter (fun card => not (List.mem card board.cards)) hand
-  )
+  ) board.hands
 };
 
+let totalCards board =>
+  SeatMap.fold (fun _key hand result =>
+    result + (List.length hand)
+  ) board.hands 0;
+
 let playHasEnded board =>
-  (List.length board.cards == 52);
+  (List.length board.cards == (totalCards board));
 
 let declarerTricks _board =>
   0;

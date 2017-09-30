@@ -54,9 +54,11 @@ let toPBN board => {
   let prefix = (Seat.toPBN board.dealer) ^ ":";
   let remaining = CardplayQuery.remainingHands board;
 
-  (Utils.range 4) |> List.fold_left (fun result idx => {
-    let seat = Seat.rotateN board.dealer idx;
-    let cards = SeatMap.find seat remaining;
-    result ^ " " ^ (handToPBN cards)
-  }) prefix
+  (Utils.range 4)
+    |> List.fold_left (fun result idx => {
+      let seat = Seat.rotateN board.dealer idx;
+      let cards = SeatMap.find seat remaining;
+      result ^ (handToPBN cards) ^ " "
+    }) prefix
+    |> String.trim
 };

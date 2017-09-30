@@ -5,7 +5,6 @@ describe "BidQuery" (fun () => {
   open BidQuery;
   open Bid;
 
-  /* TODO use the new bs-jest combinators when they arrive */
   describe "isSlamBid" (fun () => {
     test "returns false for bids < 6" (fun () => {
       expect (isSlamBid (Call 5 BidSuit.Hearts)) |> toEqual false;

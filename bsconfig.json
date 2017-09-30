@@ -53,6 +53,10 @@
       "public": "all"
     },
     {
+      "dir": "src/model/strategy/cardplay/__tests__",
+      "type": "dev"
+    },
+    {
       "dir": "src/ui",
       "public": "all"
     },

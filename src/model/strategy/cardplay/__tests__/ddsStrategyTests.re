@@ -34,8 +34,8 @@ describe "DdsStrategy" (fun () => {
       )
     });
 
-    Skip.testPromise "unblocks in 3 card ending" (fun () => {
-      let board = Board.fromPBN "W:2...A2 7.7..7 A.A..3 456..."
+    testPromise "unblocks in 3 card ending" (fun () => {
+      let board = Board.fromPBN "W:456... 2...A2 7.7..7 A.A..3"
         |> Board.makeBids [NoBid, NoBid, NoBid, Call 1 BidSuit.NoTrumps, NoBid, NoBid, NoBid];
 
       Js.Promise.(
@@ -44,7 +44,7 @@ describe "DdsStrategy" (fun () => {
       )
     });
 
-    Skip.testPromise "Bond beats Drax" (fun () => {
+    testPromise "Bond beats Drax" (fun () => {
       let board = Board.fromPBN "N:..Q8765432.AQT84 65432.T9872.JT9. T987.6543..76532 AKQJ.AKQJ.AK.KJ9"
         |> Board.makeBids [Call 7 BidSuit.Clubs, NoBid, NoBid, Double, Redouble, NoBid, NoBid, NoBid];
 
@@ -54,7 +54,7 @@ describe "DdsStrategy" (fun () => {
       )
     });
 
-    Skip.testPromise "Solves the PotBoiler" (fun () => {
+    testPromise "Solves the PotBoiler" (fun () => {
       let board = Board.fromPBN "W:KJT86.5432..KQJT AQ7.AKQJ.QJT987. 95432..65432.432 .T9876.AK.A98765"
         |> Board.makeBids [NoBid, NoBid, NoBid, Call 7 BidSuit.Hearts, NoBid, NoBid, NoBid]
         |> Board.playCard (Pip.King, Suit.Clubs);

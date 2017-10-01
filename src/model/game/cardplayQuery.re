@@ -18,10 +18,24 @@ let currentTrick board => {
 
 let previousTrick board => {
   let currentTrickCount = (List.length board.cards) mod 4;
-  switch (Utils.take 4 (Utils.drop currentTrickCount board.cards)) {
+  let completedCards = Utils.drop currentTrickCount board.cards;
+  switch (Utils.take 4 completedCards) {
   | [] => None
   | cards => Some (List.rev cards)
   }
+};
+
+let completedTricks board => {
+  let rec completedTricksIter cards =>
+    switch (cards) {
+    | [] => []
+    | [card1, card2, card3, card4, ...rest] => [[card4, card3, card2, card1], ...(completedTricksIter rest)]
+    | _ => raise (invalid_arg "Unexpected error")
+    };
+
+  let currentTrickCount = (List.length board.cards) mod 4;
+  let completedCards = Utils.drop currentTrickCount board.cards;
+  completedTricksIter completedCards;
 };
 
 let winningCard trick trumpSuit => {
@@ -43,13 +57,14 @@ let winningCard trick trumpSuit => {
   }
 };
 
+let trickWinner board trick => {
+  HandQuery.holder (winningCard trick (trumpSuit board)) board.hands;
+};
+
 let previousTrickWinner board => {
   (previousTrick board)
     |> Utils.optionMap (fun trick =>
-      winningCard trick (trumpSuit board)
-    )
-    |> Utils.optionMap (fun card =>
-      HandQuery.holder card board.hands
+      trickWinner board trick
     )
 };
 
@@ -78,5 +93,12 @@ let totalCards board =>
 let playHasEnded board =>
   (List.length board.cards == (totalCards board));
 
-let declarerTricks _board =>
-  0;
+let declarerTricks board =>
+  switch (BiddingQuery.declarer board) {
+  | None => raise (invalid_arg "declarer has not been decided")
+  | Some declarer =>
+    completedTricks board
+      |> List.map (trickWinner board)
+      |> List.filter (fun seat => Seat.isSameSide seat declarer)
+      |> List.length;
+  };

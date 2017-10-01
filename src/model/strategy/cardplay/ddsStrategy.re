@@ -37,11 +37,12 @@ let chooseCard cards => {
 
 let getCandidates solution => {
   let maxScore = Array.get solution##score 0;
-  let maxIndex = min ((Js.Array.lastIndexOf maxScore solution##score) + 1) solution##cards;
+  let maxScoreIndex = Js.Array.lastIndexOf maxScore solution##score;
+  let inspectCount = min (maxScoreIndex + 1) solution##cards;
 
-  let suits = Array.sub solution##suit 0 maxIndex |> Array.map fromDdsSuit |> Array.to_list;
-  let pips = Array.sub solution##rank 0 maxIndex |> Array.map fromDdsRank |> Array.to_list;
-  let equivalents = Array.sub solution##equals 0 maxIndex |> Array.to_list;
+  let suits = Array.sub solution##suit 0 inspectCount |> Array.map fromDdsSuit |> Array.to_list;
+  let pips = Array.sub solution##rank 0 inspectCount |> Array.map fromDdsRank |> Array.to_list;
+  let equivalents = Array.sub solution##equals 0 inspectCount |> Array.to_list;
 
   let cardsWithEquivalents = (List.combine pips suits) |> List.combine equivalents;
 

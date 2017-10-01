@@ -35,7 +35,7 @@ describe "DdsStrategy" (fun () => {
     });
 
     testPromise "unblocks in 3 card ending" (fun () => {
-      let board = Board.fromPBN "W:456... 2...A2 7.7..7 A.A..3"
+      let board = Board.fromPBN "W:456... 2...A2 7...76 A.A..3"
         |> Board.makeBids [NoBid, NoBid, NoBid, Call 1 BidSuit.NoTrumps, NoBid, NoBid, NoBid];
 
       Js.Promise.(

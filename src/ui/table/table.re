@@ -10,6 +10,8 @@ let make
   _children => {
   ...component,
   render: fun _self => {
+    let biddingHasEnded = Board.biddingHasEnded board;
+
     let players = Seat.all
       |> List.map (fun seat =>
           <section className=("table-edge-" ^ Seat.name seat) key=(Seat.name seat)>
@@ -17,7 +19,7 @@ let make
               (ReasonReact.stringToElement (Seat.name seat))
             </header>
             <div className=("table-hand-" ^ Seat.name seat)>
-              <Hand cards=(Card.SeatMap.find seat board.hands) playCard />
+              <Hand cards=(Card.SeatMap.find seat (Board.remainingHands board)) playCard />
             </div>
           </section>
         );
@@ -29,10 +31,10 @@ let make
         (ReasonReact.arrayToElement (Array.of_list players))
       </div>
       <div className="table-board">
-        <BiddingHistory board />
+        (biddingHasEnded ? <Trick board /> : <BiddingHistory board />)
       </div>
       <div className="table-bidding-box">
-        <BiddingBox makeBid />
+        (biddingHasEnded ? ReasonReact.nullElement : <BiddingBox makeBid />)
       </div>
     </div>
   }

@@ -63,9 +63,7 @@ let trickWinner board trick => {
 
 let previousTrickWinner board => {
   (previousTrick board)
-    |> Utils.optionMap (fun trick =>
-      trickWinner board trick
-    )
+    |> Utils.optionMap (trickWinner board)
 };
 
 let leader board => {
@@ -76,6 +74,21 @@ let leader board => {
     | Some declarer => Some (Seat.rotate declarer)
     | None => None
     }
+  }
+};
+
+let currentTrickMap board => {
+  let cards = currentTrick board;
+  switch (leader board) {
+  | Some leader => {
+      Utils.range 4
+        |> List.fold_left (fun result idx => {
+          let seat = Seat.rotateN leader idx;
+          let card = idx < List.length cards ? Some (List.nth cards idx) : None;
+          SeatMap.add seat card result;
+        }) SeatMap.empty;
+    }
+  | None => SeatMap.empty;
   }
 };
 

@@ -1,5 +1,4 @@
 open Bid;
-open BoardType;
 
 let getBid _board => {
   Js.log "Bidding";

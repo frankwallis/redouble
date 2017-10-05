@@ -17,7 +17,8 @@
     "bs-jest"
   ],
   "bsc-flags": [
-    "-bs-super-errors"
+    "-bs-super-errors",
+    "-bs-gen-tds"
   ],
   "sources": [
     {

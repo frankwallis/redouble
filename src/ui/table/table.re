@@ -1,5 +1,3 @@
-open Board;
-
 NodeUtils.require "ui/table/table.css";
 
 let component = ReasonReact.statelessComponent "Table";

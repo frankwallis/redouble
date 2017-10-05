@@ -4,7 +4,7 @@ NodeUtils.require "./navbar.css";
 let component = ReasonReact.statelessComponent "Main";
 
 let make
-  ::notifications ::dismiss ::board ::makeBid ::playCard
+  ::busy ::notifications ::dismiss ::board ::makeBid ::playCard
   ::pause ::canPause ::resume ::canResume ::back ::canBack ::forward ::canForward ::jumpBack ::canJumpBack
   _children => {
   ...component,
@@ -24,6 +24,9 @@ let make
       </div>
       <div className="main-growl">
         <Growl notifications dismiss />
+      </div>
+      <div className="main-spinner">
+        (busy ? <Spinner /> : ReasonReact.nullElement)
       </div>
     </div>
   }

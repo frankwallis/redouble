@@ -10,7 +10,7 @@ and makeBid bid forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Store.
   let state = Reductive.Store.getState store;
 
   if (forSequenceNo === state.game.sequenceNo) {
-    let board = (List.nth state.game.history state.game.position);
+    let board = GameReducer.currentBoard state.game;
     let error = Board.validateBid bid board;
 
     switch error {
@@ -30,7 +30,7 @@ and playCard card forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Stor
   let state = Reductive.Store.getState store;
 
   if (forSequenceNo === state.game.sequenceNo) {
-    let board = (List.nth state.game.history state.game.position);
+    let board = GameReducer.currentBoard state.game;
     let error = Board.validateCard card board;
 
     switch error {
@@ -46,9 +46,14 @@ and playCard card forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Stor
   }
 }
 
+and resume (store: Reductive.Store.t (ReduxThunk.thunk Store.appState) Store.appState) => {
+  Reductive.Store.dispatch store (Store.GameAction GameReducer.Resume);
+  scheduleAutoPlay store;
+}
+
 and scheduleAutoPlay store => {
   let state = Reductive.Store.getState store;
-  let board = (List.nth state.game.history state.game.position);
+  let board = GameReducer.currentBoard state.game;
 
   if (not (Board.playHasEnded board)) {
     let forSequenceNo = state.game.sequenceNo;
@@ -61,24 +66,11 @@ and scheduleAutoPlay store => {
   }
 }
 
-and resume (store: Reductive.Store.t (ReduxThunk.thunk Store.appState) Store.appState) => {
-  Reductive.Store.dispatch store (Store.GameAction GameReducer.Resume);
-
-  let state = Reductive.Store.getState store;
-  let forSequenceNo = state.game.sequenceNo;
-
-  ignore (
-    Js.Global.setTimeout (fun () => {
-      Reductive.Store.dispatch store (ReduxThunk.Thunk (autoPlay forSequenceNo))
-    }) 2000
-  )
-}
-
 and autoPlay forSequenceNo (store: Reductive.Store.t (ReduxThunk.thunk Store.appState) Store.appState) => {
   let state = Reductive.Store.getState store;
 
   if (forSequenceNo === state.game.sequenceNo) {
-    let board = (List.nth state.game.history state.game.position);
+    let board = GameReducer.currentBoard state.game;
 
     if (Board.biddingHasEnded board) {
       Js.Promise.(

@@ -1,6 +1,7 @@
 let component = ReasonReact.statelessComponent "App";
 
 let make state::(state: Store.appState) ::dispatch _children => {
+  let busy = NotificationReducer.isBusy(state.notifications);
   let notifications = state.notifications.items;
   let dismiss id => dispatch (Store.NotificationAction (NotificationReducer.Dismiss id));
   let board = GameReducer.currentBoard state.game;
@@ -20,7 +21,7 @@ let make state::(state: Store.appState) ::dispatch _children => {
     ...component,
     render: fun _self => {
       <Main
-        notifications dismiss board makeBid playCard
+        busy notifications dismiss board makeBid playCard
         pause canPause resume canResume back canBack forward canForward jumpBack canJumpBack />
     }
   }

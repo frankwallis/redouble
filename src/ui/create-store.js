@@ -3,14 +3,15 @@ import {createStore as reduxCreateStore, applyMiddleware, compose, combineReduce
 import thunk from 'redux-thunk';
 import reducers from '../stores/index';
 
+const devToolsExtension = typeof(window) !== 'undefined' ? window.devToolsExtension : null;
+
 export function createStore(initialState) {
 	/* initialise redux */
 	const reducer = combineReducers(reducers);
 	const finalCreateStore = compose(
 		applyMiddleware(thunk),
-		window.devToolsExtension ? window.devToolsExtension() : f => f // support chrome extension
+		devToolsExtension ? devToolsExtension() : f => f // support chrome extension
 	)(reduxCreateStore);
-	const store = finalCreateStore(reducer, initialState);
 
-	return store;
+	return finalCreateStore(reducer, initialState);
 }

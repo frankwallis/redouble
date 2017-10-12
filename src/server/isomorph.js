@@ -9,7 +9,7 @@ export function isomorph() {
 		let origPath = this.path;
 		yield next;
 
-		if (this.path === "/") {
+		if (this.path === "/index.html") {
 			var bodyJson = yield parser.json(this);
 
 	    	console.log('server rendering ' + origPath);

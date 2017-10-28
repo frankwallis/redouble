@@ -86,6 +86,10 @@
       "public": "all"
     },
     {
+      "dir": "src/stores/__tests__",
+      "type": "dev"
+    },
+    {
       "dir": "src/actions",
       "public": "all"
     },

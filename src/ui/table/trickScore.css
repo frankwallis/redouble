@@ -1,0 +1,20 @@
+.trick-score-container {
+  display: inline-block;
+  padding: .3em;
+  font-weight: bold;
+	background: #fafafa;
+	border-radius: .5em;
+	border: .3em solid #3B3738;
+}
+
+.trick-score-row {
+
+}
+
+.trick-score-row-header {
+  width: 60%;
+}
+
+.trick-score-row-content {
+  width: 40%;
+}

@@ -36,3 +36,5 @@ let optionMap fmap opt => {
   | None => None
   }
 };
+
+let identity x => x;

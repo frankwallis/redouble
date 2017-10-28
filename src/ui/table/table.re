@@ -24,6 +24,7 @@ let make
     <div className="bridge-table">
       <div className="table-controls">
         <ControlBar pause canPause resume canResume back canBack forward canForward jumpBack canJumpBack />
+        (biddingHasEnded ? <TrickScore board /> : ReasonReact.nullElement)
       </div>
       <div className="table-players">
         (ReasonReact.arrayToElement (Array.of_list players))

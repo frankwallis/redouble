@@ -79,14 +79,18 @@ let declarer board =>
     None
   };
 
-let contractSuit board =>
+let contract board =>
   if (biddingHasEnded board) {
-    /* TODO: replace with? (lastCall bids) |> Option.map (fun call => call.suit) */
-    switch (lastCall board) {
-    | Some { seat: _, bid: (Call _ suit) } => Some suit
-    | _ => None
-    }
+    (lastCall board) |> Utils.optionMap (fun zippedBid => zippedBid.bid);
   } else {
     None
   };
 
+let contractSuit board =>
+  (contract board)
+    |> Utils.optionMap (fun contract => {
+      switch contract {
+      | Call _level suit => suit
+      | _ => raise (Invalid_argument "contract should always be of type Call")
+      }
+    });

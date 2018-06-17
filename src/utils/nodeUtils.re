@@ -1,1 +1,1 @@
-external require : string => unit = "require" [@@bs.val];
+[@bs.val] external require : string => unit = "require";

@@ -8,94 +8,24 @@
   "reason": {
     "react-jsx": 2
   },
+  "refmt": 3,
   "bs-dependencies": [
     "reason-react",
-    "reductive"
+    "reductive",
+    "bs-enzyme",
+    "@glennsl/bs-jest"
   ],
   "bs-dev-dependencies": [
     "bs-enzyme",
-    "bs-jest"
+    "@glennsl/bs-jest"
   ],
   "bsc-flags": [
-    "-bs-super-errors",
-    "-bs-gen-tds"
+    "-bs-super-errors"
   ],
   "sources": [
     {
       "dir": "src",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/core",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/core/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/model/game",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/game/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/model/strategy",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/strategy/bidding",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/strategy/cardplay",
-      "public": "all"
-    },
-    {
-      "dir": "src/model/strategy/cardplay/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/ui",
-      "public": "all"
-    },
-    {
-      "dir": "src/ui/app",
-      "public": "all"
-    },
-    {
-      "dir": "src/ui/components",
-      "public": "all"
-    },
-    {
-      "dir": "src/ui/components/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/ui/table",
-      "public": "all"
-    },
-    {
-      "dir": "src/ui/table/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/stores",
-      "public": "all"
-    },
-    {
-      "dir": "src/stores/__tests__",
-      "type": "dev"
-    },
-    {
-      "dir": "src/actions",
-      "public": "all"
-    },
-    {
-      "dir": "src/utils",
-      "public": "all"
+      "subdirs": true
     }
   ]
 }

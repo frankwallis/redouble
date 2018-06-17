@@ -1,14 +1,8 @@
-NodeUtils.require "./spinner.css";
+NodeUtils.require("./spinner.css");
 
-let component = ReasonReact.statelessComponent "Spinner";
+let component = ReasonReact.statelessComponent("Spinner");
 
-let make _children => {
+let make = (_children) => {
   ...component,
-  render: fun _self => {
-    <div className="spinner-container">
-      <div/>
-      <div/>
-      <div/>
-    </div>
-  }
+  render: (_self) => <div className="spinner-container"> <div /> <div /> <div /> </div>
 };

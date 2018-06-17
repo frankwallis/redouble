@@ -1,15 +1,15 @@
 open Jest;
 
-describe "BiddingBox" (fun () => {
+describe("BiddingBox", () => {
   open Expect;
 
-  test "displays the right number of buttons" (fun () => {
-    let wrapper = Enzyme.shallow <BiddingBox makeBid=(fun _ => ()) />;
+  test("displays the right number of buttons", () => {
+    let wrapper = Enzyme.shallow(<BiddingBox makeBid=(_ => ()) />);
 
     let length = wrapper
-      |> Enzyme.find "button"
+      |> Enzyme.find("button")
       |> Enzyme.length;
-    expect (length) |> toBe 38;
+    expect (length) |> toBe(38);
   });
 
   /* test "makes a bid when a button is clicked" (fun () => {

@@ -6,12 +6,12 @@
  * return value can be used by the middleware that called you (optional)
  */
 
-/**
+/***
  * logs the action before dispatching and the new state after.
  */
-let middleware store next action => {
-  Js.log action;
-  let returnValue = next action;
-  Js.log (Reductive.Store.getState store);
+let middleware = (store, next, action) => {
+  Js.log(action);
+  let returnValue = next(action);
+  Js.log(Reductive.Store.getState(store));
   returnValue
 };

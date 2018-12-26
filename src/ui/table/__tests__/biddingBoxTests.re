@@ -3,12 +3,14 @@ open Jest;
 describe("BiddingBox", () => {
   open Expect;
 
+  Enzyme.configureEnzyme(Enzyme.react_16_adapter()) |> ignore;
+
   test("displays the right number of buttons", () => {
     let wrapper = Enzyme.shallow(<BiddingBox makeBid=(_ => ()) />);
 
     let length = wrapper
-      |> Enzyme.find("button")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("button")
+      |> Enzyme.Shallow.length;
     expect (length) |> toBe(38);
   });
 
@@ -17,7 +19,7 @@ describe("BiddingBox", () => {
     let wrapper = Enzyme.shallow <BiddingBox makeBid=(makeBidSpy) />;
 
     let button = wrapper
-      |> Enzyme.find "button"
+      |> Enzyme.Shallow.find "button"
       |> Enzyme.first;
 
     Enzyme.simulate(button, "click");

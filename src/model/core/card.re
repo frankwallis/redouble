@@ -5,19 +5,19 @@ module Suit = {
     | Hearts
     | Spades;
   let all = [Spades, Hearts, Diamonds, Clubs];
-  let name =
-    fun
+  let name = suit => switch(suit) {
     | Spades => "spades"
     | Hearts => "hearts"
     | Diamonds => "diamonds"
-    | Clubs => "clubs";
+    | Clubs => "clubs"
+  };
   /* TODO - deriving ord */
-  let value =
-    fun
+  let value = suit => switch(suit) {
     | Clubs => 1
     | Diamonds => 2
     | Hearts => 3
-    | Spades => 4;
+    | Spades => 4
+  };
   let compare = (a, b) => value(a) - value(b);
   /* END TODO */
 };
@@ -39,8 +39,7 @@ module Pip = {
     | Ace;
   let all = [Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two];
   let values = [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
-  let name =
-    fun
+  let name = pip => switch(pip) {
     | Ace => "A"
     | King => "K"
     | Queen => "Q"
@@ -53,14 +52,14 @@ module Pip = {
     | Five => "5"
     | Four => "4"
     | Three => "3"
-    | Two => "2";
+    | Two => "2"
+  };
   /* TODO - deriving ord */
   let toValue = (pip) => List.assoc(pip, List.combine(all, values));
   let fromValue = (value) => List.assoc(value, List.combine(values, all));
   let compare = (a, b) => toValue(a) - toValue(b);
   /* END TODO */
-  let fromPBN = (pbn) =>
-    switch pbn {
+  let fromPBN = (pbn) => switch pbn {
     | "A" => Ace
     | "K" => King
     | "Q" => Queen
@@ -76,14 +75,14 @@ module Pip = {
     | "2" => Two
     | _ => raise(Invalid_argument("Invalid PBN Pip [" ++ (pbn ++ "]")))
     };
-  let toPBN =
-    fun
+  let toPBN = pip => switch(pip) {
     | Ace => "A"
     | King => "K"
     | Queen => "Q"
     | Jack => "J"
     | Ten => "T"
-    | pip => string_of_int(toValue(pip));
+    | pip => string_of_int(toValue(pip))
+  };
 };
 
 module SeatMap = Map.Make(Seat);

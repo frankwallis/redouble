@@ -4,13 +4,15 @@ describe("BiddingHistory", () => {
   open Expect;
   open Bid;
 
+  Enzyme.configureEnzyme(Enzyme.react_16_adapter()) |> ignore;
+
   test("displays the headings", () => {
     let board = Board.create(Seat.East);
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let length = wrapper
-      |> Enzyme.find("thead tr th")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("thead tr th")
+      |> Enzyme.Shallow.length;
     expect (length) |> toBe(4);
   });
 
@@ -19,9 +21,9 @@ describe("BiddingHistory", () => {
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let text = wrapper
-      |> Enzyme.find("thead tr th")
-      |> Enzyme.first
-      |> Enzyme.text;
+      |> Enzyme.Shallow.find("thead tr th")
+      |> Enzyme.Shallow.first
+      |> Enzyme.Shallow.text;
     expect (text) |> toBe("east");
   });
 
@@ -33,8 +35,8 @@ describe("BiddingHistory", () => {
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let cellLength = wrapper
-      |> Enzyme.find("tbody tr td")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("tbody tr td")
+      |> Enzyme.Shallow.length;
     expect (cellLength) |> toBe(4);
   });
 
@@ -46,8 +48,8 @@ describe("BiddingHistory", () => {
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let bidLength = wrapper
-      |> Enzyme.find("tbody tr BidComponent")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("tbody tr BidComponent")
+      |> Enzyme.Shallow.length;
     expect (bidLength) |> toBe(2);
   });
 
@@ -56,8 +58,8 @@ describe("BiddingHistory", () => {
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let length = wrapper
-      |> Enzyme.find("tbody tr td")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("tbody tr td")
+      |> Enzyme.Shallow.length;
     expect (length) |> toBe(4);
   });
 
@@ -71,8 +73,8 @@ describe("BiddingHistory", () => {
     let wrapper = Enzyme.shallow(<BiddingHistory board />);
 
     let length = wrapper
-      |> Enzyme.find("tbody tr")
-      |> Enzyme.length;
+      |> Enzyme.Shallow.find("tbody tr")
+      |> Enzyme.Shallow.length;
     expect (length) |> toBe(2);
   });
 });

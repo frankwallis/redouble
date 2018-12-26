@@ -11,7 +11,6 @@
   "refmt": 3,
   "bs-dependencies": [
     "reason-react",
-    "reductive",
     "bs-enzyme",
     "@glennsl/bs-jest"
   ],
@@ -19,13 +18,8 @@
     "bs-enzyme",
     "@glennsl/bs-jest"
   ],
-  "bsc-flags": [
-    "-bs-super-errors"
-  ],
-  "sources": [
-    {
+  "sources": {
       "dir": "src",
       "subdirs": true
-    }
-  ]
+  }
 }

@@ -1,3 +1,4 @@
+
 let rec split_on_char = (delim, str) =>
   switch (String.index(str, delim)) {
   | exception Not_found => [str]
@@ -7,13 +8,13 @@ let rec split_on_char = (delim, str) =>
   };
 
 let rec to_list = (str) =>
-  switch str {
+  switch (str) {
   | "" => []
   | _ => [String.sub(str, 0, 1), ...to_list(String.sub(str, 1, String.length(str) - 1))]
   };
 
 let rec take = (n, xs) =>
-  switch n {
+  switch (n) {
   | 0 => []
   | _ =>
     switch xs {
@@ -23,7 +24,7 @@ let rec take = (n, xs) =>
   };
 
 let rec drop = (n, xs) =>
-  switch n {
+  switch (n) {
   | 0 => xs
   | _ =>
     switch xs {
@@ -35,7 +36,7 @@ let rec drop = (n, xs) =>
 let rec range = (~start=0, len) => start >= len ? [] : [start] @ range(~start=start + 1, len);
 
 let optionMap = (fmap, opt) =>
-  switch opt {
+  switch (opt) {
   | Some(value) => Some(fmap(value))
   | None => None
   };

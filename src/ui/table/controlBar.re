@@ -19,7 +19,7 @@ let make =
   let barButton = (buttonClass, action, enabled) => {
     let disabled = ! enabled;
     let className = "control-bar-button " ++ (buttonClass ++ (disabled ? " disabled" : ""));
-    <button className disabled=(Js.Boolean.to_js_boolean(disabled)) onClick=((_evt) => action()) />
+    <button className disabled onClick=((_evt) => action()) />
   };
   {
     ...component,

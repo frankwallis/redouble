@@ -19,7 +19,7 @@ describe(
           () => {
             let shuffled1 = Card.deck |> Card.shuffle;
             let shuffled2 = Card.deck |> Card.shuffle;
-            expect(shuffled1) |> not_ |> toEqual(shuffled2)
+            expect(shuffled1) |> not |> toEqual(shuffled2)
           }
         )
     );

@@ -17,7 +17,7 @@ and makeBid =
   if (forSequenceNo === state.game.sequenceNo) {
     let board = GameReducer.currentBoard(state.game);
     let error = Board.validateBid(bid, board);
-    switch error {
+    switch (error) {
     | Some(message) =>
       Reductive.Store.dispatch(
         store,
@@ -44,7 +44,7 @@ and playCard =
   if (forSequenceNo === state.game.sequenceNo) {
     let board = GameReducer.currentBoard(state.game);
     let error = Board.validateCard(card, board);
-    switch error {
+    switch (error) {
     | Some(message) =>
       Reductive.Store.dispatch(
         store,
@@ -68,7 +68,7 @@ and resume = (store: Reductive.Store.t(ReduxThunk.thunk(Store.appState), Store.a
 and scheduleAutoPlay = (store) => {
   let state = Reductive.Store.getState(store);
   let board = GameReducer.currentBoard(state.game);
-  if (! Board.playHasEnded(board)) {
+  if (!Board.playHasEnded(board)) {
     let forSequenceNo = state.game.sequenceNo;
     ignore(
       Js.Global.setTimeout(

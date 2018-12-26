@@ -19,3 +19,4 @@ jspm_packages/
 finalOutput/*.js
 .merlin
 .reify-cache/
+.vscode/

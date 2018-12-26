@@ -8,4 +8,4 @@ module ThunkedStoreProvider = {
   let make = Reductive.Provider.createMake(Store.store);
 };
 
-ReactDOMRe.renderToElementWithId(<ThunkedStoreProvider component=App.make />, "main");
+ReactDOMRe.renderToElementWithId(<ThunkedStoreProvider component=(App.make) />, "main");

@@ -15,3 +15,5 @@ dist/
 build/
 jspm_packages/
 .settings/
+.reify-cache
+.vscode

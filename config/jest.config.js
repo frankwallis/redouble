@@ -21,7 +21,7 @@ module.exports = {
   "testEnvironment": "node",
   "testURL": "http://localhost",
   "transform": {
-    "^.+\\.css$": "<rootDir>/config/css-transform.js",
+    '^.+\\.css$': 'jest-css',
     "^.+\\.(re|ml)$": "bs-loader"
   },
   "transformIgnorePatterns": [

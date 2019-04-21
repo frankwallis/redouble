@@ -17,5 +17,5 @@ let make = (~board) => {
               )
             </li>
         );
-  <ol className="trick-container"> (ReasonReact.array(Array.of_list(cardItems))) </ol>
+  <ol className="trick-container"> (ReasonReact.array(Array.of_list(cardItems))) </ol>;
 };

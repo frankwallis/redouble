@@ -1,12 +1,15 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = function(env = {}) {
-  var localIdentName = env.development ?  '[path]-[local]-[hash:base64:5]' : '[hash:base64]';
+  const hash = env.development ? '' : '.[contenthash]'
 
 	return {
+    bail: !env.development,
+    mode: env.development ? 'development' : 'production',
 		entry: [
       //'webpack-hot-middleware/client',
       //'lib/js/src/ui/client'
@@ -38,63 +41,42 @@ module.exports = function(env = {}) {
             }
           }
         },
-				{
-					test: /\.css$/,
-					use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?resolve-url&localIdentName=' + localIdentName }),
-				},
-				{
-					test: /\.(otf|eot|png|svg|ttf|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-					use: 'url-loader?limit=8192'
-				},
-				{
-					test: /\.png$/,
-					use: "url-loader?limit=100000&mimetype=image/png",
-				},
-				{
-					test: /\.svg$/,
-					use: "url-loader?limit=100000&mimetype=image/svg+xml",
-				},
-				{
-					test: /\.gif$/,
-					use: "url-loader?limit=100000&mimetype=image/gif",
-				},
-				{
-					test: /\.jpg$/,
-					use: "file-loader",
-				},
+        {
+          test: /\.css$/,
+          loader: [env.development ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
+        },
+        {
+          test: [/\.png$/, /\.svg$/, /\.gif$/, /\.(eot|ttf|woff|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/],
+          loader: 'url-loader',
+          options: {
+            limit: 4096, // inline assets smaller than this
+            name: 'assets/[name].[hash].[ext]'
+          }
+        }
 			],
 		},
-    plugins: env.development ? [
+    plugins: [
 			new webpack.DefinePlugin({
 				"process.env": {
 					"__BROWSER__": true
 				}
       }),
-      new ExtractTextPlugin({ filename: "app.[hash].css", allChunks: true }),
-			new HtmlWebpackPlugin({
-        template: './config/index-template.ejs',
-        development: true
-			}),
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin()
-		] : [
-			// Important to keep React file size down
-			new webpack.DefinePlugin({
-				"process.env": {
-					"NODE_ENV": JSON.stringify("production"),
-					"__BROWSER__": true
-				}
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				compress: {
-					warnings: false,
-				},
-			}),
-			new ExtractTextPlugin({ filename: "app.[hash].css", allChunks: true }),
-			new HtmlWebpackPlugin({
-				template: './config/index-template.ejs'
-			}),
-		]
-	};
-};
+      new MiniCssExtractPlugin({
+        filename: `[name]${hash}.css`
+      }),
+      new HtmlWebpackPlugin({
+        template: './config/index-template.ejs'
+			})
+    ],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            ecma: 6
+          }
+        })
+      ]
+    }
+	}
+}

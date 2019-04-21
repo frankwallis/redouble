@@ -80,17 +80,16 @@ let declarer = (board) =>
 
 let contract = (board) =>
   if (biddingHasEnded(board)) {
-    lastCall(board) |> Utils.optionMap((zippedBid) => zippedBid.bid)
+    Belt.Option.map(lastCall(board), zippedBid => zippedBid.bid)
   } else {
     None
   };
 
-let contractSuit = (board) =>
-  contract(board)
-  |> Utils.optionMap(
-       (contract) =>
-         switch contract {
-         | Call(_level, suit) => suit
-         | _ => raise(Invalid_argument("contract should always be of type Call"))
-         }
-     );
+let contractSuit = board => Belt.Option.map(
+  contract(board),
+  (contract) =>
+    switch contract {
+    | Call(_level, suit) => suit
+    | _ => raise(Invalid_argument("contract should always be of type Call"))
+    }
+);

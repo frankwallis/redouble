@@ -35,10 +35,4 @@ let rec drop = (n, xs) =>
 
 let rec range = (~start=0, len) => start >= len ? [] : [start] @ range(~start=start + 1, len);
 
-let optionMap = (fmap, opt) =>
-  switch (opt) {
-  | Some(value) => Some(fmap(value))
-  | None => None
-  };
-
 let identity = (x) => x;

@@ -62,7 +62,7 @@ let winningCard = (trick, trumpSuit) => {
 let trickWinner = (board, trick) =>
   HandQuery.holder(winningCard(trick, trumpSuit(board)), board.hands);
 
-let previousTrickWinner = (board) => previousTrick(board) |> Utils.optionMap(trickWinner(board));
+let previousTrickWinner = (board) => Belt.Option.map(previousTrick(board), trickWinner(board));
 
 let leader = (board) =>
   switch (previousTrickWinner(board)) {

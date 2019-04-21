@@ -26,7 +26,7 @@ let reducer = (state, action) =>
       items: [{id: state.nextId, severity, title, message}, ...state.items],
       nextId: state.nextId + 1
     }
-  | Dismiss(id) => {...state, items: List.filter(((!)) => (!).id != id, state.items)}
+  | Dismiss(id) => {...state, items: List.filter(item => item.id != id, state.items)}
   | Busy => {...state, busyCounter: succ(state.busyCounter)}
   | Idle => {...state, busyCounter: max(0, pred(state.busyCounter))}
   };

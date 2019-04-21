@@ -12,7 +12,7 @@ module.exports = function(env = {}) {
       //'webpack-hot-middleware/client',
       //'lib/js/src/ui/client'
       //'src/ui/client.re'
-      'ui/client.re'
+      'client.re'
 		],
     devtool: 'source-map',
     context: path.resolve(__dirname, '../'),

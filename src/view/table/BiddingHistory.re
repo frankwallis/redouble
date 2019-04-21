@@ -2,9 +2,8 @@ open Board;
 
 NodeUtils.require("./biddingHistory.css");
 
-let component = ReasonReact.statelessComponent("BiddingHistory");
-
-let make = (~board, _children) => {
+[@react.component]
+let make = (~board) => {
   let rec range = (i, j) =>
     if (i >= j) {
       []
@@ -41,12 +40,9 @@ let make = (~board, _children) => {
   let headings =
     List.map(renderHeading, List.map((idx) => Seat.rotateN(board.dealer, idx), range(0, 4)));
   let rows = renderRows(List.rev(board.bids), 0);
-  {
-    ...component,
-    render: (_self) =>
-      <table className="bidding-container pure-table">
-        <thead> <tr> (ReasonReact.array(Array.of_list(headings))) </tr> </thead>
-        <tbody> (ReasonReact.array(Array.of_list(rows))) </tbody>
-      </table>
-  }
+
+  <table className="bidding-container pure-table">
+    <thead> <tr> (ReasonReact.array(Array.of_list(headings))) </tr> </thead>
+    <tbody> (ReasonReact.array(Array.of_list(rows))) </tbody>
+  </table>
 };

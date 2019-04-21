@@ -2,6 +2,7 @@ open Jest;
 
 describe("BidComponent", () => {
   open Expect;
+  open Bid;
 
   Enzyme.configureEnzyme(Enzyme.react_16_adapter()) |> ignore;
 

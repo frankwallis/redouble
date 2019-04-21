@@ -4,12 +4,6 @@ NodeUtils.require("./biddingHistory.css");
 
 [@react.component]
 let make = (~board) => {
-  let rec range = (i, j) =>
-    if (i >= j) {
-      []
-    } else {
-      [i, ...range(i + 1, j)]
-    };
   let renderHeading = (seat) =>
     <th key=(Seat.name(seat)) className="bidding-cell">
       (ReasonReact.string(Seat.name(seat)))
@@ -22,7 +16,7 @@ let make = (~board) => {
              <td key=(string_of_int(idx)) className="bidding-cell"> <BidComponent bid /> </td>
          );
     let emptyCells =
-      range(List.length(bids), 4)
+      Utils.range(~start=List.length(bids), 4)
       |> List.mapi((_, idx) => <td key=(string_of_int(idx)) className="bidding-cell" />);
     <tr key=(string_of_int(rowIdx)) className="bidding-round">
       (ReasonReact.array(Array.of_list(cells @ emptyCells)))
@@ -38,7 +32,7 @@ let make = (~board) => {
     | _ => [renderRow(bids, rowIdx)]
     };
   let headings =
-    List.map(renderHeading, List.map((idx) => Seat.rotateN(board.dealer, idx), range(0, 4)));
+    List.map(renderHeading, List.map((idx) => Seat.rotateN(board.dealer, idx), Utils.range(4)));
   let rows = renderRows(List.rev(board.bids), 0);
 
   <table className="bidding-container pure-table">

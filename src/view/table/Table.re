@@ -18,6 +18,7 @@ let make =
       ~canJumpBack
     ) => {
   let biddingHasEnded = Board.biddingHasEnded(board);
+  let contract = Board.contract(board);
   let players =
     Seat.all
     |> List.map(
@@ -31,6 +32,12 @@ let make =
               </div>
             </section>
         );
+
+  let trickScore = switch (contract) {
+  |  Some(_) => <TrickScore board />
+  |  None => ReasonReact.null
+  };
+
   <div className="bridge-table">
     <div className="table-controls">
       <ControlBar
@@ -45,7 +52,7 @@ let make =
         jumpBack
         canJumpBack
       />
-      (biddingHasEnded ? <TrickScore board /> : ReasonReact.null)
+      (trickScore)
     </div>
     <div className="table-players"> (ReasonReact.array(Array.of_list(players))) </div>
     <div className="table-board">

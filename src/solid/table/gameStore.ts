@@ -1,8 +1,9 @@
-import { createStore } from "solid-js/store";
+import { createMutable, createStore, produce } from "solid-js/store";
 import { Bid } from "../../model/core/bid";
 import { Card } from "../../model/core/card";
 import { Deck, Hand } from "../../model/core/deck";
 import { Seat } from "../../model/core/seat";
+import { addGrowl } from "../growl/growlStore";
 
 export interface BoardState {
 	hands: Record<Seat, Hand>
@@ -11,11 +12,7 @@ export interface BoardState {
 	cards: Array<Card>;
 }
 
-export interface GameState {
-	boards: Array<BoardState>
-}
-
-const [gameState, setGameState] = createStore<GameState>({ boards: [createBoard()] });
+const gameStore = createMutable<BoardState>(createBoard());
 
 function createBoard() {
 	const deck = new Deck();
@@ -30,12 +27,12 @@ function createBoard() {
 }
 
 export function makeBid(bid: Bid) {
-	setGameState(gameState => {
-		const board = gameState.boards[gameState.boards.length -1]
-		board.bids = board.bids.concat(bid);
-		return gameState
-
-	})
+	const lastBid = gameStore.bids[gameStore.bids.length -1]
+	if (lastBid && Bid.compare(bid, lastBid) <= 0) {
+		addGrowl({ type: 'error', message: 'Your bid must be higher than the previous bid', title: 'Invalid bid', timeout: 0 })
+	} else {
+		gameStore.bids.push(bid)
+	}
 }
 
-export { gameState }
+export { gameStore }

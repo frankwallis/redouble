@@ -1,15 +1,12 @@
 import { Component, For } from 'solid-js'
 import { BidComponent } from '../components/bid.jsx';
 import { Bid, BidSuit, BidType } from '../../model/core/bid';
+import { makeBid } from './gameStore.js';
 import "./BiddingBox.css"
 
-export interface BiddingBoxProps {
-	makeBid: (bid: Bid) => void;
-}
+export interface BiddingBoxProps {}
 
-export const BiddingBox: Component<BiddingBoxProps> = ({
-	makeBid
-}) => {
+export const BiddingBox: Component<BiddingBoxProps> = () => {
 	return (
 		<div class="bidding-box-container">
 			<For each={[1, 2, 3, 4, 5, 6, 7]}>
@@ -17,29 +14,27 @@ export const BiddingBox: Component<BiddingBoxProps> = ({
 					<div class="bidding-box-row">
 						<For each={BidSuit.all()}>
 							{(suit) => (
-								<BidButton bid={{ type: BidType.Call, level, suit }} makeBid={makeBid} />
+								<BidButton bid={{ type: BidType.Call, level, suit }} />
 							)}
 						</For>
 					</div>
 				)}
 			</For>
 			<div class="bidding-box-row">
-				<BidButton bid={{ type: BidType.NoBid }} makeBid={makeBid} />
-				<BidButton bid={{ type: BidType.Double }} makeBid={makeBid} />
-				<BidButton bid={{ type: BidType.Redouble }} makeBid={makeBid} />
+				<BidButton bid={{ type: BidType.NoBid }} />
+				<BidButton bid={{ type: BidType.Double }} />
+				<BidButton bid={{ type: BidType.Redouble }} />
 			</div>
 		</div>
 	);
 }
 
 interface BidButtonProps {
-	bid: Bid;
-	makeBid: (bid: Bid) => void;
+	bid: Bid;	
 }
 
 const BidButton: Component<BidButtonProps> = ({
-	bid,
-	makeBid
+	bid,	
 }) => {
 	return (
 		<button class="bidding-box-button pure-button" classList={{

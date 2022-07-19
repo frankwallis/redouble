@@ -44,7 +44,9 @@
 		"react-router": "^1.0.2",
 		"redux": "^3.0.5",
 		"redux-persist": "^1.4.10",
-		"redux-thunk": "^1.0.2"
+		"redux-thunk": "^1.0.2",
+		"solid-app-router": "^0.4.1",
+		"solid-js": "^1.4.7"
 	},
 	"devDependencies": {
 		"autoprefixer-loader": "^3.0.0",
@@ -73,7 +75,10 @@
 		"s3": "^4.4.0",
 		"sinon": "^1.16.1",
 		"style-loader": "^0.13.0",
+		"typescript": "^4.7.4",
 		"url-loader": "^0.5.7",
+		"vite": "^3.0.0",
+		"vite-plugin-solid": "^2.3.0",
 		"webpack": "^1.12.9",
 		"webpack-hot-middleware": "^2.6.0",
 		"webpack-sources": "^0.1.0"
@@ -82,7 +87,7 @@
 		"test": "./node_modules/.bin/mocha --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js'",
 		"test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover ./node_modules/mocha/bin/_mocha -- --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js' --timeout 10000",
 		"test:watch": "./node_modules/.bin/mocha -w --require ./config/mocha-environment.js './src/**/__tests__/*-tests.js'",
-		"start": "./node_modules/.bin/babel-node ./src/server/main.js",
+		"start": "vite",
 		"start:production": "cross-env NODE_ENV=production forever start -c \"npm start\" ./",
 		"build": "./node_modules/.bin/webpack --config config/webpack.production.js",
 		"deploy": "npm run build && node ./config/aws-deploy.js && npm run clean",

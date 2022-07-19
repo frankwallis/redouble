@@ -1,39 +1,39 @@
-/* @flow */
+export enum BidSuit {
+	Clubs = 1,
+	Diamonds = 2,
+	Hearts = 3,
+	Spades = 4,
+	NoTrumps = 5,
+}
 
-export const BidSuit = {
-	Clubs: 1,
-	Diamonds: 2,
-	Hearts: 3,
-	Spades: 4,
-	NoTrumps: 5,
-
-	all: () => [1, 2, 3, 4, 5],
-	fromPBN: (idx) => PBNBidSuitMap[idx],
-	toPBN: (suit) => PBNBidSuitMap.indexOf(suit),
-	fromPBNString: (pbn) => PBNBidSuitStringMap.indexOf(pbn),
-	toPBNString: (suit) => PBNBidSuitStringMap[suit]
+export namespace BidSuit {
+	export const all = () => [1, 2, 3, 4, 5];
+	export const fromPBN = (idx: number) => PBNBidSuitMap[idx];
+	export const toPBN = (suit: BidSuit) => PBNBidSuitMap.indexOf(suit);
+	export const fromPBNString = (pbn: string) => PBNBidSuitStringMap.indexOf(pbn);
+	export const toPBNString = (suit: BidSuit) => PBNBidSuitStringMap[suit];
 };
 
 const PBNBidSuitMap = [BidSuit.Spades, BidSuit.Hearts, BidSuit.Diamonds, BidSuit.Clubs, BidSuit.NoTrumps];
 const PBNBidSuitStringMap = ["", "C", "D", "H", "S", "NT"];
 
-export const BidType = {
-	NoBid: 1,
-	Call: 2,
-	Double: 3,
-	Redouble: 4
+export enum BidType {
+	NoBid = 1,
+	Call = 2,
+	Double = 3,
+	Redouble = 4
 };
 
-/*
-	interface Bid {
-		type: BidType;
-		suit?: BidSuit;
-		level?: number;
-	}
-*/
+export type Bid = {
+	type: BidType.NoBid | BidType.Double | BidType.Redouble;
+} | {
+	type: BidType.Call;
+	suit: BidSuit;
+	level: number;
+}
 
 export const Bid = {
-	stringify(bid) {
+	stringify(bid: Bid) {
 		switch(bid.type) {
 			case BidType.NoBid:
 				return "No Bid";
@@ -48,7 +48,7 @@ export const Bid = {
 		}
 	},
 
-	key(bid) {
+	key(bid: Bid) {
 		let result = [ bid.type ];
 
 		if (bid.type === BidType.Call)
@@ -70,10 +70,11 @@ export const Bid = {
 		else if (bid === "no bid")
 			return { type: BidType.NoBid };
 		else {
-			let result = { type: BidType.Call };
-			result.level = parseInt(bid[0]);
-			result.suit = shortNames.indexOf(bid[1]);
-			return result;
+			return {
+				type: BidType.Call,
+				level: parseInt(bid[0]),
+				suit: shortNames.indexOf(bid[1])
+			};
 		}
 	},
 
@@ -81,20 +82,22 @@ export const Bid = {
 	 * creates an array of bids
 	 * takes a variable length argument list of strings e.g. "1H", "double", "no bid"
 	 */
-	createAll(...args) {
-		var result = [];
+	// createAll(...args: string[]);
+	// createAll(...args: string[][]);
+	// createAll(...args: string[] | string[][]) {
+	// 	var result: Bid[] = [];
 
-		for (let i = 0; i < args.length; i ++) {
-			if (args[i]) {
-				if (Array.isArray(args[i]))
-					result = result.concat(Bid.createAll.apply(Bid, args[i]));
-				else
-					result.push(Bid.create(args[i]));
-			}
-		}
+	// 	for (let i = 0; i < args.length; i ++) {
+	// 		if (args[i]) {
+	// 			if (Array.isArray(args[i]))
+	// 				result = result.concat(Bid.createAll.apply(Bid, args[i]));
+	// 			else
+	// 				result.push(Bid.create(args[i]));
+	// 		}
+	// 	}
 
-		return result;
-	},
+	// 	return result;
+	// },
 
 	/*
 	 * returns array containing all the bids
@@ -115,17 +118,17 @@ export const Bid = {
 		return result;
 	},
 
-	suitName(suit: BidSuit, singular: boolean) {
+	suitName(suit: BidSuit, singular?: boolean) {
 		let names = [ "", "club", "diamond", "heart", "spade", "no-trump" ];
 		return names[suit] + (singular ? '' : 's');
 	},
 
-	compare(bid1, bid2) {
+	compare(bid1: Bid, bid2: Bid) {
 		if (bid1.type !== bid2.type) {
 			return bid1.type - bid2.type;
 		}
 		else {
-			if (bid1.type === BidType.Call) {
+			if (bid1.type === BidType.Call && bid2.type === BidType.Call) {
 				if (bid1.level === bid2.level)
 					return bid1.suit - bid2.suit;
 				else
@@ -137,7 +140,7 @@ export const Bid = {
 		}
 	},
 
-	fromPBN(pbn) {
+	fromPBN(pbn: string) {
 		return Bid.create(pbn);
 	}
 };

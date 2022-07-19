@@ -1,7 +1,7 @@
-/* @flow */
-
 import {Suit, Pip, Card} from "./card";
 import {Seat} from "./seat";
+
+export type Hand = Array<Card>
 
 export class Deck {
 
@@ -12,7 +12,7 @@ export class Deck {
 	cards: Array<Card>;
 
 	createCards(): Array<Card> {
-		let result = [];
+		const result = [];
 
 		for (let suit = Suit.Clubs; suit <= Suit.Spades; suit++) {
 			for (let pip = Pip.Two; pip <= Pip.Ace; pip++) {
@@ -44,14 +44,16 @@ export class Deck {
 	 * Deals 13 cards to each player.
 	 * hands are returned as a map of Seat -> Array<Card>
 	 */
-	deal(dealer: Seat): any {
-		let result = {};
+	deal(dealer: Seat): Record<Seat, Hand> {
+		const result: Record<Seat, Hand> = {
+			[Seat.North]: [],
+			[Seat.South]: [],
+			[Seat.East]: [],
+			[Seat.West]: [],
+		};
 		let current = Seat.rotate(dealer, 1);
 
 		this.cards.forEach((card) => {
-			if (!result[current])
-				result[current] = [];
-
 			result[current].push(card);
 			current = Seat.rotate(current, 1);
 		});
@@ -63,24 +65,26 @@ export class Deck {
 	 * rigs the returned hands
 	 * pbn should be a valid pbn string
 	 */
-	static fromPBN(pbn) {
-		let result = {};
-		let parts = pbn.split(":").map(part => part.trim());
-
-		let dealer = Seat.fromPBNString(parts[0]);
-		let hands = parts[1].split(" ").map(part => part.trim());
+	static fromPBN(pbn: string) {
+		const result: Record<Seat, Hand> = {
+			[Seat.North]: [],
+			[Seat.South]: [],
+			[Seat.East]: [],
+			[Seat.West]: [],
+		};
+		const parts = pbn.split(":").map(part => part.trim());
+		const dealer = Seat.fromPBNString(parts[0]);
+		const hands = parts[1].split(" ").map(part => part.trim());
 
 		Seat.all().forEach((_1, i) => {
-			let current = Seat.rotate(dealer, i);
-			result[current] = [];
-
-			let holdings = hands[i].split(".");
+			const current = Seat.rotate(dealer, i);
+			const holdings = hands[i].split(".");
 
 			Suit.all().forEach((_2, j) => {
-				let suit = Suit.fromPBN(j);
+				const suit = Suit.fromPBN(j);
 
-				let holding = holdings[j].split("").map(pipName => {
-					let pip = Pip.fromPBNString(pipName);
+				const holding = holdings[j].split("").map(pipName => {
+					const pip = Pip.fromPBNString(pipName);
 					return {pip, suit};
 				});
 

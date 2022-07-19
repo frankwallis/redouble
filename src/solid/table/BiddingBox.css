@@ -1,0 +1,26 @@
+.bidding-box-container {
+	background: #fafafa;
+	border: 0.3em solid #3B3738;
+	border-radius: .5em;
+	padding: 0.3em;
+	overflow: hidden;
+}
+
+.bidding-box-row {
+
+}
+
+button.bidding-box-button {
+	width: 3em;
+	height: 1.5em;
+	padding: 0.1em;
+	background: transparent;
+}
+
+button.bidding-box-button-special {
+	width: 5em;
+}
+
+.bidding-box-button:hover {
+	background: #E6E6E6;
+}
